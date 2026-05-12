@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تم استلام طلبك — جمعية سنابل للغة العربية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    .success-page {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-10) var(--space-6);
+    }
+    .success-card {
+      background: var(--glass-bg-strong);
+      backdrop-filter: var(--glass-blur-heavy);
+      -webkit-backdrop-filter: var(--glass-blur-heavy);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow-modal);
+      padding: var(--space-12) var(--space-10);
+      text-align: center;
+      max-width: 520px;
+      width: 100%;
+    }
+    .check-icon {
+      width: 80px; height: 80px;
+      color: var(--emerald);
+      margin-inline: auto;
+      margin-bottom: var(--space-6);
+      animation: bounce-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    .success-title { font-size: 28px; font-weight: 800; color: var(--text-primary); margin-bottom: var(--space-3); }
+    .ref-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-4) var(--space-5);
+      margin: var(--space-6) 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .ref-number { font-size: 20px; font-weight: 800; color: var(--primary); margin-top: var(--space-1); }
+    @media (max-width: 767px) { .success-card { padding: var(--space-8) var(--space-5); } }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div id="navbar-container"></div>
+    <main id="main-content" class="page-content" role="main">
+      <div class="success-page">
+        <div class="success-card animate-scale-in">
+          <i data-lucide="check-circle" class="check-icon" aria-label="تم بنجاح"></i>
+          <h1 class="success-title">تم استلام طلب الانضمام بنجاح!</h1>
+          <p style="font-size:16px;color:var(--text-secondary);line-height:1.7;margin-bottom:var(--space-2)">
+            شكراً لاهتمامك بالانضمام إلى جمعية سنابل للغة العربية.
+          </p>
+          <div class="ref-card">
+            <div>رقم طلبك</div>
+            <div class="ref-number" id="refNumber">SAN-2026-001</div>
+            <div style="margin-top:var(--space-2);font-size:13px">سنتواصل معك خلال ٣ أيام عمل</div>
+          </div>
+          <a href="index.html" class="btn btn-primary btn-lg">
+            <i data-lucide="home" aria-hidden="true"></i>
+            العودة إلى الصفحة الرئيسية
+          </a>
+        </div>
+      </div>
+    </main>
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    renderNavbar({});
+    renderFooter();
+    const ref = sessionStorage.getItem('join_ref');
+    if (ref) document.getElementById('refNumber').textContent = ref;
+    lucide.createIcons();
+  });
+  </script>
+</body>
+</html>

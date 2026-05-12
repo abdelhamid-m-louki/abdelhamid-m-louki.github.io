@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الأنشطة الرياضية — جمعية سنابل للغة العربية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    .page-header { background:linear-gradient(135deg,#C0392B 0%,var(--danger) 100%); padding:var(--space-12) var(--space-6); color:white; text-align:center; }
+    .page-header-title { font-size:clamp(28px,4vw,44px); font-weight:800; }
+    .sport-card {
+      background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+      border:1px solid var(--glass-border); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-card),var(--inset-light); overflow:hidden; transition:all var(--transition-base);
+    }
+    .sport-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover),var(--inset-light); }
+    .sport-card-img { width:100%; height:180px; object-fit:cover; background:linear-gradient(135deg,#FECDD3,#FED7AA); }
+    .sport-card-body { padding:var(--space-5); }
+    .sport-card-title { font-size:17px; font-weight:700; color:var(--text-primary); margin-bottom:var(--space-3); }
+    .sport-meta { display:flex; flex-direction:column; gap:var(--space-2); font-size:13px; color:var(--text-secondary); }
+    .sport-meta-row { display:flex; align-items:center; gap:var(--space-2); }
+    .sport-meta-row svg { width:14px; height:14px; color:var(--gold); flex-shrink:0; }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div id="navbar-container"></div>
+    <main id="main-content" class="page-content" role="main">
+      <header class="page-header">
+        <div aria-hidden="true" style="margin-bottom:var(--space-4)"><i data-lucide="dumbbell" style="width:48px;height:48px;color:rgba(255,255,255,0.70)"></i></div>
+        <nav class="breadcrumb" style="justify-content:center" aria-label="مسار التنقل">
+          <a href="index.html" style="color:rgba(255,255,255,0.70)">🏠</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span style="color:white">الأنشطة الرياضية</span>
+        </nav>
+        <h1 class="page-header-title">الأنشطة الرياضية</h1>
+        <div class="pills-row" style="justify-content:center;margin-top:var(--space-5)">
+          <button class="pill active" data-filter="all" style="color:white;border-color:rgba(255,255,255,0.40);background:rgba(255,255,255,0.20)">الكل</button>
+          <button class="pill" data-filter="مسابقة" style="color:rgba(255,255,255,0.70);border-color:rgba(255,255,255,0.30);background:rgba(255,255,255,0.10)">
+            <i data-lucide="trophy" style="width:13px;height:13px;display:inline" aria-hidden="true"></i> مسابقة
+          </button>
+          <button class="pill" data-filter="تدريب" style="color:rgba(255,255,255,0.70);border-color:rgba(255,255,255,0.30);background:rgba(255,255,255,0.10)">
+            <i data-lucide="target" style="width:13px;height:13px;display:inline" aria-hidden="true"></i> تدريب
+          </button>
+        </div>
+      </header>
+
+      <div class="container" style="padding-top:var(--space-10);padding-bottom:var(--space-10)">
+        <div class="grid-3" id="sportsGrid" aria-live="polite" aria-label="قائمة الأنشطة الرياضية">
+          <div class="skeleton skeleton-img"></div>
+          <div class="skeleton skeleton-img"></div>
+        </div>
+      </div>
+    </main>
+    <div id="footer-container"></div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script>
+  'use strict';
+  let _allSports = [];
+  let _filterSport = 'all';
+
+  function buildSportCard(s) {
+    const lang = App.lang;
+    const title = lang === 'ar' ? s.title_ar : (s.title_fr || s.title_ar);
+    const loc = lang === 'ar' ? s.location_ar : (s.location_fr || s.location_ar);
+    const sched = lang === 'ar' ? s.schedule_ar : (s.schedule_fr || s.schedule_ar);
+    const type = lang === 'ar' ? s.sport_type_ar : (s.sport_type_fr || s.sport_type_ar);
+    const isComp = s.sport_type_ar === 'مسابقة';
+    return `
+      <article class="sport-card animate-on-scroll">
+        ${s.image ? `<img class="sport-card-img" src="${s.image}" alt="${sanitize(title)}" loading="lazy">` : `<div class="sport-card-img" style="display:flex;align-items:center;justify-content:center;"><i data-lucide="${isComp ? 'trophy' : 'target'}" style="width:48px;height:48px;color:var(--danger)" aria-hidden="true"></i></div>`}
+        <div class="sport-card-body">
+          <div style="margin-bottom:var(--space-3)">
+            <span class="badge ${isComp ? 'badge-danger' : 'badge-warning'}">
+              <i data-lucide="${isComp ? 'trophy' : 'target'}" style="width:12px;height:12px" aria-hidden="true"></i>
+              ${sanitize(type)}
+            </span>
+          </div>
+          <h2 class="sport-card-title">${sanitize(title)}</h2>
+          <div class="sport-meta">
+            ${loc ? `<div class="sport-meta-row"><i data-lucide="map-pin" aria-hidden="true"></i>${sanitize(loc)}</div>` : ''}
+            ${sched ? `<div class="sport-meta-row"><i data-lucide="clock" aria-hidden="true"></i>${sanitize(sched)}</div>` : ''}
+          </div>
+          <a href="post.html?id=${s.id}&type=sport" class="btn btn-primary btn-full" style="margin-top:var(--space-4)">
+            <i data-lucide="arrow-left" aria-hidden="true"></i> التفاصيل
+          </a>
+        </div>
+      </article>`;
+  }
+
+  function renderSports() {
+    const grid = document.getElementById('sportsGrid');
+    let items = [..._allSports];
+    if (_filterSport !== 'all') items = items.filter(s => s.sport_type_ar === _filterSport);
+    grid.innerHTML = items.length
+      ? items.map(buildSportCard).join('')
+      : `<div class="empty-state" style="grid-column:1/-1"><i data-lucide="search-x" class="empty-state-icon"></i><p class="empty-state-title">لا توجد أنشطة</p></div>`;
+    App.initAnimateOnScroll();
+    lucide.createIcons();
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    renderNavbar({ activePage:'sports.html' });
+    renderFooter();
+    lucide.createIcons();
+    try {
+      _allSports = await SportsDB.getPublished();
+      renderSports();
+    } catch { document.getElementById('sportsGrid').innerHTML = '<p style="color:var(--text-muted);grid-column:1/-1">تعذّر تحميل الأنشطة</p>'; }
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        _filterSport = btn.dataset.filter;
+        document.querySelectorAll('[data-filter]').forEach(b => b.classList.toggle('active', b === btn));
+        renderSports();
+      });
+    });
+  });
+  </script>
+</body>
+</html>

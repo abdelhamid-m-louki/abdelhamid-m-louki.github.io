@@ -1,0 +1,36 @@
+{
+  "site": {
+    "name_ar": "جمعية سنابل للغة العربية",
+    "name_fr": "Association Sanabil de la Langue Arabe",
+    "slogan_ar": "نبني جسور المستقبل بلغة الضاد",
+    "slogan_fr": "Nous bâtissons les ponts du futur avec la langue de Dâd",
+    "logo": "assets/images/logo.svg",
+    "hero_image": "assets/images/hero/hero-main.jpg",
+    "about_ar": "جمعية سنابل للغة العربية جمعية ثقافية تعليمية تأسست عام 2013 في مدينة أبيشي بتشاد، تعمل على نشر اللغة العربية وتعزيز الهوية الثقافية في المنطقة.",
+    "about_fr": "L'Association Sanabil de la Langue Arabe est une association culturelle et éducative fondée en 2013 à Abéché au Tchad, œuvrant pour la promotion de la langue arabe et le renforcement de l'identité culturelle dans la région.",
+    "founded_year": 2013,
+    "members_count": 150,
+    "activities_count": 50,
+    "events_count": 13,
+    "courses_count": 12
+  },
+  "contact": {
+    "phone": "+235 91 40 41 66",
+    "email": "sanabilarabe2022@gmail.com",
+    "address_ar": "أبيشي، تشاد",
+    "address_fr": "Abéché, Tchad",
+    "hours_ar": "الأحد – الخميس: ٠٨:٠٠ – ١٧:٠٠",
+    "hours_fr": "Dim – Jeu : 08h00 – 17h00",
+    "maps_embed": ""
+  },
+  "social": {
+    "facebook": "#",
+    "instagram": "#",
+    "youtube": "#",
+    "twitter": "#"
+  },
+  "ai": {
+    "gemini_key": "",
+    "openai_key": ""
+  }
+}

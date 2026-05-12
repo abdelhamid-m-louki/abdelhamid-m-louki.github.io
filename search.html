@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>البحث — جمعية سنابل للغة العربية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    .result-card {
+      display:flex; align-items:flex-start; gap:var(--space-4);
+      background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+      border:1px solid var(--glass-border); border-radius:var(--radius-sm);
+      box-shadow:var(--shadow-card); padding:var(--space-4) var(--space-5);
+      transition:all var(--transition-fast); text-decoration:none; color:inherit;
+    }
+    .result-card:hover { background:var(--glass-bg-hover); transform:translateX(-2px); }
+    .result-icon { width:36px; height:36px; border-radius:var(--radius-xs); background:var(--gold-muted); display:flex; align-items:center; justify-content:center; color:var(--gold); flex-shrink:0; }
+    .result-title { font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+    .result-excerpt { font-size:13px; color:var(--text-secondary); line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .result-meta { font-size:12px; color:var(--text-muted); margin-top:4px; display:flex; align-items:center; gap:var(--space-2); }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div id="navbar-container"></div>
+    <main id="main-content" class="page-content" role="main">
+
+      <div style="background:linear-gradient(135deg,var(--primary) 0%,var(--primary-mid) 100%);padding:var(--space-10) var(--space-6);text-align:center">
+        <div style="max-width:600px;margin-inline:auto">
+          <div class="search-bar" style="background:rgba(255,255,255,0.20);border-color:rgba(255,255,255,0.40)">
+            <i data-lucide="search" style="color:rgba(255,255,255,0.70)" aria-hidden="true"></i>
+            <input type="search" id="searchInput" placeholder="ابحث في الموقع..." aria-label="بحث" style="color:white" autocomplete="off">
+            <button id="clearSearch" aria-label="مسح البحث" style="background:transparent;border:none;cursor:pointer;color:rgba(255,255,255,0.70);display:none">
+              <i data-lucide="x" style="width:16px;height:16px" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="searchSummary" style="color:rgba(255,255,255,0.80);font-size:14px;margin-top:var(--space-4)"></div>
+        </div>
+      </div>
+
+      <div class="container" style="padding-top:var(--space-6);padding-bottom:var(--space-10)">
+
+        <!-- Filter pills -->
+        <div class="pills-row" style="margin-bottom:var(--space-5)" id="typeFilter" role="group" aria-label="تصفية النتائج">
+          <button class="pill active" data-type="all">الكل</button>
+          <button class="pill" data-type="article"><i data-lucide="file-text" style="width:13px;height:13px" aria-hidden="true"></i> مقالات</button>
+          <button class="pill" data-type="event"><i data-lucide="calendar-days" style="width:13px;height:13px" aria-hidden="true"></i> فعاليات</button>
+          <button class="pill" data-type="course"><i data-lucide="graduation-cap" style="width:13px;height:13px" aria-hidden="true"></i> دورات</button>
+        </div>
+
+        <div id="resultsContainer" aria-live="polite">
+          <div style="text-align:center;padding:var(--space-10);color:var(--text-muted)">
+            <i data-lucide="search" style="width:48px;height:48px;opacity:0.4" aria-hidden="true"></i>
+            <p style="margin-top:var(--space-4)">ابدأ بالبحث...</p>
+          </div>
+        </div>
+
+      </div>
+    </main>
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script>
+  'use strict';
+  const typeIcons = { article:'file-text', event:'calendar-days', course:'graduation-cap', sport:'dumbbell' };
+  const typeLabels = { article:{ar:'مقال',fr:'Article'}, event:{ar:'فعالية',fr:'Événement'}, course:{ar:'دورة',fr:'Formation'}, sport:{ar:'رياضة',fr:'Sport'} };
+  let _allResults = [];
+  let _filterType = 'all';
+  let _query = '';
+
+  function buildResultCard(item) {
+    const lang = App.lang;
+    const title = lang === 'ar' ? item.title_ar : (item.title_fr || item.title_ar);
+    const excerpt = lang === 'ar' ? item.excerpt_ar : (item.excerpt_fr || item.excerpt_ar);
+    const type = item.type || 'article';
+    const icon = typeIcons[type] || 'file-text';
+    const label = typeLabels[type]?.[lang] || '';
+    return `
+      <a href="post.html?id=${item.id}&type=${type}" class="result-card animate-on-scroll">
+        <div class="result-icon" aria-hidden="true"><i data-lucide="${icon}"></i></div>
+        <div style="flex:1;min-width:0">
+          <div class="result-title">${highlightText(title, _query)}</div>
+          <div class="result-excerpt">${highlightText(excerpt||'', _query)}</div>
+          <div class="result-meta">
+            <span class="badge badge-muted" style="font-size:11px">${label}</span>
+            <span>${formatDate(item.date_published || item.date_start || item.date_created)}</span>
+          </div>
+        </div>
+        <i data-lucide="external-link" style="width:16px;height:16px;color:var(--text-muted);flex-shrink:0;margin-top:4px" aria-hidden="true"></i>
+      </a>`;
+  }
+
+  function renderResults() {
+    let items = [..._allResults];
+    if (_filterType !== 'all') items = items.filter(i => i.type === _filterType);
+    const container = document.getElementById('resultsContainer');
+    const summary = document.getElementById('searchSummary');
+
+    if (!_query) {
+      container.innerHTML = `<div style="text-align:center;padding:var(--space-10);color:var(--text-muted)"><i data-lucide="search" style="width:48px;height:48px;opacity:0.4"></i><p style="margin-top:var(--space-4)">ابدأ بالبحث...</p></div>`;
+      if (summary) summary.textContent = '';
+      lucide.createIcons();
+      return;
+    }
+
+    if (summary) summary.textContent = `نتائج البحث عن: "${_query}" · وجدنا ${formatNumber(items.length)} نتيجة`;
+
+    if (!items.length) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <i data-lucide="search-x" class="empty-state-icon"></i>
+          <p class="empty-state-title">لم نجد أي نتيجة لبحثك عن "${sanitize(_query)}"</p>
+          <p class="empty-state-text">جرّب كلمات أخرى أو تصفّح الأقسام</p>
+          <a href="articles.html" class="btn btn-secondary">تصفّح المقالات</a>
+        </div>`;
+    } else {
+      container.innerHTML = `<div style="display:flex;flex-direction:column;gap:var(--space-3)">${items.map(buildResultCard).join('')}</div>`;
+    }
+    App.initAnimateOnScroll();
+    lucide.createIcons();
+  }
+
+  async function performSearch(q) {
+    _query = q;
+    if (!q) { _allResults = []; renderResults(); return; }
+    try {
+      const [articles, events, courses] = await Promise.all([
+        ArticlesDB.search(q),
+        EventsDB.getAll().then(all => all.filter(e => (e.title_ar||'').toLowerCase().includes(q.toLowerCase()) || (e.title_fr||'').toLowerCase().includes(q.toLowerCase()))),
+        CoursesDB.getAll().then(all => all.filter(c => (c.title_ar||'').toLowerCase().includes(q.toLowerCase())))
+      ]);
+      _allResults = [...articles, ...events, ...courses].sort((a,b) => new Date(b.date_created||0) - new Date(a.date_created||0));
+      renderResults();
+    } catch { renderResults(); }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderNavbar({});
+    renderFooter();
+    lucide.createIcons();
+
+    const q = getParam('q') || '';
+    const input = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearSearch');
+    if (input && q) { input.value = q; clearBtn.style.display = ''; }
+    if (q) performSearch(q);
+
+    input?.addEventListener('input', debounce(() => {
+      const v = input.value.trim();
+      if (clearBtn) clearBtn.style.display = v ? '' : 'none';
+      performSearch(v);
+    }, 300));
+
+    clearBtn?.addEventListener('click', () => { input.value = ''; clearBtn.style.display = 'none'; performSearch(''); input.focus(); });
+
+    document.querySelectorAll('[data-type]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        _filterType = btn.dataset.type;
+        document.querySelectorAll('[data-type]').forEach(b => b.classList.toggle('active', b === btn));
+        renderResults();
+      });
+    });
+  });
+  </script>
+</body>
+</html>

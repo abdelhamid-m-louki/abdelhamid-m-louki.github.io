@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة القيادة — جمعية سنابل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+
+    <div class="admin-layout">
+      <!-- Sidebar -->
+      <aside class="admin-sidebar" role="complementary" aria-label="القائمة الجانبية">
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-icon">س</div>
+          <div>
+            <div class="sidebar-logo-text">جمعية سنابل</div>
+            <div class="sidebar-logo-sub">لوحة الإدارة</div>
+          </div>
+        </div>
+        <nav class="sidebar-nav" role="navigation" aria-label="قائمة الإدارة">
+          <a href="dashboard.html" class="sidebar-nav-item active"><i data-lucide="layout-dashboard" aria-hidden="true"></i> لوحة القيادة</a>
+          <a href="posts.html?type=article" class="sidebar-nav-item"><i data-lucide="file-text" aria-hidden="true"></i> المقالات</a>
+          <a href="posts.html?type=event" class="sidebar-nav-item"><i data-lucide="calendar-days" aria-hidden="true"></i> الفعاليات</a>
+          <a href="posts.html?type=course" class="sidebar-nav-item"><i data-lucide="graduation-cap" aria-hidden="true"></i> الدورات</a>
+          <a href="posts.html?type=sport" class="sidebar-nav-item"><i data-lucide="dumbbell" aria-hidden="true"></i> الأنشطة الرياضية</a>
+          <a href="categories.html" class="sidebar-nav-item"><i data-lucide="tag" aria-hidden="true"></i> التصنيفات</a>
+          <div class="sidebar-sep"></div>
+          <a href="contacts.html" class="sidebar-nav-item"><i data-lucide="message-square" aria-hidden="true"></i> الرسائل <span class="sidebar-badge" id="msgBadge" style="display:none">0</span></a>
+          <a href="memberships.html" class="sidebar-nav-item"><i data-lucide="user-plus" aria-hidden="true"></i> الانضمامات <span class="sidebar-badge warning" id="memBadge" style="display:none">0</span></a>
+          <a href="bureau-admin.html" class="sidebar-nav-item"><i data-lucide="shield" aria-hidden="true"></i> المكتب التنفيذي</a>
+          <a href="settings.html" class="sidebar-nav-item"><i data-lucide="settings" aria-hidden="true"></i> الإعدادات</a>
+          <div class="sidebar-sep"></div>
+          <a href="../index.html" class="sidebar-nav-item" target="_blank"><i data-lucide="external-link" aria-hidden="true"></i> عرض الموقع</a>
+        </nav>
+        <div class="sidebar-user">
+          <div class="sidebar-avatar" data-admin-initials>م</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name" data-admin-name>مدير النظام</div>
+            <div class="sidebar-user-role" data-admin-role>مدير رئيسي</div>
+          </div>
+          <button class="sidebar-logout" data-logout aria-label="تسجيل الخروج" title="تسجيل الخروج">
+            <i data-lucide="log-out" aria-hidden="true"></i>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Content -->
+      <main class="admin-content" id="main-content" role="main">
+        <div class="admin-page-header">
+          <div>
+            <div class="admin-breadcrumb">لوحة القيادة</div>
+            <h1 class="admin-page-title">لوحة القيادة</h1>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-3)">
+            <span style="font-size:13px;color:var(--text-muted);" id="currentDate"></span>
+            <div class="dropdown">
+              <button class="btn btn-primary" id="addContentBtn" aria-label="إضافة محتوى" aria-expanded="false">
+                <i data-lucide="plus" aria-hidden="true"></i> إضافة محتوى
+                <i data-lucide="chevron-down" style="width:14px;height:14px" aria-hidden="true"></i>
+              </button>
+              <div class="dropdown-menu" id="addContentMenu" role="menu">
+                <a class="dropdown-item" href="post-edit.html?type=article" role="menuitem"><i data-lucide="file-text" aria-hidden="true"></i> مقال جديد</a>
+                <a class="dropdown-item" href="post-edit.html?type=event" role="menuitem"><i data-lucide="calendar-plus" aria-hidden="true"></i> فعالية جديدة</a>
+                <a class="dropdown-item" href="post-edit.html?type=course" role="menuitem"><i data-lucide="graduation-cap" aria-hidden="true"></i> دورة جديدة</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="admin-stats animate-on-scroll">
+          <div class="admin-stat-card">
+            <div class="admin-stat-header">
+              <div class="admin-stat-icon"><i data-lucide="file-text" aria-hidden="true"></i></div>
+            </div>
+            <div class="admin-stat-value" id="statArticles">—</div>
+            <div class="admin-stat-label">المقالات</div>
+            <div class="admin-stat-info up"><i data-lucide="trending-up" style="width:12px;height:12px" aria-hidden="true"></i> نشط</div>
+            <div class="admin-stat-bar"></div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-header">
+              <div class="admin-stat-icon"><i data-lucide="mail" aria-hidden="true"></i></div>
+            </div>
+            <div class="admin-stat-value" id="statMessages">—</div>
+            <div class="admin-stat-label">الرسائل</div>
+            <div class="admin-stat-info" id="statMsgUnread"><i data-lucide="circle" style="width:8px;height:8px" aria-hidden="true"></i> جميعها مقروءة</div>
+            <div class="admin-stat-bar"></div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-header">
+              <div class="admin-stat-icon"><i data-lucide="user-plus" aria-hidden="true"></i></div>
+            </div>
+            <div class="admin-stat-value" id="statMemberships">—</div>
+            <div class="admin-stat-label">طلبات الانضمام</div>
+            <div class="admin-stat-info" id="statMemPending"><i data-lucide="circle" style="width:8px;height:8px" aria-hidden="true"></i> لا يوجد جديد</div>
+            <div class="admin-stat-bar"></div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-header">
+              <div class="admin-stat-icon"><i data-lucide="users" aria-hidden="true"></i></div>
+            </div>
+            <div class="admin-stat-value">+١٥٠</div>
+            <div class="admin-stat-label">الأعضاء</div>
+            <div class="admin-stat-info up"><i data-lucide="trending-up" style="width:12px;height:12px" aria-hidden="true"></i> نشطون</div>
+            <div class="admin-stat-bar"></div>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="glass-card animate-on-scroll" style="padding:var(--space-6);margin-bottom:var(--space-6)">
+          <h2 style="font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:var(--space-5);display:flex;align-items:center;gap:var(--space-2)">
+            <i data-lucide="activity" style="width:18px;height:18px;color:var(--gold)" aria-hidden="true"></i>
+            النشاط الأخير
+          </h2>
+          <div id="recentActivity" style="display:flex;flex-direction:column;gap:var(--space-3)">
+            <div style="text-align:center;padding:var(--space-8);color:var(--text-muted)">
+              <i data-lucide="loader-2" style="width:32px;height:32px;animation:spin 1s linear infinite" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick access -->
+        <div class="glass-card animate-on-scroll" style="padding:var(--space-6)">
+          <h2 style="font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:var(--space-4)">اختصارات سريعة</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:var(--space-3)">
+            <a href="post-edit.html?type=article" class="btn btn-secondary"><i data-lucide="file-plus" aria-hidden="true"></i> إضافة مقال</a>
+            <a href="post-edit.html?type=event" class="btn btn-secondary"><i data-lucide="calendar-plus" aria-hidden="true"></i> إضافة فعالية</a>
+            <a href="contacts.html" class="btn btn-secondary"><i data-lucide="mail" aria-hidden="true"></i> الرسائل الجديدة</a>
+            <a href="memberships.html" class="btn btn-secondary"><i data-lucide="user-check" aria-hidden="true"></i> طلبات الانضمام</a>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- Mobile bottom nav -->
+    <nav class="admin-bottom-nav" aria-label="التنقل السريع">
+      <a href="dashboard.html" class="admin-bottom-nav-item active" aria-label="لوحة القيادة">
+        <i data-lucide="layout-dashboard" aria-hidden="true"></i><span>الرئيسية</span>
+      </a>
+      <a href="posts.html?type=article" class="admin-bottom-nav-item" aria-label="المقالات">
+        <i data-lucide="file-text" aria-hidden="true"></i><span>المقالات</span>
+      </a>
+      <a href="contacts.html" class="admin-bottom-nav-item" aria-label="الرسائل">
+        <i data-lucide="message-square" aria-hidden="true"></i><span>الرسائل</span>
+      </a>
+      <a href="memberships.html" class="admin-bottom-nav-item" aria-label="الانضمامات">
+        <i data-lucide="user-plus" aria-hidden="true"></i><span>الانضمام</span>
+      </a>
+      <a href="settings.html" class="admin-bottom-nav-item" aria-label="الإعدادات">
+        <i data-lucide="settings" aria-hidden="true"></i><span>الإعدادات</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/components/toast.js"></script>
+  <script>
+  'use strict';
+
+  // Dropdown
+  const addBtn = document.getElementById('addContentBtn');
+  const addMenu = document.getElementById('addContentMenu');
+  addBtn?.addEventListener('click', () => { addMenu?.classList.toggle('open'); addBtn.setAttribute('aria-expanded', addMenu.classList.contains('open').toString()); });
+  document.addEventListener('click', e => { if (!addBtn?.contains(e.target)) addMenu?.classList.remove('open'); });
+
+  // Date
+  const dateEl = document.getElementById('currentDate');
+  if (dateEl) dateEl.textContent = new Date().toLocaleDateString('ar-TN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  // Activity item builder
+  function activityItem(icon, color, text, time) {
+    return `<div style="display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) 0;border-bottom:1px solid var(--glass-border-soft)">
+      <div style="width:32px;height:32px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i data-lucide="${icon}" style="width:15px;height:15px;color:white" aria-hidden="true"></i>
+      </div>
+      <div style="flex:1;font-size:13px;color:var(--text-secondary)">${text}</div>
+      <div style="font-size:11px;color:var(--text-muted);flex-shrink:0">${time}</div>
+    </div>`;
+  }
+
+  async function loadDashboard() {
+    try {
+      const [articles, contacts, memberships] = await Promise.all([
+        ArticlesDB.getAll(),
+        ContactsDB.getAll(),
+        MembershipsDB.getAll()
+      ]);
+
+      document.getElementById('statArticles').textContent = formatNumber(articles.length);
+      document.getElementById('statMessages').textContent = formatNumber(contacts.length);
+      document.getElementById('statMemberships').textContent = formatNumber(memberships.length);
+
+      const unread = contacts.filter(c => !c.read).length;
+      if (unread > 0) {
+        document.getElementById('statMsgUnread').innerHTML = `<i data-lucide="circle" style="width:8px;height:8px;color:var(--danger)"></i> <span style="color:var(--danger)">${formatNumber(unread)} غير مقروءة</span>`;
+        const msgBadge = document.getElementById('msgBadge');
+        if (msgBadge) { msgBadge.textContent = unread; msgBadge.style.display = ''; }
+      }
+
+      const pending = memberships.filter(m => m.status === 'pending').length;
+      if (pending > 0) {
+        document.getElementById('statMemPending').innerHTML = `<i data-lucide="circle" style="width:8px;height:8px;color:var(--warning)"></i> <span style="color:var(--warning)">${formatNumber(pending)} قيد الانتظار</span>`;
+        const memBadge = document.getElementById('memBadge');
+        if (memBadge) { memBadge.textContent = pending; memBadge.style.display = ''; }
+      }
+
+      // Recent activity
+      const recentItems = [
+        ...articles.slice(0, 3).map(a => ({ icon:'file-text', color:'var(--primary)', text:`مقال: ${sanitize(a.title_ar)}`, time:'مؤخراً' })),
+        ...contacts.slice(0, 2).map(c => ({ icon:'mail', color:'var(--emerald)', text:`رسالة من: ${sanitize(c.name||'زائر')}`, time:'مؤخراً' })),
+        ...memberships.slice(0, 2).map(m => ({ icon:'user-plus', color:'var(--warning)', text:`طلب انضمام: ${sanitize(m.firstName||'')} ${sanitize(m.lastName||'')}`, time:'مؤخراً' }))
+      ].slice(0, 8);
+
+      const actEl = document.getElementById('recentActivity');
+      actEl.innerHTML = recentItems.length
+        ? recentItems.map(i => activityItem(i.icon, i.color, i.text, i.time)).join('')
+        : '<p style="text-align:center;color:var(--text-muted);font-size:13px">لا يوجد نشاط حديث</p>';
+
+      lucide.createIcons();
+    } catch (err) {
+      console.error('Dashboard load error:', err);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadDashboard();
+    App.initAnimateOnScroll();
+  });
+  </script>
+</body>
+</html>

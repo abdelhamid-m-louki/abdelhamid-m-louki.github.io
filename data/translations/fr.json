@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "articles": "Articles",
+    "events": "Événements",
+    "courses": "Formations",
+    "sports": "Sports",
+    "bureau": "Bureau Exécutif",
+    "about": "À propos de l'association",
+    "contact": "Contactez-nous",
+    "join": "Rejoignez-nous"
+  },
+  "footer": {
+    "quick_links": "Liens rapides",
+    "activities": "Nos activités",
+    "contact_us": "Contactez-nous",
+    "copyright": "Tous droits réservés"
+  },
+  "home": {
+    "hero_title": "Association Sanabil pour la langue arabe",
+    "hero_subtitle": "Nous bâtissons les ponts du futur avec la langue du Dhad",
+    "hero_join": "Rejoignez-nous",
+    "hero_discover": "Découvrez nos activités",
+    "stats_title": "Nos chiffres parlent d'eux-mêmes",
+    "years": "Années de dévouement",
+    "members": "Membres actifs",
+    "activities": "Activités diverses",
+    "courses": "Sessions de formation",
+    "news_title": "Dernières actualités",
+    "events_title": "Événements à venir",
+    "bureau_title": "Direction de l'association",
+    "cta_title": "Faites partie du changement",
+    "cta_subtitle": "Rejoignez plus de 150 membres actifs qui portent le flambeau de la langue arabe",
+    "cta_btn": "Consulter le formulaire d'adhésion",
+    "read_more": "Lire la suite",
+    "all_articles": "Tous les articles",
+    "full_bureau": "Tous les membres du bureau",
+    "event_details": "Détails",
+    "upcoming": "À venir",
+    "past": "Terminé"
+  },
+  "general": {
+    "search": "Rechercher",
+    "loading": "Chargement...",
+    "no_results": "Aucun résultat",
+    "error": "Une erreur s'est produite",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Afficher",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "submit": "Envoyer",
+    "required": "Ce champ est obligatoire",
+    "views": "Vues",
+    "by": "Par"
+  }
+}

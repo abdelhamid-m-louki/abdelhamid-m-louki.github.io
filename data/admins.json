@@ -1,0 +1,13 @@
+{
+  "admins": [
+    {
+      "id": "adm-001",
+      "name": "مدير النظام",
+      "email": "admin@sanabil.td",
+      "password_hash": "admin123",
+      "role": "super_admin",
+      "last_login": null,
+      "active": true
+    }
+  ]
+}

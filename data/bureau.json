@@ -1,0 +1,116 @@
+{
+  "secretariats": [
+    {
+      "id": "sec-001",
+      "name_ar": "رئاسة الجمعية",
+      "name_fr": "Présidence",
+      "order": 1,
+      "members": [
+        {
+          "id": "mbr-001",
+          "name_ar": "أ. محمد أحمد عبد الله",
+          "name_fr": "M. Mohammed Ahmed Abdallah",
+          "role_ar": "الرئيس",
+          "role_fr": "Président",
+          "phone": "+235 91 40 41 66",
+          "email": "president@sanabil.td",
+          "bio_ar": "أستاذ اللغة العربية بجامعة أبيشي، أكثر من 20 عاماً من الخبرة في التدريس والعمل الثقافي.",
+          "bio_fr": "Professeur de langue arabe à l'Université d'Abéché, plus de 20 ans d'expérience dans l'enseignement et le travail culturel.",
+          "photo": "assets/images/members/mbr-001.jpg",
+          "mandate_start": "2022",
+          "mandate_end": "2027",
+          "active": true,
+          "order": 1
+        }
+      ]
+    },
+    {
+      "id": "sec-002",
+      "name_ar": "الأمانة العامة",
+      "name_fr": "Secrétariat Général",
+      "order": 2,
+      "members": [
+        {
+          "id": "mbr-002",
+          "name_ar": "أ. فاطمة علي حسن",
+          "name_fr": "Mme Fatima Ali Hassan",
+          "role_ar": "الأمين العام",
+          "role_fr": "Secrétaire Générale",
+          "phone": "+235 66 XX XX XX",
+          "email": "",
+          "bio_ar": "باحثة في اللسانيات العربية، حاصلة على الدكتوراه من جامعة الخرطوم.",
+          "bio_fr": "Chercheuse en linguistique arabe, docteur de l'Université de Khartoum.",
+          "photo": "assets/images/members/mbr-002.jpg",
+          "mandate_start": "2022",
+          "mandate_end": "2027",
+          "active": true,
+          "order": 1
+        },
+        {
+          "id": "mbr-003",
+          "name_ar": "أ. إبراهيم يوسف آدم",
+          "name_fr": "M. Ibrahim Youssef Adam",
+          "role_ar": "نائب الأمين العام",
+          "role_fr": "Secrétaire Général Adjoint",
+          "phone": "+235 65 XX XX XX",
+          "email": "",
+          "bio_ar": "مدرس اللغة العربية بالمرحلة الثانوية، متخصص في تعليم اللغة العربية للناطقين بغيرها.",
+          "bio_fr": "Enseignant de langue arabe au lycée, spécialisé dans l'enseignement de l'arabe aux non-arabophones.",
+          "photo": "assets/images/members/mbr-003.jpg",
+          "mandate_start": "2022",
+          "mandate_end": "2027",
+          "active": true,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "sec-003",
+      "name_ar": "أمانة المالية",
+      "name_fr": "Secrétariat aux Finances",
+      "order": 3,
+      "members": [
+        {
+          "id": "mbr-004",
+          "name_ar": "أ. عمر موسى حسين",
+          "name_fr": "M. Omar Moussa Hussein",
+          "role_ar": "أمين المالية",
+          "role_fr": "Trésorier",
+          "phone": "+235 62 XX XX XX",
+          "email": "",
+          "bio_ar": "محاسب قانوني معتمد، أكثر من 15 عاماً من الخبرة في إدارة مالية الجمعيات.",
+          "bio_fr": "Comptable certifié, plus de 15 ans d'expérience dans la gestion financière des associations.",
+          "photo": "assets/images/members/mbr-004.jpg",
+          "mandate_start": "2022",
+          "mandate_end": "2027",
+          "active": true,
+          "order": 1
+        }
+      ]
+    },
+    {
+      "id": "sec-004",
+      "name_ar": "أمانة الأنشطة الثقافية",
+      "name_fr": "Secrétariat aux Activités Culturelles",
+      "order": 4,
+      "members": [
+        {
+          "id": "mbr-005",
+          "name_ar": "أ. خديجة محمد صالح",
+          "name_fr": "Mme Khadija Mohammed Saleh",
+          "role_ar": "أمينة الأنشطة الثقافية",
+          "role_fr": "Secrétaire aux Activités Culturelles",
+          "phone": "+235 63 XX XX XX",
+          "email": "",
+          "bio_ar": "شاعرة وكاتبة، عضو في اتحاد الكتاب التشاديين.",
+          "bio_fr": "Poète et écrivaine, membre de l'Union des écrivains tchadiens.",
+          "photo": "assets/images/members/mbr-005.jpg",
+          "mandate_start": "2022",
+          "mandate_end": "2027",
+          "active": true,
+          "order": 1
+        }
+      ]
+    }
+  ]
+}

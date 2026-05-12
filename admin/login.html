@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول — لوحة إدارة جمعية سنابل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <style>
+    body { min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--bg-gradient); padding:var(--space-5); }
+    .login-card {
+      background:var(--glass-bg-strong); backdrop-filter:var(--glass-blur-heavy); -webkit-backdrop-filter:var(--glass-blur-heavy);
+      border:1px solid var(--glass-border); border-radius:var(--radius-xl);
+      box-shadow:var(--shadow-modal); padding:var(--space-12) var(--space-8);
+      width:100%; max-width:440px;
+    }
+    .login-logo { text-align:center; margin-bottom:var(--space-6); }
+    .login-logo-circle { width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--primary-mid)); display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:800; color:white; margin-inline:auto; margin-bottom:var(--space-4); }
+    .login-title { font-size:22px; font-weight:800; color:var(--text-primary); margin-bottom:4px; }
+    .login-sub { font-size:13px; color:var(--text-muted); }
+    .pass-wrapper { position:relative; }
+    .pass-toggle { position:absolute; left:14px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:var(--text-muted); }
+    .pass-toggle:hover { color:var(--primary); }
+    .remember-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-5); }
+    .error-alert { background:rgba(231,76,60,0.10); border:1px solid rgba(231,76,60,0.30); border-radius:var(--radius-sm); padding:var(--space-3) var(--space-4); font-size:14px; color:var(--danger); display:flex; align-items:center; gap:var(--space-2); margin-bottom:var(--space-4); }
+  </style>
+</head>
+<body>
+  <div class="orb orb-1" aria-hidden="true" style="z-index:0"></div>
+  <div class="orb orb-2" aria-hidden="true" style="z-index:0"></div>
+
+  <div class="login-card animate-scale-in" style="position:relative;z-index:1">
+    <div class="login-logo">
+      <div class="login-logo-circle">س</div>
+      <div class="login-title">لوحة الإدارة</div>
+      <div class="login-sub">جمعية سنابل للغة العربية</div>
+    </div>
+
+    <div class="error-alert" id="loginError" style="display:none">
+      <i data-lucide="alert-triangle" aria-hidden="true"></i>
+      <span id="loginErrorMsg">بريد إلكتروني أو كلمة مرور غير صحيحة</span>
+    </div>
+
+    <div class="error-alert" id="sessionAlert" style="display:none;background:rgba(243,156,18,0.10);border-color:rgba(243,156,18,0.30);color:var(--warning)">
+      <i data-lucide="alert-circle" aria-hidden="true"></i>
+      انتهت صلاحية جلستك، يرجى تسجيل الدخول مجدداً
+    </div>
+
+    <form id="loginForm" novalidate>
+      <div class="input-group">
+        <label class="input-label" for="adminEmail"><i data-lucide="mail" aria-hidden="true"></i>البريد الإلكتروني</label>
+        <input class="glass-input" type="email" id="adminEmail" placeholder="admin@sanabil.td" required autocomplete="username">
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="adminPass"><i data-lucide="lock" aria-hidden="true"></i>كلمة المرور</label>
+        <div class="pass-wrapper">
+          <input class="glass-input" type="password" id="adminPass" placeholder="••••••••" required autocomplete="current-password" style="padding-left:48px">
+          <button type="button" class="pass-toggle" id="passToggle" aria-label="إظهار/إخفاء كلمة المرور">
+            <i data-lucide="eye" style="width:18px;height:18px" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <div class="remember-row">
+        <label class="checkbox-custom" style="font-size:14px">
+          <input type="checkbox" id="rememberMe">
+          <div class="checkbox-box"></div>
+          <span>تذكرني</span>
+        </label>
+        <a href="#" style="font-size:13px;color:var(--text-muted)">نسيت كلمة المرور؟</a>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg" id="loginBtn">
+        <i data-lucide="log-in" aria-hidden="true"></i>
+        تسجيل الدخول
+      </button>
+    </form>
+
+    <div style="text-align:center;margin-top:var(--space-6)">
+      <a href="../index.html" style="font-size:13px;color:var(--text-muted);display:inline-flex;align-items:center;gap:4px">
+        <i data-lucide="arrow-left" style="width:14px;height:14px" aria-hidden="true"></i>
+        العودة إلى الموقع
+      </a>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/components/toast.js"></script>
+  <script>
+  'use strict';
+
+  // Redirect if already logged in
+  if (Auth.isAuthenticated()) window.location.href = 'dashboard.html';
+
+  // Show session expired alert if redirected
+  if (new URLSearchParams(location.search).has('redirect')) {
+    document.getElementById('sessionAlert').style.display = 'flex';
+  }
+
+  document.getElementById('passToggle')?.addEventListener('click', () => {
+    const pass = document.getElementById('adminPass');
+    const icon = document.getElementById('passToggle').querySelector('i');
+    if (pass.type === 'password') {
+      pass.type = 'text';
+      icon.setAttribute('data-lucide', 'eye-off');
+    } else {
+      pass.type = 'password';
+      icon.setAttribute('data-lucide', 'eye');
+    }
+    lucide.createIcons();
+  });
+
+  document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('adminEmail').value.trim();
+    const password = document.getElementById('adminPass').value;
+    const btn = document.getElementById('loginBtn');
+    const errorEl = document.getElementById('loginError');
+
+    btn.disabled = true;
+    btn.innerHTML = '<i data-lucide="loader-2" style="animation:spin 1s linear infinite"></i> جارٍ التحقق...';
+    lucide.createIcons();
+    errorEl.style.display = 'none';
+
+    await new Promise(r => setTimeout(r, 500));
+
+    try {
+      await Auth.login(email, password);
+      const redirect = new URLSearchParams(location.search).get('redirect');
+      window.location.href = redirect || 'dashboard.html';
+    } catch {
+      errorEl.style.display = 'flex';
+      btn.disabled = false;
+      btn.innerHTML = '<i data-lucide="log-in"></i> تسجيل الدخول';
+      lucide.createIcons();
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+  </script>
+</body>
+</html>

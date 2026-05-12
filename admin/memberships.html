@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الانضمامات — جمعية سنابل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <style>
+    .mem-type-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:var(--radius-full); font-size:11px; font-weight:700; }
+    .mem-type-individual { background:rgba(27,79,114,0.12); color:var(--primary); }
+    .mem-type-family { background:rgba(39,174,96,0.12); color:var(--emerald); }
+    .mem-type-student { background:rgba(212,160,23,0.12); color:var(--gold); }
+    .mem-type-honorary { background:rgba(155,89,182,0.12); color:#8e44ad; }
+    .detail-row { display:flex; gap:var(--space-2); padding:var(--space-2) 0; border-bottom:1px solid var(--glass-border-soft); font-size:13px; }
+    .detail-label { color:var(--text-muted); width:140px; flex-shrink:0; }
+    .detail-value { color:var(--text-secondary); font-weight:600; }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+
+    <div class="admin-layout">
+      <aside class="admin-sidebar" role="complementary">
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-icon">س</div>
+          <div><div class="sidebar-logo-text">جمعية سنابل</div><div class="sidebar-logo-sub">لوحة الإدارة</div></div>
+        </div>
+        <nav class="sidebar-nav" role="navigation">
+          <a href="dashboard.html" class="sidebar-nav-item"><i data-lucide="layout-dashboard" aria-hidden="true"></i> لوحة القيادة</a>
+          <a href="posts.html?type=article" class="sidebar-nav-item"><i data-lucide="file-text" aria-hidden="true"></i> المقالات</a>
+          <a href="posts.html?type=event" class="sidebar-nav-item"><i data-lucide="calendar-days" aria-hidden="true"></i> الفعاليات</a>
+          <a href="posts.html?type=course" class="sidebar-nav-item"><i data-lucide="graduation-cap" aria-hidden="true"></i> الدورات</a>
+          <a href="posts.html?type=sport" class="sidebar-nav-item"><i data-lucide="dumbbell" aria-hidden="true"></i> الأنشطة الرياضية</a>
+          <a href="categories.html" class="sidebar-nav-item"><i data-lucide="tag" aria-hidden="true"></i> التصنيفات</a>
+          <div class="sidebar-sep"></div>
+          <a href="contacts.html" class="sidebar-nav-item"><i data-lucide="message-square" aria-hidden="true"></i> الرسائل</a>
+          <a href="memberships.html" class="sidebar-nav-item active"><i data-lucide="user-plus" aria-hidden="true"></i> الانضمامات</a>
+          <a href="bureau-admin.html" class="sidebar-nav-item"><i data-lucide="shield" aria-hidden="true"></i> المكتب التنفيذي</a>
+          <a href="settings.html" class="sidebar-nav-item"><i data-lucide="settings" aria-hidden="true"></i> الإعدادات</a>
+        </nav>
+        <div class="sidebar-user">
+          <div class="sidebar-avatar" data-admin-initials>م</div>
+          <div class="sidebar-user-info"><div class="sidebar-user-name" data-admin-name>مدير النظام</div><div class="sidebar-user-role" data-admin-role>مدير رئيسي</div></div>
+          <button class="sidebar-logout" data-logout aria-label="تسجيل الخروج"><i data-lucide="log-out" aria-hidden="true"></i></button>
+        </div>
+      </aside>
+
+      <main class="admin-content" id="main-content" role="main">
+        <div class="admin-page-header">
+          <div>
+            <div class="admin-breadcrumb"><a href="dashboard.html">لوحة القيادة</a> › طلبات الانضمام</div>
+            <h1 class="admin-page-title">طلبات الانضمام <span class="badge badge-warning" id="pendingBadge" style="display:none;font-size:12px;vertical-align:middle"></span></h1>
+          </div>
+          <div style="display:flex;gap:var(--space-3)">
+            <button class="btn btn-secondary" id="exportBtn"><i data-lucide="download" aria-hidden="true"></i> تصدير CSV</button>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);margin-bottom:var(--space-5)" id="memStats">
+          <div class="glass-card" style="padding:var(--space-4);text-align:center">
+            <div style="font-size:24px;font-weight:800;color:var(--text-primary)" id="statTotal">—</div>
+            <div style="font-size:12px;color:var(--text-muted)">إجمالي الطلبات</div>
+          </div>
+          <div class="glass-card" style="padding:var(--space-4);text-align:center">
+            <div style="font-size:24px;font-weight:800;color:var(--warning)" id="statPending">—</div>
+            <div style="font-size:12px;color:var(--text-muted)">قيد الانتظار</div>
+          </div>
+          <div class="glass-card" style="padding:var(--space-4);text-align:center">
+            <div style="font-size:24px;font-weight:800;color:var(--emerald)" id="statApproved">—</div>
+            <div style="font-size:12px;color:var(--text-muted)">مقبولة</div>
+          </div>
+          <div class="glass-card" style="padding:var(--space-4);text-align:center">
+            <div style="font-size:24px;font-weight:800;color:var(--danger)" id="statRejected">—</div>
+            <div style="font-size:12px;color:var(--text-muted)">مرفوضة</div>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <div class="table-header">
+            <div class="search-bar" style="flex:1;max-width:320px">
+              <i data-lucide="search" aria-hidden="true"></i>
+              <input type="search" id="memSearch" placeholder="ابحث بالاسم أو البريد..." aria-label="بحث" autocomplete="off">
+            </div>
+            <div style="display:flex;gap:var(--space-3);flex-wrap:wrap">
+              <select class="glass-input" id="statusFilter" style="width:auto;padding:8px 12px;font-size:13px" aria-label="تصفية الحالة">
+                <option value="all">الكل</option>
+                <option value="pending">قيد الانتظار</option>
+                <option value="approved">مقبول</option>
+                <option value="rejected">مرفوض</option>
+              </select>
+              <select class="glass-input" id="typeFilter" style="width:auto;padding:8px 12px;font-size:13px" aria-label="تصفية النوع">
+                <option value="all">جميع الأنواع</option>
+                <option value="individual">فردية</option>
+                <option value="family">عائلية</option>
+                <option value="student">طلابية</option>
+                <option value="honorary">فخرية</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="overflow-x:auto">
+            <table class="data-table" id="memTable" aria-label="قائمة طلبات الانضمام">
+              <thead>
+                <tr>
+                  <th>الاسم</th>
+                  <th>البريد الإلكتروني</th>
+                  <th>نوع العضوية</th>
+                  <th>الحالة</th>
+                  <th>تاريخ الطلب</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="memBody">
+                <tr><td colspan="6" style="text-align:center;padding:var(--space-8);color:var(--text-muted)"><i data-lucide="loader-2" style="width:32px;height:32px;animation:spin 1s linear infinite"></i></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination" id="memPagination" style="padding:var(--space-5)"></div>
+        </div>
+      </main>
+    </div>
+
+    <nav class="admin-bottom-nav" aria-label="التنقل السريع">
+      <a href="dashboard.html" class="admin-bottom-nav-item"><i data-lucide="layout-dashboard" aria-hidden="true"></i><span>الرئيسية</span></a>
+      <a href="posts.html?type=article" class="admin-bottom-nav-item"><i data-lucide="file-text" aria-hidden="true"></i><span>المقالات</span></a>
+      <a href="contacts.html" class="admin-bottom-nav-item"><i data-lucide="message-square" aria-hidden="true"></i><span>الرسائل</span></a>
+      <a href="memberships.html" class="admin-bottom-nav-item active"><i data-lucide="user-plus" aria-hidden="true"></i><span>الانضمام</span></a>
+      <a href="settings.html" class="admin-bottom-nav-item"><i data-lucide="settings" aria-hidden="true"></i><span>الإعدادات</span></a>
+    </nav>
+  </div>
+
+  <!-- Detail modal -->
+  <div class="modal-overlay" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
+    <div class="modal-card" style="max-width:560px">
+      <div class="modal-header">
+        <h2 id="detailModalTitle" class="modal-title">تفاصيل الطلب</h2>
+        <button class="modal-close" id="closeDetailModal" aria-label="إغلاق"><i data-lucide="x" aria-hidden="true"></i></button>
+      </div>
+      <div class="modal-body" id="detailModalBody"></div>
+      <div class="modal-footer" id="detailModalFooter"></div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/components/toast.js"></script>
+  <script>
+  'use strict';
+  const ITEMS_PER_PAGE = 15;
+  let _all = [];
+  let _filtered = [];
+  let _page = 1;
+
+  const typeLabels = { individual:'فردية', family:'عائلية', student:'طلابية', honorary:'فخرية' };
+  const typeClass = { individual:'mem-type-individual', family:'mem-type-family', student:'mem-type-student', honorary:'mem-type-honorary' };
+  const statusLabels = { pending:'قيد الانتظار', approved:'مقبول', rejected:'مرفوض' };
+  const statusBadge = { pending:'badge-warning', approved:'badge-success', rejected:'badge-danger' };
+
+  function getStored() { try { return JSON.parse(localStorage.getItem('sanabil_memberships') || '[]'); } catch { return []; } }
+  function setStored(d) { localStorage.setItem('sanabil_memberships', JSON.stringify(d)); }
+
+  function buildRow(m) {
+    const name = `${sanitize(m.firstName||'')} ${sanitize(m.lastName||'')}`.trim() || '—';
+    const type = m.membershipType || m.type || 'individual';
+    const status = m.status || 'pending';
+    return `<tr>
+      <td style="font-weight:600">${name}<br><span style="font-size:11px;color:var(--text-muted)">${sanitize(m.city||'')}</span></td>
+      <td style="font-size:13px"><a href="mailto:${sanitize(m.email||'')}" style="color:var(--primary)">${sanitize(m.email||'—')}</a></td>
+      <td><span class="mem-type-badge ${typeClass[type]||''}">${typeLabels[type]||type}</span></td>
+      <td><span class="badge ${statusBadge[status]||'badge-muted'}">${statusLabels[status]||status}</span></td>
+      <td style="font-size:12px;color:var(--text-muted);white-space:nowrap">${formatDate(m.date_created||m.created_at)}</td>
+      <td>
+        <div class="table-actions">
+          <button class="table-action-btn" title="عرض التفاصيل" aria-label="عرض" onclick="showDetail('${m.id}')"><i data-lucide="eye" style="width:15px;height:15px"></i></button>
+          ${status==='pending' ? `
+          <button class="table-action-btn" style="color:var(--emerald);border-color:rgba(39,174,96,0.3)" title="قبول" aria-label="قبول" onclick="updateStatus('${m.id}','approved')"><i data-lucide="check" style="width:15px;height:15px"></i></button>
+          <button class="table-action-btn danger" title="رفض" aria-label="رفض" onclick="updateStatus('${m.id}','rejected')"><i data-lucide="x" style="width:15px;height:15px"></i></button>
+          ` : ''}
+        </div>
+      </td>
+    </tr>`;
+  }
+
+  function renderTable() {
+    const start = (_page - 1) * ITEMS_PER_PAGE;
+    const page = _filtered.slice(start, start + ITEMS_PER_PAGE);
+    const tbody = document.getElementById('memBody');
+    tbody.innerHTML = page.length
+      ? page.map(buildRow).join('')
+      : '<tr><td colspan="6" style="text-align:center;padding:var(--space-10);color:var(--text-muted)"><i data-lucide="users" style="width:32px;height:32px;opacity:0.4"></i><br>لا توجد نتائج</td></tr>';
+    lucide.createIcons();
+
+    const total = Math.ceil(_filtered.length / ITEMS_PER_PAGE);
+    const pg = document.getElementById('memPagination');
+    if (total > 1) {
+      let html = '';
+      for (let i = 1; i <= total; i++) html += `<button class="page-btn ${i===_page?'active':''}" onclick="_page=${i};renderTable()">${i}</button>`;
+      pg.innerHTML = html;
+    } else pg.innerHTML = '';
+  }
+
+  function updateStats() {
+    document.getElementById('statTotal').textContent = formatNumber(_all.length);
+    document.getElementById('statPending').textContent = formatNumber(_all.filter(m => m.status === 'pending').length);
+    document.getElementById('statApproved').textContent = formatNumber(_all.filter(m => m.status === 'approved').length);
+    document.getElementById('statRejected').textContent = formatNumber(_all.filter(m => m.status === 'rejected').length);
+    const pending = _all.filter(m => m.status === 'pending').length;
+    const badge = document.getElementById('pendingBadge');
+    if (pending > 0) { badge.textContent = pending + ' في الانتظار'; badge.style.display = ''; }
+    else badge.style.display = 'none';
+  }
+
+  function applyFilter() {
+    const q = document.getElementById('memSearch').value.toLowerCase();
+    const sf = document.getElementById('statusFilter').value;
+    const tf = document.getElementById('typeFilter').value;
+    _filtered = _all.filter(m => {
+      const name = `${m.firstName||''} ${m.lastName||''}`.toLowerCase();
+      const matchQ = !q || name.includes(q) || (m.email||'').toLowerCase().includes(q);
+      const matchS = sf === 'all' || m.status === sf;
+      const matchT = tf === 'all' || (m.membershipType || m.type) === tf;
+      return matchQ && matchS && matchT;
+    });
+    _page = 1;
+    renderTable();
+  }
+
+  window.updateStatus = function(id, status) {
+    const idx = _all.findIndex(m => m.id === id);
+    if (idx < 0) return;
+    _all[idx].status = status;
+    setStored(_all);
+    updateStats();
+    applyFilter();
+    Toast.success(status === 'approved' ? 'تم قبول الطلب' : 'تم رفض الطلب');
+  };
+
+  window.showDetail = function(id) {
+    const m = _all.find(m => m.id === id);
+    if (!m) return;
+    const type = m.membershipType || m.type || 'individual';
+    const status = m.status || 'pending';
+    const name = `${m.firstName||''} ${m.lastName||''}`.trim() || '—';
+
+    document.getElementById('detailModalTitle').textContent = `طلب: ${name}`;
+    document.getElementById('detailModalBody').innerHTML = `
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div class="detail-row"><span class="detail-label">الاسم الكامل</span><span class="detail-value">${sanitize(name)}</span></div>
+        <div class="detail-row"><span class="detail-label">البريد الإلكتروني</span><span class="detail-value"><a href="mailto:${sanitize(m.email||'')}" style="color:var(--primary)">${sanitize(m.email||'—')}</a></span></div>
+        <div class="detail-row"><span class="detail-label">الهاتف</span><span class="detail-value">${sanitize(m.phone||'—')}</span></div>
+        <div class="detail-row"><span class="detail-label">تاريخ الميلاد</span><span class="detail-value">${sanitize(m.birthDate||'—')}</span></div>
+        <div class="detail-row"><span class="detail-label">المدينة</span><span class="detail-value">${sanitize(m.city||'—')}</span></div>
+        <div class="detail-row"><span class="detail-label">العنوان</span><span class="detail-value">${sanitize(m.address||'—')}</span></div>
+        <div class="detail-row"><span class="detail-label">نوع العضوية</span><span class="detail-value"><span class="mem-type-badge ${typeClass[type]||''}">${typeLabels[type]||type}</span></span></div>
+        <div class="detail-row"><span class="detail-label">الحالة</span><span class="detail-value"><span class="badge ${statusBadge[status]||'badge-muted'}">${statusLabels[status]||status}</span></span></div>
+        <div class="detail-row"><span class="detail-label">رقم المرجع</span><span class="detail-value" style="font-family:monospace">${sanitize(m.ref||m.id||'—')}</span></div>
+        <div class="detail-row" style="border:none"><span class="detail-label">الدافع</span><span class="detail-value" style="white-space:pre-wrap">${sanitize(m.motivation||'—')}</span></div>
+      </div>`;
+
+    const footer = document.getElementById('detailModalFooter');
+    if (status === 'pending') {
+      footer.innerHTML = `
+        <button class="btn btn-secondary" onclick="document.getElementById('detailModal').classList.remove('open')">إغلاق</button>
+        <button class="btn btn-success" onclick="updateStatus('${m.id}','approved');document.getElementById('detailModal').classList.remove('open')" style="background:var(--emerald);border-color:var(--emerald);color:white"><i data-lucide="check" style="width:15px;height:15px"></i> قبول الطلب</button>
+        <button class="btn btn-danger" onclick="updateStatus('${m.id}','rejected');document.getElementById('detailModal').classList.remove('open')"><i data-lucide="x" style="width:15px;height:15px"></i> رفض</button>`;
+    } else {
+      footer.innerHTML = `<button class="btn btn-secondary" onclick="document.getElementById('detailModal').classList.remove('open')">إغلاق</button>`;
+    }
+    document.getElementById('detailModal').classList.add('open');
+    lucide.createIcons();
+  };
+
+  document.getElementById('closeDetailModal')?.addEventListener('click', () => document.getElementById('detailModal').classList.remove('open'));
+  document.getElementById('detailModal')?.addEventListener('click', e => { if (e.target === document.getElementById('detailModal')) document.getElementById('detailModal').classList.remove('open'); });
+
+  // Export CSV
+  document.getElementById('exportBtn')?.addEventListener('click', () => {
+    const rows = [['الاسم','البريد','الهاتف','نوع العضوية','الحالة','المدينة','تاريخ الطلب','رقم المرجع']];
+    _filtered.forEach(m => {
+      rows.push([
+        `${m.firstName||''} ${m.lastName||''}`.trim(),
+        m.email||'', m.phone||'',
+        typeLabels[m.membershipType||m.type]||'',
+        statusLabels[m.status]||'',
+        m.city||'',
+        (m.date_created||m.created_at||'').slice(0,10),
+        m.ref||m.id||''
+      ]);
+    });
+    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob = new Blob(['﻿' + csv], { type:'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `memberships-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    Toast.success('تم تصدير الملف');
+  });
+
+  document.getElementById('memSearch')?.addEventListener('input', debounce(applyFilter, 250));
+  document.getElementById('statusFilter')?.addEventListener('change', applyFilter);
+  document.getElementById('typeFilter')?.addEventListener('change', applyFilter);
+
+  async function load() {
+    try {
+      const fromDB = await MembershipsDB.getAll();
+      const fromStorage = getStored();
+      const storageIds = new Set(fromStorage.map(m => m.id));
+      _all = [...fromDB.filter(m => !storageIds.has(m.id)), ...fromStorage];
+      _all.sort((a,b) => new Date(b.date_created||b.created_at||0) - new Date(a.date_created||a.created_at||0));
+      _filtered = _all;
+      updateStats();
+      renderTable();
+    } catch {
+      document.getElementById('memBody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">تعذّر تحميل البيانات</td></tr>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', load);
+  </script>
+</body>
+</html>

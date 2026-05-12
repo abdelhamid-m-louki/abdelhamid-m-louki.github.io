@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الإعدادات — جمعية سنابل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <style>
+    .settings-tabs { display:flex; gap:0; border-bottom:1px solid var(--glass-border-soft); margin-bottom:var(--space-6); overflow-x:auto; }
+    .stab { display:flex; align-items:center; gap:var(--space-2); padding:var(--space-3) var(--space-5); font-size:13px; font-weight:600; cursor:pointer; border:none; background:transparent; color:var(--text-muted); border-bottom:2px solid transparent; transition:all var(--transition-fast); font-family:var(--font-primary); white-space:nowrap; margin-bottom:-1px; }
+    .stab.active { color:var(--primary); border-bottom-color:var(--primary); }
+    .stab:hover { color:var(--text-primary); }
+    .stab-panel { display:none; }
+    .stab-panel.active { display:block; }
+    .settings-section { background:var(--glass-bg); border:1px solid var(--glass-border-soft); border-radius:var(--radius-lg); padding:var(--space-5) var(--space-6); margin-bottom:var(--space-5); }
+    .settings-section-title { font-size:14px; font-weight:700; color:var(--text-primary); margin-bottom:var(--space-4); padding-bottom:var(--space-3); border-bottom:1px solid var(--glass-border-soft); display:flex; align-items:center; gap:var(--space-2); }
+    .form-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); }
+    .admin-row { display:flex; align-items:center; gap:var(--space-4); padding:var(--space-3) var(--space-4); background:var(--glass-bg-strong); border:1px solid var(--glass-border-soft); border-radius:var(--radius-md); margin-bottom:var(--space-3); }
+    .admin-avatar-sm { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,var(--primary),var(--primary-mid)); display:flex; align-items:center; justify-content:center; font-weight:800; color:white; font-size:16px; flex-shrink:0; }
+    @media (max-width:767px) { .form-grid-2 { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+
+    <div class="admin-layout">
+      <aside class="admin-sidebar" role="complementary">
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-icon">س</div>
+          <div><div class="sidebar-logo-text">جمعية سنابل</div><div class="sidebar-logo-sub">لوحة الإدارة</div></div>
+        </div>
+        <nav class="sidebar-nav" role="navigation">
+          <a href="dashboard.html" class="sidebar-nav-item"><i data-lucide="layout-dashboard" aria-hidden="true"></i> لوحة القيادة</a>
+          <a href="posts.html?type=article" class="sidebar-nav-item"><i data-lucide="file-text" aria-hidden="true"></i> المقالات</a>
+          <a href="posts.html?type=event" class="sidebar-nav-item"><i data-lucide="calendar-days" aria-hidden="true"></i> الفعاليات</a>
+          <a href="posts.html?type=course" class="sidebar-nav-item"><i data-lucide="graduation-cap" aria-hidden="true"></i> الدورات</a>
+          <a href="posts.html?type=sport" class="sidebar-nav-item"><i data-lucide="dumbbell" aria-hidden="true"></i> الأنشطة الرياضية</a>
+          <a href="categories.html" class="sidebar-nav-item"><i data-lucide="tag" aria-hidden="true"></i> التصنيفات</a>
+          <div class="sidebar-sep"></div>
+          <a href="contacts.html" class="sidebar-nav-item"><i data-lucide="message-square" aria-hidden="true"></i> الرسائل</a>
+          <a href="memberships.html" class="sidebar-nav-item"><i data-lucide="user-plus" aria-hidden="true"></i> الانضمامات</a>
+          <a href="bureau-admin.html" class="sidebar-nav-item"><i data-lucide="shield" aria-hidden="true"></i> المكتب التنفيذي</a>
+          <a href="settings.html" class="sidebar-nav-item active"><i data-lucide="settings" aria-hidden="true"></i> الإعدادات</a>
+        </nav>
+        <div class="sidebar-user">
+          <div class="sidebar-avatar" data-admin-initials>م</div>
+          <div class="sidebar-user-info"><div class="sidebar-user-name" data-admin-name>مدير النظام</div><div class="sidebar-user-role" data-admin-role>مدير رئيسي</div></div>
+          <button class="sidebar-logout" data-logout aria-label="تسجيل الخروج"><i data-lucide="log-out" aria-hidden="true"></i></button>
+        </div>
+      </aside>
+
+      <main class="admin-content" id="main-content" role="main">
+        <div class="admin-page-header">
+          <div>
+            <div class="admin-breadcrumb"><a href="dashboard.html">لوحة القيادة</a> › الإعدادات</div>
+            <h1 class="admin-page-title">الإعدادات</h1>
+          </div>
+          <button class="btn btn-primary" id="saveSettingsBtn">
+            <i data-lucide="save" aria-hidden="true"></i> حفظ الإعدادات
+          </button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="settings-tabs" role="tablist">
+          <button class="stab active" data-stab="general" role="tab" aria-selected="true"><i data-lucide="info" style="width:15px;height:15px" aria-hidden="true"></i> معلومات عامة</button>
+          <button class="stab" data-stab="contact" role="tab"><i data-lucide="map-pin" style="width:15px;height:15px" aria-hidden="true"></i> الاتصال والعنوان</button>
+          <button class="stab" data-stab="social" role="tab"><i data-lucide="share-2" style="width:15px;height:15px" aria-hidden="true"></i> التواصل الاجتماعي</button>
+          <button class="stab" data-stab="admins" role="tab"><i data-lucide="shield-check" style="width:15px;height:15px" aria-hidden="true"></i> المشرفون</button>
+          <button class="stab" data-stab="ai" role="tab"><i data-lucide="sparkles" style="width:15px;height:15px" aria-hidden="true"></i> الذكاء الاصطناعي</button>
+        </div>
+
+        <!-- General info tab -->
+        <div class="stab-panel active" id="stab-general">
+          <div class="settings-section">
+            <div class="settings-section-title"><i data-lucide="building" style="width:16px;height:16px;color:var(--primary)" aria-hidden="true"></i> هوية الجمعية</div>
+            <div class="form-grid-2">
+              <div class="input-group">
+                <label class="input-label" for="orgNameAr">اسم الجمعية (عربي)</label>
+                <input class="glass-input" type="text" id="orgNameAr" value="جمعية سنابل للغة العربية">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="orgNameFr">Nom (Français)</label>
+                <input class="glass-input" type="text" id="orgNameFr" value="Association Sanabil de la Langue Arabe">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="orgTaglineAr">الشعار (عربي)</label>
+                <input class="glass-input" type="text" id="orgTaglineAr" placeholder="شعار الجمعية">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="orgTaglineFr">Slogan (Français)</label>
+                <input class="glass-input" type="text" id="orgTaglineFr" placeholder="Slogan de l'association">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="orgFoundedYear">سنة التأسيس</label>
+                <input class="glass-input" type="number" id="orgFoundedYear" placeholder="مثال: 2010" min="1900" max="2100">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="orgRegNumber">رقم التسجيل القانوني</label>
+                <input class="glass-input" type="text" id="orgRegNumber" placeholder="رقم السجل الرسمي">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="orgDescAr">نبذة عن الجمعية (عربي)</label>
+              <textarea class="glass-input" id="orgDescAr" rows="3" placeholder="وصف مختصر للجمعية..." style="resize:vertical"></textarea>
+            </div>
+            <div class="input-group" style="margin-bottom:0">
+              <label class="input-label" for="orgDescFr">À propos (Français)</label>
+              <textarea class="glass-input" id="orgDescFr" rows="3" placeholder="Description de l'association..." style="resize:vertical"></textarea>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <div class="settings-section-title"><i data-lucide="bar-chart-3" style="width:16px;height:16px;color:var(--primary)" aria-hidden="true"></i> إحصائيات للعرض</div>
+            <div class="form-grid-2">
+              <div class="input-group">
+                <label class="input-label" for="statMembers">عدد الأعضاء</label>
+                <input class="glass-input" type="text" id="statMembers" placeholder="مثال: +١٥٠">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="statYears">سنوات الخبرة</label>
+                <input class="glass-input" type="text" id="statYears" placeholder="مثال: ١٥+">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="statEvents">الفعاليات المنجزة</label>
+                <input class="glass-input" type="text" id="statEvents" placeholder="مثال: +٥٠">
+              </div>
+              <div class="input-group" style="margin-bottom:0">
+                <label class="input-label" for="statCourses">الدورات المقدمة</label>
+                <input class="glass-input" type="text" id="statCourses" placeholder="مثال: +٣٠">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact tab -->
+        <div class="stab-panel" id="stab-contact">
+          <div class="settings-section">
+            <div class="settings-section-title"><i data-lucide="map-pin" style="width:16px;height:16px;color:var(--primary)" aria-hidden="true"></i> العنوان والتواصل</div>
+            <div class="form-grid-2">
+              <div class="input-group">
+                <label class="input-label" for="contactEmail">البريد الإلكتروني الرسمي</label>
+                <input class="glass-input" type="email" id="contactEmail" placeholder="contact@sanabil.td">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="contactPhone">الهاتف الرئيسي</label>
+                <input class="glass-input" type="tel" id="contactPhone" placeholder="+235 ...">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="contactPhone2">هاتف ثانوي</label>
+                <input class="glass-input" type="tel" id="contactPhone2" placeholder="+235 ...">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="contactWhatsapp">واتساب</label>
+                <input class="glass-input" type="tel" id="contactWhatsapp" placeholder="+235 ...">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="contactCity">المدينة</label>
+                <input class="glass-input" type="text" id="contactCity" placeholder="أبشة، تشاد">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="contactPostal">الرمز البريدي</label>
+                <input class="glass-input" type="text" id="contactPostal" placeholder="BP ...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="contactAddress">العنوان التفصيلي</label>
+              <textarea class="glass-input" id="contactAddress" rows="2" placeholder="العنوان الكامل..." style="resize:vertical"></textarea>
+            </div>
+            <div class="input-group" style="margin-bottom:0">
+              <label class="input-label" for="contactMapEmbed">رابط خريطة Google Maps (embed)</label>
+              <input class="glass-input" type="url" id="contactMapEmbed" placeholder="https://www.google.com/maps/embed?...">
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <div class="settings-section-title"><i data-lucide="clock" style="width:16px;height:16px;color:var(--primary)" aria-hidden="true"></i> ساعات العمل</div>
+            <div class="form-grid-2">
+              <div class="input-group">
+                <label class="input-label" for="hoursWeekdays">أيام الأسبوع</label>
+                <input class="glass-input" type="text" id="hoursWeekdays" placeholder="السبت – الخميس: 8:00 – 17:00">
+              </div>
+              <div class="input-group" style="margin-bottom:0">
+                <label class="input-label" for="hoursFriday">الجمعة</label>
+                <input class="glass-input" type="text" id="hoursFriday" placeholder="مغلق">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social tab -->
+        <div class="stab-panel" id="stab-social">
+          <div class="settings-section">
+            <div class="settings-section-title"><i data-lucide="share-2" style="width:16px;height:16px;color:var(--primary)" aria-hidden="true"></i> منصات التواصل الاجتماعي</div>
+            <div class="form-grid-2">
+              <div class="input-group">
+                <label class="input-label" for="socialFacebook"><i data-lucide="facebook" style="width:14px;height:14px" aria-hidden="true"></i> Facebook</label>
+                <input class="glass-input" type="url" id="socialFacebook" placeholder="https://facebook.com/...">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="socialTwitter"><i data-lucide="twitter" style="width:14px;height:14px" aria-hidden="true"></i> Twitter / X</label>
+                <input class="glass-input" type="url" id="socialTwitter" placeholder="https://twitter.com/...">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="socialInstagram"><i data-lucide="instagram" style="width:14px;height:14px" aria-hidden="true"></i> Instagram</label>
+                <input class="glass-input" type="url" id="socialInstagram" placeholder="https://instagram.com/...">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="socialYoutube"><i data-lucide="youtube" style="width:14px;height:14px" aria-hidden="true"></i> YouTube</label>
+                <input class="glass-input" type="url" id="socialYoutube" placeholder="https://youtube.com/...">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="socialTelegram"><i data-lucide="send" style="width:14px;height:14px" aria-hidden="true"></i> Telegram</label>
+                <input class="glass-input" type="url" id="socialTelegram" placeholder="https://t.me/...">
+              </div>
+              <div class="input-group" style="margin-bottom:0">
+                <label class="input-label" for="socialLinkedin"><i data-lucide="linkedin" style="width:14px;height:14px" aria-hidden="true"></i> LinkedIn</label>
+                <input class="glass-input" type="url" id="socialLinkedin" placeholder="https://linkedin.com/...">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admins tab -->
+        <div class="stab-panel" id="stab-admins">
+          <div class="settings-section">
+            <div class="settings-section-title" style="justify-content:space-between">
+              <span><i data-lucide="shield-check" style="width:16px;height:16px;color:var(--primary)" aria-hidden="true"></i> المشرفون</span>
+              <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" id="addAdminBtn"><i data-lucide="plus" style="width:13px;height:13px" aria-hidden="true"></i> إضافة مشرف</button>
+            </div>
+            <div id="adminsList"></div>
+          </div>
+
+          <div class="settings-section">
+            <div class="settings-section-title"><i data-lucide="lock" style="width:16px;height:16px;color:var(--primary)" aria-hidden="true"></i> تغيير كلمة المرور</div>
+            <div style="max-width:400px">
+              <div class="input-group">
+                <label class="input-label" for="currentPass">كلمة المرور الحالية</label>
+                <input class="glass-input" type="password" id="currentPass" autocomplete="current-password">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="newPass">كلمة المرور الجديدة</label>
+                <input class="glass-input" type="password" id="newPass" autocomplete="new-password">
+              </div>
+              <div class="input-group" style="margin-bottom:0">
+                <label class="input-label" for="confirmPass">تأكيد كلمة المرور</label>
+                <input class="glass-input" type="password" id="confirmPass" autocomplete="new-password">
+              </div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:var(--space-4)" id="changePassBtn"><i data-lucide="key" aria-hidden="true"></i> تغيير كلمة المرور</button>
+          </div>
+        </div>
+
+        <!-- AI tab -->
+        <div class="stab-panel" id="stab-ai">
+          <div class="settings-section">
+            <div class="settings-section-title"><i data-lucide="sparkles" style="width:16px;height:16px;color:var(--gold)" aria-hidden="true"></i> إعدادات الذكاء الاصطناعي</div>
+            <div class="input-group">
+              <label class="input-label" for="geminiKey">مفتاح Google Gemini API <span class="badge badge-primary" style="font-size:10px">رئيسي</span></label>
+              <input class="glass-input" type="password" id="geminiKey" placeholder="AIza..." autocomplete="off">
+              <p style="font-size:11px;color:var(--text-muted);margin-top:4px">يُستخدم لإعادة الصياغة، واقتراح العناوين، والترجمة</p>
+            </div>
+            <div class="input-group" style="margin-bottom:0">
+              <label class="input-label" for="openaiKey">مفتاح OpenAI API <span class="badge badge-muted" style="font-size:10px">احتياطي</span></label>
+              <input class="glass-input" type="password" id="openaiKey" placeholder="sk-..." autocomplete="off">
+              <p style="font-size:11px;color:var(--text-muted);margin-top:4px">يُستخدم تلقائياً عند تعذّر الاتصال بـ Gemini</p>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-section-title"><i data-lucide="sliders" style="width:16px;height:16px;color:var(--primary)" aria-hidden="true"></i> تفضيلات الذكاء الاصطناعي</div>
+            <div class="form-grid-2">
+              <div class="input-group">
+                <label class="input-label" for="aiDefaultStyle">أسلوب الصياغة الافتراضي</label>
+                <select class="glass-input" id="aiDefaultStyle">
+                  <option value="formal">رسمي</option>
+                  <option value="simple">مبسّط</option>
+                  <option value="academic">أكاديمي</option>
+                  <option value="journalistic">صحفي</option>
+                </select>
+              </div>
+              <div class="input-group" style="margin-bottom:0">
+                <label class="input-label" for="aiHooksCount">عدد العناوين المقترحة</label>
+                <select class="glass-input" id="aiHooksCount">
+                  <option value="3">3 عناوين</option>
+                  <option value="5" selected>5 عناوين</option>
+                  <option value="7">7 عناوين</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <nav class="admin-bottom-nav" aria-label="التنقل السريع">
+      <a href="dashboard.html" class="admin-bottom-nav-item"><i data-lucide="layout-dashboard" aria-hidden="true"></i><span>الرئيسية</span></a>
+      <a href="posts.html?type=article" class="admin-bottom-nav-item"><i data-lucide="file-text" aria-hidden="true"></i><span>المقالات</span></a>
+      <a href="contacts.html" class="admin-bottom-nav-item"><i data-lucide="message-square" aria-hidden="true"></i><span>الرسائل</span></a>
+      <a href="memberships.html" class="admin-bottom-nav-item"><i data-lucide="user-plus" aria-hidden="true"></i><span>الانضمام</span></a>
+      <a href="settings.html" class="admin-bottom-nav-item active"><i data-lucide="settings" aria-hidden="true"></i><span>الإعدادات</span></a>
+    </nav>
+  </div>
+
+  <!-- Add admin modal -->
+  <div class="modal-overlay" id="addAdminModal" role="dialog" aria-modal="true" aria-labelledby="addAdminTitle">
+    <div class="modal-card" style="max-width:460px">
+      <div class="modal-header">
+        <h2 id="addAdminTitle" class="modal-title">إضافة مشرف جديد</h2>
+        <button class="modal-close" id="closeAdminModal" aria-label="إغلاق"><i data-lucide="x" aria-hidden="true"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <label class="input-label" for="newAdminName">الاسم <span style="color:var(--danger)">*</span></label>
+          <input class="glass-input" type="text" id="newAdminName" placeholder="الاسم الكامل">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="newAdminEmail">البريد الإلكتروني <span style="color:var(--danger)">*</span></label>
+          <input class="glass-input" type="email" id="newAdminEmail" placeholder="admin@sanabil.td">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="newAdminPass">كلمة المرور <span style="color:var(--danger)">*</span></label>
+          <input class="glass-input" type="password" id="newAdminPass" placeholder="كلمة مرور قوية">
+        </div>
+        <div class="input-group" style="margin-bottom:0">
+          <label class="input-label" for="newAdminRole">الدور</label>
+          <select class="glass-input" id="newAdminRole">
+            <option value="editor">محرر</option>
+            <option value="moderator">مشرف</option>
+            <option value="super_admin">مدير رئيسي</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelAdminModal">إلغاء</button>
+        <button class="btn btn-primary" id="saveAdminBtn"><i data-lucide="save" aria-hidden="true"></i> إضافة</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/components/toast.js"></script>
+  <script>
+  'use strict';
+  const SETTINGS_KEY = 'sanabil_settings';
+  const ADMINS_KEY = 'sanabil_admins_custom';
+  let _admins = [];
+
+  // Tabs
+  document.querySelectorAll('.stab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.stab').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      document.querySelectorAll('.stab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      document.getElementById('stab-' + btn.dataset.stab)?.classList.add('active');
+    });
+  });
+
+  // Settings fields map: { elementId: settingsKey }
+  const fields = {
+    orgNameAr:'name_ar', orgNameFr:'name_fr', orgTaglineAr:'tagline_ar', orgTaglineFr:'tagline_fr',
+    orgFoundedYear:'founded_year', orgRegNumber:'registration_number', orgDescAr:'description_ar', orgDescFr:'description_fr',
+    statMembers:'stat_members', statYears:'stat_years', statEvents:'stat_events', statCourses:'stat_courses',
+    contactEmail:'contact_email', contactPhone:'contact_phone', contactPhone2:'contact_phone2',
+    contactWhatsapp:'whatsapp', contactCity:'city', contactPostal:'postal',
+    contactAddress:'address', contactMapEmbed:'map_embed',
+    hoursWeekdays:'hours_weekdays', hoursFriday:'hours_friday',
+    socialFacebook:'facebook', socialTwitter:'twitter', socialInstagram:'instagram',
+    socialYoutube:'youtube', socialTelegram:'telegram', socialLinkedin:'linkedin',
+    geminiKey:'gemini_api_key', openaiKey:'openai_api_key',
+    aiDefaultStyle:'ai_style', aiHooksCount:'ai_hooks_count'
+  };
+
+  function loadSettings() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+      Object.entries(fields).forEach(([elId, key]) => {
+        const el = document.getElementById(elId);
+        if (el && saved[key] !== undefined) el.value = saved[key];
+      });
+    } catch {}
+  }
+
+  function saveSettings() {
+    const data = {};
+    Object.entries(fields).forEach(([elId, key]) => {
+      const el = document.getElementById(elId);
+      if (el) data[key] = el.value;
+    });
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
+    Toast.success('تم حفظ الإعدادات بنجاح');
+  }
+
+  document.getElementById('saveSettingsBtn')?.addEventListener('click', saveSettings);
+
+  // Admins
+  function getStoredAdmins() { try { return JSON.parse(localStorage.getItem(ADMINS_KEY) || '[]'); } catch { return []; } }
+  function setStoredAdmins(d) { localStorage.setItem(ADMINS_KEY, JSON.stringify(d)); }
+
+  const roleLabels = { super_admin:'مدير رئيسي', moderator:'مشرف', editor:'محرر' };
+  const roleBadge = { super_admin:'badge-primary', moderator:'badge-warning', editor:'badge-muted' };
+
+  function renderAdmins() {
+    const cont = document.getElementById('adminsList');
+    if (!_admins.length) {
+      cont.innerHTML = '<p style="text-align:center;color:var(--text-muted);font-size:13px;padding:var(--space-5)">لا يوجد مشرفون</p>';
+      return;
+    }
+    cont.innerHTML = _admins.map(a => `
+      <div class="admin-row">
+        <div class="admin-avatar-sm">${(a.name||a.email||'?').slice(0,1).toUpperCase()}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:14px;font-weight:700;color:var(--text-primary)">${sanitize(a.name||'—')}</div>
+          <div style="font-size:12px;color:var(--text-muted)">${sanitize(a.email||'')}</div>
+        </div>
+        <span class="badge ${roleBadge[a.role]||'badge-muted'}" style="font-size:11px">${roleLabels[a.role]||a.role}</span>
+        ${a.id !== 'adm-001' ? `<button class="table-action-btn danger" aria-label="حذف" onclick="removeAdmin('${a.id}')"><i data-lucide="trash-2" style="width:14px;height:14px"></i></button>` : ''}
+      </div>`).join('');
+    lucide.createIcons();
+  }
+
+  window.removeAdmin = function(id) {
+    if (!confirm('هل تريد حذف هذا المشرف؟')) return;
+    _admins = _admins.filter(a => a.id !== id);
+    setStoredAdmins(_admins);
+    renderAdmins();
+    Toast.success('تم حذف المشرف');
+  };
+
+  // Add admin modal
+  document.getElementById('addAdminBtn')?.addEventListener('click', () => { document.getElementById('addAdminModal').classList.add('open'); document.getElementById('newAdminName').focus(); });
+  const closeAdminModal = () => {
+    document.getElementById('addAdminModal').classList.remove('open');
+    ['newAdminName','newAdminEmail','newAdminPass'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    document.getElementById('newAdminRole').value = 'editor';
+  };
+  document.getElementById('closeAdminModal')?.addEventListener('click', closeAdminModal);
+  document.getElementById('cancelAdminModal')?.addEventListener('click', closeAdminModal);
+  document.getElementById('addAdminModal')?.addEventListener('click', e => { if (e.target === document.getElementById('addAdminModal')) closeAdminModal(); });
+
+  document.getElementById('saveAdminBtn')?.addEventListener('click', () => {
+    const name = document.getElementById('newAdminName').value.trim();
+    const email = document.getElementById('newAdminEmail').value.trim();
+    const pass = document.getElementById('newAdminPass').value;
+    const role = document.getElementById('newAdminRole').value;
+    if (!name) { Toast.error('الاسم مطلوب'); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { Toast.error('بريد إلكتروني غير صالح'); return; }
+    if (!pass || pass.length < 6) { Toast.error('كلمة المرور يجب أن تكون 6 أحرف على الأقل'); return; }
+    if (_admins.some(a => a.email === email)) { Toast.error('يوجد مشرف بهذا البريد مسبقاً'); return; }
+    const newAdmin = { id:'adm-' + Date.now(), name, email, password_hash: pass, role, active: true };
+    _admins.push(newAdmin);
+    setStoredAdmins(_admins);
+    renderAdmins();
+    closeAdminModal();
+    Toast.success('تم إضافة المشرف بنجاح');
+  });
+
+  // Change password
+  document.getElementById('changePassBtn')?.addEventListener('click', () => {
+    const current = document.getElementById('currentPass').value;
+    const newP = document.getElementById('newPass').value;
+    const confirm = document.getElementById('confirmPass').value;
+    const admin = Auth.getCurrentAdmin?.();
+    if (!current) { Toast.error('أدخل كلمة المرور الحالية'); return; }
+    if (!newP || newP.length < 6) { Toast.error('كلمة المرور الجديدة يجب أن تكون 6 أحرف على الأقل'); return; }
+    if (newP !== confirm) { Toast.error('كلمتا المرور غير متطابقتين'); return; }
+    // Simple check: compare with stored (in real app this would be hashed)
+    const idx = _admins.findIndex(a => a.email === (admin?.email || 'admin@sanabil.td'));
+    if (idx >= 0 && _admins[idx].password_hash !== current) { Toast.error('كلمة المرور الحالية غير صحيحة'); return; }
+    if (idx >= 0) { _admins[idx].password_hash = newP; setStoredAdmins(_admins); }
+    document.getElementById('currentPass').value = '';
+    document.getElementById('newPass').value = '';
+    document.getElementById('confirmPass').value = '';
+    Toast.success('تم تغيير كلمة المرور بنجاح');
+  });
+
+  async function load() {
+    loadSettings();
+    try {
+      const fromDB = await fetch('../data/admins.json').then(r => r.json()).then(d => d.admins || []).catch(() => []);
+      const custom = getStoredAdmins();
+      const customIds = new Set(custom.map(a => a.id));
+      _admins = [...fromDB.filter(a => !customIds.has(a.id)), ...custom];
+    } catch {
+      _admins = getStoredAdmins();
+    }
+    renderAdmins();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    load();
+    lucide.createIcons();
+  });
+  </script>
+</body>
+</html>

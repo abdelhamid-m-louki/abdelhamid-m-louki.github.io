@@ -1,0 +1,9 @@
+{
+  "categories": [
+    { "id": "cat-001", "name_ar": "ثقافة وتراث", "name_fr": "Culture et Patrimoine", "slug": "culture", "color": "#1B4F72", "count": 8 },
+    { "id": "cat-002", "name_ar": "تعليم وتكوين", "name_fr": "Éducation et Formation", "slug": "education", "color": "#27AE60", "count": 12 },
+    { "id": "cat-003", "name_ar": "أنشطة رياضية", "name_fr": "Activités Sportives", "slug": "sports", "color": "#E74C3C", "count": 5 },
+    { "id": "cat-004", "name_ar": "أخبار الجمعية", "name_fr": "Actualités", "slug": "news", "color": "#D4A017", "count": 10 },
+    { "id": "cat-005", "name_ar": "شراكات وتعاون", "name_fr": "Partenariats", "slug": "partnerships", "color": "#8E44AD", "count": 3 }
+  ]
+}

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الرسائل — جمعية سنابل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="stylesheet" href="../assets/css/animations.css">
+  <style>
+    .msg-card { background:var(--glass-bg); border:1px solid var(--glass-border-soft); border-radius:var(--radius-md); padding:var(--space-4) var(--space-5); cursor:pointer; transition:all var(--transition-fast); }
+    .msg-card:hover { background:var(--glass-bg-hover); border-color:var(--primary-light); }
+    .msg-card.unread { border-right:3px solid var(--primary); background:rgba(27,79,114,0.04); }
+    .msg-card.unread .msg-name { font-weight:800; }
+    .msg-name { font-size:14px; font-weight:600; color:var(--text-primary); }
+    .msg-subject { font-size:13px; color:var(--text-secondary); margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .msg-preview { font-size:12px; color:var(--text-muted); margin-top:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .msg-time { font-size:11px; color:var(--text-muted); white-space:nowrap; flex-shrink:0; }
+    .msg-detail-panel { background:var(--glass-bg-strong); border:1px solid var(--glass-border-soft); border-radius:var(--radius-lg); padding:var(--space-6); }
+    .msg-detail-header { border-bottom:1px solid var(--glass-border-soft); padding-bottom:var(--space-4); margin-bottom:var(--space-5); }
+    .msg-detail-body { font-size:14px; color:var(--text-secondary); line-height:1.9; white-space:pre-wrap; }
+    .msg-meta-item { display:flex; align-items:center; gap:var(--space-2); font-size:13px; color:var(--text-muted); }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+
+    <div class="admin-layout">
+      <aside class="admin-sidebar" role="complementary">
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-icon">س</div>
+          <div><div class="sidebar-logo-text">جمعية سنابل</div><div class="sidebar-logo-sub">لوحة الإدارة</div></div>
+        </div>
+        <nav class="sidebar-nav" role="navigation">
+          <a href="dashboard.html" class="sidebar-nav-item"><i data-lucide="layout-dashboard" aria-hidden="true"></i> لوحة القيادة</a>
+          <a href="posts.html?type=article" class="sidebar-nav-item"><i data-lucide="file-text" aria-hidden="true"></i> المقالات</a>
+          <a href="posts.html?type=event" class="sidebar-nav-item"><i data-lucide="calendar-days" aria-hidden="true"></i> الفعاليات</a>
+          <a href="posts.html?type=course" class="sidebar-nav-item"><i data-lucide="graduation-cap" aria-hidden="true"></i> الدورات</a>
+          <a href="posts.html?type=sport" class="sidebar-nav-item"><i data-lucide="dumbbell" aria-hidden="true"></i> الأنشطة الرياضية</a>
+          <a href="categories.html" class="sidebar-nav-item"><i data-lucide="tag" aria-hidden="true"></i> التصنيفات</a>
+          <div class="sidebar-sep"></div>
+          <a href="contacts.html" class="sidebar-nav-item active"><i data-lucide="message-square" aria-hidden="true"></i> الرسائل</a>
+          <a href="memberships.html" class="sidebar-nav-item"><i data-lucide="user-plus" aria-hidden="true"></i> الانضمامات</a>
+          <a href="bureau-admin.html" class="sidebar-nav-item"><i data-lucide="shield" aria-hidden="true"></i> المكتب التنفيذي</a>
+          <a href="settings.html" class="sidebar-nav-item"><i data-lucide="settings" aria-hidden="true"></i> الإعدادات</a>
+        </nav>
+        <div class="sidebar-user">
+          <div class="sidebar-avatar" data-admin-initials>م</div>
+          <div class="sidebar-user-info"><div class="sidebar-user-name" data-admin-name>مدير النظام</div><div class="sidebar-user-role" data-admin-role>مدير رئيسي</div></div>
+          <button class="sidebar-logout" data-logout aria-label="تسجيل الخروج"><i data-lucide="log-out" aria-hidden="true"></i></button>
+        </div>
+      </aside>
+
+      <main class="admin-content" id="main-content" role="main">
+        <div class="admin-page-header">
+          <div>
+            <div class="admin-breadcrumb"><a href="dashboard.html">لوحة القيادة</a> › الرسائل</div>
+            <h1 class="admin-page-title">الرسائل <span class="badge badge-primary" id="unreadBadge" style="display:none;font-size:12px;vertical-align:middle"></span></h1>
+          </div>
+          <div style="display:flex;gap:var(--space-3)">
+            <button class="btn btn-secondary" id="markAllReadBtn"><i data-lucide="check-check" aria-hidden="true"></i> تحديد الكل كمقروء</button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:380px 1fr;gap:var(--space-5);align-items:flex-start" id="msgLayout">
+
+          <!-- Messages list -->
+          <div class="table-wrapper" style="padding:0">
+            <div style="padding:var(--space-4);border-bottom:1px solid var(--glass-border-soft);display:flex;gap:var(--space-3);flex-wrap:wrap">
+              <div class="search-bar" style="flex:1;min-width:160px">
+                <i data-lucide="search" aria-hidden="true"></i>
+                <input type="search" id="msgSearch" placeholder="بحث..." aria-label="بحث" autocomplete="off">
+              </div>
+              <select class="glass-input" id="readFilter" style="width:auto;padding:8px 12px;font-size:13px" aria-label="تصفية">
+                <option value="all">الكل</option>
+                <option value="unread">غير مقروء</option>
+                <option value="read">مقروء</option>
+              </select>
+            </div>
+            <div id="msgList" style="display:flex;flex-direction:column;gap:0;max-height:600px;overflow-y:auto">
+              <div style="text-align:center;padding:var(--space-8);color:var(--text-muted)"><i data-lucide="loader-2" style="width:32px;height:32px;animation:spin 1s linear infinite"></i></div>
+            </div>
+          </div>
+
+          <!-- Message detail -->
+          <div id="msgDetail" style="display:none">
+            <div class="msg-detail-panel">
+              <div class="msg-detail-header">
+                <h2 id="detailSubject" style="font-size:18px;font-weight:700;color:var(--text-primary);margin-bottom:var(--space-3)"></h2>
+                <div style="display:flex;flex-wrap:wrap;gap:var(--space-4)">
+                  <div class="msg-meta-item"><i data-lucide="user" style="width:14px;height:14px" aria-hidden="true"></i> <span id="detailName"></span></div>
+                  <div class="msg-meta-item"><i data-lucide="mail" style="width:14px;height:14px" aria-hidden="true"></i> <a id="detailEmail" href="#" style="color:var(--primary)"></a></div>
+                  <div class="msg-meta-item" id="detailPhoneMeta" style="display:none"><i data-lucide="phone" style="width:14px;height:14px" aria-hidden="true"></i> <span id="detailPhone"></span></div>
+                  <div class="msg-meta-item"><i data-lucide="clock" style="width:14px;height:14px" aria-hidden="true"></i> <span id="detailDate"></span></div>
+                </div>
+              </div>
+              <div class="msg-detail-body" id="detailBody"></div>
+              <div style="margin-top:var(--space-6);display:flex;gap:var(--space-3);flex-wrap:wrap">
+                <a id="replyBtn" href="#" class="btn btn-primary"><i data-lucide="reply" aria-hidden="true"></i> رد عبر البريد</a>
+                <button class="btn btn-secondary" id="toggleReadBtn"><i data-lucide="eye-off" aria-hidden="true"></i> تعيين كغير مقروء</button>
+                <button class="btn btn-danger" id="deleteContactBtn"><i data-lucide="trash-2" aria-hidden="true"></i> حذف</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty state (no selection) -->
+          <div id="msgEmpty" style="display:flex;align-items:center;justify-content:center">
+            <div style="text-align:center;color:var(--text-muted);padding:var(--space-10)">
+              <i data-lucide="inbox" style="width:64px;height:64px;opacity:0.3;margin-bottom:var(--space-4)" aria-hidden="true"></i>
+              <p style="font-size:14px">اختر رسالة لعرض تفاصيلها</p>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+
+    <nav class="admin-bottom-nav" aria-label="التنقل السريع">
+      <a href="dashboard.html" class="admin-bottom-nav-item"><i data-lucide="layout-dashboard" aria-hidden="true"></i><span>الرئيسية</span></a>
+      <a href="posts.html?type=article" class="admin-bottom-nav-item"><i data-lucide="file-text" aria-hidden="true"></i><span>المقالات</span></a>
+      <a href="contacts.html" class="admin-bottom-nav-item active"><i data-lucide="message-square" aria-hidden="true"></i><span>الرسائل</span></a>
+      <a href="memberships.html" class="admin-bottom-nav-item"><i data-lucide="user-plus" aria-hidden="true"></i><span>الانضمام</span></a>
+      <a href="settings.html" class="admin-bottom-nav-item"><i data-lucide="settings" aria-hidden="true"></i><span>الإعدادات</span></a>
+    </nav>
+  </div>
+
+  <!-- Delete confirm -->
+  <div class="modal-overlay" id="deleteContactModal" role="dialog" aria-modal="true">
+    <div class="modal-card" style="max-width:420px;text-align:center">
+      <i data-lucide="alert-triangle" style="width:48px;height:48px;color:var(--danger);margin-bottom:var(--space-4)" aria-hidden="true"></i>
+      <h2 style="font-size:18px;font-weight:700;margin-bottom:var(--space-3)">حذف الرسالة؟</h2>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:var(--space-6)">لا يمكن التراجع عن هذه العملية</p>
+      <div class="modal-footer" style="justify-content:center">
+        <button class="btn btn-secondary" id="cancelDeleteContact">إلغاء</button>
+        <button class="btn btn-danger" id="confirmDeleteContact"><i data-lucide="trash-2" aria-hidden="true"></i> حذف</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/components/toast.js"></script>
+  <script>
+  'use strict';
+  let _all = [];
+  let _filtered = [];
+  let _selected = null;
+
+  function getStored() {
+    try { return JSON.parse(localStorage.getItem('sanabil_contacts') || '[]'); } catch { return []; }
+  }
+  function setStored(data) { localStorage.setItem('sanabil_contacts', JSON.stringify(data)); }
+
+  function buildMsgItem(msg) {
+    const isUnread = !msg.read;
+    return `<div class="msg-card ${isUnread ? 'unread' : ''}" style="border-radius:0;border-left:none;border-right-width:${isUnread?'3px':'1px'};border-top:none;border-left:none" data-id="${msg.id}" onclick="selectMsg('${msg.id}')">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-3)">
+        <div style="min-width:0;flex:1">
+          <div class="msg-name">${sanitize(msg.name||'زائر')}${isUnread ? ' <span class="badge badge-primary" style="font-size:10px;vertical-align:middle">جديد</span>' : ''}</div>
+          <div class="msg-subject">${sanitize(msg.subject||'بدون موضوع')}</div>
+          <div class="msg-preview">${sanitize((msg.message||'').slice(0,80))}</div>
+        </div>
+        <div class="msg-time">${formatDate(msg.date_created||msg.created_at)}</div>
+      </div>
+    </div>`;
+  }
+
+  function renderList() {
+    const container = document.getElementById('msgList');
+    container.innerHTML = _filtered.length
+      ? _filtered.map(buildMsgItem).join('')
+      : '<div style="text-align:center;padding:var(--space-8);color:var(--text-muted)"><i data-lucide="inbox" style="width:32px;height:32px;opacity:0.4"></i><br>لا توجد رسائل</div>';
+    lucide.createIcons();
+  }
+
+  function updateUnreadBadge() {
+    const count = _all.filter(m => !m.read).length;
+    const badge = document.getElementById('unreadBadge');
+    if (count > 0) { badge.textContent = count + ' غير مقروءة'; badge.style.display = ''; }
+    else badge.style.display = 'none';
+  }
+
+  function applyFilter() {
+    const q = document.getElementById('msgSearch').value.toLowerCase();
+    const rf = document.getElementById('readFilter').value;
+    _filtered = _all.filter(m => {
+      const matchQ = !q || (m.name||'').toLowerCase().includes(q) || (m.subject||'').toLowerCase().includes(q) || (m.message||'').toLowerCase().includes(q);
+      const matchR = rf === 'all' || (rf === 'unread' ? !m.read : !!m.read);
+      return matchQ && matchR;
+    });
+    renderList();
+  }
+
+  window.selectMsg = function(id) {
+    _selected = _all.find(m => m.id === id);
+    if (!_selected) return;
+
+    // Mark read
+    if (!_selected.read) {
+      _selected.read = true;
+      const idx = _all.findIndex(m => m.id === id);
+      if (idx >= 0) _all[idx].read = true;
+      setStored(_all);
+      updateUnreadBadge();
+      applyFilter();
+    }
+
+    // Show detail
+    document.getElementById('msgDetail').style.display = '';
+    document.getElementById('msgEmpty').style.display = 'none';
+    document.getElementById('detailSubject').textContent = _selected.subject || 'بدون موضوع';
+    document.getElementById('detailName').textContent = _selected.name || '—';
+    const emailEl = document.getElementById('detailEmail');
+    emailEl.textContent = _selected.email || '—';
+    emailEl.href = _selected.email ? `mailto:${_selected.email}` : '#';
+    document.getElementById('detailBody').textContent = _selected.message || '';
+    document.getElementById('detailDate').textContent = formatDate(_selected.date_created || _selected.created_at);
+
+    if (_selected.phone) {
+      document.getElementById('detailPhone').textContent = _selected.phone;
+      document.getElementById('detailPhoneMeta').style.display = '';
+    } else {
+      document.getElementById('detailPhoneMeta').style.display = 'none';
+    }
+
+    const subject = encodeURIComponent('رد: ' + (_selected.subject || ''));
+    document.getElementById('replyBtn').href = `mailto:${_selected.email}?subject=${subject}`;
+    document.getElementById('toggleReadBtn').innerHTML = '<i data-lucide="eye-off" style="width:15px;height:15px"></i> تعيين كغير مقروء';
+    lucide.createIcons();
+
+    // Highlight in list
+    document.querySelectorAll('.msg-card').forEach(el => el.style.background = '');
+    document.querySelector(`[data-id="${id}"]`)?.style.setProperty('background', 'rgba(27,79,114,0.08)');
+  };
+
+  document.getElementById('toggleReadBtn')?.addEventListener('click', () => {
+    if (!_selected) return;
+    _selected.read = !_selected.read;
+    const idx = _all.findIndex(m => m.id === _selected.id);
+    if (idx >= 0) _all[idx].read = _selected.read;
+    setStored(_all);
+    updateUnreadBadge();
+    applyFilter();
+    Toast.success(_selected.read ? 'تم تعيينه كمقروء' : 'تم تعيينه كغير مقروء');
+  });
+
+  document.getElementById('markAllReadBtn')?.addEventListener('click', () => {
+    _all.forEach(m => { m.read = true; });
+    setStored(_all);
+    updateUnreadBadge();
+    applyFilter();
+    Toast.success('تم تحديد الكل كمقروء');
+  });
+
+  // Delete
+  document.getElementById('deleteContactBtn')?.addEventListener('click', () => document.getElementById('deleteContactModal').classList.add('open'));
+  document.getElementById('cancelDeleteContact')?.addEventListener('click', () => document.getElementById('deleteContactModal').classList.remove('open'));
+  document.getElementById('deleteContactModal')?.addEventListener('click', e => { if (e.target === document.getElementById('deleteContactModal')) document.getElementById('deleteContactModal').classList.remove('open'); });
+  document.getElementById('confirmDeleteContact')?.addEventListener('click', () => {
+    if (!_selected) return;
+    _all = _all.filter(m => m.id !== _selected.id);
+    setStored(_all);
+    updateUnreadBadge();
+    applyFilter();
+    document.getElementById('deleteContactModal').classList.remove('open');
+    document.getElementById('msgDetail').style.display = 'none';
+    document.getElementById('msgEmpty').style.display = '';
+    _selected = null;
+    Toast.success('تم حذف الرسالة');
+  });
+
+  document.getElementById('msgSearch')?.addEventListener('input', debounce(applyFilter, 250));
+  document.getElementById('readFilter')?.addEventListener('change', applyFilter);
+
+  async function load() {
+    try {
+      const fromDB = await ContactsDB.getAll();
+      const fromStorage = getStored();
+      // Merge: storage items override DB items by id
+      const storageIds = new Set(fromStorage.map(m => m.id));
+      _all = [...fromDB.filter(m => !storageIds.has(m.id)), ...fromStorage];
+      _all.sort((a,b) => new Date(b.date_created||b.created_at||0) - new Date(a.date_created||a.created_at||0));
+      _filtered = _all;
+      renderList();
+      updateUnreadBadge();
+
+      // Responsive: hide right panel on small screen by default
+      if (window.innerWidth < 1024) {
+        document.getElementById('msgLayout').style.gridTemplateColumns = '1fr';
+        document.getElementById('msgEmpty').style.display = 'none';
+      }
+    } catch {
+      document.getElementById('msgList').innerHTML = '<div style="text-align:center;padding:var(--space-8);color:var(--text-muted)">تعذّر تحميل الرسائل</div>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', load);
+  </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الفعاليات — جمعية سنابل للغة العربية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    .page-header { background:linear-gradient(135deg,var(--primary) 0%,var(--primary-mid) 100%); padding:var(--space-12) var(--space-6); color:white; text-align:center; }
+    .page-header-title { font-size:clamp(28px,4vw,44px); font-weight:800; margin-bottom:var(--space-2); }
+    .timeline { position:relative; max-width:800px; margin-inline:auto; padding:var(--space-8) var(--space-6); }
+    .timeline::before { content:''; position:absolute; top:0; right:calc(80px + var(--space-6) + 1px); bottom:0; width:2px; background:linear-gradient(to bottom,var(--gold),transparent); }
+    .timeline-item { display:flex; gap:var(--space-5); margin-bottom:var(--space-8); position:relative; }
+    .timeline-date {
+      width:80px; flex-shrink:0;
+      background:linear-gradient(135deg,var(--gold),#E8B520);
+      border-radius:var(--radius-sm);
+      padding:var(--space-3); text-align:center;
+      color:#1A1A00; align-self:flex-start;
+    }
+    .timeline-date-day { font-size:24px; font-weight:800; line-height:1; }
+    .timeline-date-month { font-size:11px; font-weight:600; }
+    .timeline-dot {
+      position:absolute; right:calc(80px + var(--space-5) - 5px);
+      top:20px; width:12px; height:12px;
+      background:var(--gold); border-radius:50%;
+      border:2px solid white; z-index:1;
+    }
+    .timeline-card {
+      flex:1; background:var(--glass-bg); backdrop-filter:var(--glass-blur);
+      -webkit-backdrop-filter:var(--glass-blur); border:1px solid var(--glass-border);
+      border-radius:var(--radius-lg); box-shadow:var(--shadow-card),var(--inset-light);
+      overflow:hidden; transition:all var(--transition-base);
+    }
+    .timeline-card:hover { box-shadow:var(--shadow-hover),var(--inset-light); transform:translateX(-4px); }
+    .timeline-card-img { width:100%; height:160px; object-fit:cover; }
+    .timeline-card-body { padding:var(--space-4); }
+    .timeline-card-title { font-size:17px; font-weight:700; color:var(--text-primary); margin-bottom:var(--space-2); }
+    @media (max-width:767px) {
+      .timeline::before { display:none; }
+      .timeline-dot { display:none; }
+      .timeline-item { flex-direction:column; }
+      .timeline-date { width:auto; display:flex; align-items:center; gap:var(--space-2); text-align:right; }
+      .timeline-date-day { font-size:18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div id="navbar-container"></div>
+    <main id="main-content" class="page-content" role="main">
+      <header class="page-header">
+        <div aria-hidden="true" style="margin-bottom:var(--space-4)"><i data-lucide="calendar-days" style="width:48px;height:48px;color:var(--gold-light)"></i></div>
+        <nav class="breadcrumb" style="justify-content:center" aria-label="مسار التنقل">
+          <a href="index.html" style="color:rgba(255,255,255,0.70)">🏠</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span class="breadcrumb-current" style="color:white">الفعاليات</span>
+        </nav>
+        <h1 class="page-header-title">الفعاليات</h1>
+        <div class="pills-row" style="justify-content:center;margin-top:var(--space-5)">
+          <button class="pill active" data-filter="upcoming" style="color:white;border-color:rgba(255,255,255,0.40);background:rgba(255,255,255,0.20)">القادمة</button>
+          <button class="pill" data-filter="past" style="color:rgba(255,255,255,0.70);border-color:rgba(255,255,255,0.30);background:rgba(255,255,255,0.10)">الماضية</button>
+        </div>
+      </header>
+
+      <div class="timeline" id="eventsTimeline" aria-live="polite">
+        <div style="text-align:center;padding:var(--space-10);color:var(--text-muted)">
+          <i data-lucide="loader-2" style="width:40px;height:40px;animation:spin 1s linear infinite"></i>
+        </div>
+      </div>
+    </main>
+    <div id="footer-container"></div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script>
+  'use strict';
+  let _showUpcoming = true;
+
+  function buildTimelineItem(evt) {
+    const lang = App.lang;
+    const title = lang === 'ar' ? evt.title_ar : (evt.title_fr || evt.title_ar);
+    const loc = lang === 'ar' ? evt.location_ar : (evt.location_fr || evt.location_ar);
+    const d = new Date(evt.date_start);
+    const day = d.toLocaleDateString(lang === 'ar' ? 'ar-TN' : 'fr-FR', { day:'numeric' });
+    const month = d.toLocaleDateString(lang === 'ar' ? 'ar-TN' : 'fr-FR', { month:'long' });
+    const isUp = new Date(evt.date_start) >= new Date();
+    return `
+      <div class="timeline-item animate-on-scroll">
+        <div class="timeline-date" aria-label="${day} ${month}">
+          <div class="timeline-date-day">${day}</div>
+          <div class="timeline-date-month">${month}</div>
+        </div>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <article class="timeline-card">
+          ${evt.image ? `<img class="timeline-card-img" src="${evt.image}" alt="${sanitize(evt.image_alt_ar||title)}" loading="lazy">` : ''}
+          <div class="timeline-card-body">
+            <h2 class="timeline-card-title">${sanitize(title)}</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-3);font-size:13px;color:var(--text-secondary)">
+              ${loc ? `<span style="display:flex;align-items:center;gap:4px"><i data-lucide="map-pin" style="width:13px;height:13px;color:var(--gold)"></i>${sanitize(loc)}</span>` : ''}
+              ${evt.capacity ? `<span style="display:flex;align-items:center;gap:4px"><i data-lucide="users" style="width:13px;height:13px;color:var(--gold)"></i>${formatNumber(evt.capacity)} مقعداً</span>` : ''}
+            </div>
+            <div style="display:flex;align-items:center;gap:var(--space-3)">
+              <span class="badge ${isUp?'badge-success':'badge-muted'}">${isUp?'قريباً':'منتهي'}</span>
+              <a href="post.html?id=${evt.id}&type=event" class="flex items-center gap-1" style="font-size:13px;font-weight:600;color:var(--primary)">
+                التفاصيل <i data-lucide="arrow-left" style="width:13px;height:13px"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>`;
+  }
+
+  async function renderEvents() {
+    const container = document.getElementById('eventsTimeline');
+    try {
+      const events = _showUpcoming ? await EventsDB.getUpcoming() : await EventsDB.getPast();
+      container.innerHTML = events.length
+        ? events.map(buildTimelineItem).join('')
+        : `<div class="empty-state"><i data-lucide="calendar-x" class="empty-state-icon"></i><p class="empty-state-title">لا توجد فعاليات</p></div>`;
+      App.initAnimateOnScroll();
+      lucide.createIcons();
+    } catch {
+      container.innerHTML = '<p style="text-align:center;color:var(--text-muted)">تعذّر تحميل الفعاليات</p>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderNavbar({ activePage:'events.html' });
+    renderFooter();
+    lucide.createIcons();
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        _showUpcoming = btn.dataset.filter === 'upcoming';
+        document.querySelectorAll('[data-filter]').forEach(b => b.classList.toggle('active', b === btn));
+        renderEvents();
+      });
+    });
+    renderEvents();
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>انضم إلينا — جمعية سنابل للغة العربية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    .benefit-card {
+      background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+      border:1px solid var(--glass-border); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-card); padding:var(--space-6); text-align:center;
+    }
+    .benefit-icon { color:var(--gold); margin-bottom:var(--space-3); }
+    .benefit-icon svg { width:36px; height:36px; }
+    .benefit-title { font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+    .benefit-text { font-size:13px; color:var(--text-secondary); }
+    .step-panel { display:none; }
+    .step-panel.active { display:block; }
+    .membership-types { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-4); }
+    @media (max-width:767px) { .membership-types { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div id="navbar-container"></div>
+    <main id="main-content" class="page-content" role="main">
+
+      <div style="background:linear-gradient(135deg,var(--primary) 0%,var(--primary-mid) 100%);padding:var(--space-12) var(--space-6);color:white;text-align:center">
+        <div aria-hidden="true" style="margin-bottom:var(--space-4)"><i data-lucide="user-plus" style="width:48px;height:48px;color:var(--gold-light)"></i></div>
+        <nav class="breadcrumb" style="justify-content:center" aria-label="مسار التنقل">
+          <a href="index.html" style="color:rgba(255,255,255,0.70)">🏠</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span style="color:white">انضم إلينا</span>
+        </nav>
+        <h1 style="font-size:clamp(28px,4vw,40px);font-weight:800">انضم إلى جمعية سنابل</h1>
+        <p style="font-size:16px;color:rgba(255,255,255,0.75);margin-top:var(--space-2)">كن جزءًا من مجتمع نشط يحمل مشعل اللغة العربية</p>
+      </div>
+
+      <div class="container" style="padding-top:var(--space-10)">
+
+        <!-- Benefits -->
+        <div class="grid-4 animate-on-scroll" style="margin-bottom:var(--space-10)">
+          <div class="benefit-card"><div class="benefit-icon" aria-hidden="true"><i data-lucide="graduation-cap"></i></div><div class="benefit-title">التدريب والتكوين</div><div class="benefit-text">دورات متخصصة في اللغة العربية</div></div>
+          <div class="benefit-card"><div class="benefit-icon" aria-hidden="true"><i data-lucide="users"></i></div><div class="benefit-title">الانتماء للمجتمع</div><div class="benefit-text">شبكة من المتحمسين للغة العربية</div></div>
+          <div class="benefit-card"><div class="benefit-icon" aria-hidden="true"><i data-lucide="book-open"></i></div><div class="benefit-title">الوصول للمكتبة</div><div class="benefit-text">مجموعة كتب ومراجع متنوعة</div></div>
+          <div class="benefit-card"><div class="benefit-icon" aria-hidden="true"><i data-lucide="trophy"></i></div><div class="benefit-title">المشاركة في البطولات</div><div class="benefit-text">مسابقات وفعاليات إقليمية</div></div>
+        </div>
+
+        <!-- Stepper -->
+        <div class="stepper animate-on-scroll" aria-label="خطوات الانضمام">
+          <div class="step active" id="step1Indicator">
+            <div class="step-number">١</div>
+            <div class="step-label">البيانات الشخصية</div>
+          </div>
+          <div class="step-line" id="stepLine"></div>
+          <div class="step" id="step2Indicator">
+            <div class="step-number">٢</div>
+            <div class="step-label">نوع العضوية والتحفيز</div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="glass-card-strong animate-on-scroll" style="padding:var(--space-8);max-width:700px;margin-inline:auto;margin-top:var(--space-5)">
+
+          <!-- Step 1 -->
+          <div class="step-panel active" id="panel1">
+            <h2 style="font-size:18px;font-weight:700;margin-bottom:var(--space-6)">البيانات الشخصية</h2>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)">
+              <div class="input-group">
+                <label class="input-label" for="firstName"><i data-lucide="user" aria-hidden="true"></i>الاسم الأول</label>
+                <input class="glass-input" type="text" id="firstName" placeholder="الاسم الأول" required autocomplete="given-name">
+              </div>
+              <div class="input-group">
+                <label class="input-label" for="lastName"><i data-lucide="user" aria-hidden="true"></i>اللقب</label>
+                <input class="glass-input" type="text" id="lastName" placeholder="اللقب" required autocomplete="family-name">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="joinEmail"><i data-lucide="mail" aria-hidden="true"></i>البريد الإلكتروني</label>
+              <input class="glass-input" type="email" id="joinEmail" placeholder="example@email.com" required autocomplete="email">
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="joinPhone"><i data-lucide="phone" aria-hidden="true"></i>رقم الهاتف</label>
+              <input class="glass-input" type="tel" id="joinPhone" placeholder="+235 XX XX XX XX" autocomplete="tel">
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="birthDate"><i data-lucide="calendar-days" aria-hidden="true"></i>تاريخ الميلاد</label>
+              <input class="glass-input" type="date" id="birthDate" autocomplete="bday">
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="address"><i data-lucide="map-pin" aria-hidden="true"></i>العنوان الكامل</label>
+              <textarea class="glass-input" id="address" rows="2" placeholder="عنوانك الكامل" autocomplete="street-address"></textarea>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="city"><i data-lucide="building" aria-hidden="true"></i>المدينة</label>
+              <input class="glass-input" type="text" id="city" placeholder="المدينة" autocomplete="address-level2">
+            </div>
+            <div id="step1Error" style="display:none" class="input-error"><i data-lucide="alert-circle" aria-hidden="true"></i> يرجى ملء جميع الحقول المطلوبة</div>
+            <button class="btn btn-primary btn-full" style="margin-top:var(--space-4)" id="nextBtn">
+              التالي <i data-lucide="chevron-left" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-panel" id="panel2">
+            <h2 style="font-size:18px;font-weight:700;margin-bottom:var(--space-6)">نوع العضوية والتحفيز</h2>
+
+            <div style="margin-bottom:var(--space-5)">
+              <div style="font-size:14px;font-weight:600;color:var(--text-secondary);margin-bottom:var(--space-3)">نوع العضوية</div>
+              <div class="membership-types">
+                <label class="radio-card selected" id="typeCard-individual">
+                  <input type="radio" name="memberType" value="individual" checked>
+                  <div class="radio-card-icon" aria-hidden="true"><i data-lucide="user"></i></div>
+                  <div class="radio-card-title">فردية</div>
+                  <div class="radio-card-desc">للأفراد</div>
+                </label>
+                <label class="radio-card" id="typeCard-family">
+                  <input type="radio" name="memberType" value="family">
+                  <div class="radio-card-icon" aria-hidden="true"><i data-lucide="users"></i></div>
+                  <div class="radio-card-title">عائلية</div>
+                  <div class="radio-card-desc">للعائلات</div>
+                </label>
+                <label class="radio-card" id="typeCard-student">
+                  <input type="radio" name="memberType" value="student">
+                  <div class="radio-card-icon" aria-hidden="true"><i data-lucide="graduation-cap"></i></div>
+                  <div class="radio-card-title">طلابية</div>
+                  <div class="radio-card-desc">للطلاب</div>
+                </label>
+                <label class="radio-card" id="typeCard-honorary">
+                  <input type="radio" name="memberType" value="honorary">
+                  <div class="radio-card-icon" aria-hidden="true"><i data-lucide="star"></i></div>
+                  <div class="radio-card-title">فخرية</div>
+                  <div class="radio-card-desc">للشخصيات الداعمة</div>
+                </label>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label class="input-label" for="motivation">دوافع الانضمام</label>
+              <textarea class="glass-input" id="motivation" rows="4" placeholder="أخبرنا لماذا تريد الانضمام إلى جمعية سنابل..."></textarea>
+            </div>
+
+            <label class="checkbox-custom" style="margin-bottom:var(--space-5)">
+              <input type="checkbox" id="termsCheck">
+              <div class="checkbox-box"></div>
+              <span>أوافق على <a href="#" style="color:var(--primary)">شروط وأحكام</a> الجمعية</span>
+            </label>
+
+            <div style="display:flex;gap:var(--space-3)">
+              <button class="btn btn-secondary" id="prevBtn">
+                <i data-lucide="chevron-right" aria-hidden="true"></i> السابق
+              </button>
+              <button class="btn btn-primary btn-full" id="submitJoinBtn">
+                <i data-lucide="send" aria-hidden="true"></i>
+                إرسال الطلب
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script>
+  'use strict';
+
+  let _step = 1;
+
+  function goToStep(n) {
+    _step = n;
+    document.getElementById('panel1').classList.toggle('active', n === 1);
+    document.getElementById('panel2').classList.toggle('active', n === 2);
+    document.getElementById('step1Indicator').classList.toggle('active', n === 1);
+    document.getElementById('step1Indicator').classList.toggle('done', n === 2);
+    document.getElementById('step2Indicator').classList.toggle('active', n === 2);
+    document.getElementById('stepLine').classList.toggle('done', n === 2);
+    lucide.createIcons();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.getElementById('nextBtn')?.addEventListener('click', () => {
+    const first = document.getElementById('firstName').value.trim();
+    const last = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('joinEmail').value.trim();
+    if (!first || !last || !email) {
+      document.getElementById('step1Error').style.display = 'flex';
+      return;
+    }
+    document.getElementById('step1Error').style.display = 'none';
+    goToStep(2);
+  });
+
+  document.getElementById('prevBtn')?.addEventListener('click', () => goToStep(1));
+
+  // Membership type radio cards
+  document.querySelectorAll('[name="memberType"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      document.querySelectorAll('[id^="typeCard-"]').forEach(c => c.classList.remove('selected'));
+      radio.closest('.radio-card')?.classList.add('selected');
+    });
+  });
+
+  document.getElementById('submitJoinBtn')?.addEventListener('click', async () => {
+    if (!document.getElementById('termsCheck').checked) {
+      alert('يرجى الموافقة على الشروط والأحكام');
+      return;
+    }
+    const btn = document.getElementById('submitJoinBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i data-lucide="loader-2" style="animation:spin 1s linear infinite"></i> جارٍ الإرسال...';
+    lucide.createIcons();
+
+    await new Promise(r => setTimeout(r, 800));
+
+    const memberType = document.querySelector('[name="memberType"]:checked')?.value || 'individual';
+    const typeLabels = { individual:'فردية', family:'عائلية', student:'طلابية', honorary:'فخرية' };
+    const ref = MembershipsDB.add({
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName: document.getElementById('lastName').value.trim(),
+      email: document.getElementById('joinEmail').value.trim(),
+      phone: document.getElementById('joinPhone').value.trim(),
+      birthDate: document.getElementById('birthDate').value,
+      address: document.getElementById('address').value.trim(),
+      city: document.getElementById('city').value.trim(),
+      memberType,
+      memberTypeLabel: typeLabels[memberType],
+      motivation: document.getElementById('motivation').value.trim()
+    });
+
+    sessionStorage.setItem('join_ref', ref.reference);
+    window.location.href = 'join-success.html';
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderNavbar({ activePage:'join.html' });
+    renderFooter();
+    lucide.createIcons();
+  });
+  </script>
+</body>
+</html>

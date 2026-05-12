@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اتصل بنا — جمعية سنابل للغة العربية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    .contact-layout { display:grid; grid-template-columns:1fr 1.5fr; gap:var(--space-8); max-width:1100px; margin-inline:auto; padding:var(--space-10) var(--space-6); }
+    .info-card { background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); border:1px solid var(--glass-border); border-radius:var(--radius-md); padding:var(--space-5); margin-bottom:var(--space-4); transition:all var(--transition-fast); }
+    .info-card:hover { box-shadow:var(--shadow-card); }
+    .info-card-title { font-size:13px; font-weight:700; color:var(--text-primary); margin-bottom:var(--space-2); display:flex; align-items:center; gap:var(--space-2); }
+    .info-card-title svg { width:16px; height:16px; color:var(--gold); }
+    .info-card-value { font-size:15px; color:var(--text-secondary); }
+    .form-card { background:var(--glass-bg-strong); backdrop-filter:var(--glass-blur-heavy); -webkit-backdrop-filter:var(--glass-blur-heavy); border:1px solid var(--glass-border); border-radius:var(--radius-xl); box-shadow:var(--shadow-card),var(--inset-light); padding:var(--space-8); }
+    @media (max-width:1023px) { .contact-layout { grid-template-columns:1fr; } }
+    @media (max-width:767px) { .contact-layout { padding:var(--space-5) var(--space-4); } }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div id="navbar-container"></div>
+    <main id="main-content" class="page-content" role="main">
+
+      <div style="background:linear-gradient(135deg,var(--primary) 0%,var(--primary-mid) 100%);padding:var(--space-12) var(--space-6);color:white;text-align:center">
+        <div aria-hidden="true" style="margin-bottom:var(--space-4)"><i data-lucide="message-square" style="width:48px;height:48px;color:var(--gold-light)"></i></div>
+        <nav class="breadcrumb" style="justify-content:center" aria-label="مسار التنقل">
+          <a href="index.html" style="color:rgba(255,255,255,0.70)">🏠</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span style="color:white">تواصل معنا</span>
+        </nav>
+        <h1 style="font-size:clamp(28px,4vw,40px);font-weight:800">تواصل معنا</h1>
+        <p style="font-size:16px;color:rgba(255,255,255,0.75);margin-top:var(--space-2)">نحن هنا للإجابة على استفساراتك واقتراحاتك</p>
+      </div>
+
+      <div class="contact-layout">
+        <!-- Info column -->
+        <div>
+          <div class="info-card animate-on-scroll">
+            <div class="info-card-title"><i data-lucide="map-pin" aria-hidden="true"></i>الموقع</div>
+            <div class="info-card-value">أبيشي، تشاد<br><em style="font-size:13px;color:var(--text-muted)">Abéché, Tchad</em></div>
+          </div>
+          <div class="info-card animate-on-scroll">
+            <div class="info-card-title"><i data-lucide="phone" aria-hidden="true"></i>الهاتف</div>
+            <div class="info-card-value"><a href="tel:+23591404166" style="color:inherit">+235 91 40 41 66</a></div>
+          </div>
+          <div class="info-card animate-on-scroll">
+            <div class="info-card-title"><i data-lucide="mail" aria-hidden="true"></i>البريد الإلكتروني</div>
+            <div class="info-card-value"><a href="mailto:sanabilarabe2022@gmail.com" style="color:inherit;word-break:break-all">sanabilarabe2022@gmail.com</a></div>
+          </div>
+          <div class="info-card animate-on-scroll">
+            <div class="info-card-title"><i data-lucide="clock" aria-hidden="true"></i>ساعات العمل</div>
+            <div class="info-card-value">الأحد – الخميس<br>٠٨:٠٠ – ١٧:٠٠</div>
+          </div>
+          <div class="animate-on-scroll" style="margin-top:var(--space-4);background:rgba(255,255,255,0.40);border-radius:var(--radius-md);overflow:hidden;height:200px;display:flex;align-items:center;justify-content:center;border:1px solid var(--glass-border-soft);color:var(--text-muted);font-size:14px">
+            <div style="text-align:center"><i data-lucide="map" style="width:32px;height:32px;margin-bottom:var(--space-2)" aria-hidden="true"></i><br>خريطة الموقع<br><small>Abéché, Tchad</small></div>
+          </div>
+        </div>
+
+        <!-- Form column -->
+        <div class="form-card animate-on-scroll">
+          <h2 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:var(--space-6)">أرسل لنا رسالة</h2>
+
+          <div id="contactSuccess" style="display:none;text-align:center;padding:var(--space-10) 0">
+            <i data-lucide="check-circle" style="width:64px;height:64px;color:var(--emerald);margin-bottom:var(--space-4)" aria-hidden="true"></i>
+            <h3 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:var(--space-2)">تم إرسال رسالتك بنجاح!</h3>
+            <p style="color:var(--text-secondary)">سنرد عليك في أقرب وقت ممكن.</p>
+          </div>
+
+          <form id="contactForm" novalidate>
+            <div class="input-group">
+              <label class="input-label" for="fullName"><i data-lucide="user" aria-hidden="true"></i>الاسم الكامل</label>
+              <input class="glass-input" type="text" id="fullName" name="fullName" placeholder="أدخل اسمك الكامل" required minlength="3" autocomplete="name">
+              <div class="input-error" id="nameError" style="display:none"><i data-lucide="alert-circle" aria-hidden="true"></i> يرجى إدخال الاسم الكامل</div>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="email"><i data-lucide="mail" aria-hidden="true"></i>البريد الإلكتروني</label>
+              <input class="glass-input" type="email" id="email" name="email" placeholder="example@email.com" required autocomplete="email">
+              <div class="input-error" id="emailError" style="display:none"><i data-lucide="alert-circle" aria-hidden="true"></i> يرجى إدخال بريد إلكتروني صحيح</div>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="phone"><i data-lucide="phone" aria-hidden="true"></i>رقم الهاتف <span style="color:var(--text-muted);font-weight:400">(اختياري)</span></label>
+              <input class="glass-input" type="tel" id="phone" name="phone" placeholder="+235 XX XX XX XX" autocomplete="tel">
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="subject"><i data-lucide="tag" aria-hidden="true"></i>الموضوع</label>
+              <input class="glass-input" type="text" id="subject" name="subject" placeholder="موضوع رسالتك" required>
+              <div class="input-error" id="subjectError" style="display:none"><i data-lucide="alert-circle" aria-hidden="true"></i> يرجى إدخال موضوع الرسالة</div>
+            </div>
+            <div class="input-group">
+              <label class="input-label" for="message">الرسالة</label>
+              <textarea class="glass-input" id="message" name="message" rows="6" placeholder="اكتب رسالتك هنا..." required style="resize:vertical"></textarea>
+              <div class="input-error" id="messageError" style="display:none"><i data-lucide="alert-circle" aria-hidden="true"></i> يرجى كتابة رسالتك</div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitBtn">
+              <i data-lucide="send" aria-hidden="true"></i>
+              إرسال الرسالة
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </main>
+    <div id="footer-container"></div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script src="assets/js/components/toast.js"></script>
+  <script>
+  'use strict';
+
+  function validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+  function showError(id, show) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = show ? 'flex' : 'none';
+  }
+
+  function setInputError(inputId, hasError) {
+    const input = document.getElementById(inputId);
+    if (input) input.classList.toggle('error', hasError);
+  }
+
+  document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    const name = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (name.length < 3) { showError('nameError', true); setInputError('fullName', true); valid = false; } else { showError('nameError', false); setInputError('fullName', false); }
+    if (!validateEmail(email)) { showError('emailError', true); setInputError('email', true); valid = false; } else { showError('emailError', false); setInputError('email', false); }
+    if (!subject) { showError('subjectError', true); setInputError('subject', true); valid = false; } else { showError('subjectError', false); setInputError('subject', false); }
+    if (!message) { showError('messageError', true); setInputError('message', true); valid = false; } else { showError('messageError', false); setInputError('message', false); }
+
+    if (!valid) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i data-lucide="loader-2" style="animation:spin 1s linear infinite" aria-hidden="true"></i> جارٍ الإرسال...';
+    lucide.createIcons();
+
+    await new Promise(r => setTimeout(r, 1000));
+
+    ContactsDB.add({ name, email, phone: document.getElementById('phone').value.trim(), subject, message });
+
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('contactSuccess').style.display = '';
+    Toast.success('تم إرسال رسالتك بنجاح!');
+    lucide.createIcons();
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderNavbar({ activePage:'contact.html' });
+    renderFooter();
+    lucide.createIcons();
+  });
+  </script>
+</body>
+</html>

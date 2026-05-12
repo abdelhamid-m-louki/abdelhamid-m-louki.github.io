@@ -1,1552 +1,354 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdel-Hamid Mahamat Louki | Security & Network Engineer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --glass-bg: rgba(255, 255, 255, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.8);
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-            --primary: #3B82F6;
-            --primary-light: #60A5FA;
-            --primary-dark: #2563EB;
-            --secondary: #8B5CF6;
-            --accent: #F59E0B;
-            --text: #1F2937;
-            --text-light: #6B7280;
-            --bg: #F0F4F8;
-            --white: #FFFFFF;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            background-attachment: fixed;
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Glassmorphism Utilities */
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
-        }
-
-        .glass-strong {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
-        }
-
-        /* Fixed Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-cta {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 8rem 2rem 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
-            top: -200px;
-            right: -200px;
-            border-radius: 50%;
-        }
-
-        .hero-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            color: var(--text);
-        }
-
-        .hero-content h1 span {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-role {
-            display: inline-block;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            margin-bottom: 1.5rem;
-            padding: 0.5rem 1.5rem;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 50px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-
-        .hero-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            color: #10B981;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .hero-status::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: #10B981;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        .hero-text {
-            font-size: 1.125rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        .hero-highlights {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-bottom: 2rem;
-        }
-
-        .highlight-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 600;
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        .highlight-icon {
-            width: 24px;
-            height: 24px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.75rem;
-            flex-shrink: 0;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-glass {
-            background: rgba(255, 255, 255, 0.5);
-            color: var(--text);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-glass:hover {
-            background: rgba(255, 255, 255, 0.8);
-            transform: translateY(-3px);
-        }
-
-        /* Profile Image Section */
-        .hero-visual {
-            position: relative;
-            display: flex;
-            justify-content: center;
-        }
-
-        .profile-wrapper {
-            position: relative;
-            width: 400px;
-            height: 500px;
-        }
-
-        .profile-glass {
-            width: 100%;
-            height: 100%;
-            border-radius: 30px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .profile-glass:hover .profile-img {
-            transform: scale(1.05);
-        }
-
-        .floating-badge {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 1rem 1.5rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            z-index: 10;
-            font-weight: 700;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .badge-1 {
-            top: 20px;
-            right: -20px;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .badge-2 {
-            bottom: 40px;
-            left: -30px;
-            animation: float 6s ease-in-out infinite 2s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* SKILLS SECTION - IMMEDIATEMENT VISIBLE */
-        .skills-section {
-            padding: 4rem 2rem;
-            position: relative;
-            z-index: 10;
-            margin-top: -4rem;
-        }
-
-        .skills-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--text);
-        }
-
-        .section-title span {
-            color: var(--primary);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-card {
-            padding: 2rem;
-            border-radius: 24px;
-            transition: all 0.4s ease;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .skill-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .skill-icon-large {
-            width: 50px;
-            height: 50px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-
-        .skill-card h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.6);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--text);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--primary);
-            transform: scale(1.05);
-        }
-
-        .skill-tag.bold-highlight {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
-            color: var(--primary-dark);
-            border-color: rgba(59, 130, 246, 0.3);
-            font-weight: 800;
-        }
-
-        /* Experience Section */
-        .experience-section {
-            padding: 6rem 2rem;
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .exp-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .exp-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .exp-card {
-            padding: 2.5rem;
-            border-radius: 24px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .exp-card.featured {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
-            border: 2px solid rgba(59, 130, 246, 0.2);
-        }
-
-        .exp-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .exp-badge {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: rgba(16, 185, 129, 0.1);
-            color: #059669;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        .exp-card h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .exp-company {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .exp-date {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .exp-desc {
-            color: var(--text-light);
-            line-height: 1.8;
-            font-size: 0.95rem;
-        }
-
-        /* Projects Section */
-        .projects-section {
-            padding: 6rem 2rem;
-        }
-
-        .proj-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .project-card {
-            border-radius: 24px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        .project-image-container {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-            position: relative;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .project-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .project-card:hover .project-img {
-            transform: scale(1.1);
-        }
-
-        .project-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
-            display: flex;
-            align-items: flex-end;
-            padding: 1.5rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover .project-overlay {
-            opacity: 1;
-        }
-
-        .project-tech-stack {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tech-pill {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .project-content {
-            padding: 2rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-content h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-
-        .project-content p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            flex: 1;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-btn {
-            flex: 1;
-            padding: 0.75rem;
-            border-radius: 12px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .btn-github {
-            background: #24292e;
-            color: white;
-        }
-
-        .btn-github:hover {
-            background: #000;
-            transform: translateY(-2px);
-        }
-
-        .btn-demo {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--primary);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-demo:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Certifications Section */
-        .certs-section {
-            padding: 6rem 2rem;
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .certs-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .certs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .cert-card-glass {
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-
-        .cert-card-glass:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .cert-image-wrap {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .cert-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .cert-card-glass:hover .cert-img {
-            transform: scale(1.1);
-        }
-
-        .cert-body {
-            padding: 1.5rem;
-        }
-
-        .cert-body h4 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .cert-issuer {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .cert-date {
-            color: var(--text-light);
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Education Section */
-        .edu-section {
-            padding: 6rem 2rem;
-        }
-
-        .edu-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .edu-timeline {
-            margin-top: 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .edu-item-glass {
-            padding: 2rem;
-            border-radius: 20px;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 2rem;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .edu-item-glass:hover {
-            transform: translateX(10px);
-        }
-
-        .edu-icon-box {
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-
-        .edu-content h3 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .edu-school {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .edu-detail {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 0.25rem;
-        }
-
-        .edu-year-badge {
-            padding: 0.5rem 1.5rem;
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--primary);
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-
-        /* Contact Section */
-        .contact-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-        }
-
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .contact-card {
-            padding: 2rem;
-            border-radius: 24px;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-icon-bg {
-            width: 60px;
-            height: 60px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .contact-card h4 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 1.1rem;
-        }
-
-        .contact-card span {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(31, 41, 55, 0.95);
-            backdrop-filter: blur(10px);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 3rem 2rem 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-content {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .footer-name {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .footer-copy {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .profile-wrapper {
-                width: 300px;
-                height: 380px;
-                margin: 0 auto;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .skills-grid,
-            .projects-grid,
-            .certs-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .edu-item-glass {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .edu-year-badge {
-                justify-self: center;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="جمعية سنابل للغة العربية — تشاد | نبني جسور المستقبل بلغة الضاد">
+  <meta property="og:title" content="جمعية سنابل للغة العربية">
+  <meta property="og:description" content="نبني جسور المستقبل بلغة الضاد — Abéché, Tchad">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="index.html">
+  <title>جمعية سنابل للغة العربية — تشاد</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--primary) 0%, #2980B9 60%, #1A8A6B 100%);
+      z-index: 0;
+    }
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      opacity: 0.25;
+      z-index: 1;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.35) 100%);
+      z-index: 2;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      padding: var(--space-10) var(--space-6);
+      max-width: 800px;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.40);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-12) var(--space-10);
+      box-shadow: 0 24px 64px rgba(27,79,114,0.25), var(--inset-light);
+    }
+    .hero-icon { color: var(--gold); margin-bottom: var(--space-5); }
+    .hero-icon svg { width: 56px; height: 56px; }
+    .hero-title {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 800;
+      color: white;
+      margin-bottom: var(--space-3);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.20);
+    }
+    .hero-subtitle {
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: rgba(255,255,255,0.88);
+      margin-bottom: var(--space-8);
+      font-weight: 400;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .btn-hero-primary {
+      background: linear-gradient(135deg, var(--gold), #E8B520);
+      color: #1A1A00;
+      font-weight: 800;
+      padding: 14px 32px;
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      box-shadow: 0 8px 24px rgba(212,160,23,0.40);
+      transition: all var(--transition-base);
+      text-decoration: none;
+    }
+    .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(212,160,23,0.50); }
+    .btn-hero-secondary {
+      background: rgba(255,255,255,0.20);
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.50);
+      padding: 13px 28px;
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      backdrop-filter: blur(10px);
+      transition: all var(--transition-base);
+      text-decoration: none;
+    }
+    .btn-hero-secondary:hover { background: rgba(255,255,255,0.30); color: white; }
+    .hero-scroll {
+      position: absolute;
+      bottom: var(--space-6);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      animation: bounce-in 2s ease infinite;
+      color: rgba(255,255,255,0.60);
+    }
+
+    /* Sections */
+    .section { padding: var(--space-16) 0; }
+    .section-alt { background: rgba(255,255,255,0.30); padding: var(--space-16) 0; }
+
+    /* Event card */
+    .event-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card), var(--inset-light);
+      padding: var(--space-5);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-5);
+      transition: all var(--transition-base);
+    }
+    .event-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover), var(--inset-light); }
+    .event-date-block {
+      background: linear-gradient(135deg, var(--gold), #E8B520);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3) var(--space-4);
+      text-align: center;
+      min-width: 64px;
+      flex-shrink: 0;
+      color: #1A1A00;
+    }
+    .event-date-day { font-size: 26px; font-weight: 800; line-height: 1; }
+    .event-date-month { font-size: 12px; font-weight: 600; }
+    .event-info { flex: 1; min-width: 0; }
+    .event-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-2); }
+    .event-meta { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--text-secondary); }
+    .event-meta-row { display: flex; align-items: center; gap: var(--space-2); }
+    .event-meta-row svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
+
+    /* CTA section */
+    .cta-section {
+      background: var(--glass-bg-strong);
+      backdrop-filter: var(--glass-blur-heavy);
+      -webkit-backdrop-filter: var(--glass-blur-heavy);
+      border-top: 2px solid rgba(212,160,23,0.20);
+      border-bottom: 2px solid rgba(212,160,23,0.20);
+      padding: var(--space-20) var(--space-6);
+      text-align: center;
+    }
+    .cta-icon { color: var(--gold); margin-bottom: var(--space-4); }
+    .cta-icon svg { width: 56px; height: 56px; }
+    .cta-title { font-size: clamp(24px, 4vw, 40px); font-weight: 800; color: var(--text-primary); margin-bottom: var(--space-3); }
+    .cta-subtitle { font-size: 18px; color: var(--text-secondary); margin-bottom: var(--space-8); max-width: 600px; margin-inline: auto; margin-bottom: var(--space-8); }
+
+    @media (max-width: 767px) {
+      .hero-card { padding: var(--space-8) var(--space-5); }
+      .event-card { flex-direction: column; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "جمعية سنابل للغة العربية",
+    "telephone": "+23591404166",
+    "email": "sanabilarabe2022@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Abéché", "addressCountry": "TD" }
+  }
+  </script>
 </head>
 <body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
 
-    <!-- Fixed Navbar -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">AM Louki</a>
-            <ul class="nav-links glass">
-                <li><a href="#competences">Compétences</a></li>
-                <li><a href="#experience">Expérience</a></li>
-                <li><a href="#projets">Projets</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="#contact" class="nav-cta">Disponible</a>
+    <div id="navbar-container"></div>
+
+    <main id="main-content" class="page-content" role="main">
+
+      <!-- ==================== HERO ==================== -->
+      <section class="hero" aria-label="القسم الرئيسي">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content animate-fade-in">
+          <div class="hero-card">
+            <div class="hero-icon" aria-hidden="true">
+              <i data-lucide="book-open"></i>
+            </div>
+            <h1 class="hero-title">جمعية سنابل للغة العربية</h1>
+            <p class="hero-subtitle">نبني جسور المستقبل بلغة الضاد — أبيشي، تشاد</p>
+            <div class="hero-actions">
+              <a href="join.html" class="btn-hero-primary">
+                <i data-lucide="user-plus" style="width:20px;height:20px" aria-hidden="true"></i>
+                انضم إلينا
+              </a>
+              <a href="#activities" class="btn-hero-secondary">
+                <i data-lucide="chevron-down" style="width:20px;height:20px" aria-hidden="true"></i>
+                اكتشف أنشطتنا
+              </a>
+            </div>
+          </div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-role">Security & Network Engineer</div>
-                <div class="hero-status">En stage chez Computime Sarl</div>
-                <h1>Abdel-Hamid <span>Mahamat Louki</span></h1>
-                <p class="hero-text">
-                    Élève Ingénieur en Génie Informatique (4ème Année) à l'Université Mundiapolis, Casablanca. 
-                    Passionné par l'architecture réseau sécurisée, le cloud AWS et la cybersécurité défensive (Blue Team).
-                </p>
-                
-                <div class="hero-highlights">
-                    <div class="highlight-item">
-                        <div class="highlight-icon">✓</div>
-                        <span>Architecture Cloud Secure by Design (AWS, VPC, DMZ)</span>
-                    </div>
-                    <div class="highlight-item">
-                        <div class="highlight-icon">✓</div>
-                        <span>SIEM & EDR (Wazuh) - Détection temps réel</span>
-                    </div>
-                    <div class="highlight-item">
-                        <div class="highlight-icon">✓</div>
-                        <span>Major de promotion Licence (14.37/20) - Mention Bien</span>
-                    </div>
-                </div>
-
-                <div class="hero-cta">
-                    <a href="#projets" class="btn-primary">
-                        Voir les projets
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
-                    <a href="https://linkedin.com/in/amlouki" target="_blank" class="btn-glass">LinkedIn</a>
-                </div>
-            </div>
-
-            <div class="hero-visual">
-                <div class="profile-wrapper">
-                    <div class="profile-glass glass-strong">
-                        <img src="profile.jpg" alt="Abdel-Hamid Mahamat Louki" class="profile-img">
-                    </div>
-                    <div class="floating-badge badge-1">
-                        <span>🔒</span> Security First
-                    </div>
-                    <div class="floating-badge badge-2">
-                        <span>☁️</span> Cloud AWS
-                    </div>
-                </div>
-            </div>
+        <div class="hero-scroll" aria-hidden="true">
+          <i data-lucide="chevrons-down" style="width:28px;height:28px"></i>
         </div>
-    </section>
+      </section>
 
-    <!-- SKILLS SECTION - IMMÉDIATEMENT VISIBLE ET EN GRAS -->
-    <section id="competences" class="skills-section">
-        <div class="skills-container">
-            <h2 class="section-title">Compétences <span>Techniques</span> & Expertise</h2>
-            
-            <div class="skills-grid">
-                <!-- Hard Skills -->
-                <div class="skill-card glass">
-                    <div class="skill-header">
-                        <div class="skill-icon-large">🛡️</div>
-                        <h3>Réseaux & Sécurité</h3>
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-tag bold-highlight">Architectures LAN/WAN/DMZ</span>
-                        <span class="skill-tag bold-highlight">Firewalls OPNsense</span>
-                        <span class="skill-tag bold-highlight">SIEM & EDR (Wazuh)</span>
-                        <span class="skill-tag bold-highlight">VLANs & Segmentation</span>
-                        <span class="skill-tag">Routage, NAT, DHCP, DNS</span>
-                        <span class="skill-tag">Proxy Squid, HA</span>
-                        <span class="skill-tag">MITRE ATT&CK Framework</span>
-                    </div>
-                </div>
-
-                <div class="skill-card glass">
-                    <div class="skill-header">
-                        <div class="skill-icon-large">☁️</div>
-                        <h3>Cloud & Infrastructure</h3>
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-tag bold-highlight">AWS (EC2, VPC, ALB, S3)</span>
-                        <span class="skill-tag">Docker & Containerisation</span>
-                        <span class="skill-tag">VMware Virtualisation</span>
-                        <span class="skill-tag">Linux Administration</span>
-                        <span class="skill-tag">Windows Server</span>
-                        <span class="skill-tag">CI/CD & Git</span>
-                    </div>
-                </div>
-
-                <div class="skill-card glass">
-                    <div class="skill-header">
-                        <div class="skill-icon-large">💻</div>
-                        <h3>Développement</h3>
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-tag bold-highlight">Spring Boot & Java JEE</span>
-                        <span class="skill-tag">Angular & TypeScript</span>
-                        <span class="skill-tag">Flutter & Dart</span>
-                        <span class="skill-tag">MySQL & Bases de données</span>
-                        <span class="skill-tag">API REST</span>
-                    </div>
-                </div>
-
-                <!-- Soft Skills -->
-                <div class="skill-card glass">
-                    <div class="skill-header">
-                        <div class="skill-icon-large">🎯</div>
-                        <h3>Savoir-être & Méthodes</h3>
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-tag bold-highlight">Rigueur & Sens du détail</span>
-                        <span class="skill-tag bold-highlight">Esprit d'analyse</span>
-                        <span class="skill-tag bold-highlight">Autonomie technique</span>
-                        <span class="skill-tag">Vision globale SI</span>
-                        <span class="skill-tag">Management de projets</span>
-                        <span class="skill-tag">UML & Documentation</span>
-                        <span class="skill-tag">Curiosité technologique</span>
-                    </div>
-                </div>
-
-                <div class="skill-card glass">
-                    <div class="skill-header">
-                        <div class="skill-icon-large">🤖</div>
-                        <h3>Technologies Émergentes</h3>
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-tag bold-highlight">IA Générative (RAG)</span>
-                        <span class="skill-tag">OpenAI API</span>
-                        <span class="skill-tag">Sécurité offensive/défensive</span>
-                        <span class="skill-tag">Monitoring Zabbix</span>
-                    </div>
-                </div>
-
-                <div class="skill-card glass">
-                    <div class="skill-header">
-                        <div class="skill-icon-large">🌍</div>
-                        <h3>Langues</h3>
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-tag bold-highlight">Français C2 (Maîtrise)</span>
-                        <span class="skill-tag bold-highlight">Arabe (Maternelle)</span>
-                        <span class="skill-tag">Anglais A2 (Progression)</span>
-                    </div>
-                </div>
+      <!-- ==================== STATS ==================== -->
+      <section class="section" id="activities" aria-label="أرقام الجمعية">
+        <div class="container">
+          <div class="section-header animate-on-scroll">
+            <i data-lucide="bar-chart-2" class="section-header-icon" aria-hidden="true"></i>
+            <h2 class="section-title">أرقامنا تتحدث</h2>
+            <div class="section-decorator" aria-hidden="true"></div>
+          </div>
+          <div class="grid-4 stagger" id="stats-grid" aria-label="إحصائيات الجمعية">
+            <div class="stat-card animate-on-scroll">
+              <div class="stat-card-icon" aria-hidden="true"><i data-lucide="calendar"></i></div>
+              <div class="stat-card-value" data-counter="13" data-prefix="+" data-suffix="">+13</div>
+              <div class="stat-card-label">سنة من العطاء</div>
             </div>
+            <div class="stat-card animate-on-scroll">
+              <div class="stat-card-icon" aria-hidden="true"><i data-lucide="users"></i></div>
+              <div class="stat-card-value" data-counter="150" data-prefix="+" data-suffix="">+150</div>
+              <div class="stat-card-label">عضو نشط</div>
+            </div>
+            <div class="stat-card animate-on-scroll">
+              <div class="stat-card-icon" aria-hidden="true"><i data-lucide="activity"></i></div>
+              <div class="stat-card-value" data-counter="50" data-prefix="+" data-suffix="">+50</div>
+              <div class="stat-card-label">نشاط متنوع</div>
+            </div>
+            <div class="stat-card animate-on-scroll">
+              <div class="stat-card-icon" aria-hidden="true"><i data-lucide="graduation-cap"></i></div>
+              <div class="stat-card-value" data-counter="12" data-prefix="+" data-suffix="">+12</div>
+              <div class="stat-card-label">دورة تكوينية</div>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- EXPERIENCE SECTION - COMPUTIME SARL EN AVANT -->
-    <section id="experience" class="experience-section">
-        <div class="exp-container">
-            <h2 class="section-title">Expérience <span>Professionnelle</span></h2>
-            
-            <div class="exp-grid">
-                <div class="exp-card glass-strong featured">
-                    <span class="exp-badge">ACTUELLEMENT</span>
-                    <h3>Stagiaire en Informatique</h3>
-                    <span class="exp-company">Computime Sarl, Casablanca</span>
-                    <span class="exp-date">2025 - Présent</span>
-                    <p class="exp-desc">
-                        Stage en cours au sein de Computime Sarl. Intervention sur les infrastructures réseau et systèmes, 
-                        support technique, administration des équipements réseau et participation aux projets d'intégration 
-                        et déploiement des solutions informatiques pour les clients.
-                    </p>
-                </div>
-
-                <div class="exp-card glass">
-                    <h3>Secrétaire Général</h3>
-                    <span class="exp-company">Association Sanabel pour la langue arabe, Abéché</span>
-                    <span class="exp-date">Janvier 2025 - Octobre 2025</span>
-                    <p class="exp-desc">
-                        Gestion administrative complète de l'association, coordination des activités culturelles et éducatives, 
-                        organisation d'événements majeurs, développement des partenariats institutionnels et supervision des équipes.
-                        Obtention d'une Attestation de Reconnaissance pour l'engagement.
-                    </p>
-                </div>
-
-                <div class="exp-card glass">
-                    <h3>Chargé des Activités Culturelles & Sportives</h3>
-                    <span class="exp-company">Chambre des Délégués, Université Adam Barka</span>
-                    <span class="exp-date">Octobre 2022 - Juin 2025</span>
-                    <p class="exp-desc">
-                        Organisation de tournois sportifs, concours académiques, conférences et sorties étudiantes. 
-                        Collaboration active avec les clubs étudiants pour dynamiser la vie de campus et améliorer l'expérience étudiante.
-                    </p>
-                </div>
-            </div>
+      <!-- ==================== ARTICLES ==================== -->
+      <section class="section-alt" aria-label="آخر الأخبار">
+        <div class="container">
+          <div class="section-header animate-on-scroll">
+            <i data-lucide="newspaper" class="section-header-icon" aria-hidden="true"></i>
+            <h2 class="section-title">آخر الأخبار</h2>
+            <div class="section-decorator" aria-hidden="true"></div>
+          </div>
+          <div class="grid-3" id="articles-grid" aria-label="آخر المقالات">
+            <!-- Loaded by JS -->
+            <div class="skeleton skeleton-img"></div>
+            <div class="skeleton skeleton-img"></div>
+            <div class="skeleton skeleton-img"></div>
+          </div>
+          <div style="text-align:center;margin-top:var(--space-8)">
+            <a href="articles.html" class="btn btn-secondary">
+              <i data-lucide="layout-grid" aria-hidden="true"></i>
+              جميع المقالات
+            </a>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- PROJECTS SECTION - AVEC IMAGES ET LIENS GITHUB -->
-    <section id="projets" class="projects-section">
-        <div class="proj-container">
-            <h2 class="section-title">Projets <span>Académiques</span> & Techniques</h2>
-            
-            <div class="projects-grid">
-                <div class="project-card glass">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80" alt="Cloud Security" class="project-img">
-                        <div class="project-overlay">
-                            <div class="project-tech-stack">
-                                <span class="tech-pill">AWS</span>
-                                <span class="tech-pill">Wazuh</span>
-                                <span class="tech-pill">MITRE ATT&CK</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Architecture Cloud Sécurisée & SIEM Wazuh</h3>
-                        <p>
-                            Conception d'une infrastructure "Secure by Design" sur AWS avec segmentation réseau (VPC public/privé). 
-                            Déploiement d'un SOC Wazuh pour détection temps réel des attaques (Brute Force SSH, élévation de privilèges).
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/dirdaymi" target="_blank" class="project-btn btn-github">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                Code
-                            </a>
-                            <a href="#" class="project-btn btn-demo">Documentation</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card glass">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop&q=80" alt="SmartBank" class="project-img">
-                        <div class="project-overlay">
-                            <div class="project-tech-stack">
-                                <span class="tech-pill">Spring Boot</span>
-                                <span class="tech-pill">Angular</span>
-                                <span class="tech-pill">OpenAI</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>SmartBank AI - Plateforme Bancaire Digitale</h3>
-                        <p>
-                            Application bancaire avec assistant IA intégré (RAG), chatbot web et bot Telegram synchronisé. 
-                            Sécurité JWT complète, gestion des permissions et architecture microservices.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/dirdaymi" target="_blank" class="project-btn btn-github">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                GitHub
-                            </a>
-                            <a href="#" class="project-btn btn-demo">Démo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card glass">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80" alt="Monitoring" class="project-img">
-                        <div class="project-overlay">
-                            <div class="project-tech-stack">
-                                <span class="tech-pill">AWS</span>
-                                <span class="tech-pill">Zabbix</span>
-                                <span class="tech-pill">Docker</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Infrastructure Cloud de Supervision</h3>
-                        <p>
-                            VPC AWS sécurisé avec Zabbix 5.0 conteneurisé. Supervision hybride Linux/Windows, 
-                            scripts d'automatisation et alerting avancé pour infrastructure critique.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/dirdaymi" target="_blank" class="project-btn btn-github">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                Code
-                            </a>
-                            <a href="#" class="project-btn btn-demo">Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card glass">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&auto=format&fit=crop&q=80" alt="Network Security" class="project-img">
-                        <div class="project-overlay">
-                            <div class="project-tech-stack">
-                                <span class="tech-pill">OPNsense</span>
-                                <span class="tech-pill">Squid</span>
-                                <span class="tech-pill">HA</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Architecture Réseau Sécurisée Entreprise</h3>
-                        <p>
-                            Segmentation réseau avancée avec DMZ, filtrage strict via OPNsense, proxy Squid 
-                            pour le contrôle de contenu et mise en œuvre de la Haute Disponibilité (HA).
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/dirdaymi" target="_blank" class="project-btn btn-github">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                Configs
-                            </a>
-                            <a href="#" class="project-btn btn-demo">Architecture</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card glass">
-                    <div class="project-image-container">
-                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&auto=format&fit=crop&q=80" alt="Mobile App" class="project-img">
-                        <div class="project-overlay">
-                            <div class="project-tech-stack">
-                                <span class="tech-pill">Flutter</span>
-                                <span class="tech-pill">Dart</span>
-                                <span class="tech-pill">API REST</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Portfolio Explorer - Application Mobile</h3>
-                        <p>
-                            Application mobile modulaire avec animations fluides, mode sombre, consommation 
-                            d'APIs tierces (News, Pexels, Météo) et interface responsive.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/dirdaymi" target="_blank" class="project-btn btn-github">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                                Code
-                            </a>
-                            <a href="#" class="project-btn btn-demo">APK</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- ==================== EVENTS ==================== -->
+      <section class="section" aria-label="الفعاليات القادمة">
+        <div class="container">
+          <div class="section-header animate-on-scroll">
+            <i data-lucide="calendar-days" class="section-header-icon" aria-hidden="true"></i>
+            <h2 class="section-title">الفعاليات القادمة</h2>
+            <div class="section-decorator" aria-hidden="true"></div>
+          </div>
+          <div class="grid-2" id="events-grid" aria-label="الفعاليات القادمة">
+            <!-- Loaded by JS -->
+          </div>
+          <div style="text-align:center;margin-top:var(--space-8)">
+            <a href="events.html" class="btn btn-secondary">
+              <i data-lucide="calendar" aria-hidden="true"></i>
+              جميع الفعاليات
+            </a>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- CERTIFICATIONS - IMAGES REMPLISSANTES -->
-    <section id="certifications" class="certs-section">
-        <div class="certs-container">
-            <h2 class="section-title">Certifications & <span>Attestations</span></h2>
-            
-            <div class="certs-grid">
-                <div class="cert-card-glass glass">
-                    <div class="cert-image-wrap">
-                        <img src="indabax-chad.png" alt="IndabaX Chad 2025" class="cert-img">
-                    </div>
-                    <div class="cert-body">
-                        <h4>Deep Learning IndabaX Chad 2025</h4>
-                        <p class="cert-issuer">Conférence Deep Learning IndabaX</p>
-                        <p class="cert-date">4-5 Novembre 2025 • Maison Nationale de la Femme</p>
-                    </div>
-                </div>
-
-                <div class="cert-card-glass glass">
-                    <div class="cert-image-wrap">
-                        <img src="pitchday-mundia.png" alt="Pitch Day" class="cert-img">
-                    </div>
-                    <div class="cert-body">
-                        <h4>Pitch Day - Projet Entrepreneuriat</h4>
-                        <p class="cert-issuer">Centre de Carrière Université Mundiapolis</p>
-                        <p class="cert-date">Année académique 2025-2026</p>
-                    </div>
-                </div>
-
-                <div class="cert-card-glass glass">
-                    <div class="cert-image-wrap">
-                        <img src="oasis-info.png" alt="Certificat Informatique" class="cert-img">
-                    </div>
-                    <div class="cert-body">
-                        <h4>Certificat d'Informatique</h4>
-                        <p class="cert-issuer">Centre Culturel Oasis, N'Djamena</p>
-                        <p class="cert-date">12 Février - 12 Mai 2016 • Mention: Très-bien</p>
-                    </div>
-                </div>
-
-                <div class="cert-card-glass glass-strong">
-                    <div class="cert-image-wrap" style="background: linear-gradient(135deg, #FF9900 0%, #232F3E 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; font-weight: 800;">
-                        AWS
-                    </div>
-                    <div class="cert-body">
-                        <h4>AWS Cloud Foundations</h4>
-                        <p class="cert-issuer">Amazon Web Services</p>
-                        <p class="cert-date">Certification des fondamentaux du Cloud</p>
-                    </div>
-                </div>
-
-                <div class="cert-card-glass glass">
-                    <div class="cert-image-wrap" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                        🏆
-                    </div>
-                    <div class="cert-body">
-                        <h4>Attestation de Reconnaissance</h4>
-                        <p class="cert-issuer">Association Sanabel pour la langue arabe</p>
-                        <p class="cert-date">Engagement associatif et leadership</p>
-                    </div>
-                </div>
-            </div>
+      <!-- ==================== BUREAU ==================== -->
+      <section class="section-alt" aria-label="قيادة الجمعية">
+        <div class="container">
+          <div class="section-header animate-on-scroll">
+            <i data-lucide="shield" class="section-header-icon" aria-hidden="true"></i>
+            <h2 class="section-title">قيادة الجمعية</h2>
+            <div class="section-decorator" aria-hidden="true"></div>
+          </div>
+          <div class="grid-4" id="bureau-grid" aria-label="أعضاء المكتب التنفيذي">
+            <!-- Loaded by JS -->
+          </div>
+          <div style="text-align:center;margin-top:var(--space-8)">
+            <a href="bureau.html" class="btn btn-secondary">
+              <i data-lucide="users" aria-hidden="true"></i>
+              أعضاء المكتب الكامل
+            </a>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- EDUCATION SECTION -->
-    <section class="edu-section">
-        <div class="edu-container">
-            <h2 class="section-title">Formation <span>Académique</span></h2>
-            
-            <div class="edu-timeline">
-                <div class="edu-item-glass glass">
-                    <div class="edu-icon-box">🎓</div>
-                    <div class="edu-content">
-                        <h3>Cycle Ingénieur d'État - Informatique</h3>
-                        <p class="edu-school">Université Mundiapolis, Casablanca (Maroc)</p>
-                        <p class="edu-detail">4ème Année • Spécialisation Réseaux & Cybersécurité</p>
-                    </div>
-                    <div class="edu-year-badge">2025 - Présent</div>
-                </div>
+      <!-- ==================== CTA ==================== -->
+      <section class="cta-section" aria-label="الانضمام للجمعية">
+        <div class="cta-icon" aria-hidden="true"><i data-lucide="heart"></i></div>
+        <h2 class="cta-title">كن جزءًا من التغيير</h2>
+        <p class="cta-subtitle">انضم إلى أكثر من ١٥٠ عضو نشط يحملون مشعل اللغة العربية في تشاد</p>
+        <a href="join.html" class="btn btn-primary btn-lg">
+          <i data-lucide="clipboard-list" aria-hidden="true"></i>
+          اقرأ نموذج الانضمام
+        </a>
+      </section>
 
-                <div class="edu-item-glass glass">
-                    <div class="edu-icon-box">📜</div>
-                    <div class="edu-content">
-                        <h3>Licence Professionnelle - Informatique Appliquée à la Gestion</h3>
-                        <p class="edu-school">Université Adam Barka, Abéché (Tchad)</p>
-                        <p class="edu-detail">Major de promotion • Mention Bien (14.37/20)</p>
-                    </div>
-                    <div class="edu-year-badge">2022 - 2025</div>
-                </div>
+    </main>
 
-                <div class="edu-item-glass glass">
-                    <div class="edu-icon-box">📚</div>
-                    <div class="edu-content">
-                        <h3>Baccalauréat Scientifique</h3>
-                        <p class="edu-school">Lycée Hissein Mahamat Itno, Abéché</p>
-                        <p class="edu-detail">Mention Assez Bien (13.53/20)</p>
-                    </div>
-                    <div class="edu-year-badge">2021</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div id="footer-container"></div>
+  </div>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="contact-section">
-        <div class="contact-container">
-            <h2 class="section-title">Me <span>Contacter</span></h2>
-            <p style="color: var(--text-light); font-size: 1.1rem; margin-top: 1rem;">
-                Basé à Casablanca, Maroc • Ouvert aux opportunités Security & Network
-            </p>
-            
-            <div class="contact-grid">
-                <a href="mailto:am.louki@outlook.fr" class="contact-card glass">
-                    <div class="contact-icon-bg">📧</div>
-                    <h4>Email</h4>
-                    <span>am.louki@outlook.fr</span>
-                </a>
-
-                <a href="tel:+212763084630" class="contact-card glass">
-                    <div class="contact-icon-bg">📱</div>
-                    <h4>Téléphone</h4>
-                    <span>+212 7 63 08 46 30</span>
-                </a>
-
-                <a href="https://linkedin.com/in/amlouki" target="_blank" class="contact-card glass">
-                    <div class="contact-icon-bg">💼</div>
-                    <h4>LinkedIn</h4>
-                    <span>/in/amlouki</span>
-                </a>
-            </div>
-
-            <div style="margin-top: 3rem;">
-                <a href="https://github.com/dirdaymi" target="_blank" class="btn-primary" style="padding: 1.25rem 3rem; font-size: 1.1rem;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    GitHub: /dirdaymi
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-name">AM Louki</div>
-            <p>Security & Network Engineer • Élève Ingénieur</p>
-            
-            <div class="footer-links">
-                <a href="#competences">Compétences</a>
-                <a href="#experience">Expérience</a>
-                <a href="#projets">Projets</a>
-                <a href="#certifications">Certifications</a>
-                <a href="https://linkedin.com/in/amlouki" target="_blank">LinkedIn</a>
-                <a href="https://github.com/dirdaymi" target="_blank">GitHub</a>
-            </div>
-            
-            <div class="footer-copy">
-                <p>&copy; 2025 Abdel-Hamid Mahamat Louki. Tous droits réservés.</p>
-                <p>En stage chez Computime Sarl • Casablanca, Maroc</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.skill-card, .exp-card, .project-card, .cert-card-glass, .edu-item-glass').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script src="assets/js/pages/home.js"></script>
 </body>
 </html>

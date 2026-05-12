@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المكتب التنفيذي — جمعية سنابل للغة العربية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    .page-header { background:linear-gradient(135deg,var(--primary) 0%,#1A3A5C 100%); padding:var(--space-16) var(--space-6); color:white; text-align:center; }
+    .page-header-title { font-size:clamp(28px,4vw,44px); font-weight:800; margin-bottom:var(--space-2); }
+    .page-header-sub { font-size:16px; color:rgba(255,255,255,0.75); }
+    .sec-header {
+      display:flex; align-items:center; gap:var(--space-3);
+      padding:var(--space-4) 0; margin-bottom:var(--space-5);
+      border-bottom:2px solid rgba(212,160,23,0.25);
+    }
+    .sec-header-title { font-size:20px; font-weight:700; color:var(--text-primary); flex:1; }
+    .sec-header-count { font-size:12px; color:var(--text-muted); }
+    .member-card-full {
+      background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+      border:1px solid var(--glass-border); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-card),var(--inset-light); padding:var(--space-6);
+      text-align:center; transition:all var(--transition-base);
+    }
+    .member-card-full:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover),var(--inset-light); }
+    .member-avatar-lg {
+      width:160px; height:160px; border-radius:50%;
+      object-fit:cover; border:2px solid rgba(212,160,23,0.50);
+      margin-inline:auto; margin-bottom:var(--space-4);
+    }
+    .member-avatar-lg-ph {
+      width:160px; height:160px; border-radius:50%;
+      background:linear-gradient(135deg,var(--primary),var(--primary-mid));
+      display:flex; align-items:center; justify-content:center;
+      font-size:48px; font-weight:700; color:white;
+      margin-inline:auto; margin-bottom:var(--space-4);
+      border:2px solid rgba(212,160,23,0.50);
+    }
+    .member-bio-collapse { font-size:13px; color:var(--text-secondary); line-height:1.6; margin-top:var(--space-3); }
+    .contact-bar {
+      background:var(--glass-bg-strong); backdrop-filter:var(--glass-blur-heavy); -webkit-backdrop-filter:var(--glass-blur-heavy);
+      border:1px solid var(--glass-border); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-card); padding:var(--space-6);
+      display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
+      gap:var(--space-8); margin-top:var(--space-10);
+    }
+    .contact-item { display:flex; align-items:center; gap:var(--space-3); font-size:15px; color:var(--text-secondary); }
+    .contact-item svg { width:20px; height:20px; color:var(--gold); }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div id="navbar-container"></div>
+    <main id="main-content" class="page-content" role="main">
+      <header class="page-header">
+        <div aria-hidden="true" style="margin-bottom:var(--space-5)"><i data-lucide="shield" style="width:56px;height:56px;color:var(--gold-light)"></i></div>
+        <nav class="breadcrumb" style="justify-content:center" aria-label="مسار التنقل">
+          <a href="index.html" style="color:rgba(255,255,255,0.70)">🏠</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span style="color:white">المكتب التنفيذي</span>
+        </nav>
+        <h1 class="page-header-title">المكتب التنفيذي</h1>
+        <p class="page-header-sub">القيادة الملتزمة بخدمة اللغة العربية والمجتمع</p>
+      </header>
+
+      <div class="container" style="padding-top:var(--space-10);padding-bottom:var(--space-10)">
+        <div id="bureauSections" aria-live="polite">
+          <div style="text-align:center;padding:var(--space-10);color:var(--text-muted)">
+            <i data-lucide="loader-2" style="width:40px;height:40px;animation:spin 1s linear infinite" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <!-- Contact bar -->
+        <div class="contact-bar animate-on-scroll">
+          <div class="contact-item">
+            <i data-lucide="mail" aria-hidden="true"></i>
+            <a href="mailto:sanabilarabe2022@gmail.com" style="color:inherit">sanabilarabe2022@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <i data-lucide="phone" aria-hidden="true"></i>
+            <a href="tel:+23591404166" style="color:inherit">+235 91 40 41 66</a>
+          </div>
+          <div class="contact-item">
+            <i data-lucide="map-pin" aria-hidden="true"></i>
+            <span>أبيشي، تشاد</span>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div id="footer-container"></div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script>
+  'use strict';
+
+  function buildMemberCard(m) {
+    const lang = App.lang;
+    const name = lang === 'ar' ? m.name_ar : (m.name_fr || m.name_ar);
+    const role = lang === 'ar' ? m.role_ar : (m.role_fr || m.role_ar);
+    const bio = lang === 'ar' ? m.bio_ar : (m.bio_fr || m.bio_ar);
+    const initials = m.name_ar.split(' ').map(w=>w[0]).slice(0,2).join('');
+    return `
+      <div class="member-card-full animate-on-scroll">
+        ${m.photo
+          ? `<img class="member-avatar-lg" src="${m.photo}" alt="${sanitize(name)}" loading="lazy">`
+          : `<div class="member-avatar-lg-ph" aria-label="${sanitize(name)}">${initials}</div>`
+        }
+        <div style="font-size:18px;font-weight:700;color:var(--text-primary);margin-bottom:4px">${sanitize(name)}</div>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:var(--space-3)">${sanitize(role)}</div>
+        ${m.phone ? `<div style="font-size:13px;color:var(--text-muted);margin-bottom:var(--space-2)"><i data-lucide="phone" style="width:13px;height:13px;display:inline;color:var(--gold)"></i> ${sanitize(m.phone)}</div>` : ''}
+        ${bio ? `<div class="member-bio-collapse">${sanitize(bio)}</div>` : ''}
+        ${m.mandate_start ? `<div style="font-size:12px;color:var(--text-muted);margin-top:var(--space-3);display:flex;align-items:center;gap:4px;justify-content:center;"><i data-lucide="calendar" style="width:12px;height:12px;color:var(--gold)"></i>${m.mandate_start} – ${m.mandate_end||'...'}</div>` : ''}
+      </div>`;
+  }
+
+  async function loadBureau() {
+    const container = document.getElementById('bureauSections');
+    try {
+      const secretariats = await BureauDB.getAll();
+      container.innerHTML = secretariats.map(sec => {
+        const lang = App.lang;
+        const name = lang === 'ar' ? sec.name_ar : (sec.name_fr || sec.name_ar);
+        const members = (sec.members||[]).filter(m => m.active);
+        return `
+          <section style="margin-bottom:var(--space-12)" aria-label="${sanitize(name)}">
+            <div class="sec-header">
+              <i data-lucide="briefcase" style="width:24px;height:24px;color:var(--gold)" aria-hidden="true"></i>
+              <h2 class="sec-header-title">${sanitize(name)}</h2>
+              <span class="sec-header-count">${formatNumber(members.length)} أعضاء</span>
+            </div>
+            <div class="grid-3">${members.map(buildMemberCard).join('')}</div>
+          </section>`;
+      }).join('');
+      App.initAnimateOnScroll();
+      lucide.createIcons();
+    } catch { container.innerHTML = '<p style="text-align:center;color:var(--text-muted)">تعذّر تحميل البيانات</p>'; }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderNavbar({ activePage:'bureau.html' });
+    renderFooter();
+    lucide.createIcons();
+    loadBureau();
+  });
+  </script>
+</body>
+</html>

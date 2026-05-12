@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="مقالات جمعية سنابل للغة العربية — أخبار وأنشطة الجمعية">
+  <title>المقالات — جمعية سنابل للغة العربية</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    .page-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+      padding: var(--space-12) var(--space-6);
+      color: white;
+      text-align: center;
+    }
+    .page-header-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; margin-bottom: var(--space-2); }
+    .page-header-icon { margin-bottom: var(--space-4); color: var(--gold-light); }
+    .articles-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: var(--space-8);
+      max-width: 1280px;
+      margin-inline: auto;
+      padding: var(--space-8) var(--space-6);
+    }
+    @media (max-width: 1023px) {
+      .articles-layout { grid-template-columns: 1fr; }
+      .articles-sidebar { display: none; }
+    }
+    @media (max-width: 767px) {
+      .articles-layout { padding: var(--space-5) var(--space-4); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+
+    <div id="navbar-container"></div>
+
+    <main id="main-content" class="page-content" role="main">
+
+      <header class="page-header">
+        <div class="page-header-icon" aria-hidden="true"><i data-lucide="file-text" style="width:48px;height:48px"></i></div>
+        <nav class="breadcrumb" style="justify-content:center" aria-label="مسار التنقل">
+          <a href="index.html">🏠</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span class="breadcrumb-current">المقالات</span>
+        </nav>
+        <h1 class="page-header-title">المقالات</h1>
+        <div style="max-width:520px;margin:var(--space-5) auto 0">
+          <div class="search-bar" style="background:rgba(255,255,255,0.20);border-color:rgba(255,255,255,0.40)">
+            <i data-lucide="search" style="color:rgba(255,255,255,0.70)" aria-hidden="true"></i>
+            <input type="search" id="articleSearch" placeholder="ابحث في المقالات..." aria-label="بحث في المقالات"
+              style="color:white" autocomplete="off">
+          </div>
+        </div>
+      </header>
+
+      <div class="articles-layout">
+        <!-- Main column -->
+        <div>
+          <!-- Filters -->
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-6)">
+            <div class="pills-row" id="categoryPills" role="group" aria-label="تصفية حسب التصنيف">
+              <button class="pill active" data-cat="all">الكل</button>
+            </div>
+            <div class="dropdown">
+              <button class="btn btn-ghost btn-sm" id="sortDropdownBtn" aria-label="ترتيب المقالات" aria-expanded="false">
+                <i data-lucide="sliders-horizontal" aria-hidden="true"></i>
+                الأحدث
+                <i data-lucide="chevron-down" style="width:14px;height:14px" aria-hidden="true"></i>
+              </button>
+              <div class="dropdown-menu" id="sortDropdown" role="menu">
+                <div class="dropdown-item" data-sort="newest" role="menuitem">الأحدث</div>
+                <div class="dropdown-item" data-sort="oldest" role="menuitem">الأقدم</div>
+                <div class="dropdown-item" data-sort="views" role="menuitem">الأكثر قراءة</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid -->
+          <div class="grid-3" id="articlesGrid" aria-label="قائمة المقالات" aria-live="polite">
+            <div class="skeleton skeleton-img"></div>
+            <div class="skeleton skeleton-img"></div>
+            <div class="skeleton skeleton-img"></div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination" id="pagination" aria-label="ترقيم الصفحات"></div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="articles-sidebar" aria-label="معلومات إضافية">
+          <div class="glass-card" style="padding:var(--space-5);margin-bottom:var(--space-5)">
+            <h3 style="font-size:15px;font-weight:700;margin-bottom:var(--space-4);display:flex;align-items:center;gap:var(--space-2)">
+              <i data-lucide="tag" style="width:16px;height:16px;color:var(--gold)" aria-hidden="true"></i>
+              التصنيفات الشائعة
+            </h3>
+            <div id="sidebarCategories" style="display:flex;flex-direction:column;gap:var(--space-2)"></div>
+          </div>
+          <div class="glass-card" style="padding:var(--space-5)">
+            <h3 style="font-size:15px;font-weight:700;margin-bottom:var(--space-4);display:flex;align-items:center;gap:var(--space-2)">
+              <i data-lucide="trending-up" style="width:16px;height:16px;color:var(--gold)" aria-hidden="true"></i>
+              الأكثر قراءة
+            </h3>
+            <div id="sidebarTopRead" style="display:flex;flex-direction:column;gap:var(--space-3)"></div>
+          </div>
+        </aside>
+      </div>
+
+    </main>
+
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script src="assets/js/pages/articles.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+:root {
+  /* === COULEURS PRIMAIRES === */
+  --primary:        #1B4F72;
+  --primary-mid:    #2471A3;
+  --primary-light:  #AED6F1;
+
+  /* === COULEURS SECONDAIRES === */
+  --gold:           #D4A017;
+  --gold-light:     #F7DC6F;
+  --gold-muted:     rgba(212, 160, 23, 0.15);
+
+  /* === COULEURS ACCENT === */
+  --emerald:        #27AE60;
+  --emerald-light:  rgba(39, 174, 96, 0.15);
+  --danger:         #E74C3C;
+  --danger-light:   rgba(231, 76, 60, 0.12);
+  --warning:        #F39C12;
+  --warning-light:  rgba(243, 156, 18, 0.15);
+
+  /* === FONDS DÉGRADÉS === */
+  --bg-gradient: linear-gradient(
+    135deg,
+    #E8F4FD 0%,
+    #EEF2FF 30%,
+    #F0FDF4 60%,
+    #FFF7ED 100%
+  );
+
+  --bg-gradient-alt: linear-gradient(
+    160deg,
+    #DBEAFE 0%,
+    #EDE9FE 50%,
+    #D1FAE5 100%
+  );
+
+  /* Orbes */
+  --orb-blue:   rgba(147, 197, 253, 0.35);
+  --orb-purple: rgba(196, 181, 253, 0.30);
+  --orb-gold:   rgba(253, 230, 138, 0.25);
+  --orb-green:  rgba(167, 243, 208, 0.30);
+
+  /* === GLASSMORPHISM === */
+  --glass-bg:           rgba(255, 255, 255, 0.65);
+  --glass-bg-hover:     rgba(255, 255, 255, 0.80);
+  --glass-bg-strong:    rgba(255, 255, 255, 0.85);
+  --glass-bg-subtle:    rgba(255, 255, 255, 0.40);
+  --glass-border:       rgba(255, 255, 255, 0.90);
+  --glass-border-soft:  rgba(200, 215, 240, 0.50);
+  --glass-blur:         blur(20px) saturate(180%);
+  --glass-blur-heavy:   blur(40px) saturate(200%);
+
+  /* === TEXTE === */
+  --text-primary:   #1A2B4A;
+  --text-secondary: #4A6080;
+  --text-muted:     #8DA3BF;
+  --text-on-dark:   rgba(255, 255, 255, 0.95);
+
+  /* === OMBRES === */
+  --shadow-card:    0 8px 32px rgba(100, 140, 200, 0.15), 0 2px 8px rgba(100, 140, 200, 0.08);
+  --shadow-hover:   0 16px 48px rgba(100, 140, 200, 0.25), 0 4px 16px rgba(100, 140, 200, 0.12);
+  --shadow-button:  0 4px 16px rgba(27, 79, 114, 0.30);
+  --shadow-modal:   0 24px 80px rgba(27, 79, 114, 0.20);
+  --inset-light:    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+  /* === BORDER RADIUS === */
+  --radius-xs:   8px;
+  --radius-sm:  12px;
+  --radius-md:  16px;
+  --radius-lg:  20px;
+  --radius-xl:  24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* === SPACING === */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* === TRANSITIONS === */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.40s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* === Z-INDEX === */
+  --z-base:    1;
+  --z-dropdown: 100;
+  --z-sticky:  200;
+  --z-navbar:  1000;
+  --z-modal:   2000;
+  --z-toast:   3000;
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عن جمعية سنابل — جمعية سنابل للغة العربية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    .about-hero {
+      position:relative; height:360px; overflow:hidden;
+      background:linear-gradient(135deg,var(--primary) 0%,#1A6B5C 100%);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .about-hero-title { font-size:clamp(28px,5vw,52px); font-weight:800; color:white; text-align:center; position:relative; z-index:1; text-shadow:0 2px 8px rgba(0,0,0,0.20); }
+    .about-hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg,transparent,rgba(0,0,0,0.30)); }
+
+    /* Timeline */
+    .history-timeline { position:relative; max-width:700px; margin-inline:auto; padding:var(--space-8) var(--space-6); }
+    .history-timeline::before { content:''; position:absolute; top:0; right:calc(var(--space-6) + 32px); bottom:0; width:2px; background:linear-gradient(to bottom,var(--gold),transparent); z-index:0; }
+    .timeline-milestone { display:flex; gap:var(--space-5); margin-bottom:var(--space-8); position:relative; }
+    .milestone-year {
+      font-size:clamp(28px,5vw,48px); font-weight:800; color:var(--gold);
+      width:64px; flex-shrink:0; line-height:1;
+      writing-mode:horizontal-tb; text-align:center;
+    }
+    .milestone-dot { position:absolute; right:calc(var(--space-6) + 27px); top:8px; width:12px; height:12px; background:var(--gold); border-radius:50%; border:2px solid white; z-index:1; }
+    .milestone-card {
+      flex:1; background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+      border:1px solid var(--glass-border); border-radius:var(--radius-md);
+      box-shadow:var(--shadow-card); padding:var(--space-4) var(--space-5);
+    }
+    .milestone-title { font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+    .milestone-text { font-size:13px; color:var(--text-secondary); line-height:1.6; }
+
+    /* Value card */
+    .value-card {
+      background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+      border:1px solid var(--glass-border); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-card); padding:var(--space-6); text-align:center;
+      transition:all var(--transition-base);
+    }
+    .value-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+    .value-icon { color:var(--gold); margin-bottom:var(--space-4); }
+    .value-icon svg { width:40px; height:40px; }
+    .value-title { font-size:17px; font-weight:700; color:var(--text-primary); margin-bottom:var(--space-2); }
+    .value-text { font-size:13px; color:var(--text-secondary); line-height:1.6; }
+
+    @media (max-width:767px) {
+      .history-timeline::before { display:none; }
+      .milestone-dot { display:none; }
+      .timeline-milestone { flex-direction:column; }
+      .milestone-year { font-size:32px; width:auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div id="navbar-container"></div>
+    <main id="main-content" class="page-content" role="main">
+
+      <!-- Hero -->
+      <div class="about-hero">
+        <div class="about-hero-overlay"></div>
+        <div style="position:relative;z-index:1;text-align:center;padding:var(--space-6)">
+          <nav class="breadcrumb" style="justify-content:center;margin-bottom:var(--space-4)" aria-label="مسار التنقل">
+            <a href="index.html" style="color:rgba(255,255,255,0.70)">🏠</a>
+            <span class="breadcrumb-sep" aria-hidden="true">›</span>
+            <span style="color:white">عن الجمعية</span>
+          </nav>
+          <h1 class="about-hero-title">عن جمعية سنابل</h1>
+        </div>
+      </div>
+
+      <!-- Intro -->
+      <div class="container" style="padding-top:var(--space-10)">
+        <div class="glass-card-strong animate-on-scroll" style="padding:var(--space-8);max-width:800px;margin-inline:auto;text-align:center">
+          <p style="font-size:18px;color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-4)">
+            جمعية سنابل للغة العربية جمعية ثقافية تعليمية تأسست عام ٢٠١٣ في مدينة أبيشي بتشاد، تعمل على نشر اللغة العربية وتعزيز الهوية الثقافية في المنطقة.
+          </p>
+          <p style="font-size:16px;color:var(--text-muted);line-height:1.7">
+            <em>Association Sanabil de la Langue Arabe — une association culturelle et éducative fondée en 2013 à Abéché au Tchad.</em>
+          </p>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <section style="padding:var(--space-12) 0" aria-label="التاريخ والمسيرة">
+        <div class="container">
+          <div class="section-header animate-on-scroll">
+            <i data-lucide="milestone" class="section-header-icon" aria-hidden="true"></i>
+            <h2 class="section-title">مسيرتنا عبر الزمن</h2>
+            <div class="section-decorator" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="history-timeline">
+          <div class="timeline-milestone animate-on-scroll">
+            <div class="milestone-year">٢٠١٣</div>
+            <div class="milestone-dot" aria-hidden="true"></div>
+            <div class="milestone-card">
+              <div class="milestone-title">تأسيس الجمعية</div>
+              <div class="milestone-text">تأسست جمعية سنابل للغة العربية في مدينة أبيشي بمبادرة مجموعة من المثقفين والتربويين المهتمين بنشر اللغة العربية في تشاد.</div>
+            </div>
+          </div>
+          <div class="timeline-milestone animate-on-scroll">
+            <div class="milestone-year">٢٠٢٢</div>
+            <div class="milestone-dot" aria-hidden="true"></div>
+            <div class="milestone-card">
+              <div class="milestone-title">الاعتماد الرسمي وتوسع النشاط</div>
+              <div class="milestone-text">حصلت الجمعية على الاعتماد الرسمي من السلطات التشادية وأطلقت برامج تكوينية متخصصة لتعليم اللغة العربية.</div>
+            </div>
+          </div>
+          <div class="timeline-milestone animate-on-scroll">
+            <div class="milestone-year">٢٠٢٤</div>
+            <div class="milestone-dot" aria-hidden="true"></div>
+            <div class="milestone-card">
+              <div class="milestone-title">الانطلاق الرقمي</div>
+              <div class="milestone-text">أطلقت الجمعية برنامجها الرقمي لتوسيع نطاق خدماتها وتعزيز التواصل مع أعضائها والجمهور العام.</div>
+            </div>
+          </div>
+          <div class="timeline-milestone animate-on-scroll">
+            <div class="milestone-year">٢٠٢٦</div>
+            <div class="milestone-dot" aria-hidden="true"></div>
+            <div class="milestone-card">
+              <div class="milestone-title">آفاق الشراكة الإقليمية</div>
+              <div class="milestone-text">تطلع الجمعية إلى توسيع شراكاتها الإقليمية والدولية لدعم تعليم اللغة العربية في منطقة وسط أفريقيا.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mission & Vision -->
+      <section class="container" style="padding-bottom:var(--space-10)" aria-label="الرسالة والرؤية">
+        <div class="section-header animate-on-scroll">
+          <i data-lucide="target" class="section-header-icon" aria-hidden="true"></i>
+          <h2 class="section-title">الرسالة والرؤية</h2>
+          <div class="section-decorator" aria-hidden="true"></div>
+        </div>
+        <div class="grid-2">
+          <div class="glass-card animate-on-scroll" style="padding:var(--space-8);text-align:center">
+            <i data-lucide="target" style="width:40px;height:40px;color:var(--gold);margin-bottom:var(--space-4)" aria-hidden="true"></i>
+            <h3 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:var(--space-4)">الرسالة</h3>
+            <p style="font-size:15px;color:var(--text-secondary);line-height:1.75">نشر اللغة العربية وتعزيز تعليمها في تشاد من خلال برامج تكوينية متخصصة وفعاليات ثقافية هادفة.</p>
+          </div>
+          <div class="glass-card animate-on-scroll" style="padding:var(--space-8);text-align:center">
+            <i data-lucide="lightbulb" style="width:40px;height:40px;color:var(--gold);margin-bottom:var(--space-4)" aria-hidden="true"></i>
+            <h3 style="font-size:20px;font-weight:700;color:var(--text-primary);margin-bottom:var(--space-4)">الرؤية</h3>
+            <p style="font-size:15px;color:var(--text-secondary);line-height:1.75">أن تكون اللغة العربية لغة حية وفاعلة في المشهد الثقافي التشادي، وجسراً للتواصل والتنمية.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Values -->
+      <section style="background:rgba(255,255,255,0.30);padding:var(--space-12) 0" aria-label="قيمنا">
+        <div class="container">
+          <div class="section-header animate-on-scroll">
+            <i data-lucide="star" class="section-header-icon" aria-hidden="true"></i>
+            <h2 class="section-title">قيمنا</h2>
+            <div class="section-decorator" aria-hidden="true"></div>
+          </div>
+          <div class="grid-3">
+            <div class="value-card animate-on-scroll">
+              <div class="value-icon" aria-hidden="true"><i data-lucide="eye"></i></div>
+              <div class="value-title">الشفافية</div>
+              <div class="value-text">نؤمن بالشفافية التامة في إدارة شؤون الجمعية وتقديم حساباتنا لأعضائنا والجمهور.</div>
+            </div>
+            <div class="value-card animate-on-scroll">
+              <div class="value-icon" aria-hidden="true"><i data-lucide="handshake"></i></div>
+              <div class="value-title">التعاون</div>
+              <div class="value-text">نبني جسور التعاون مع المؤسسات التعليمية والثقافية المحلية والدولية لتحقيق أهدافنا المشتركة.</div>
+            </div>
+            <div class="value-card animate-on-scroll">
+              <div class="value-icon" aria-hidden="true"><i data-lucide="trending-up"></i></div>
+              <div class="value-title">التطوير المستمر</div>
+              <div class="value-text">نسعى دائماً إلى تطوير برامجنا وأساليبنا لتلبية احتياجات أعضائنا والمجتمع المحيط بنا.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <div id="footer-container"></div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    renderNavbar({ activePage:'about.html' });
+    renderFooter();
+    lucide.createIcons();
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الدورات والتدريبات — جمعية سنابل للغة العربية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <style>
+    .page-header { background:linear-gradient(135deg,var(--primary) 0%,var(--primary-mid) 100%); padding:var(--space-12) var(--space-6); color:white; text-align:center; }
+    .page-header-title { font-size:clamp(28px,4vw,44px); font-weight:800; }
+    .course-card {
+      background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur);
+      border:1px solid var(--glass-border); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-card),var(--inset-light); overflow:hidden; transition:all var(--transition-base);
+    }
+    .course-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover),var(--inset-light); }
+    .course-card-img { width:100%; height:180px; object-fit:cover; background:linear-gradient(135deg,#DBEAFE,#EDE9FE); }
+    .course-card-body { padding:var(--space-5); }
+    .course-card-title { font-size:17px; font-weight:700; color:var(--text-primary); margin-bottom:var(--space-3); }
+    .course-card-excerpt { font-size:13px; color:var(--text-secondary); line-height:1.6; margin-bottom:var(--space-4); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .course-meta { display:flex; flex-wrap:wrap; gap:var(--space-3); font-size:12px; color:var(--text-muted); border-top:1px solid var(--glass-border-soft); padding-top:var(--space-3); margin-top:var(--space-3); }
+    .course-meta-item { display:flex; align-items:center; gap:4px; }
+    .course-meta-item svg { width:13px; height:13px; color:var(--gold); }
+  </style>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div id="navbar-container"></div>
+    <main id="main-content" class="page-content" role="main">
+      <header class="page-header">
+        <div aria-hidden="true" style="margin-bottom:var(--space-4)"><i data-lucide="graduation-cap" style="width:48px;height:48px;color:var(--gold-light)"></i></div>
+        <nav class="breadcrumb" style="justify-content:center" aria-label="مسار التنقل">
+          <a href="index.html" style="color:rgba(255,255,255,0.70)">🏠</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span style="color:white">الدورات والتدريبات</span>
+        </nav>
+        <h1 class="page-header-title">الدورات والتدريبات</h1>
+        <div class="pills-row" style="justify-content:center;margin-top:var(--space-5)">
+          <button class="pill active" data-filter="all" style="color:white;border-color:rgba(255,255,255,0.40);background:rgba(255,255,255,0.20)">الكل</button>
+          <button class="pill" data-filter="active" style="color:rgba(255,255,255,0.70);border-color:rgba(255,255,255,0.30);background:rgba(255,255,255,0.10)">
+            <span class="badge-success" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--emerald);margin-left:4px"></span> نشط
+          </button>
+          <button class="pill" data-filter="completed" style="color:rgba(255,255,255,0.70);border-color:rgba(255,255,255,0.30);background:rgba(255,255,255,0.10)">مكتمل</button>
+        </div>
+      </header>
+
+      <div class="container" style="padding-top:var(--space-10);padding-bottom:var(--space-10)">
+        <div class="grid-3" id="coursesGrid" aria-live="polite" aria-label="قائمة الدورات">
+          <div class="skeleton skeleton-img"></div>
+          <div class="skeleton skeleton-img"></div>
+          <div class="skeleton skeleton-img"></div>
+        </div>
+      </div>
+    </main>
+    <div id="footer-container"></div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script>
+  'use strict';
+  let _allCourses = [];
+  let _filterCourses = 'all';
+
+  function buildCourseCard(c) {
+    const lang = App.lang;
+    const title = lang === 'ar' ? c.title_ar : (c.title_fr || c.title_ar);
+    const excerpt = lang === 'ar' ? c.excerpt_ar : (c.excerpt_fr || c.excerpt_ar);
+    const level = lang === 'ar' ? c.level_ar : (c.level_fr || c.level_ar);
+    const duration = lang === 'ar' ? c.duration_ar : (c.duration_fr || c.duration_ar);
+    const isActive = c.status === 'active';
+    return `
+      <article class="course-card animate-on-scroll">
+        ${c.image ? `<img class="course-card-img" src="${c.image}" alt="${sanitize(title)}" loading="lazy">` : '<div class="course-card-img" style="display:flex;align-items:center;justify-content:center;"><i data-lucide="graduation-cap" style="width:48px;height:48px;color:var(--primary-light)"></i></div>'}
+        <div class="course-card-body">
+          <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-3)">
+            <span class="badge ${isActive ? 'badge-success' : 'badge-muted'}">${isActive ? 'نشط' : 'مكتمل'}</span>
+            ${level ? `<span class="badge badge-primary">${sanitize(level)}</span>` : ''}
+          </div>
+          <h2 class="course-card-title">${sanitize(title)}</h2>
+          <p class="course-card-excerpt">${sanitize(excerpt)}</p>
+          <div class="course-meta">
+            ${duration ? `<div class="course-meta-item"><i data-lucide="clock"></i>${sanitize(duration)}</div>` : ''}
+            ${c.participants ? `<div class="course-meta-item"><i data-lucide="users"></i>${formatNumber(c.participants)} مشارك</div>` : ''}
+          </div>
+          <a href="post.html?id=${c.id}&type=course" class="btn btn-primary btn-full" style="margin-top:var(--space-4)">
+            <i data-lucide="arrow-left" aria-hidden="true"></i> التفاصيل
+          </a>
+        </div>
+      </article>`;
+  }
+
+  function renderCourses() {
+    const grid = document.getElementById('coursesGrid');
+    let items = [..._allCourses];
+    if (_filterCourses !== 'all') items = items.filter(c => c.status === _filterCourses);
+    grid.innerHTML = items.length
+      ? items.map(buildCourseCard).join('')
+      : `<div class="empty-state" style="grid-column:1/-1"><i data-lucide="search-x" class="empty-state-icon"></i><p class="empty-state-title">لا توجد دورات</p></div>`;
+    App.initAnimateOnScroll();
+    lucide.createIcons();
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    renderNavbar({ activePage:'courses.html' });
+    renderFooter();
+    lucide.createIcons();
+    try {
+      _allCourses = await CoursesDB.getAll();
+      renderCourses();
+    } catch { document.getElementById('coursesGrid').innerHTML = '<p style="color:var(--text-muted);grid-column:1/-1">تعذّر تحميل الدورات</p>'; }
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        _filterCourses = btn.dataset.filter;
+        document.querySelectorAll('[data-filter]').forEach(b => b.classList.toggle('active', b === btn));
+        renderCourses();
+      });
+    });
+  });
+  </script>
+</body>
+</html>
