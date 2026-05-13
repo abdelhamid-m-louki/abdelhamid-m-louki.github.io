@@ -1,12 +1,17 @@
+(function() {
+'use strict';
+
 // === SUPABASE CONFIGURATION ===
 let supabaseClient = null;
 
 function initSupabase() {
   if (typeof window !== 'undefined' && window.supabase && window.SUPABASE_CONFIG) {
-    supabaseClient = window.supabase.createClient(
-      window.SUPABASE_CONFIG.url,
-      window.SUPABASE_CONFIG.anonKey
-    );
+    if (!supabaseClient) {
+      supabaseClient = window.supabase.createClient(
+        window.SUPABASE_CONFIG.url,
+        window.SUPABASE_CONFIG.anonKey
+      );
+    }
   }
   return supabaseClient;
 }
@@ -333,3 +338,17 @@ const SettingsDB = {
 document.addEventListener('DOMContentLoaded', () => {
   initSupabase();
 });
+
+Object.assign(window, {
+  SupabaseDB,
+  ArticlesDB,
+  EventsDB,
+  CoursesDB,
+  SportsDB,
+  CategoriesDB,
+  ContactsDB,
+  MembershipsDB,
+  SettingsDB
+});
+
+})();

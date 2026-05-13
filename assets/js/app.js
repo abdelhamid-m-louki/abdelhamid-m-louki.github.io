@@ -17,12 +17,15 @@ const App = {
     try {
       if (typeof SettingsDB !== 'undefined') {
         this.settings = await SettingsDB.get();
-      } else {
+      } else if (typeof DataStore !== 'undefined') {
         const data = await DataStore.get('settings');
         this.settings = data;
+      } else {
+        this.settings = {};
       }
     } catch (e) {
       console.warn('Could not load settings', e);
+      this.settings = {};
     }
   },
 
