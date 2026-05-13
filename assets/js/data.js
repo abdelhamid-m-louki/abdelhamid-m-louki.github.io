@@ -200,7 +200,31 @@ const MembershipsDB = {
 // === SETTINGS ===
 const SettingsDB = {
   async get() {
-    return await DataStore.get('settings');
+    const settings = await DataStore.get('settings');
+    const saved = localStorage.getItem('sanabil_settings');
+    if (!saved) return settings;
+
+    try {
+      const custom = JSON.parse(saved);
+      settings.ai = settings.ai || {};
+
+      if (typeof custom.gemini_api_key === 'string') {
+        settings.ai.gemini_key = custom.gemini_api_key;
+      }
+      if (typeof custom.openai_api_key === 'string') {
+        settings.ai.openai_key = custom.openai_api_key;
+      }
+      if (typeof custom.ai_style === 'string') {
+        settings.ai.style = custom.ai_style;
+      }
+      if (typeof custom.ai_hooks_count !== 'undefined') {
+        settings.ai.hooks_count = custom.ai_hooks_count;
+      }
+    } catch {
+      // Ignore invalid saved settings
+    }
+
+    return settings;
   }
 };
 
