@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="جمعية سنابل للغة العربية — تشاد | نبني جسور المستقبل بلغة الضاد">
+  <meta property="og:title" content="جمعية سنابل للغة العربية">
+  <meta property="og:description" content="نبني جسور المستقبل بلغة الضاد — Abéché, Tchad">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="index.html">
+  <title>جمعية سنابل للغة العربية — تشاد</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/navbar.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/supabase.js"></script>
+
+  <!-- Styles spécifiques à la page -->
+  <style>
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--primary) 0%, #2980B9 60%, #1A8A6B 100%);
+      z-index: 0;
+    }
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      opacity: 0.25;
+      z-index: 1;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.35) 100%);
+      z-index: 2;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: white;
+      max-width: 800px;
+      padding: 0 var(--space-4);
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 800;
+      margin-bottom: var(--space-4);
+      line-height: 1.1;
+    }
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      font-weight: 400;
+      margin-bottom: var(--space-6);
+      opacity: 0.95;
+    }
+    .hero-actions {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: var(--radius-xl);
+      padding: var(--space-10) var(--space-6);
+      margin-top: var(--space-8);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+    .hero-card-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+    }
+    .hero-card-text {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: var(--space-5);
+    }
+    .stat-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      text-align: center;
+      transition: transform var(--transition-fast);
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+    .stat-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin: 0 auto var(--space-3);
+      font-size: 1.2rem;
+    }
+    .stat-card-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: var(--space-2);
+    }
+    .stat-card-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .section {
+      padding: var(--space-16) 0;
+      position: relative;
+    }
+    .section-alt {
+      background: var(--bg-alt);
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-10);
+    }
+    .section-header-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin: 0 auto var(--space-4);
+      font-size: 1.5rem;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+    }
+    .section-decorator {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--gold));
+      border-radius: 2px;
+      margin: 0 auto;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-6);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: var(--space-6);
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-6);
+    }
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-fast);
+      height: 100%;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: var(--space-5);
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+      line-height: 1.4;
+    }
+    .card-text {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: var(--space-4);
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .event-card {
+      display: flex;
+      gap: var(--space-5);
+      align-items: center;
+    }
+    .event-card-img {
+      width: 120px;
+      height: 120px;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .event-card-content {
+      flex: 1;
+    }
+    .event-card-date {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-primary);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+      color: white;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-secondary {
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+    }
+    .btn-secondary:hover {
+      background: var(--glass-bg-strong);
+    }
+    .skeleton {
+      background: linear-gradient(90deg, var(--glass-bg) 25%, var(--glass-bg-strong) 50%, var(--glass-bg) 75%);
+      background-size: 200% 100%;
+      animation: skeleton 1.5s infinite;
+      border-radius: var(--radius-lg);
+    }
+    .skeleton-img {
+      height: 200px;
+    }
+    @keyframes skeleton {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    @media (max-width: 767px) {
+      .hero-card { padding: var(--space-8) var(--space-5); }
+      .event-card { flex-direction: column; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "جمعية سنابل للغة العربية",
+    "telephone": "+23591404166",
+    "email": "sanabilarabe2022@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Abéché", "addressCountry": "TD" }
+  }
+  </script>
+</head>
+<body>
+  <div class="page-bg">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" aria-label="الصفحة الرئيسية">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <img src="assets/images/hero/hero-main.jpg" alt="" class="hero-bg-img" aria-hidden="true">
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="hero-content animate-scale-in">
+          <h1 class="hero-title">جمعية سنابل للغة العربية</h1>
+          <p class="hero-subtitle">نبني جسور المستقبل بلغة الضاد</p>
+
+          <div class="hero-actions">
+            <a href="#about" class="btn btn-primary">
+              <i data-lucide="info" aria-hidden="true"></i>
+              تعرف علينا
+            </a>
+            <a href="join.html" class="btn btn-secondary">
+              <i data-lucide="user-plus" aria-hidden="true"></i>
+              انضم إلينا
+            </a>
+          </div>
+
+          <div class="hero-card animate-slide-up">
+            <div class="hero-card-title">مرحباً بكم في موقعنا</div>
+            <div class="hero-card-text">
+              جمعية ثقافية تعليمية تأسست عام 2013 في مدينة أبيشي بتشاد، تعمل على نشر اللغة العربية وتعزيز الهوية الثقافية في المنطقة من خلال مجموعة متنوعة من الأنشطة والفعاليات.
+            </div>
+
+            <div class="stat-cards">
+              <div class="stat-card animate-on-scroll">
+                <div class="stat-card-icon" aria-hidden="true"><i data-lucide="calendar"></i></div>
+                <div class="stat-card-value" data-counter="13" data-prefix="+" data-suffix="">+13</div>
+                <div class="stat-card-label">فعالية منجزة</div>
+              </div>
+              <div class="stat-card animate-on-scroll">
+                <div class="stat-card-icon" aria-hidden="true"><i data-lucide="users"></i></div>
+                <div class="stat-card-value" data-counter="150" data-prefix="+" data-suffix="">+150</div>
+                <div class="stat-card-label">عضو نشط</div>
+              </div>
+              <div class="stat-card animate-on-scroll">
+                <div class="stat-card-icon" aria-hidden="true"><i data-lucide="activity"></i></div>
+                <div class="stat-card-value" data-counter="50" data-prefix="+" data-suffix="">+50</div>
+                <div class="stat-card-label">نشاط متنوع</div>
+              </div>
+              <div class="stat-card animate-on-scroll">
+                <div class="stat-card-icon" aria-hidden="true"><i data-lucide="graduation-cap"></i></div>
+                <div class="stat-card-value" data-counter="12" data-prefix="+" data-suffix="">+12</div>
+                <div class="stat-card-label">دورة تكوينية</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section" aria-label="من نحن">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <i data-lucide="heart" class="section-header-icon" aria-hidden="true"></i>
+          <h2 class="section-title">من نحن</h2>
+          <div class="section-decorator" aria-hidden="true"></div>
+        </div>
+
+        <div style="max-width:800px;margin:0 auto;text-align:center">
+          <p style="font-size:1.2rem;line-height:1.8;color:var(--text-secondary);margin-bottom:var(--space-6)">
+            جمعية سنابل للغة العربية جمعية ثقافية تعليمية تأسست عام 2013 في مدينة أبيشي بتشاد، تعمل على نشر اللغة العربية وتعزيز الهوية الثقافية في المنطقة من خلال مجموعة متنوعة من الأنشطة التعليمية والثقافية والرياضية.
+          </p>
+
+          <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;margin-bottom:var(--space-8)">
+            <a href="about.html" class="btn btn-primary">
+              <i data-lucide="book-open" aria-hidden="true"></i>
+              اقرأ المزيد
+            </a>
+            <a href="bureau.html" class="btn btn-secondary">
+              <i data-lucide="shield" aria-hidden="true"></i>
+              المكتب التنفيذي
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section class="section-alt" aria-label="آخر الأخبار">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <i data-lucide="newspaper" class="section-header-icon" aria-hidden="true"></i>
+          <h2 class="section-title">آخر الأخبار</h2>
+          <div class="section-decorator" aria-hidden="true"></div>
+        </div>
+        <div class="grid-3" id="articles-grid" aria-label="آخر المقالات">
+          <!-- Chargé par JavaScript -->
+        </div>
+        <div style="text-align:center;margin-top:var(--space-8)">
+          <a href="articles.html" class="btn btn-secondary">
+            <i data-lucide="layout-grid" aria-hidden="true"></i>
+            جميع المقالات
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="section" aria-label="الفعاليات القادمة">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <i data-lucide="calendar-days" class="section-header-icon" aria-hidden="true"></i>
+          <h2 class="section-title">الفعاليات القادمة</h2>
+          <div class="section-decorator" aria-hidden="true"></div>
+        </div>
+        <div class="grid-2" id="events-grid" aria-label="الفعاليات القادمة">
+          <!-- Chargé par JavaScript -->
+        </div>
+        <div style="text-align:center;margin-top:var(--space-8)">
+          <a href="events.html" class="btn btn-secondary">
+            <i data-lucide="calendar" aria-hidden="true"></i>
+            جميع الفعاليات
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bureau Section -->
+    <section class="section-alt" aria-label="قيادة الجمعية">
+      <div class="container">
+        <div class="section-header animate-on-scroll">
+          <i data-lucide="shield" class="section-header-icon" aria-hidden="true"></i>
+          <h2 class="section-title">قيادة الجمعية</h2>
+          <div class="section-decorator" aria-hidden="true"></div>
+        </div>
+        <div class="grid-4" id="bureau-grid" aria-label="أعضاء المكتب التنفيذي">
+          <!-- Chargé par JavaScript -->
+        </div>
+        <div style="text-align:center;margin-top:var(--space-8)">
+          <a href="bureau.html" class="btn btn-secondary">
+            <i data-lucide="users" aria-hidden="true"></i>
+            جميع الأعضاء
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/components/navbar.js"></script>
+  <script src="assets/js/components/footer.js"></script>
+  <script src="assets/js/pages/home.js"></script>
+</body>
+</html>
