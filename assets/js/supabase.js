@@ -1,14 +1,14 @@
 // === SUPABASE CONFIGURATION ===
-let supabase = null;
+let supabaseClient = null;
 
 function initSupabase() {
   if (typeof window !== 'undefined' && window.supabase && window.SUPABASE_CONFIG) {
-    supabase = window.supabase.createClient(
+    supabaseClient = window.supabase.createClient(
       window.SUPABASE_CONFIG.url,
       window.SUPABASE_CONFIG.anonKey
     );
   }
-  return supabase;
+  return supabaseClient;
 }
 
 // === SUPABASE DATABASE OPERATIONS ===
@@ -20,7 +20,8 @@ const SupabaseDB = {
 
   // Authentication methods
   async signIn(email, password) {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const client = initSupabase();
+    const { data, error } = await client.auth.signInWithPassword({
       email,
       password
     });
@@ -29,12 +30,14 @@ const SupabaseDB = {
   },
 
   async signOut() {
-    const { error } = await supabase.auth.signOut();
+    const client = initSupabase();
+    const { error } = await client.auth.signOut();
     if (error) throw error;
   },
 
   async getCurrentUser() {
-    const { data: { user } } = await supabase.auth.getUser();
+    const client = initSupabase();
+    const { data: { user } } = await client.auth.getUser();
     return user;
   },
 
@@ -48,7 +51,8 @@ const SupabaseDB = {
 
   // Generic CRUD operations
   async get(table, filters = {}) {
-    let query = supabase.from(table).select('*');
+    const client = initSupabase();
+    let query = client.from(table).select('*');
 
     // Apply filters
     Object.entries(filters).forEach(([key, value]) => {
@@ -63,7 +67,8 @@ const SupabaseDB = {
   },
 
   async getById(table, id) {
-    const { data, error } = await supabase
+    const client = initSupabase();
+    const { data, error } = await client
       .from(table)
       .select('*')
       .eq('id', id)
@@ -74,7 +79,8 @@ const SupabaseDB = {
   },
 
   async create(table, data) {
-    const { data: result, error } = await supabase
+    const client = initSupabase();
+    const { data: result, error } = await client
       .from(table)
       .insert(data)
       .select()
@@ -85,7 +91,8 @@ const SupabaseDB = {
   },
 
   async update(table, id, data) {
-    const { data: result, error } = await supabase
+    const client = initSupabase();
+    const { data: result, error } = await client
       .from(table)
       .update(data)
       .eq('id', id)
@@ -97,7 +104,8 @@ const SupabaseDB = {
   },
 
   async delete(table, id) {
-    const { error } = await supabase
+    const client = initSupabase();
+    const { error } = await client
       .from(table)
       .delete()
       .eq('id', id);
@@ -107,7 +115,8 @@ const SupabaseDB = {
 
   // Storage operations
   async uploadImage(file, path) {
-    const { data, error } = await supabase.storage
+    const client = initSupabase();
+    const { data, error } = await client.storage
       .from('images')
       .upload(path, file);
 
@@ -116,7 +125,8 @@ const SupabaseDB = {
   },
 
   async deleteImage(path) {
-    const { error } = await supabase.storage
+    const client = initSupabase();
+    const { error } = await client.storage
       .from('images')
       .remove([path]);
 
@@ -124,7 +134,8 @@ const SupabaseDB = {
   },
 
   getImageUrl(path) {
-    const { data } = supabase.storage
+    const client = initSupabase();
+    const { data } = client.storage
       .from('images')
       .getPublicUrl(path);
 

@@ -15,10 +15,14 @@ const App = {
 
   async loadSettings() {
     try {
-      const data = await DataStore.get('settings');
-      this.settings = data;
+      if (typeof SettingsDB !== 'undefined') {
+        this.settings = await SettingsDB.get();
+      } else {
+        const data = await DataStore.get('settings');
+        this.settings = data;
+      }
     } catch (e) {
-      console.warn('Could not load settings');
+      console.warn('Could not load settings', e);
     }
   },
 
