@@ -42,11 +42,11 @@
     <script src="../assets/js/config.js"></script>
 
     <script>
-        let supabase = null;
+        let supabaseClient = null;
 
         function initSupabase() {
             if (window.SUPABASE_CONFIG) {
-                supabase = window.supabase.createClient(
+                supabaseClient = window.supabase.createClient(
                     window.SUPABASE_CONFIG.url,
                     window.SUPABASE_CONFIG.anonKey
                 );
@@ -73,7 +73,7 @@
                 const item = transformFn ? transformFn(dataArray[i]) : dataArray[i];
 
                 try {
-                    const { error } = await supabase
+                    const { error } = await supabaseClient
                         .from(tableName)
                         .upsert(item);
 
