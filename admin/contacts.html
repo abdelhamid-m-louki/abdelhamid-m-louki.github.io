@@ -24,6 +24,10 @@
     .msg-detail-body { font-size:14px; color:var(--text-secondary); line-height:1.9; white-space:pre-wrap; }
     .msg-meta-item { display:flex; align-items:center; gap:var(--space-2); font-size:13px; color:var(--text-muted); }
   </style>
+  <!-- Supabase CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/supabase.js"></script>
 </head>
 <body>
   <div class="page-bg">
@@ -145,7 +149,7 @@
   <div class="toast-container" id="toastContainer"></div>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script src="../assets/js/app.js"></script>
-  <script src="../assets/js/data.js"></script>
+  
   <script src="../assets/js/auth.js"></script>
   <script src="../assets/js/components/toast.js"></script>
   <script>

@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS settings (
 );
 
 CREATE TABLE IF NOT EXISTS admins (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
   name TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL,
   role TEXT DEFAULT 'editor' CHECK (role IN ('super_admin', 'moderator', 'editor')),
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS admins (
 );
 
 CREATE TABLE IF NOT EXISTS categories (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
   name_ar TEXT NOT NULL,
   name_fr TEXT,
   slug TEXT UNIQUE,
@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS categories (
   description_fr TEXT,
   color TEXT DEFAULT '#1b4e5c',
   icon TEXT,
+  count INTEGER DEFAULT 0,
   sort_order INTEGER DEFAULT 0,
   active BOOLEAN DEFAULT true,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -42,7 +43,8 @@ CREATE TABLE IF NOT EXISTS categories (
 );
 
 CREATE TABLE IF NOT EXISTS articles (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  id TEXT PRIMARY KEY,
+  type TEXT,
   title_ar TEXT NOT NULL,
   title_fr TEXT,
   excerpt_ar TEXT,
@@ -51,19 +53,25 @@ CREATE TABLE IF NOT EXISTS articles (
   content_fr TEXT,
   body_ar TEXT,
   body_fr TEXT,
-  category_id UUID REFERENCES categories(id),
+  category_id TEXT REFERENCES categories(id),
   status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived')),
   image TEXT,
+  image_alt_ar TEXT,
+  image_alt_fr TEXT,
+  gallery JSONB DEFAULT '[]'::jsonb,
   tags TEXT[] DEFAULT '{}',
+  author TEXT,
   date_published TIMESTAMP WITH TIME ZONE,
   date_created TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   date_updated TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   views INTEGER DEFAULT 0,
-  author_id UUID REFERENCES admins(id)
+  related_ids TEXT[] DEFAULT '{}',
+  author_id TEXT REFERENCES admins(id)
 );
 
 CREATE TABLE IF NOT EXISTS events (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  id TEXT PRIMARY KEY,
+  type TEXT,
   title_ar TEXT NOT NULL,
   title_fr TEXT,
   excerpt_ar TEXT,
@@ -72,25 +80,30 @@ CREATE TABLE IF NOT EXISTS events (
   content_fr TEXT,
   body_ar TEXT,
   body_fr TEXT,
-  category_id UUID REFERENCES categories(id),
-  status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived')),
+  category_id TEXT REFERENCES categories(id),
+  status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived', 'upcoming', 'past')),
   image TEXT,
+  image_alt_ar TEXT,
+  image_alt_fr TEXT,
   tags TEXT[] DEFAULT '{}',
+  author TEXT,
   date_start TIMESTAMP WITH TIME ZONE,
   date_end TIMESTAMP WITH TIME ZONE,
   location_ar TEXT,
   location_fr TEXT,
+  registered INTEGER,
   capacity INTEGER,
   registration_link TEXT,
   date_published TIMESTAMP WITH TIME ZONE,
   date_created TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   date_updated TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   views INTEGER DEFAULT 0,
-  author_id UUID REFERENCES admins(id)
+  author_id TEXT REFERENCES admins(id)
 );
 
 CREATE TABLE IF NOT EXISTS courses (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  id TEXT PRIMARY KEY,
+  type TEXT,
   title_ar TEXT NOT NULL,
   title_fr TEXT,
   excerpt_ar TEXT,
@@ -99,23 +112,32 @@ CREATE TABLE IF NOT EXISTS courses (
   content_fr TEXT,
   body_ar TEXT,
   body_fr TEXT,
-  category_id UUID REFERENCES categories(id),
-  status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived')),
+  category_id TEXT REFERENCES categories(id),
+  status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived', 'active', 'completed')),
   image TEXT,
+  image_alt_ar TEXT,
+  image_alt_fr TEXT,
   tags TEXT[] DEFAULT '{}',
+  author TEXT,
   duration TEXT,
+  duration_ar TEXT,
+  duration_fr TEXT,
   level TEXT,
+  level_ar TEXT,
+  level_fr TEXT,
   instructor TEXT,
   price TEXT,
+  participants INTEGER,
   date_published TIMESTAMP WITH TIME ZONE,
   date_created TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   date_updated TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   views INTEGER DEFAULT 0,
-  author_id UUID REFERENCES admins(id)
+  author_id TEXT REFERENCES admins(id)
 );
 
 CREATE TABLE IF NOT EXISTS sports (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  id TEXT PRIMARY KEY,
+  type TEXT,
   title_ar TEXT NOT NULL,
   title_fr TEXT,
   excerpt_ar TEXT,
@@ -124,17 +146,26 @@ CREATE TABLE IF NOT EXISTS sports (
   content_fr TEXT,
   body_ar TEXT,
   body_fr TEXT,
-  category_id UUID REFERENCES categories(id),
+  category_id TEXT REFERENCES categories(id),
   status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived')),
   image TEXT,
+  image_alt_ar TEXT,
+  image_alt_fr TEXT,
   tags TEXT[] DEFAULT '{}',
+  author TEXT,
   sport_type TEXT,
+  sport_type_ar TEXT,
+  sport_type_fr TEXT,
   age_group TEXT,
+  location_ar TEXT,
+  location_fr TEXT,
+  schedule_ar TEXT,
+  schedule_fr TEXT,
   date_published TIMESTAMP WITH TIME ZONE,
   date_created TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   date_updated TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   views INTEGER DEFAULT 0,
-  author_id UUID REFERENCES admins(id)
+  author_id TEXT REFERENCES admins(id)
 );
 
 CREATE TABLE IF NOT EXISTS contacts (
@@ -163,8 +194,67 @@ CREATE TABLE IF NOT EXISTS memberships (
   reference TEXT UNIQUE,
   date_created TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   processed_at TIMESTAMP WITH TIME ZONE,
-  processed_by UUID REFERENCES admins(id)
+  processed_by TEXT REFERENCES admins(id)
 );
+
+-- Ensure columns exist for migration if the schema was partial
+ALTER TABLE categories ADD COLUMN IF NOT EXISTS count INTEGER DEFAULT 0;
+ALTER TABLE articles ADD COLUMN IF NOT EXISTS image_alt_ar TEXT;
+ALTER TABLE articles ADD COLUMN IF NOT EXISTS image_alt_fr TEXT;
+ALTER TABLE articles ADD COLUMN IF NOT EXISTS author TEXT;
+ALTER TABLE articles ADD COLUMN IF NOT EXISTS gallery JSONB DEFAULT '[]'::jsonb;
+ALTER TABLE articles ADD COLUMN IF NOT EXISTS type TEXT;
+ALTER TABLE articles ADD COLUMN IF NOT EXISTS related_ids TEXT[] DEFAULT '{}';
+ALTER TABLE events ADD COLUMN IF NOT EXISTS image_alt_ar TEXT;
+ALTER TABLE events ADD COLUMN IF NOT EXISTS image_alt_fr TEXT;
+ALTER TABLE events ADD COLUMN IF NOT EXISTS author TEXT;
+ALTER TABLE events ADD COLUMN IF NOT EXISTS registered INTEGER;
+ALTER TABLE events ADD COLUMN IF NOT EXISTS type TEXT;
+ALTER TABLE courses ADD COLUMN IF NOT EXISTS image_alt_ar TEXT;
+ALTER TABLE courses ADD COLUMN IF NOT EXISTS image_alt_fr TEXT;
+ALTER TABLE courses ADD COLUMN IF NOT EXISTS author TEXT;
+ALTER TABLE courses ADD COLUMN IF NOT EXISTS duration_ar TEXT;
+ALTER TABLE courses ADD COLUMN IF NOT EXISTS duration_fr TEXT;
+ALTER TABLE courses ADD COLUMN IF NOT EXISTS level_ar TEXT;
+ALTER TABLE courses ADD COLUMN IF NOT EXISTS level_fr TEXT;
+ALTER TABLE courses ADD COLUMN IF NOT EXISTS participants INTEGER;
+ALTER TABLE sports ADD COLUMN IF NOT EXISTS image_alt_ar TEXT;
+ALTER TABLE sports ADD COLUMN IF NOT EXISTS image_alt_fr TEXT;
+ALTER TABLE sports ADD COLUMN IF NOT EXISTS author TEXT;
+ALTER TABLE sports ADD COLUMN IF NOT EXISTS location_ar TEXT;
+ALTER TABLE sports ADD COLUMN IF NOT EXISTS location_fr TEXT;
+ALTER TABLE sports ADD COLUMN IF NOT EXISTS schedule_ar TEXT;
+ALTER TABLE sports ADD COLUMN IF NOT EXISTS schedule_fr TEXT;
+ALTER TABLE sports ADD COLUMN IF NOT EXISTS sport_type_ar TEXT;
+ALTER TABLE sports ADD COLUMN IF NOT EXISTS sport_type_fr TEXT;
+ALTER TABLE sports ADD COLUMN IF NOT EXISTS type TEXT;
+
+-- Ensure table IDs and foreign keys use TEXT if schema was previously created with UUIDs
+ALTER TABLE articles DROP CONSTRAINT IF EXISTS articles_category_id_fkey;
+ALTER TABLE articles DROP CONSTRAINT IF EXISTS articles_author_id_fkey;
+ALTER TABLE events DROP CONSTRAINT IF EXISTS events_category_id_fkey;
+ALTER TABLE events DROP CONSTRAINT IF EXISTS events_author_id_fkey;
+ALTER TABLE courses DROP CONSTRAINT IF EXISTS courses_category_id_fkey;
+ALTER TABLE courses DROP CONSTRAINT IF EXISTS courses_author_id_fkey;
+ALTER TABLE sports DROP CONSTRAINT IF EXISTS sports_category_id_fkey;
+ALTER TABLE sports DROP CONSTRAINT IF EXISTS sports_author_id_fkey;
+ALTER TABLE memberships DROP CONSTRAINT IF EXISTS memberships_processed_by_fkey;
+
+ALTER TABLE admins ALTER COLUMN id TYPE TEXT USING id::text;
+ALTER TABLE categories ALTER COLUMN id TYPE TEXT USING id::text;
+ALTER TABLE articles ALTER COLUMN id TYPE TEXT USING id::text;
+ALTER TABLE articles ALTER COLUMN category_id TYPE TEXT USING category_id::text;
+ALTER TABLE articles ALTER COLUMN author_id TYPE TEXT USING author_id::text;
+ALTER TABLE events ALTER COLUMN id TYPE TEXT USING id::text;
+ALTER TABLE events ALTER COLUMN category_id TYPE TEXT USING category_id::text;
+ALTER TABLE events ALTER COLUMN author_id TYPE TEXT USING author_id::text;
+ALTER TABLE courses ALTER COLUMN id TYPE TEXT USING id::text;
+ALTER TABLE courses ALTER COLUMN category_id TYPE TEXT USING category_id::text;
+ALTER TABLE courses ALTER COLUMN author_id TYPE TEXT USING author_id::text;
+ALTER TABLE sports ALTER COLUMN id TYPE TEXT USING id::text;
+ALTER TABLE sports ALTER COLUMN category_id TYPE TEXT USING category_id::text;
+ALTER TABLE sports ALTER COLUMN author_id TYPE TEXT USING author_id::text;
+ALTER TABLE memberships ALTER COLUMN processed_by TYPE TEXT USING processed_by::text;
 
 -- Create storage bucket for images
 INSERT INTO storage.buckets (id, name, public)
@@ -195,6 +285,30 @@ ALTER TABLE courses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE sports ENABLE ROW LEVEL SECURITY;
 ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE memberships ENABLE ROW LEVEL SECURITY;
+
+-- Drop existing policies if they exist (for re-running the schema)
+DROP POLICY IF EXISTS "Allow authenticated users to read settings" ON settings;
+DROP POLICY IF EXISTS "Allow authenticated users to update settings" ON settings;
+DROP POLICY IF EXISTS "Allow authenticated users to manage admins" ON admins;
+DROP POLICY IF EXISTS "Allow authenticated users to manage categories" ON categories;
+DROP POLICY IF EXISTS "Allow authenticated users to manage articles" ON articles;
+DROP POLICY IF EXISTS "Allow authenticated users to manage events" ON events;
+DROP POLICY IF EXISTS "Allow authenticated users to manage courses" ON courses;
+DROP POLICY IF EXISTS "Allow authenticated users to manage sports" ON sports;
+DROP POLICY IF EXISTS "Allow authenticated users to manage contacts" ON contacts;
+DROP POLICY IF EXISTS "Allow authenticated users to manage memberships" ON memberships;
+DROP POLICY IF EXISTS "Allow public to read published articles" ON articles;
+DROP POLICY IF EXISTS "Allow public to read published events" ON events;
+DROP POLICY IF EXISTS "Allow public to read published courses" ON courses;
+DROP POLICY IF EXISTS "Allow public to read published sports" ON sports;
+DROP POLICY IF EXISTS "Allow public to read categories" ON categories;
+DROP POLICY IF EXISTS "Allow public to read settings" ON settings;
+DROP POLICY IF EXISTS "Allow public to create contacts" ON contacts;
+DROP POLICY IF EXISTS "Allow public to create memberships" ON memberships;
+DROP POLICY IF EXISTS "Allow authenticated users to upload images" ON storage.objects;
+DROP POLICY IF EXISTS "Allow authenticated users to update images" ON storage.objects;
+DROP POLICY IF EXISTS "Allow authenticated users to delete images" ON storage.objects;
+DROP POLICY IF EXISTS "Allow public to view images" ON storage.objects;
 
 -- Create policies for authenticated users (admins)
 CREATE POLICY "Allow authenticated users to read settings" ON settings

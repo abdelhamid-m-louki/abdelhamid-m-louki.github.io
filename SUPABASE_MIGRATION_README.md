@@ -28,25 +28,40 @@ Ce guide explique comment migrer votre site web de fichiers JSON locaux vers Sup
    };
    ```
 
-## 🔄 Migration des données
+## 🔄 Migration des données - Version Corrigée
 
-### Option 1: Outil de migration web (Recommandé)
+### Problèmes résolus :
+- ✅ **Colonnes manquantes** : Ajouté `count` à categories, `author` et `image_alt_*` aux autres tables
+- ✅ **RLS activé** : Scripts séparés pour gérer la sécurité pendant la migration
+- ✅ **Politiques existantes** : Gestion des politiques dupliquées
 
-1. Ouvrez le fichier `migrate-tool.html` dans votre navigateur
-2. Assurez-vous que `config.js` est configuré avec vos clés Supabase
-3. Cliquez sur "Start Migration"
-4. Suivez la progression dans l'interface
+### Étapes de migration :
 
-### Option 2: Script console (si collage bloqué)
+1. **Créer le schéma de base de données** :
+   ```sql
+   -- Dans Supabase SQL Editor, exécutez supabase-schema.sql
+   -- (Maintenant gère les politiques existantes automatiquement)
+   ```
 
-Si Chrome bloque le collage dans la console :
+2. **Préparer la migration** :
+   ```sql
+   -- Exécutez migration-prep.sql pour désactiver RLS temporairement
+   ```
 
-1. Ouvrez `migration-console.js` et copiez son contenu
-2. Dans la console du navigateur, tapez `allow pasting` et appuyez sur Entrée
-3. Collez le script et modifiez les clés Supabase en haut du fichier
-4. Exécutez `startMigration()` à la fin
+3. **Migrer les données** :
+   - Ouvrez `http://localhost:8000/migrate-tool.html`
+   - Cliquez sur "Start Migration"
+   - Attendez la fin de la migration
 
-### Option 3: Migration manuelle par parties
+4. **Finaliser la migration** :
+   ```sql
+   -- Après migration, exécutez migration-post.sql pour réactiver RLS
+   ```
+
+### Fichiers SQL créés :
+- `supabase-schema.sql` : Schéma principal (avec gestion des politiques existantes)
+- `migration-prep.sql` : Préparation (désactive RLS)
+- `migration-post.sql` : Finalisation (réactive RLS avec politiques publiques)
 
 Si les options ci-dessus ne fonctionnent pas :
 

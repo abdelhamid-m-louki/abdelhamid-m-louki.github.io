@@ -27,6 +27,10 @@
     .remember-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-5); }
     .error-alert { background:rgba(231,76,60,0.10); border:1px solid rgba(231,76,60,0.30); border-radius:var(--radius-sm); padding:var(--space-3) var(--space-4); font-size:14px; color:var(--danger); display:flex; align-items:center; gap:var(--space-2); margin-bottom:var(--space-4); }
   </style>
+  <!-- Supabase CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/supabase.js"></script>
 </head>
 <body>
   <div class="orb orb-1" aria-hidden="true" style="z-index:0"></div>
@@ -89,7 +93,7 @@
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script src="../assets/js/app.js"></script>
-  <script src="../assets/js/data.js"></script>
+  
   <script src="../assets/js/auth.js"></script>
   <script src="../assets/js/components/toast.js"></script>
   <script>
