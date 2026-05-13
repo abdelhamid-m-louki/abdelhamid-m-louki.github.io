@@ -211,7 +211,9 @@ function renderFooter(options = {}) {
       </div>
 
       <div class="footer-bottom">
-        <p>© ${new Date().getFullYear()} جمعية سنابل للغة العربية — أبيشي، تشاد. جميع الحقوق محفوظة.</p>
+        <p>
+        <a href="${basePath}admin/dashboard.html" class="footer-admin-link-toClear" aria-hidden="true">© ${new Date().getFullYear()} جمعية سنابل للغة العربية — أبيشي، تشاد. جميع الحقوق محفوظة.</a>
+        </p>
       </div>
     </footer>
   `;
