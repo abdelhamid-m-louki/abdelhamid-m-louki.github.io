@@ -556,7 +556,11 @@
     btn.disabled = true;
     btn.innerHTML = `<i data-lucide="loader-2" style="width:13px;height:13px;animation:spin 1s linear infinite"></i> ${label}`;
     lucide.createIcons();
-    try { await fn(); } catch { Toast.error('حدث خطأ في الذكاء الاصطناعي'); }
+    try { await fn(); } catch (err) {
+      if (err?.message === 'AI_UNAVAILABLE') Toast.error('لم يتم تكوين مفتاح الذكاء الاصطناعي');
+      else Toast.error('حدث خطأ في الذكاء الاصطناعي');
+      console.error(err);
+    }
     btn.disabled = false; btn.innerHTML = orig; lucide.createIcons();
   }
 
@@ -824,6 +828,7 @@
   if (!isEdit) document.getElementById('datePublished').value = new Date().toISOString().slice(0, 10);
 
   document.addEventListener('DOMContentLoaded', async () => {
+    await AI.init();
     await loadCategories();
     await loadItem();
     lucide.createIcons();
