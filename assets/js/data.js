@@ -6,7 +6,7 @@ const DataStore = {
 
   async get(resource) {
     if (this._cache[resource]) return this._cache[resource];
-    const res = await fetch(`data/${resource}.json?v=${Date.now()}`);
+    const res = await fetch(`/data/${resource}.json?v=${Date.now()}`);
     if (!res.ok) throw new Error(`DataStore: failed to fetch ${resource}.json`);
     const data = await res.json();
     this._cache[resource] = data;
