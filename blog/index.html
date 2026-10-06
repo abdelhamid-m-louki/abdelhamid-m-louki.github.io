@@ -6,14 +6,17 @@
 
   <!-- SEO dynamique — complété par blog.js -->
   <title>Blog — Portfolio Éditorial</title>
-  <meta name="description" content="Toutes mes publications : design, code et culture numérique. Blog éditorial indépendant.">
+  <meta name="description" content="Toutes mes publications : sécurité informatique, développement web et culture numérique. Blog éditorial indépendant.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://amlouki.me/blog/index.html">
 
   <meta property="og:type"      content="website">
   <meta property="og:title"     content="Blog — Portfolio Éditorial">
-  <meta property="og:description" content="Toutes mes publications : design, code et culture numérique.">
+  <meta property="og:description" content="Toutes mes publications : sécurité informatique, développement web et culture numérique.">
   <meta property="og:url"       content="https://amlouki.me/blog/index.html">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +35,7 @@
   <link rel="stylesheet" href="/styles/pages/blog.css">
 
   <script src="/config.js"></script>
+  <script src="/scripts/site-parametres.js"></script>
 
   <script type="application/ld+json">
   {
@@ -145,7 +149,7 @@
               Le Blog
             </h1>
             <p class="chapeau" style="max-width:52ch;margin-top:var(--espace-4);">
-              Réflexions sur le design, le code et la culture numérique.
+              Réflexions sur la sécurité informatique, le développement web et la culture numérique.
               <span id="compteur-resultats" aria-live="polite" aria-atomic="true" style="font-size:var(--taille-base);font-style:normal;color:var(--texte-tertiaire);margin-left:var(--espace-2);"></span>
             </p>
           </div>
@@ -254,14 +258,14 @@
             <div class="widget-sidebar">
               <div class="widget-sidebar-titre">L'auteur</div>
               <div class="auteur-widget">
-                <div class="auteur-widget-avatar" aria-hidden="true">PN</div>
+                <div class="auteur-widget-avatar" aria-hidden="true">AM</div>
                 <div>
                   <div class="auteur-widget-nom">Abdel-hamid M. LOUKI</div>
-                  <div class="auteur-widget-role">Développeur &amp; auteur éditorial</div>
+                  <div class="auteur-widget-role" data-contenu="auteur-titre">Sécurité informatique &amp; développement web</div>
                 </div>
               </div>
-              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin-top:var(--espace-4);line-height:var(--ligne-lache);">
-                J'écris sur le design, le code et la culture numérique depuis 2016.
+              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin-top:var(--espace-4);line-height:var(--ligne-lache);" data-contenu="auteur-bio">
+                Étudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique.
               </p>
               <a href="/a-propos.html" class="btn btn-contour btn-sm btn-pleine-largeur" style="margin-top:var(--espace-4);">
                 En savoir plus
@@ -274,28 +278,6 @@
               <div id="tags-populaires" class="tags-nuage" aria-label="Tags populaires">
                 <!-- Chargé dynamiquement -->
               </div>
-            </div>
-
-            <!-- Archives -->
-            <div class="widget-sidebar">
-              <div class="widget-sidebar-titre">Newsletter</div>
-              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin-bottom:var(--espace-4);">
-                Recevez mes derniers articles directement dans votre boîte mail.
-              </p>
-              <form id="form-newsletter" novalidate aria-label="Inscription à la newsletter">
-                <div style="display:flex;flex-direction:column;gap:var(--espace-3);">
-                  <input
-                    type="email"
-                    class="champ champ-sm"
-                    placeholder="votre@email.fr"
-                    aria-label="Votre adresse email pour la newsletter"
-                    required
-                  >
-                  <button type="submit" class="btn btn-accent btn-sm btn-pleine-largeur">
-                    S'abonner
-                  </button>
-                </div>
-              </form>
             </div>
 
           </aside>
@@ -316,7 +298,9 @@
         <p class="pied-copyright">
           <a href="/" style="color:inherit;">Portfolio Éditorial</a>
           &mdash;
-          <a href="/sitemap.xml" style="color:inherit;">Plan du site</a>
+          <a href="/mentions-legales.html" style="color:inherit;">Mentions légales</a> &middot;
+          <a href="/confidentialite.html"  style="color:inherit;">Confidentialité</a> &middot;
+          <a href="/sitemap.xml"           style="color:inherit;">Plan du site</a>
         </p>
       </div>
     </div>
@@ -357,20 +341,6 @@
         `).join('');
       }
     } catch (_) {}
-
-    // Newsletter (simulée)
-    document.getElementById('form-newsletter')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const input = e.target.querySelector('input[type="email"]');
-      if (input?.value) {
-        e.target.innerHTML = `
-          <p style="font-family:var(--police-mono);font-size:var(--taille-xs);
-                    color:var(--couleur-succes);letter-spacing:var(--espacement-large);">
-            Inscription confirmée. Merci !
-          </p>
-        `;
-      }
-    });
   </script>
 
 </body>

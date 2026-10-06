@@ -167,8 +167,14 @@ class MoteurSEO {
   _definirTwitterCard(cfg) {
     const type = cfg.image ? 'summary_large_image' : 'summary';
     this._meta('name', 'twitter:card',    type);
-    this._meta('name', 'twitter:site',    SITE.twitter || '@' + SITE.auteur.replace(' ', ''));
-    this._meta('name', 'twitter:creator', SITE.twitter || '@' + SITE.auteur.replace(' ', ''));
+
+    // Handle Twitter : uniquement si un handle valide est configuré.
+    // Jamais de pseudo inventé à partir du nom d'auteur.
+    const handle = SITE.twitter ? SITE.twitter.replace(/^@/, '') : '';
+    if (/^[A-Za-z0-9_]{1,15}$/.test(handle)) {
+      this._meta('name', 'twitter:site',    '@' + handle);
+      this._meta('name', 'twitter:creator', '@' + handle);
+    }
 
     if (cfg.image) {
       this._meta('name', 'twitter:image',     cfg.image);
@@ -312,7 +318,7 @@ class MoteurSEO {
         url:     SITE.url,
         logo: {
           '@type': 'ImageObject',
-          url:     `${SITE.url}/assets/logo.png`,
+          url:     (CFG.AUTEUR_PHOTO ? SITE.url.replace(/\/+$/, '') + CFG.AUTEUR_PHOTO : `${SITE.url}/assets/og-defaut.jpg`),
         },
       },
       keywords: cfg.tags?.join(', '),

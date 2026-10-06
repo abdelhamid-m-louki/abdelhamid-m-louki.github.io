@@ -25,8 +25,6 @@
   <link rel="stylesheet" href="/styles/components/formulaires.css">
   <link rel="stylesheet" href="/styles/components/responsive.css">
   <link rel="stylesheet" href="/styles/components/utilitaires.css">
-  <link rel="stylesheet" href="/styles/components/responsive.css">
-  <link rel="stylesheet" href="/styles/components/utilitaires.css">
   <link rel="stylesheet" href="/styles/components/cartes.css">
 
   <style>
@@ -119,6 +117,11 @@
   </style>
 
   <script src="/config.js"></script>
+  <script src="/scripts/site-parametres.js"></script>
+  
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
   
   <script type="application/ld+json">
   {
@@ -263,7 +266,12 @@
     <div class="conteneur">
       <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
         <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Abdel-hamid M. LOUKI. Tous droits réservés.</p>
-        <p class="pied-copyright"><a href="/" style="color:inherit;">Portfolio Éditorial</a></p>
+        <p class="pied-copyright">
+          <a href="/mentions-legales.html" style="color:inherit;">Mentions légales</a> &middot;
+          <a href="/confidentialite.html"  style="color:inherit;">Confidentialité</a> &middot;
+          <a href="/sitemap.xml"           style="color:inherit;">Plan du site</a> &middot;
+          <a href="/" style="color:inherit;">Accueil</a>
+        </p>
       </div>
     </div>
   </footer>
@@ -356,10 +364,7 @@
                    role="listitem"
                    itemscope itemtype="https://schema.org/CreativeWork"
                    data-animer data-delai="${Math.min(index * 80, 400)}">
-            <a href="/projets/${echapper(slug)}.html"
-               class="carte-projet-lien-complet"
-               itemprop="url"
-               aria-label="${echapper(projet.titre)}">
+            <div class="carte-projet-lien-complet">
               <div class="carte-projet-image">
                 ${projet.image
                   ? `<img src="${echapper(projet.image)}"
@@ -385,12 +390,12 @@
                     ).join('')}
                   </div>
                   <div style="display:flex;align-items:center;gap:var(--espace-3);">
-                    ${projet.url_demo ? `<a href="${echapper(projet.url_demo)}" target="_blank" rel="noopener noreferrer" class="btn btn-accent btn-xs" onclick="event.stopPropagation()" aria-label="Démo de ${echapper(projet.titre)}">Démo</a>` : ''}
-                    ${projet.url_code ? `<a href="${echapper(projet.url_code)}" target="_blank" rel="noopener noreferrer" class="btn btn-contour btn-xs" onclick="event.stopPropagation()" aria-label="Code de ${echapper(projet.titre)}">Code</a>` : ''}
+                    ${projet.url_demo ? `<a href="${echapper(projet.url_demo)}" target="_blank" rel="noopener noreferrer" class="btn btn-accent btn-xs" aria-label="Démo de ${echapper(projet.titre)}">Démo</a>` : ''}
+                    ${projet.url_code ? `<a href="${echapper(projet.url_code)}" target="_blank" rel="noopener noreferrer" class="btn btn-contour btn-xs" aria-label="Code de ${echapper(projet.titre)}">Code</a>` : ''}
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           </article>`;
       }).join('');
 

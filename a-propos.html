@@ -26,11 +26,14 @@
   <link rel="stylesheet" href="/styles/components/formulaires.css">
   <link rel="stylesheet" href="/styles/components/responsive.css">
   <link rel="stylesheet" href="/styles/components/utilitaires.css">
-  <link rel="stylesheet" href="/styles/components/responsive.css">
-  <link rel="stylesheet" href="/styles/components/utilitaires.css">
   <link rel="stylesheet" href="/styles/components/cartes.css">
 
   <script src="/config.js"></script>
+  <script src="/scripts/site-parametres.js"></script>
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
 
   <script type="application/ld+json">
   {
@@ -42,7 +45,7 @@
       "@type": "Person",
       "@id": "https://amlouki.me/#personne",
       "name": "Abdel-hamid M. LOUKI",
-      "jobTitle": "Security Engineer & Author",
+      "jobTitle": "Étudiant en ingénierie de la sécurité informatique",
       "url": "https://amlouki.me/"
     }
   }
@@ -99,11 +102,11 @@
             <span class="kicker">À propos</span>
             <h1 class="titre-grand" style="margin-bottom:var(--espace-6);">
               Abdel-hamid M. LOUKI,<br>
-              <em>développeur &amp; auteur.</em>
+              <em>sécurité informatique &amp; développement web.</em>
             </h1>
-            <p class="chapeau" style="margin-bottom:var(--espace-8);">
-              Artisan du numérique depuis plus de 8 ans. Je construis des interfaces
-              performantes et j'écris sur le design, le code et la culture numérique.
+            <p class="chapeau" style="margin-bottom:var(--espace-8);" data-contenu="auteur-bio">
+              Étudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité,
+              le développement web et l'écriture technique.
             </p>
             <div style="display:flex;gap:var(--espace-4);flex-wrap:wrap;">
               <a href="/contact.html" class="btn btn-primaire">Me contacter</a>
@@ -121,7 +124,7 @@
                 style="width:100%;height:auto;filter:grayscale(0.4) contrast(1.1);"
               >
             </div>
-            <div class="etiquette-volante etiquette-jaune etiquette-inclinee-2" style="position:absolute;bottom:var(--espace-4);right:calc(-1 * var(--espace-6));">
+            <div class="etiquette-volante etiquette-jaune etiquette-inclinee-2" style="position:absolute;bottom:var(--espace-4);right:calc(-1 * var(--espace-6));" data-contenu="disponible">
               Disponible en freelance
             </div>
           </div>
@@ -139,40 +142,37 @@
             <div style="display:flex;flex-direction:column;gap:var(--espace-4);">
               <div style="padding:var(--espace-4);background:var(--couleur-fond-alt);border-left:3px solid var(--couleur-accent);">
                 <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-2);">Localisation</div>
-                <div style="font-family:var(--police-corps);color:var(--texte-primaire);">Paris, France</div>
+                <div style="font-family:var(--police-corps);color:var(--texte-primaire);" data-contenu="localisation">Paris, France</div>
               </div>
               <div style="padding:var(--espace-4);background:var(--couleur-fond-alt);border-left:3px solid var(--couleur-accent);">
-                <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-2);">Expérience</div>
-                <div style="font-family:var(--police-corps);color:var(--texte-primaire);">8+ années</div>
+                <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-2);">Statut</div>
+                <div style="font-family:var(--police-corps);color:var(--texte-primaire);">Étudiant ingénieur</div>
               </div>
               <div style="padding:var(--espace-4);background:var(--couleur-fond-alt);border-left:3px solid var(--couleur-accent);">
                 <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-2);">Spécialité</div>
-                <div style="font-family:var(--police-corps);color:var(--texte-primaire);">Full-Stack &amp; Design</div>
+                <div style="font-family:var(--police-corps);color:var(--texte-primaire);">Sécurité &amp; Développement web</div>
               </div>
             </div>
           </div>
           <div class="prose">
             <p>
-              Avec plus de 8 ans d'expérience dans le développement web et le design,
-              j'ai accompagné des startups, des PME et des institutions culturelles dans
-              leurs projets digitaux. Mon approche croise la rigueur de l'ingénierie
-              et la vision d'un directeur artistique.
+              Étudiant en ingénierie de la sécurité informatique, je conçois et développe
+              des interfaces web performantes, en portant une attention particulière
+              à la sécurité, à la clarté technique et à l'expérience utilisateur.
             </p>
             <p>
-              Je suis spécialisé dans la conception d'architectures front-end performantes,
-              l'optimisation SEO technique et la création d'expériences utilisateur
-              qui restent mémorables. Je crois que le code bien écrit et le design
-              soigné ne sont pas opposés — ils se renforcent mutuellement.
+              Je m'intéresse à la cybersécurité au sens large — administration de
+              systèmes et de réseaux, gestion des identités et des accès, protection
+              des données — et à la manière dont le code bien écrit participe à la
+              robustesse d'un produit numérique.
             </p>
             <p>
-              Parallèlement à mon activité de développeur, j'écris sur le design,
-              la technologie et la culture numérique. Mon blog reçoit chaque mois
-              plusieurs milliers de lecteurs qui apprécient une écriture claire,
-              informée et sans concession.
+              J'écris sur la sécurité informatique, le développement web et la culture
+              numérique, avec le souci d'une écriture claire, informée et structurée.
             </p>
             <blockquote>
-              Le code est un médium, pas une fin en soi. Ce qui compte, c'est
-              l'expérience que l'on crée pour les gens qui utilisent ce qu'on construit.
+              La sécurité n'est pas un état, c'est un processus. Comme le code,
+              elle s'entretient et se documente.
             </blockquote>
           </div>
         </div>
@@ -229,7 +229,7 @@
             Un projet ? <em>Parlons-en.</em>
           </h2>
           <div style="display:flex;gap:var(--espace-4);justify-content:center;flex-wrap:wrap;">
-            <a href="mailto:am.louki@outlook.fr" class="btn btn-accent btn-lg">
+            <a href="mailto:am.louki@outlook.fr" class="btn btn-accent btn-lg" data-contenu="email">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               Écrire un email
             </a>
@@ -246,8 +246,13 @@
   <footer class="pied-de-page" role="contentinfo">
     <div class="conteneur">
       <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
-        <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Abdel-hamid M. LOUKI.</p>
-        <p class="pied-copyright"><a href="/" style="color:inherit;">Portfolio Éditorial</a></p>
+        <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Abdel-hamid M. LOUKI. Tous droits réservés.</p>
+        <p class="pied-copyright">
+          <a href="/mentions-legales.html" style="color:inherit;">Mentions légales</a> &middot;
+          <a href="/confidentialite.html"  style="color:inherit;">Confidentialité</a> &middot;
+          <a href="/sitemap.xml"           style="color:inherit;">Plan du site</a> &middot;
+          <a href="/" style="color:inherit;">Accueil</a>
+        </p>
       </div>
     </div>
   </footer>
@@ -257,6 +262,16 @@
   </button>
 
   <script type="module" src="/scripts/app.js"></script>
+  <script type="module">
+    import seo from '/scripts/seo/seo.js';
+    seo.configurer({
+      titre: 'À propos',
+      description: (window.CONFIG && window.CONFIG.SITE_DESCRIPTION) || 'Étudiant en ingénierie de la sécurité informatique, développeur web et auteur.',
+      url: 'https://amlouki.me/a-propos.html',
+      image: 'https://amlouki.me/assets/og-defaut.jpg',
+      type: 'profile',
+    });
+  </script>
   <script type="module">
     import stockage, { COLLECTIONS } from '/scripts/storage/storage-manager.js';
     import { echapper, formaterDateCourte } from '/scripts/app.js';

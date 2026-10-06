@@ -23,14 +23,6 @@
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "/assets/screenshots/accueil.webp",
-      "sizes": "1280x720",
-      "type": "image/webp",
-      "label": "Page d'accueil éditoriale"
-    }
-  ],
   "shortcuts": [
     {
       "name": "Blog",

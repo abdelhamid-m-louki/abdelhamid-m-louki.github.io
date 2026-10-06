@@ -28,6 +28,11 @@
   <link rel="stylesheet" href="/styles/components/cartes.css">
 
   <script src="/config.js"></script>
+  <script src="/scripts/site-parametres.js"></script>
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
 
   <script type="application/ld+json">
   {
@@ -40,7 +45,7 @@
       "@type": "Person",
       "@id": "https://amlouki.me/#personne",
       "name": "Abdel-hamid M. LOUKI",
-      "email": "contact@amlouki.me",
+      "email": "am.louki@outlook.fr",
       "url": "https://amlouki.me/"
     }
   }
@@ -269,7 +274,7 @@
               <h2 style="font-family:var(--police-condensee);font-size:var(--taille-xs);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-5);padding-bottom:var(--espace-3);border-bottom:var(--bordure-forte);">Contact direct</h2>
 
               <div style="display:flex;flex-direction:column;gap:var(--espace-5);">
-                <a href="mailto:am.louki@outlook.fr" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;transition:color var(--transition-rapide);" class="lien-contact-direct">
+                <a href="mailto:am.louki@outlook.fr" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;transition:color var(--transition-rapide);" class="lien-contact-direct" data-contenu="email">
                   <div style="width:40px;height:40px;background:var(--couleur-encre);color:var(--couleur-fond);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                   </div>
@@ -279,30 +284,30 @@
                   </div>
                 </a>
 
-                <a href="https://linkedin.com/in/votre-profil" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;">
+                <a href="https://linkedin.com/in/amlouki" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;" data-contenu="linkedin">
                   <div style="width:40px;height:40px;background:var(--couleur-encre);color:var(--couleur-fond);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                   </div>
                   <div>
                     <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-large);text-transform:uppercase;color:var(--texte-tertiaire);">LinkedIn</div>
-                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);">in/votre-profil</div>
+                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);">in/amlouki</div>
                   </div>
                 </a>
 
-                <a href="https://github.com/votre-profil" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;">
+                <a href="https://github.com/dirdaymi" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;" data-contenu="github">
                   <div style="width:40px;height:40px;background:var(--couleur-encre);color:var(--couleur-fond);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                   </div>
                   <div>
                     <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-large);text-transform:uppercase;color:var(--texte-tertiaire);">GitHub</div>
-                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);">votre-profil</div>
+                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);">dirdaymi</div>
                   </div>
                 </a>
               </div>
             </div>
 
             <!-- Disponibilité -->
-            <div class="feuille-papier" style="padding:var(--espace-6);border-left:4px solid var(--couleur-succes);">
+            <div class="feuille-papier" style="padding:var(--espace-6);border-left:4px solid var(--couleur-succes);" data-contenu="disponible">
               <div style="display:flex;align-items:center;gap:var(--espace-3);margin-bottom:var(--espace-3);">
                 <div style="width:10px;height:10px;border-radius:50%;background:var(--couleur-succes);box-shadow:0 0 8px rgba(45,106,79,0.6);flex-shrink:0;"></div>
                 <span style="font-family:var(--police-condensee);font-size:var(--taille-xs);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--couleur-succes);">Disponible en freelance</span>
@@ -333,7 +338,12 @@
     <div class="conteneur">
       <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
         <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Abdel-hamid M. LOUKI. Tous droits réservés.</p>
-        <p class="pied-copyright"><a href="/" style="color:inherit;">Portfolio Éditorial</a></p>
+        <p class="pied-copyright">
+          <a href="/mentions-legales.html" style="color:inherit;">Mentions légales</a> &middot;
+          <a href="/confidentialite.html"  style="color:inherit;">Confidentialité</a> &middot;
+          <a href="/sitemap.xml"           style="color:inherit;">Plan du site</a> &middot;
+          <a href="/" style="color:inherit;">Accueil</a>
+        </p>
       </div>
     </div>
   </footer>
@@ -416,20 +426,48 @@
       texteBtn.textContent = 'Envoi en cours…';
       msgErreur.style.display = 'none';
 
-      // Simulation d'envoi (remplacer par une vraie API)
-      await new Promise(r => setTimeout(r, 1200));
+      const donnees = {
+        nom:    document.getElementById('contact-nom').value.trim(),
+        email:  document.getElementById('contact-email').value.trim(),
+        objet:  document.getElementById('contact-objet').value,
+        budget: document.getElementById('contact-budget').value,
+        message: document.getElementById('contact-message').value.trim(),
+        rgpd:   document.getElementById('contact-rgpd').checked,
+      };
 
-      // Succès simulé
-      form.style.display = 'none';
-      msgSucces.style.display = 'block';
-      msgSucces.focus();
+      const base = (window.CONFIG && window.CONFIG.API_BASE) || '';
 
-      // En production, remplacer par :
-      // const reponse = await fetch('/api/contact.php', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ nom, email, objet, message, budget }),
-      // });
+      try {
+        const reponse = await fetch(base + '/api/contact', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(donnees),
+          signal:  AbortSignal.timeout(15000),
+        });
+        const corps = await reponse.json().catch(() => null);
+
+        if (reponse.ok && corps && corps.ok) {
+          form.style.display = 'none';
+          msgSucces.style.display = 'block';
+          msgSucces.focus();
+          return;
+        }
+
+        throw new Error((corps && corps.erreur) || 'Service de contact indisponible.');
+      } catch (err) {
+        // Repli : ouvrir le client email avec le message pré-rempli
+        const email = (window.CONFIG && window.CONFIG.AUTEUR_EMAIL) || 'am.louki@outlook.fr';
+        const sujet = encodeURIComponent(`[amlouki.me] ${donnees.objet || 'Message'} — ${donnees.nom}`);
+        const corps = encodeURIComponent(
+          `${donnees.message}\n\n---\n${donnees.nom} (${donnees.email})`
+        );
+        window.location.href = `mailto:${email}?subject=${sujet}&body=${corps}`;
+        btnEnvoyer.disabled = false;
+        texteBtn.textContent = 'Envoyer le message';
+        msgErreur.textContent =
+          (err && err.message) || 'Envoi impossible. Le logiciel de messagerie a été ouvert à la place.';
+        msgErreur.style.display = 'block';
+      }
     });
 
     function validerFormulaire() {

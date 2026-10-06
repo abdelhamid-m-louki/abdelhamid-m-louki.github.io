@@ -17,20 +17,18 @@
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website">
-  <meta property="og:site_name"   content="Portfolio Éditorial">
+  <meta property="og:site_name"   content="AM. LOUKI">
   <meta property="og:locale"      content="fr_FR">
   <meta property="og:url"         content="https://amlouki.me/">
   <meta property="og:title"       content="Abdel-hamid M. LOUKI — Portfolio Éditorial & Blog">
-  <meta property="og:description" content="Portfolio éditorial de Abdel-hamid M. LOUKI — Développeur, designer et auteur.">
+  <meta property="og:description" content="Portfolio éditorial de Abdel-hamid M. LOUKI — Étudiant en ingénierie de la sécurité informatique, développeur et auteur.">
   <meta property="og:image"       content="https://amlouki.me/assets/og-accueil.jpg">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt"   content="Portfolio Éditorial — Page d'accueil">
+  <meta property="og:image:alt"   content="AM. LOUKI — Page d'accueil">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card"    content="summary_large_image">
-  <meta name="twitter:site"    content="@votre_twitter">
-  <meta name="twitter:creator" content="@votre_twitter">
   <meta name="twitter:title"   content="Abdel-hamid M. LOUKI — Portfolio Éditorial">
   <meta name="twitter:description" content="Portfolio éditorial de Abdel-hamid M. LOUKI.">
   <meta name="twitter:image"   content="https://amlouki.me/assets/og-accueil.jpg">
@@ -57,8 +55,6 @@
   <link rel="stylesheet" href="/styles/components/textures.css">
   <link rel="stylesheet" href="/styles/components/navigation.css">
   <link rel="stylesheet" href="/styles/components/formulaires.css">
-  <link rel="stylesheet" href="/styles/components/responsive.css">
-  <link rel="stylesheet" href="/styles/components/utilitaires.css">
   <link rel="stylesheet" href="/styles/components/responsive.css">
   <link rel="stylesheet" href="/styles/components/utilitaires.css">
   <link rel="stylesheet" href="/styles/components/cartes.css">
@@ -91,14 +87,14 @@
         "name": "Abdel-hamid M. LOUKI",
         "url": "https://amlouki.me/",
         "description": "Etudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique. Sur ce blog, je partage mes projets, mes réflexions et mes découvertes dans le domaine de la sécurité informatique.",
-        "jobTitle": "Etudiant en ingénierie de la sécurité informatique",
+        "jobTitle": "Étudiant en ingénierie de la sécurité informatique",
         "sameAs": [
-          "https://github.com/votre-profil",
-          "https://linkedin.com/in/votre-profil"
+          "https://github.com/dirdaymi",
+          "https://linkedin.com/in/amlouki"
         ],
         "image": {
           "@type": "ImageObject",
-          "url": "https://amlouki.me/assets/portrait.png"
+          "url": "https://amlouki.me/assets/images/portrait.png"
         },
         "knowsLanguage": ["fr", "en"]
       }
@@ -108,6 +104,7 @@
 
   <!-- Configuration globale (non-secrète) -->
   <script src="/config.js"></script>
+  <script src="/scripts/site-parametres.js"></script>
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -246,7 +243,7 @@
             </div>
 
             <!-- Kicker -->
-            <span class="kicker" id="sous-titre-hero">Elève &amp; Ingénieur en sécurité informatique</span>
+            <span class="kicker" id="sous-titre-hero" data-contenu="auteur-titre">Étudiant en ingénierie de la sécurité informatique</span>
 
             <!-- Manchette principale -->
             <h1 class="manchette" id="titre-hero">
@@ -255,28 +252,28 @@
             </h1>
 
             <!-- Chapô -->
-            <p class="chapeau hero-chapo">
-              Étudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique. Sur ce blog, je partage mes projets, mes réflexions et mes découvertes dans le domaine de la sécurité informatique.
+            <p class="chapeau hero-chapo" data-contenu="auteur-bio">
+              Étudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique.
             </p>
 
             <!-- Filet de séparation -->
             <div class="filet-epais hero-filet" aria-hidden="true"></div>
 
-            <!-- Métriques éditoriales -->
+            <!-- Métriques éditoriales (compteurs réels renseignés par app.js) -->
             <div class="hero-metriques" role="list" aria-label="Statistiques clés">
               <div class="metrique-item" role="listitem">
-                <div class="metrique-nombre" data-compteur="47" aria-label="47 projets réalisés">10+</div>
+                <div class="metrique-nombre" data-mesure="projets" aria-label="Projets réalisés">—</div>
                 <div class="metrique-label">Projets réalisés</div>
               </div>
               <div class="metrique-separateur" aria-hidden="true"></div>
               <div class="metrique-item" role="listitem">
-                <div class="metrique-nombre" data-compteur="128" aria-label="128 articles publiés">3</div>
+                <div class="metrique-nombre" data-mesure="articles" aria-label="Articles publiés">—</div>
                 <div class="metrique-label">Articles publiés</div>
               </div>
               <div class="metrique-separateur" aria-hidden="true"></div>
               <div class="metrique-item" role="listitem">
-                <div class="metrique-nombre" data-compteur="8" aria-label="8 années d'expérience">4e</div>
-                <div class="metrique-label">Année d'études</div>
+                <div class="metrique-nombre">4e</div>
+                <div class="metrique-label">Année d'ingénierie</div>
               </div>
             </div>
 
@@ -293,13 +290,13 @@
 
             <!-- Liens sociaux -->
             <div class="hero-sociaux" aria-label="Réseaux sociaux">
-              <a href="https://github.com/dirdaymi" class="lien-social" aria-label="GitHub" rel="noopener noreferrer" target="_blank">
+              <a href="https://github.com/dirdaymi" class="lien-social" aria-label="GitHub" rel="noopener noreferrer" target="_blank" data-contenu="github">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
               </a>
-              <a href="https://linkedin.com/in/amlouki" class="lien-social" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
+              <a href="https://linkedin.com/in/amlouki" class="lien-social" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank" data-contenu="linkedin">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
-              <a href="mailto:amlouki@outlook.fr" class="lien-social" aria-label="Envoyer un email">
+              <a href="mailto:am.louki@outlook.fr" class="lien-social" aria-label="Envoyer un email" data-contenu="email">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               </a>
             </div>
@@ -345,8 +342,8 @@
                 <div class="etiquette-flottante-icone" aria-hidden="true">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
                 </div>
-                <div class="etiquette-flottante-texte">128 articles</div>
-                <div class="etiquette-flottante-sous">publiés &amp; indexés</div>
+                <div class="etiquette-flottante-texte">Veille continue</div>
+                <div class="etiquette-flottante-sous">sécurité &amp; développement</div>
               </div>
 
               <div class="etiquette-flottante etiquette-flottante-3 feuille-papier">
@@ -443,22 +440,19 @@
             </div>
 
             <div class="apropos-texte prose" itemscope itemtype="https://schema.org/Person">
-              <p class="chapeau" itemprop="description">
-                Artisan du numérique, je construis des interfaces qui allient 
-                performance technique et sensibilité éditoriale.
+              <p class="chapeau" itemprop="description" data-contenu="auteur-bio">
+                Étudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique. Sur ce blog, je partage mes projets, mes réflexions et mes découvertes.
               </p>
 
               <p>
-                Avec plus de <strong>8 ans d'expérience</strong> dans le développement web et le design, 
-                j'ai accompagné des startups, des PME et des institutions culturelles dans 
-                leurs projets digitaux. Mon approche croise la rigueur de l'ingénierie 
-                et la vision d'un directeur artistique.
+                Mon approche croise la rigueur de l'ingénierie de la sécurité informatique
+                et une sensibilité éditoriale : je conçois, développe et documente des
+                outils et des interfaces numériques, en privilégiant la clarté et la sobriété.
               </p>
 
               <p>
-                Parallèlement, j'écris sur le design, la technologie et la culture numérique. 
-                Mon blog reçoit chaque mois plusieurs milliers de lecteurs qui apprécient 
-                une écriture claire, informée et sans concession.
+                J'écris sur la sécurité informatique, le développement web et la culture numérique,
+                avec le souci d'une écriture claire, informée et structurée.
               </p>
             </div>
 
@@ -598,15 +592,17 @@
             Portfolio Éditorial
           </div>
           <p style="font-family: var(--police-corps); font-size: var(--taille-sm); color: rgba(240,235,224,0.55); line-height: var(--ligne-lache); max-width: 30ch;">
-            Revue personnelle de création, de code et de culture numérique.
-            Indépendante depuis 2024.
+            Revue personnelle de sécurité informatique, de développement et de culture numérique.
           </p>
           <div class="pied-sociaux" style="margin-top: var(--espace-6);">
-            <a href="https://github.com/votre-profil" class="lien-social pied-social" aria-label="GitHub" rel="noopener noreferrer" target="_blank">
+            <a href="https://github.com/dirdaymi" class="lien-social pied-social" aria-label="GitHub" rel="noopener noreferrer" target="_blank" data-contenu="github">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
             </a>
-            <a href="https://linkedin.com/in/votre-profil" class="lien-social pied-social" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
+            <a href="https://linkedin.com/in/amlouki" class="lien-social pied-social" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank" data-contenu="linkedin">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="mailto:am.louki@outlook.fr" class="lien-social pied-social" aria-label="Envoyer un email" data-contenu="email">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             </a>
           </div>
         </div>
@@ -654,8 +650,8 @@
           Tous droits réservés.
         </p>
         <p class="pied-copyright">
-          Construit avec HTML5, CSS3 &amp; JavaScript pur &mdash; 
-          Hébergé sur Supabase
+          Construit avec HTML5, CSS3 &amp; JavaScript pur &mdash;
+          Hébergé sur GitHub Pages &amp; Vercel
         </p>
       </div>
     </div>

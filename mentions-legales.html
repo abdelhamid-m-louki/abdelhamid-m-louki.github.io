@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentions légales — Portfolio Éditorial</title>
+  <meta name="description" content="Mentions légales du site amlouki.me — identification de l'éditeur et informations juridiques relatives à l'hébergement.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://amlouki.me/mentions-legales.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/navigation.css">
+  <link rel="stylesheet" href="/styles/components/responsive.css">
+  <link rel="stylesheet" href="/styles/components/utilitaires.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+
+  <script src="/config.js"></script>
+  <script src="/scripts/site-parametres.js"></script>
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+</head>
+
+<body>
+
+  <header class="en-tete" role="banner" id="en-tete-principal">
+    <div class="bandeau-superieur" aria-label="Informations éditoriales">
+      <div class="conteneur">
+        <div class="bandeau-interieur">
+          <span class="bandeau-date" id="date-bandeau"></span>
+          <span class="bandeau-edition">Édition numérique</span>
+          <div class="bandeau-actions">
+            <a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Administration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="conteneur">
+      <div class="en-tete-masthead">
+        <a href="/" class="logo-journal" aria-label="Portfolio Éditorial — Accueil">Portfolio Éditorial</a>
+        <span class="sous-titre-journal">Revue de création &amp; de code</span>
+        <button class="bouton-hamburger" id="btn-hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+      </div>
+    </div>
+    <nav class="nav-rubriques" aria-label="Navigation principale">
+      <div class="conteneur">
+        <div class="nav-rubriques-interieur" role="list">
+          <a href="/"                class="nav-lien" role="listitem">Accueil</a>
+          <a href="/a-propos.html"   class="nav-lien" role="listitem">À propos</a>
+          <a href="/projets.html"    class="nav-lien" role="listitem">Projets</a>
+          <a href="/blog/index.html" class="nav-lien" role="listitem">Blog</a>
+          <a href="/contact.html"    class="nav-lien" role="listitem">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <div class="menu-mobile-en-tete"><span class="logo-journal" style="font-size:var(--taille-xl)">Portfolio Éditorial</span><button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <nav class="menu-mobile-nav"><a href="/" class="menu-mobile-lien">Accueil</a><a href="/a-propos.html" class="menu-mobile-lien">À propos</a><a href="/projets.html" class="menu-mobile-lien">Projets</a><a href="/blog/index.html" class="menu-mobile-lien">Blog</a><a href="/contact.html" class="menu-mobile-lien">Contact</a></nav>
+  </div>
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <main id="contenu-principal" role="main">
+    <div class="section" style="padding:calc(var(--hauteur-nav) + var(--espace-16)) 0 var(--espace-16);">
+      <div class="conteneur">
+        <nav aria-label="Fil d'Ariane">
+          <ol style="display:flex;align-items:center;gap:var(--espace-2);list-style:none;margin:0 0 var(--espace-6);padding:0;font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-tertiaire);letter-spacing:var(--espacement-large);text-transform:uppercase;">
+            <li><a href="/" style="color:var(--texte-tertiaire);text-decoration:none;">Accueil</a></li>
+            <li style="opacity:0.5;">/</li>
+            <li aria-current="page" style="color:var(--texte-secondaire);">Mentions légales</li>
+          </ol>
+        </nav>
+        <span class="kicker">Informations légales</span>
+        <h1 class="titre-grand" style="margin-bottom:var(--espace-8);">Mentions <em>légales</em></h1>
+
+        <div class="prose" style="max-width:72ch;">
+          <h2>Éditeur du site</h2>
+          <p>Le site <strong>amlouki.me</strong> est édité par <span data-contenu="auteur-nom">Abdel-hamid M. LOUKI</span>, étudiant en ingénierie de la sécurité informatique.</p>
+          <p>Contact : <a href="mailto:am.louki@outlook.fr" data-contenu="email">am.louki@outlook.fr</a>.</p>
+
+          <h2>Hébergement</h2>
+          <p>Le site est hébergé sur deux plateformes :</p>
+          <ul>
+            <li><strong>Pages des interfaces</strong> : GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. St, San Francisco, CA 94107, États-Unis) ;</li>
+            <li><strong>API serverless</strong> : Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis.</li>
+          </ul>
+          <p>La base de données est hébergée par Supabase (Supabase Inc., 203 N Pressenta St., #1001, San Francisco, CA 94103, États-Unis).</p>
+
+          <h2>Responsabilité éditoriale</h2>
+          <p>Le contenu publié sur ce site (articles, projets, descriptions) l'est à titre personnel. L'éditeur s'efforce d'assurer l'exactitude des informations, sans pouvoir garantir l'exhaustivité.</p>
+
+          <h2>Propriété intellectuelle</h2>
+          <p>Sauf mention contraire, l'ensemble des contenus (textes, illustrations, photographies, code) est la propriété de l'éditeur et est protégé par le droit de la propriété intellectuelle. Toute reproduction, même partielle, sans autorisation préalable est interdite.</p>
+
+          <h2>Dernière mise à jour</h2>
+          <p>Ces mentions légales ont été mises à jour le 6 octobre 2026.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="pied-de-page" role="contentinfo">
+    <div class="conteneur">
+      <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
+        <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Abdel-hamid M. LOUKI. Tous droits réservés.</p>
+        <p class="pied-copyright">
+          <a href="/mentions-legales.html" style="color:inherit;">Mentions légales</a> &middot;
+          <a href="/confidentialite.html"  style="color:inherit;">Confidentialité</a> &middot;
+          <a href="/sitemap.xml"           style="color:inherit;">Plan du site</a> &middot;
+          <a href="/" style="color:inherit;">Accueil</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn-haut-page" id="btn-haut-page" aria-label="Retourner en haut" hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <script type="module" src="/scripts/app.js"></script>
+  <script type="module">
+    import seo from '/scripts/seo/seo.js';
+    seo.configurer({
+      titre: 'Mentions légales',
+      url: 'https://amlouki.me/mentions-legales.html',
+      image: 'https://amlouki.me/assets/og-defaut.jpg',
+      type: 'website',
+    });
+  </script>
+</body>
+</html>

@@ -289,6 +289,46 @@ async function chargerDonnees() {
 
   // On ne bloque pas sur les erreurs de données
   await Promise.allSettled(promesses);
+
+  // Métriques réelles (accueil) — remplace tout chiffre fantaisiste
+  await renseignerMetriquesReelles();
+}
+
+/**
+ * Renseigne les métriques de l'accueil (projets / articles publiés)
+ * depuis la base, au lieu de valeurs fantaisistes en dur.
+ */
+async function renseignerMetriquesReelles() {
+  const elProjets  = document.querySelector('[data-mesure="projets"]');
+  const elArticles = document.querySelector('[data-mesure="articles"]');
+  if (!elProjets && !elArticles) return;
+
+  try {
+    const [nbProjets, nbArticles] = await Promise.all([
+      elProjets
+        ? stockage.compter(COLLECTIONS.PROJETS, { statut: 'publié' })
+        : Promise.resolve(0),
+      elArticles
+        ? stockage.compter(COLLECTIONS.ARTICLES, { statut: 'publié' })
+        : Promise.resolve(0),
+    ]);
+
+    if (elProjets) {
+      elProjets.textContent = String(nbProjets);
+      elProjets.setAttribute('data-compteur', String(nbProjets));
+      elProjets.setAttribute('aria-label', `${nbProjets} projet${nbProjets > 1 ? 's' : ''} réalisé${nbProjets > 1 ? 's' : ''}`);
+    }
+    if (elArticles) {
+      elArticles.textContent = String(nbArticles);
+      elArticles.setAttribute('data-compteur', String(nbArticles));
+      elArticles.setAttribute('aria-label', `${nbArticles} article${nbArticles > 1 ? 's' : ''} publié${nbArticles > 1 ? 's' : ''}`);
+    }
+
+    // Anime les compteurs désormais réels
+    if (elProjets || elArticles) initialiserCompteurs();
+  } catch (erreur) {
+    console.warn('[App] Métriques réelles indisponibles :', erreur.message);
+  }
 }
 
 // ============================================================
