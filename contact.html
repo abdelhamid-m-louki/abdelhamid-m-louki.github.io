@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Portfolio Éditorial</title>
+  <meta name="description" content="Contactez Prénom Nom pour vos projets freelance, collaborations éditoriales ou échanges professionnels.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.amlouki.me/contact.html">
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Contact — Portfolio Éditorial">
+  <meta property="og:description" content="Prenons contact pour discuter de votre projet.">
+  <meta property="og:url"         content="https://www.amlouki.me/contact.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/navigation.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+  <link rel="stylesheet" href="/styles/components/cartes.css">
+
+  <script>window.CONFIG = { SITE_NOM:'Portfolio Éditorial', SITE_URL:'http://www.amlouki.me', SUPABASE_URL:'https://qayrcorszsyiujzxfmxw.supabase.co', SUPABASE_ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFheXJjb3JzenN5aXVqenhmbXh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxOTk1MzcsImV4cCI6MjA5NDc3NTUzN30.4vwMex2ddoD3bCLPzdj60LoDZ5ba2igmBpVtOauQa7I' };</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact — Portfolio Éditorial",
+    "url": "https://www.amlouki.me/contact.html",
+    "description": "Formulaire de contact pour projets freelance et collaborations",
+    "mainEntity": {
+      "@type": "Person",
+      "@id": "https://www.amlouki.me/#personne",
+      "name": "Prénom Nom",
+      "email": "contact@amlouki.me",
+      "url": "https://www.amlouki.me/"
+    }
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header class="en-tete" role="banner" id="en-tete-principal">
+    <div class="bandeau-superieur" aria-label="Informations éditoriales">
+      <div class="conteneur">
+        <div class="bandeau-interieur">
+          <span class="bandeau-date" id="date-bandeau"></span>
+          <span class="bandeau-edition">Édition numérique</span>
+          <div class="bandeau-actions"><a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Administration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></a></div>
+        </div>
+      </div>
+    </div>
+    <div class="conteneur">
+      <div class="en-tete-masthead">
+        <a href="/" class="logo-journal" aria-label="Portfolio Éditorial — Accueil">Portfolio Éditorial</a>
+        <span class="sous-titre-journal">Revue de création &amp; de code</span>
+        <button class="bouton-hamburger" id="btn-hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+      </div>
+    </div>
+    <nav class="nav-rubriques" aria-label="Navigation principale">
+      <div class="conteneur">
+        <div class="nav-rubriques-interieur" role="list">
+          <a href="/"                class="nav-lien" role="listitem">Accueil</a>
+          <a href="/a-propos.html"   class="nav-lien" role="listitem">À propos</a>
+          <a href="/projets.html"    class="nav-lien" role="listitem">Projets</a>
+          <a href="/blog/index.html" class="nav-lien" role="listitem">Blog</a>
+          <a href="/contact.html"    class="nav-lien actif" role="listitem" aria-current="page">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <div class="menu-mobile-en-tete"><span class="logo-journal" style="font-size:var(--taille-xl)">Portfolio Éditorial</span><button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <nav class="menu-mobile-nav"><a href="/" class="menu-mobile-lien">Accueil</a><a href="/a-propos.html" class="menu-mobile-lien">À propos</a><a href="/projets.html" class="menu-mobile-lien">Projets</a><a href="/blog/index.html" class="menu-mobile-lien">Blog</a><a href="/contact.html" class="menu-mobile-lien">Contact</a></nav>
+  </div>
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <main id="contenu-principal" role="main">
+
+    <!-- En-tête contact -->
+    <div style="padding:calc(var(--hauteur-nav) + var(--espace-16)) 0 var(--espace-16);border-bottom:var(--bordure-tres-forte);background:var(--couleur-fond);position:relative;overflow:hidden;">
+      <!-- Lettre décorative -->
+      <div aria-hidden="true" style="position:absolute;top:-40px;right:-20px;font-family:var(--police-display);font-size:340px;font-weight:900;line-height:1;color:var(--couleur-accent-tache);pointer-events:none;user-select:none;">C</div>
+      <div class="conteneur" style="position:relative;z-index:1;">
+        <nav aria-label="Fil d'Ariane">
+          <ol style="display:flex;align-items:center;gap:var(--espace-2);list-style:none;margin:0 0 var(--espace-6);padding:0;font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-tertiaire);letter-spacing:var(--espacement-large);text-transform:uppercase;">
+            <li><a href="/" style="color:var(--texte-tertiaire);text-decoration:none;">Accueil</a></li>
+            <li style="opacity:0.5;">/</li>
+            <li aria-current="page" style="color:var(--texte-secondaire);">Contact</li>
+          </ol>
+        </nav>
+        <h1 class="titre-grand" style="margin-bottom:var(--espace-5);max-width:14ch;">
+          Discutons de<br><em>votre projet.</em>
+        </h1>
+        <p class="chapeau" style="max-width:52ch;">
+          Que ce soit pour un projet freelance, une collaboration éditoriale
+          ou simplement pour échanger — je suis à votre écoute.
+        </p>
+      </div>
+    </div>
+
+    <!-- Corps de la page contact -->
+    <div style="background:var(--couleur-fond-alt);padding:var(--espace-20) 0;">
+      <div class="conteneur">
+        <div style="display:grid;grid-template-columns:1fr 400px;gap:var(--espace-16);align-items:start;" class="contact-grid">
+
+          <!-- Formulaire -->
+          <div>
+            <!-- Message de succès (masqué par défaut) -->
+            <div
+              id="msg-succes"
+              role="alert"
+              aria-live="polite"
+              style="display:none;padding:var(--espace-6);background:rgba(45,106,79,0.08);border:1px solid var(--couleur-succes);border-left:4px solid var(--couleur-succes);margin-bottom:var(--espace-6);"
+            >
+              <p style="font-family:var(--police-display);font-size:var(--taille-xl);font-weight:700;color:var(--couleur-succes);margin-bottom:var(--espace-2);">Message envoyé !</p>
+              <p style="font-family:var(--police-corps);color:var(--texte-secondaire);">Merci pour votre message. Je vous répondrai dans les meilleurs délais, généralement sous 24 à 48 heures.</p>
+            </div>
+
+            <!-- Message d'erreur -->
+            <div
+              id="msg-erreur"
+              role="alert"
+              aria-live="assertive"
+              style="display:none;padding:var(--espace-4);background:rgba(139,26,26,0.06);border:1px solid var(--couleur-erreur);border-left:4px solid var(--couleur-erreur);margin-bottom:var(--espace-6);font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--couleur-erreur);letter-spacing:var(--espacement-large);"
+            ></div>
+
+            <form
+              id="formulaire-contact"
+              novalidate
+              aria-label="Formulaire de contact"
+              style="display:flex;flex-direction:column;gap:var(--espace-6);"
+            >
+
+              <!-- Nom et email côte à côte -->
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--espace-5);">
+                <div class="groupe-champ">
+                  <label for="contact-nom" class="etiquette etiquette-obligatoire">Nom complet</label>
+                  <input
+                    type="text"
+                    id="contact-nom"
+                    name="nom"
+                    class="champ"
+                    placeholder="Prénom Nom"
+                    autocomplete="name"
+                    required
+                    aria-required="true"
+                    aria-describedby="erreur-nom"
+                  >
+                  <span id="erreur-nom" class="erreur-champ" role="alert" aria-live="polite" hidden></span>
+                </div>
+                <div class="groupe-champ">
+                  <label for="contact-email" class="etiquette etiquette-obligatoire">Adresse email</label>
+                  <input
+                    type="email"
+                    id="contact-email"
+                    name="email"
+                    class="champ"
+                    placeholder="vous@exemple.fr"
+                    autocomplete="email"
+                    required
+                    aria-required="true"
+                    aria-describedby="erreur-email"
+                  >
+                  <span id="erreur-email" class="erreur-champ" role="alert" aria-live="polite" hidden></span>
+                </div>
+              </div>
+
+              <!-- Objet -->
+              <div class="groupe-champ">
+                <label for="contact-objet" class="etiquette etiquette-obligatoire">Objet</label>
+                <select id="contact-objet" name="objet" class="selecteur" required aria-required="true" aria-describedby="erreur-objet">
+                  <option value="" disabled selected>Sélectionnez un objet…</option>
+                  <option value="projet-freelance">Projet freelance</option>
+                  <option value="collaboration">Collaboration éditoriale</option>
+                  <option value="conseil">Conseil et consulting</option>
+                  <option value="recrutement">Proposition d'emploi</option>
+                  <option value="autre">Autre</option>
+                </select>
+                <span id="erreur-objet" class="erreur-champ" role="alert" aria-live="polite" hidden></span>
+              </div>
+
+              <!-- Budget (pour projets freelance) -->
+              <div class="groupe-champ" id="groupe-budget" style="display:none;">
+                <label for="contact-budget" class="etiquette">Budget estimé</label>
+                <select id="contact-budget" name="budget" class="selecteur">
+                  <option value="">Non défini</option>
+                  <option value="moins-1k">Moins de 1 000 €</option>
+                  <option value="1k-5k">1 000 € — 5 000 €</option>
+                  <option value="5k-15k">5 000 € — 15 000 €</option>
+                  <option value="15k-plus">15 000 € et plus</option>
+                </select>
+              </div>
+
+              <!-- Message -->
+              <div class="groupe-champ">
+                <label for="contact-message" class="etiquette etiquette-obligatoire">
+                  Message
+                  <span id="cpt-message" style="font-weight:400;color:var(--texte-tertiaire);">(0/1000)</span>
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  class="zone-texte"
+                  rows="7"
+                  placeholder="Décrivez votre projet, vos besoins, vos délais…"
+                  required
+                  aria-required="true"
+                  maxlength="1000"
+                  aria-describedby="erreur-message cpt-message"
+                ></textarea>
+                <span id="erreur-message" class="erreur-champ" role="alert" aria-live="polite" hidden></span>
+              </div>
+
+              <!-- Consentement RGPD -->
+              <div class="option-wrapper">
+                <input
+                  type="checkbox"
+                  id="contact-rgpd"
+                  name="rgpd"
+                  class="case-cochee"
+                  required
+                  aria-required="true"
+                  aria-describedby="erreur-rgpd"
+                >
+                <label for="contact-rgpd" style="font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-secondaire);cursor:pointer;letter-spacing:var(--espacement-large);">
+                  J'accepte que mes données soient utilisées pour répondre à ma demande,
+                  conformément à la <a href="/confidentialite.html" style="color:var(--couleur-accent-sombre);text-decoration:underline;">politique de confidentialité</a>.
+                </label>
+              </div>
+              <span id="erreur-rgpd" class="erreur-champ" role="alert" aria-live="polite" hidden></span>
+
+              <!-- Honeypot anti-spam (masqué) -->
+              <div style="display:none;" aria-hidden="true">
+                <input type="text" name="site_web" tabindex="-1" autocomplete="off">
+              </div>
+
+              <!-- Bouton d'envoi -->
+              <div>
+                <button
+                  type="submit"
+                  class="btn btn-primaire btn-lg"
+                  id="btn-envoyer"
+                  aria-label="Envoyer le message"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                  <span id="texte-btn-envoyer">Envoyer le message</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Informations de contact -->
+          <div style="display:flex;flex-direction:column;gap:var(--espace-6);position:sticky;top:calc(var(--hauteur-nav) + var(--espace-6));">
+
+            <!-- Carte directe -->
+            <div class="feuille-papier" style="padding:var(--espace-6);">
+              <h2 style="font-family:var(--police-condensee);font-size:var(--taille-xs);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-5);padding-bottom:var(--espace-3);border-bottom:var(--bordure-forte);">Contact direct</h2>
+
+              <div style="display:flex;flex-direction:column;gap:var(--espace-5);">
+                <a href="mailto:contact@exemple.fr" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;transition:color var(--transition-rapide);" class="lien-contact-direct">
+                  <div style="width:40px;height:40px;background:var(--couleur-encre);color:var(--couleur-fond);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-large);text-transform:uppercase;color:var(--texte-tertiaire);">Email</div>
+                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);">contact@exemple.fr</div>
+                  </div>
+                </a>
+
+                <a href="https://linkedin.com/in/votre-profil" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;">
+                  <div style="width:40px;height:40px;background:var(--couleur-encre);color:var(--couleur-fond);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-large);text-transform:uppercase;color:var(--texte-tertiaire);">LinkedIn</div>
+                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);">in/votre-profil</div>
+                  </div>
+                </a>
+
+                <a href="https://github.com/votre-profil" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;">
+                  <div style="width:40px;height:40px;background:var(--couleur-encre);color:var(--couleur-fond);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-large);text-transform:uppercase;color:var(--texte-tertiaire);">GitHub</div>
+                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);">votre-profil</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Disponibilité -->
+            <div class="feuille-papier" style="padding:var(--espace-6);border-left:4px solid var(--couleur-succes);">
+              <div style="display:flex;align-items:center;gap:var(--espace-3);margin-bottom:var(--espace-3);">
+                <div style="width:10px;height:10px;border-radius:50%;background:var(--couleur-succes);box-shadow:0 0 8px rgba(45,106,79,0.6);flex-shrink:0;"></div>
+                <span style="font-family:var(--police-condensee);font-size:var(--taille-xs);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--couleur-succes);">Disponible en freelance</span>
+              </div>
+              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin:0;line-height:var(--ligne-lache);">
+                Je suis ouvert aux missions freelance à partir de 3 jours par semaine,
+                en présentiel (Paris) ou à distance.
+              </p>
+            </div>
+
+            <!-- Délai de réponse -->
+            <div style="padding:var(--espace-5);background:var(--couleur-accent-tache);border:var(--bordure-accent);">
+              <div style="font-family:var(--police-condensee);font-size:var(--taille-xs);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--couleur-accent-sombre);margin-bottom:var(--espace-2);">Délai de réponse</div>
+              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin:0;">
+                Je réponds à tous les messages sous <strong>24 à 48 heures</strong>,
+                du lundi au vendredi.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="pied-de-page" role="contentinfo">
+    <div class="conteneur">
+      <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
+        <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Prénom Nom. Tous droits réservés.</p>
+        <p class="pied-copyright"><a href="/" style="color:inherit;">Portfolio Éditorial</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn-haut-page" id="btn-haut-page" aria-label="Retourner en haut" hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <script type="module" src="/scripts/app.js"></script>
+  <script type="module">
+    'use strict';
+
+    import seo from '/scripts/seo/seo.js';
+
+    seo.configurer({
+      titre: 'Contact',
+      description: 'Contactez Prénom Nom pour vos projets freelance, collaborations éditoriales ou échanges professionnels.',
+      type: 'website',
+      fil: [{ nom: 'Accueil', url: '/' }, { nom: 'Contact' }],
+    });
+
+    const form       = document.getElementById('formulaire-contact');
+    const btnEnvoyer = document.getElementById('btn-envoyer');
+    const texteBtn   = document.getElementById('texte-btn-envoyer');
+    const msgSucces  = document.getElementById('msg-succes');
+    const msgErreur  = document.getElementById('msg-erreur');
+
+    // Afficher budget si objet = projet-freelance
+    document.getElementById('contact-objet').addEventListener('change', e => {
+      const grpBudget = document.getElementById('groupe-budget');
+      grpBudget.style.display = e.target.value === 'projet-freelance' ? '' : 'none';
+    });
+
+    // Compteur de caractères
+    const txtMessage = document.getElementById('contact-message');
+    const cptMessage = document.getElementById('cpt-message');
+    txtMessage.addEventListener('input', () => {
+      const n = txtMessage.value.length;
+      cptMessage.textContent = `(${n}/1000)`;
+      cptMessage.style.color = n > 900 ? 'var(--couleur-erreur)' : 'var(--texte-tertiaire)';
+    });
+
+    // Validation en temps réel
+    const champEmail = document.getElementById('contact-email');
+    champEmail.addEventListener('blur', () => {
+      const erreur = document.getElementById('erreur-email');
+      if (!champEmail.value) {
+        afficherErreurChamp(erreur, champEmail, 'L\'adresse email est requise.');
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(champEmail.value)) {
+        afficherErreurChamp(erreur, champEmail, 'Adresse email invalide.');
+      } else {
+        masquerErreurChamp(erreur, champEmail);
+      }
+    });
+
+    document.getElementById('contact-nom').addEventListener('blur', () => {
+      const erreur = document.getElementById('erreur-nom');
+      const champ  = document.getElementById('contact-nom');
+      if (!champ.value.trim()) afficherErreurChamp(erreur, champ, 'Votre nom est requis.');
+      else masquerErreurChamp(erreur, champ);
+    });
+
+    // Soumission
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+
+      // Honeypot : si rempli → bot
+      if (form.querySelector('[name="site_web"]').value) return;
+
+      // Validation complète
+      const erreurs = validerFormulaire();
+      if (erreurs.length > 0) {
+        msgErreur.textContent = erreurs[0];
+        msgErreur.style.display = 'block';
+        form.querySelector('[aria-invalid="true"]')?.focus();
+        return;
+      }
+
+      btnEnvoyer.disabled = true;
+      texteBtn.textContent = 'Envoi en cours…';
+      msgErreur.style.display = 'none';
+
+      // Simulation d'envoi (remplacer par une vraie API)
+      await new Promise(r => setTimeout(r, 1200));
+
+      // Succès simulé
+      form.style.display = 'none';
+      msgSucces.style.display = 'block';
+      msgSucces.focus();
+
+      // En production, remplacer par :
+      // const reponse = await fetch('/api/contact.php', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ nom, email, objet, message, budget }),
+      // });
+    });
+
+    function validerFormulaire() {
+      const erreurs = [];
+      const nom     = document.getElementById('contact-nom');
+      const email   = document.getElementById('contact-email');
+      const objet   = document.getElementById('contact-objet');
+      const message = document.getElementById('contact-message');
+      const rgpd    = document.getElementById('contact-rgpd');
+
+      if (!nom.value.trim()) {
+        afficherErreurChamp(document.getElementById('erreur-nom'), nom, 'Votre nom est requis.');
+        erreurs.push('Nom requis.');
+      } else masquerErreurChamp(document.getElementById('erreur-nom'), nom);
+
+      if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+        afficherErreurChamp(document.getElementById('erreur-email'), email, 'Email invalide.');
+        erreurs.push('Email invalide.');
+      } else masquerErreurChamp(document.getElementById('erreur-email'), email);
+
+      if (!objet.value) {
+        afficherErreurChamp(document.getElementById('erreur-objet'), objet, 'Veuillez sélectionner un objet.');
+        erreurs.push('Objet requis.');
+      } else masquerErreurChamp(document.getElementById('erreur-objet'), objet);
+
+      if (message.value.trim().length < 20) {
+        afficherErreurChamp(document.getElementById('erreur-message'), message, 'Votre message doit contenir au moins 20 caractères.');
+        erreurs.push('Message trop court.');
+      } else masquerErreurChamp(document.getElementById('erreur-message'), message);
+
+      if (!rgpd.checked) {
+        document.getElementById('erreur-rgpd').textContent = 'Vous devez accepter la politique de confidentialité.';
+        document.getElementById('erreur-rgpd').removeAttribute('hidden');
+        erreurs.push('Consentement RGPD requis.');
+      } else {
+        document.getElementById('erreur-rgpd').setAttribute('hidden', '');
+      }
+
+      return erreurs;
+    }
+
+    function afficherErreurChamp(elemErreur, champ, message) {
+      if (!elemErreur || !champ) return;
+      elemErreur.textContent = message;
+      elemErreur.removeAttribute('hidden');
+      champ.classList.add('champ-erreur');
+      champ.setAttribute('aria-invalid', 'true');
+    }
+
+    function masquerErreurChamp(elemErreur, champ) {
+      if (!elemErreur || !champ) return;
+      elemErreur.setAttribute('hidden', '');
+      champ.classList.remove('champ-erreur');
+      champ.removeAttribute('aria-invalid');
+    }
+  </script>
+
+</body>
+</html>

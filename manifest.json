@@ -1,0 +1,50 @@
+{
+  "name": "Portfolio Éditorial",
+  "short_name": "Portfolio",
+  "description": "Portfolio et blog éditorial — Security engineering student",
+  "lang": "fr",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "categories": ["portfolio", "blog", "education"],
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshots/accueil.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "label": "Page d'accueil éditoriale"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Lire les derniers articles",
+      "url": "/blog/index.html",
+      "icons": [{ "src": "/assets/icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Projets",
+      "short_name": "Projets",
+      "description": "Voir les projets",
+      "url": "/projets.html",
+      "icons": [{ "src": "/assets/icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ]
+}

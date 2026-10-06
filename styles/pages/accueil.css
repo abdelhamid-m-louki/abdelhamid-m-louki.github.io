@@ -1,0 +1,885 @@
+/**
+ * STYLES PAGE D'ACCUEIL
+ * Portfolio Éditorial — Hero, projets, blog, contact
+ *
+ * Mise en page éditoriale inspirée de la une d'un journal :
+ * portrait photographique, collage, typographie de presse.
+ */
+
+/* ============================================================
+   SECTION HÉROS
+   ============================================================ */
+
+.section-hero {
+  padding-top: var(--espace-12);
+  padding-bottom: var(--espace-20);
+  position: relative;
+  overflow: hidden;
+  border-bottom: var(--bordure-tres-forte);
+}
+
+/* Texture de fond — colonnes de journal simulées */
+.section-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent calc(100% / 12 - 1px),
+    rgba(0,0,0,0.03) calc(100% / 12 - 1px),
+    rgba(0,0,0,0.03) calc(100% / 12)
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .section-hero::before {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent calc(100% / 12 - 1px),
+      rgba(255,255,255,0.02) calc(100% / 12 - 1px),
+      rgba(255,255,255,0.02) calc(100% / 12)
+    );
+  }
+}
+
+/* Grille héros — 2 colonnes asymétriques */
+.hero-grille {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: var(--espace-10);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   CONTENU HÉROS — GAUCHE
+   ============================================================ */
+
+.hero-contenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Étiquettes volantes au-dessus du titre */
+.etiquettes-hero {
+  display: flex;
+  gap: var(--espace-3);
+  margin-bottom: var(--espace-5);
+  flex-wrap: wrap;
+}
+
+/* Kicker */
+.hero-contenu .kicker {
+  font-size: var(--taille-sm);
+  margin-bottom: var(--espace-4);
+}
+
+/* Manchette principale */
+.hero-contenu .manchette {
+  margin: 0;
+  margin-bottom: var(--espace-6);
+  position: relative;
+}
+
+/* Soulignage décoratif sous le prénom en italique */
+.hero-contenu .manchette em {
+  font-style: italic;
+  position: relative;
+  display: inline-block;
+}
+
+.hero-contenu .manchette em::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--couleur-accent);
+}
+
+/* Chapô */
+.hero-chapo {
+  margin-bottom: var(--espace-6);
+  max-width: 52ch;
+  color: var(--texte-secondaire);
+}
+
+/* Filet de séparation */
+.hero-filet {
+  margin-bottom: var(--espace-6);
+}
+
+/* ============================================================
+   MÉTRIQUES ÉDITORIALES
+   ============================================================ */
+
+.hero-metriques {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: var(--espace-8);
+  border: var(--bordure-fine);
+  padding: var(--espace-4) var(--espace-6);
+  background: var(--couleur-fond-papier);
+  width: fit-content;
+}
+
+.metrique-item {
+  text-align: center;
+  padding: 0 var(--espace-6);
+}
+
+.metrique-item:first-child {
+  padding-left: 0;
+}
+
+.metrique-nombre {
+  font-family: var(--police-display);
+  font-size: var(--taille-4xl);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--texte-primaire);
+  letter-spacing: var(--espacement-serre);
+  /* Animation compteur */
+  transition: opacity 0.3s ease;
+}
+
+.metrique-label {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  margin-top: var(--espace-1);
+  white-space: nowrap;
+}
+
+.metrique-separateur {
+  width: 1px;
+  height: 48px;
+  background: var(--couleur-encre-fantome);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   ACTIONS ET SOCIAUX
+   ============================================================ */
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--espace-8);
+}
+
+.hero-sociaux {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+}
+
+.lien-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: var(--bordure-forte);
+  color: var(--texte-tertiaire);
+  text-decoration: none;
+  transition: all var(--transition-normale);
+}
+
+.lien-social:hover {
+  color: var(--texte-primaire);
+  border-color: var(--couleur-accent);
+  background: var(--couleur-accent-tache);
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 var(--couleur-accent);
+}
+
+/* ============================================================
+   PORTRAIT ÉDITORIAL — DROITE
+   ============================================================ */
+
+.hero-portrait-zone {
+  position: relative;
+  min-height: 560px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Fond simulant des colonnes de journal imprimées */
+.portrait-fond-journal {
+  position: absolute;
+  inset: var(--espace-6) 0 0;
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-fine);
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Lignes simulant du texte de journal */
+.portrait-fond-colonnes {
+  position: absolute;
+  inset: var(--espace-6);
+  background-image: repeating-linear-gradient(
+    transparent 0,
+    transparent 18px,
+    rgba(0,0,0,0.06) 18px,
+    rgba(0,0,0,0.06) 19px
+  );
+  background-size: 100% 19px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .portrait-fond-colonnes {
+    background-image: repeating-linear-gradient(
+      transparent 0,
+      transparent 18px,
+      rgba(255,255,255,0.05) 18px,
+      rgba(255,255,255,0.05) 19px
+    );
+  }
+}
+
+/* Cadre principal contenant le portrait */
+.portrait-cadre {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 380px;
+}
+
+/* Wrapper image portrait */
+.portrait-image-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Image portrait PNG transparent */
+.portrait-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 2;
+  /* Filtre éditorial — monochromatique partiel */
+  filter: contrast(1.1) saturate(0.4);
+  transition: filter var(--transition-lente);
+}
+
+.portrait-image:hover {
+  filter: contrast(1.05) saturate(0.7);
+}
+
+@media (prefers-color-scheme: dark) {
+  .portrait-image {
+    filter: contrast(1.15) saturate(0.3) brightness(0.95);
+  }
+  .portrait-image:hover {
+    filter: contrast(1.1) saturate(0.6) brightness(1);
+  }
+}
+
+/* ============================================================
+   ÉTIQUETTES FLOTTANTES DU PORTRAIT
+   ============================================================ */
+
+.portrait-etiquettes {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.etiquette-flottante {
+  position: absolute;
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-forte);
+  padding: var(--espace-3) var(--espace-4);
+  box-shadow: var(--ombre-carte);
+  max-width: 180px;
+  pointer-events: auto;
+
+  /* Animation de flottement */
+  animation: flottement-editorial 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.etiquette-flottante-1 {
+  top: 12%;
+  left: -14%;
+  transform: rotate(-2deg);
+  animation-delay: 0s;
+}
+
+.etiquette-flottante-2 {
+  bottom: 28%;
+  left: -12%;
+  transform: rotate(1.5deg);
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+
+.etiquette-flottante-3 {
+  top: 8%;
+  right: -10%;
+  transform: rotate(2.5deg);
+  animation-delay: -4s;
+  animation-duration: 8s;
+}
+
+.etiquette-flottante-icone {
+  color: var(--couleur-accent-sombre);
+  margin-bottom: var(--espace-2);
+}
+
+.etiquette-flottante-texte {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-sm);
+  font-weight: 700;
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  color: var(--texte-primaire);
+  line-height: 1.2;
+}
+
+.etiquette-flottante-sous {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+  margin-top: var(--espace-1);
+  letter-spacing: var(--espacement-large);
+}
+
+/* Numéro décoratif géant */
+.portrait-numero {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  font-family: var(--police-display);
+  font-size: 120px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--couleur-accent-tache);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Tampon superposé */
+.portrait-tampon {
+  position: absolute;
+  bottom: 30%;
+  right: -5%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ============================================================
+   ANIMATION FLOTTEMENT ÉDITORIAL
+   ============================================================ */
+
+@keyframes flottement-editorial {
+  0%   { transform: translateY(0px) rotate(var(--rotation-base, -2deg)); }
+  33%  { transform: translateY(-6px) rotate(calc(var(--rotation-base, -2deg) + 0.5deg)); }
+  66%  { transform: translateY(-3px) rotate(calc(var(--rotation-base, -2deg) - 0.5deg)); }
+  100% { transform: translateY(0px) rotate(var(--rotation-base, -2deg)); }
+}
+
+.etiquette-flottante-1 { --rotation-base: -2deg; }
+.etiquette-flottante-2 { --rotation-base: 1.5deg; }
+.etiquette-flottante-3 { --rotation-base: 2.5deg; }
+
+/* ============================================================
+   EN-TÊTES DE SECTION ÉDITORIALE
+   ============================================================ */
+
+.section-header-editorial {
+  margin-bottom: var(--espace-8);
+}
+
+.titre-section-editorial {
+  font-family: var(--police-display);
+  font-size: clamp(var(--taille-xl), 3vw, var(--taille-3xl));
+  font-weight: 700;
+  letter-spacing: var(--espacement-serre);
+  color: var(--texte-primaire);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.lien-voir-tout {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-2);
+  font-family: var(--police-condensee);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--texte-tertiaire);
+  text-decoration: none;
+  border-bottom: 1px solid var(--texte-tertiaire);
+  padding-bottom: 2px;
+  transition: all var(--transition-rapide);
+  white-space: nowrap;
+}
+
+.lien-voir-tout:hover {
+  color: var(--couleur-accent-sombre);
+  border-bottom-color: var(--couleur-accent);
+}
+
+/* ============================================================
+   GRILLE PROJETS
+   ============================================================ */
+
+.section-projets {
+  background: var(--couleur-fond-alt);
+  border-top: var(--bordure-tres-forte);
+  border-bottom: var(--bordure-tres-forte);
+}
+
+.grille-projets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: var(--bordure-forte);
+}
+
+.grille-projets .carte-projet {
+  border: none;
+  border-right: var(--bordure-forte);
+}
+
+.grille-projets .carte-projet:last-child {
+  border-right: none;
+}
+
+/* ============================================================
+   SQUELETTES DE CHARGEMENT
+   ============================================================ */
+
+.squelette-carte {
+  pointer-events: none;
+}
+
+.squelette-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(
+    90deg,
+    var(--couleur-fond-alt) 25%,
+    var(--couleur-fond-papier) 50%,
+    var(--couleur-fond-alt) 75%
+  );
+  background-size: 400% 100%;
+  animation: squelette-anim 1.5s ease-in-out infinite;
+}
+
+.squelette-texte {
+  height: 12px;
+  background: linear-gradient(
+    90deg,
+    var(--couleur-fond-alt) 25%,
+    var(--couleur-fond-papier) 50%,
+    var(--couleur-fond-alt) 75%
+  );
+  background-size: 400% 100%;
+  animation: squelette-anim 1.5s ease-in-out infinite;
+  margin-bottom: var(--espace-3);
+}
+
+.squelette-court  { width: 35%; animation-delay: 0.1s; }
+.squelette-long   { width: 100%; animation-delay: 0.2s; }
+.squelette-moyen  { width: 70%; animation-delay: 0.3s; }
+
+@keyframes squelette-anim {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ============================================================
+   SECTION BLOG — GRILLE ACCUEIL
+   ============================================================ */
+
+.section-blog {
+  border-bottom: var(--bordure-tres-forte);
+}
+
+/* Grille blog : vedette gauche + liste droite */
+.grille-blog-accueil {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0;
+  border: var(--bordure-forte);
+}
+
+/* Article vedette — prend toute la hauteur à gauche */
+.grille-blog-accueil .carte-vedette:first-child {
+  border-right: var(--bordure-forte);
+}
+
+/* Articles secondaires — colonne de droite empilés */
+.grille-blog-accueil .articles-secondaires {
+  display: flex;
+  flex-direction: column;
+}
+
+.grille-blog-accueil .breve {
+  padding: var(--espace-5);
+  border-bottom: var(--bordure-fine);
+  margin: 0;
+}
+
+.grille-blog-accueil .breve:last-child {
+  border-bottom: none;
+}
+
+/* ============================================================
+   SECTION À PROPOS
+   ============================================================ */
+
+.section-apropos {
+  border-bottom: var(--bordure-tres-forte);
+}
+
+.apropos-grille {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--espace-12);
+  align-items: start;
+}
+
+.apropos-texte {
+  max-width: none;
+}
+
+.competences-titre {
+  margin-bottom: var(--espace-5);
+}
+
+/* Barre de compétence */
+.competence-item {
+  margin-bottom: var(--espace-5);
+}
+
+/* ============================================================
+   SECTION EXPÉRIENCE
+   ============================================================ */
+
+.section-experience {
+  border-bottom: var(--bordure-tres-forte);
+}
+
+.experience-grille {
+  gap: var(--espace-12);
+}
+
+/* ============================================================
+   SECTION CONTACT
+   ============================================================ */
+
+.section-contact {
+  background: var(--couleur-encre);
+  color: var(--couleur-fond);
+  border-bottom: var(--bordure-tres-forte);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Lettre décorative géante */
+.contact-numero {
+  position: absolute;
+  top: -40px;
+  right: -20px;
+  font-family: var(--police-display);
+  font-size: 320px;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(200, 168, 64, 0.08);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.contact-contenu {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.contact-contenu .kicker {
+  color: var(--couleur-accent);
+}
+
+.contact-contenu .titre-grand {
+  color: var(--couleur-fond);
+}
+
+.contact-contenu .titre-grand em {
+  font-style: italic;
+  color: var(--couleur-accent);
+}
+
+.contact-contenu .chapeau {
+  color: rgba(240, 235, 224, 0.65);
+}
+
+.contact-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-4);
+  flex-wrap: wrap;
+}
+
+/* Bouton adapté au fond sombre */
+.contact-contenu .btn-contour {
+  border-color: rgba(240, 235, 224, 0.40);
+  color: var(--couleur-fond);
+}
+
+.contact-contenu .btn-contour:hover {
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+  background: rgba(200, 168, 64, 0.08);
+}
+
+/* ============================================================
+   BOUTON RETOUR EN HAUT
+   ============================================================ */
+
+.btn-haut-page {
+  position: fixed;
+  bottom: var(--espace-6);
+  right: var(--espace-6);
+  z-index: var(--z-fixe);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--couleur-encre);
+  color: var(--couleur-fond);
+  border: 2px solid var(--couleur-encre);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--couleur-accent);
+  transition: all var(--transition-normale);
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.btn-haut-page:not([hidden]) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-haut-page:hover {
+  background: var(--couleur-accent);
+  color: var(--couleur-encre);
+  border-color: var(--couleur-accent-sombre);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--couleur-encre);
+}
+
+/* ============================================================
+   LIEN ADMIN DISCRET
+   ============================================================ */
+
+.lien-admin-discret {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: rgba(240, 235, 224, 0.35);
+  text-decoration: none;
+  transition: color var(--transition-rapide);
+}
+
+.lien-admin-discret:hover {
+  color: var(--couleur-accent);
+}
+
+/* ============================================================
+   PIED SOCIAUX
+   ============================================================ */
+
+.pied-sociaux {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+}
+
+.pied-social {
+  border-color: rgba(240, 235, 224, 0.20);
+  color: rgba(240, 235, 224, 0.45);
+}
+
+.pied-social:hover {
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+  background: rgba(200, 168, 64, 0.10);
+  box-shadow: 2px 2px 0 rgba(200, 168, 64, 0.30);
+}
+
+/* ============================================================
+   RESPONSIVE — TABLETTE
+   ============================================================ */
+
+@media (max-width: 1199px) {
+  .hero-grille {
+    grid-template-columns: 1fr 420px;
+    gap: var(--espace-8);
+  }
+
+  .grille-projets {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grille-projets .carte-projet:nth-child(2) {
+    border-right: none;
+  }
+
+  .grille-projets .carte-projet:nth-child(odd) {
+    border-right: var(--bordure-forte);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .hero-grille {
+    grid-template-columns: 1fr;
+    gap: var(--espace-10);
+  }
+
+  .hero-portrait-zone {
+    min-height: 400px;
+    order: -1; /* Portrait en premier sur mobile */
+  }
+
+  .etiquette-flottante-1 { left: -5%; }
+  .etiquette-flottante-2 { left: -5%; }
+  .etiquette-flottante-3 { right: -5%; }
+
+  .portrait-numero {
+    font-size: 80px;
+  }
+
+  .hero-metriques {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .apropos-grille {
+    grid-template-columns: 1fr;
+    gap: var(--espace-8);
+  }
+
+  .experience-grille {
+    grid-template-columns: 1fr;
+    gap: var(--espace-8);
+  }
+
+  .grille-blog-accueil {
+    grid-template-columns: 1fr;
+  }
+
+  .grille-blog-accueil .carte-vedette:first-child {
+    border-right: none;
+    border-bottom: var(--bordure-forte);
+  }
+
+  .contact-numero {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-hero {
+    padding-top: var(--espace-8);
+    padding-bottom: var(--espace-12);
+  }
+
+  .hero-contenu .manchette {
+    font-size: clamp(var(--taille-xl), 4vw, var(--taille-2xl));
+  }
+
+  .grille-projets {
+    grid-template-columns: 1fr;
+  }
+
+  .grille-projets .carte-projet {
+    border-right: none;
+    border-bottom: var(--bordure-forte);
+  }
+
+  .grille-projets .carte-projet:last-child {
+    border-bottom: none;
+  }
+
+  .hero-metriques {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--espace-4);
+    padding: var(--espace-5);
+  }
+
+  .metrique-separateur {
+    width: 48px;
+    height: 1px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .contact-actions {
+    flex-direction: column;
+  }
+
+  .contact-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pied-grille {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espace-8);
+  }
+}
+
+@media (max-width: 479px) {
+  .hero-portrait-zone {
+    min-height: 320px;
+  }
+
+  .etiquette-flottante {
+    display: none;
+  }
+
+  .pied-grille {
+    grid-template-columns: 1fr;
+  }
+}

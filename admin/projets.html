@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Projets — Administration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=EB+Garamond:wght@400;600&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+  <link rel="stylesheet" href="/styles/components/cartes.css">
+  <link rel="stylesheet" href="/styles/pages/admin.css">
+  <link rel="stylesheet" href="/styles/pages/admin-crud.css">
+  <script>window.CONFIG = { SITE_NOM:'Portfolio Éditorial', SITE_URL:'http://www.amlouki.me', SUPABASE_URL:'https://qayrcorszsyiujzxfmxw.supabase.co', SUPABASE_ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFheXJjb3JzenN5aXVqenhmbXh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxOTk1MzcsImV4cCI6MjA5NDc3NTUzN30.4vwMex2ddoD3bCLPzdj60LoDZ5ba2igmBpVtOauQa7I' };</script>
+</head>
+<body class="corps-admin">
+<div class="gabarit-admin">
+
+  <!-- SIDEBAR (identique) -->
+  <aside class="sidebar-admin" id="sidebar-admin" aria-label="Navigation">
+    <div class="sidebar-logo"><a href="/" class="sidebar-logo-lien"><div class="sidebar-logo-icone" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/></svg></div><div><div class="sidebar-logo-nom">Portfolio</div><div class="sidebar-logo-sous">Administration</div></div></a></div>
+    <nav class="sidebar-nav"><div class="sidebar-section-titre">Principal</div>
+      <a href="/admin/tableau-de-bord.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>Tableau de bord</a>
+      <div class="sidebar-section-titre" style="margin-top:var(--espace-5)">Contenu</div>
+      <a href="/admin/articles.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/></svg>Articles</a>
+      <a href="/admin/projets.html" class="nav-admin-lien actif" aria-current="page"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Projets</a>
+      <a href="/admin/medias.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>Médiathèque</a>
+      <div class="sidebar-section-titre" style="margin-top:var(--espace-5)">Profil</div>
+      <a href="/admin/competences.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Compétences</a>
+      <a href="/admin/experiences.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>Expériences</a>
+      <a href="/admin/formations.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Formations</a>
+      <a href="/admin/certifications.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>Certifications</a>
+      <div class="sidebar-section-titre" style="margin-top:var(--espace-5)">Système</div>
+      <a href="/admin/seo.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>SEO</a>
+      <a href="/admin/utilisateurs.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>Utilisateurs</a>
+      <a href="/admin/parametres.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>Paramètres</a>
+    </nav>
+    <div class="sidebar-utilisateur"><div class="sidebar-utilisateur-avatar" id="avatar-utilisateur" aria-hidden="true">A</div><div class="sidebar-utilisateur-info"><div class="sidebar-utilisateur-nom" id="nom-utilisateur">Chargement…</div><div class="sidebar-utilisateur-role" id="role-utilisateur">Administrateur</div></div><button class="btn-deconnexion" id="btn-deconnexion" aria-label="Se déconnecter"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button></div>
+  </aside>
+
+  <div class="contenu-admin">
+    <header class="topbar-admin">
+      <div class="topbar-titre"><h1 class="topbar-h1" id="topbar-h1">Projets</h1><p class="topbar-sous-titre" id="topbar-date"></p></div>
+      <div class="topbar-actions">
+        <span class="indicateur-sauvegarde" id="indicateur-sauvegarde"></span>
+        <button class="btn btn-fantome btn-sm" id="btn-retour-liste" style="display:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>Retour</button>
+        <button class="btn btn-accent btn-sm" id="btn-nouveau-projet"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Nouveau projet</button>
+      </div>
+    </header>
+
+    <main class="main-admin" id="contenu-principal" role="main">
+
+      <!-- VUE LISTE -->
+      <div id="vue-liste">
+        <div class="barre-filtres">
+          <div class="barre-filtres-recherche"><svg class="recherche-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input type="search" id="recherche-projets" class="champ" placeholder="Rechercher un projet…" aria-label="Rechercher dans les projets"></div>
+          <div class="barre-filtres-separateur" aria-hidden="true"></div>
+          <select id="filtre-statut-projet" class="selecteur filtre-select" aria-label="Filtrer par statut"><option value="">Tous</option><option value="publié">Publiés</option><option value="brouillon">Brouillons</option></select>
+          <span class="barre-filtres-compteur" id="compteur-projets" aria-live="polite"></span>
+        </div>
+
+        <div class="tableau-crud-wrapper">
+          <table class="tableau-crud" aria-label="Liste des projets">
+            <thead><tr>
+              <th class="col-image" aria-label="Image"></th>
+              <th>Titre</th>
+              <th>Catégorie</th>
+              <th>Technologies</th>
+              <th>Statut</th>
+              <th>Ordre</th>
+              <th class="col-actions" aria-label="Actions"></th>
+            </tr></thead>
+            <tbody id="corps-tableau-projets" aria-live="polite"></tbody>
+          </table>
+        </div>
+        <div id="pagination-projets"></div>
+      </div>
+
+      <!-- VUE ÉDITEUR -->
+      <div id="vue-editeur" style="display:none">
+        <div class="gabarit-editeur">
+          <div class="editeur-colonne-principale">
+
+            <!-- Titre et infos principales -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Informations du projet</span></div>
+              <div class="bloc-editeur-corps">
+                <div class="groupe-champ">
+                  <label for="champ-titre-projet" class="etiquette etiquette-obligatoire">Titre du projet</label>
+                  <input type="text" id="champ-titre-projet" class="champ" placeholder="Nom du projet" style="font-family:var(--police-display);font-size:var(--taille-xl);font-weight:700;" aria-label="Titre du projet" required>
+                </div>
+                <div class="groupe-champ">
+                  <label for="champ-slug-projet" class="etiquette">Slug URL</label>
+                  <div class="champ-slug-wrapper"><span class="champ-slug-prefixe">/projets/</span><input type="text" id="champ-slug-projet" class="champ" placeholder="slug-du-projet" aria-label="Slug URL"></div>
+                </div>
+                <div class="grille-form-2">
+                  <div class="groupe-champ">
+                    <label for="champ-cat-projet" class="etiquette">Catégorie</label>
+                    <input type="text" id="champ-cat-projet" class="champ" placeholder="Application Web, API, Design…" list="cats-projet-list" aria-label="Catégorie du projet">
+                    <datalist id="cats-projet-list"><option value="Application Web"><option value="API & Backend"><option value="Data Visualisation"><option value="Mobile"><option value="Design Système"><option value="Open Source"></datalist>
+                  </div>
+                  <div class="groupe-champ">
+                    <label for="champ-annee-projet" class="etiquette">Année</label>
+                    <input type="number" id="champ-annee-projet" class="champ" placeholder="2024" min="2000" max="2099" aria-label="Année du projet">
+                  </div>
+                </div>
+                <div class="grille-form-2">
+                  <div class="groupe-champ">
+                    <label for="champ-duree-projet" class="etiquette">Durée</label>
+                    <input type="text" id="champ-duree-projet" class="champ" placeholder="3 mois" aria-label="Durée du projet">
+                  </div>
+                  <div class="groupe-champ">
+                    <label for="champ-role-projet" class="etiquette">Rôle</label>
+                    <input type="text" id="champ-role-projet" class="champ" placeholder="Développeur principal" aria-label="Votre rôle dans le projet">
+                  </div>
+                </div>
+                <div class="groupe-champ">
+                  <label for="champ-desc-courte" class="etiquette">Description courte</label>
+                  <textarea id="champ-desc-courte" class="zone-texte" rows="2" placeholder="Description concise affichée dans les listes…" aria-label="Description courte du projet"></textarea>
+                </div>
+                <div class="groupe-champ">
+                  <label for="champ-desc-projet" class="etiquette">Description complète</label>
+                  <textarea id="champ-desc-projet" class="zone-texte" rows="5" placeholder="Description détaillée du projet, contexte, défis techniques, solutions…" aria-label="Description complète du projet"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Liens -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Liens</span></div>
+              <div class="bloc-editeur-corps">
+                <div class="groupe-champ">
+                  <label for="champ-url-demo" class="etiquette">URL Démo</label>
+                  <input type="url" id="champ-url-demo" class="champ" placeholder="https://demo.exemple.fr" aria-label="URL de démonstration">
+                </div>
+                <div class="groupe-champ">
+                  <label for="champ-url-code" class="etiquette">URL Code source</label>
+                  <input type="url" id="champ-url-code" class="champ" placeholder="https://github.com/…" aria-label="URL du code source">
+                </div>
+              </div>
+            </div>
+
+            <!-- Technologies -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Technologies</span></div>
+              <div class="bloc-editeur-corps">
+                <div class="saisie-tags" id="saisie-technos" role="group" aria-label="Technologies utilisées"></div>
+                <p class="indication">Appuyez sur Entrée pour ajouter une technologie</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sidebar -->
+          <div class="editeur-sidebar">
+            <!-- Publication -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Publication</span></div>
+              <div class="bloc-editeur-corps">
+                <div class="panneau-publication">
+                  <div class="publication-ligne">
+                    <span class="publication-cle">Statut</span>
+                    <select id="champ-statut-projet" class="selecteur" style="height:32px;font-size:var(--taille-xs);" aria-label="Statut de publication">
+                      <option value="brouillon">Brouillon</option>
+                      <option value="publié">Publié</option>
+                      <option value="archivé">Archivé</option>
+                    </select>
+                  </div>
+                  <div class="publication-ligne">
+                    <span class="publication-cle">Ordre d'affichage</span>
+                    <input type="number" id="champ-ordre-projet" class="champ" style="height:32px;font-size:var(--taille-xs);width:70px;" min="1" value="1" aria-label="Ordre d'affichage">
+                  </div>
+                  <div class="ligne-interrupteur">
+                    <span class="ligne-interrupteur-label">Projet vedette</span>
+                    <label class="interrupteur" aria-label="Marquer comme projet vedette">
+                      <input type="checkbox" class="interrupteur-entree" id="champ-vedette-projet">
+                      <div class="interrupteur-piste"><div class="interrupteur-curseur"></div></div>
+                    </label>
+                  </div>
+                  <div class="boutons-publication">
+                    <button class="btn btn-fantome btn-sm" id="btn-sauv-projet" type="button">Enregistrer</button>
+                    <button class="btn btn-primaire btn-sm" id="btn-publier-projet" type="button">Publier</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Image principale</span></div>
+              <div class="bloc-editeur-corps" style="padding:var(--espace-4)">
+                <div class="preview-image-wrapper" id="wrapper-preview-projet"><img id="preview-image-projet" class="preview-image" src="" alt="Aperçu du projet"><button class="btn-supprimer-preview" id="btn-supprimer-img-projet" type="button" aria-label="Supprimer l'image"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+                <div class="zone-upload-image" id="zone-upload-projet"><input type="file" id="input-img-projet" accept="image/*" aria-label="Choisir une image"><svg class="upload-icone" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg><p class="upload-texte"><strong>Cliquer</strong> ou glisser-déposer</p><p class="upload-sous-texte">JPG, PNG, WebP</p></div>
+                <div class="barre-upload" id="barre-upload-projet"><div class="barre-upload-fill"></div></div>
+                <input type="hidden" id="champ-image-projet">
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" id="projet-id-cache">
+      </div>
+
+    </main>
+  </div>
+</div>
+<div class="zone-toasts" id="zone-toasts" aria-live="assertive" role="status"></div>
+
+<script type="module">
+import stockage, { COLLECTIONS } from '/scripts/storage/storage-manager.js';
+import { protegerPage, toast, confirmer, initialiserSaisieTags, initialiserUploadImage, slugifier, lierSlugAuTitre, indicateurSauvegarde, lireParamsURL, formaterDate, formaterDateInput, echapper, rendrePaginationAdmin } from '/scripts/admin/utils-admin.js';
+
+const etat = { vue:'liste', page:1, parPage:10, total:0, filtreStat:'', recherche:'', projetId:null, gestTechnos:null, gestImage:null, indicSauv:null };
+
+async function init() {
+  const ok = await protegerPage();
+  if (!ok) return;
+  etat.indicSauv = indicateurSauvegarde('indicateur-sauvegarde');
+  brancherEvenements();
+  const params = lireParamsURL();
+  if (params.action === 'nouveau') afficherEditeur(null);
+  else if (params.id) await afficherEditeur(params.id);
+  else await chargerListe();
+}
+
+async function chargerListe() {
+  const tbody = document.getElementById('corps-tableau-projets');
+  tbody.innerHTML = '<tr><td colspan="7" style="padding:var(--espace-6);text-align:center;"><div class="squelette-texte" style="height:18px;max-width:400px;margin:0 auto;"></div></td></tr>';
+  try {
+    const options = { parPage:etat.parPage, page:etat.page, tri:'ordre', ordre:'asc' };
+    if (etat.filtreStat) options.filtres = { statut: etat.filtreStat };
+    if (etat.recherche.length >= 2) { options.recherche = etat.recherche; options.champsRecherche = ['titre','description_courte']; }
+    const { donnees, total } = await stockage.obtenirTous(COLLECTIONS.PROJETS, options);
+    etat.total = total;
+    document.getElementById('compteur-projets').textContent = `${total} projet${total > 1 ? 's' : ''}`;
+    if (!donnees?.length) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:var(--espace-10);font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-tertiaire);">Aucun projet trouvé.</td></tr>';
+    } else {
+      const classes = {'publié':'badge-statut-publie','brouillon':'badge-statut-brouillon','archivé':'badge-statut-archive'};
+      tbody.innerHTML = donnees.map(p => `<tr>
+        <td class="col-image">${p.image ? `<img src="${echapper(p.image)}" class="miniature-tableau" alt="">` : `<div class="miniature-placeholder" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div>`}</td>
+        <td><button class="titre-crud-lien" data-action="editer" data-id="${echapper(p.id)}">${echapper(p.titre||'Sans titre')}</button><div class="sous-titre-crud">${echapper(p.slug||'')}</div></td>
+        <td style="font-size:var(--taille-xs);color:var(--texte-tertiaire);font-family:var(--police-mono);">${echapper(p.categorie||'—')}</td>
+        <td style="font-size:var(--taille-xs);color:var(--texte-tertiaire);">${(p.technologies||[]).slice(0,3).map(t=>`<span style="font-family:var(--police-mono);font-size:10px;padding:1px 4px;border:1px solid var(--couleur-encre-fantome);">${echapper(t)}</span>`).join(' ')}</td>
+        <td><span class="badge-statut ${classes[p.statut]||'badge-statut-brouillon'}">${echapper(p.statut||'brouillon')}</span></td>
+        <td style="font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-tertiaire);">${p.ordre||1}</td>
+        <td class="col-actions"><div class="actions-crud">
+          <button class="btn-action-crud" data-action="editer" data-id="${echapper(p.id)}" title="Modifier" aria-label="Modifier ${echapper(p.titre)}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
+          <button class="btn-action-crud danger" data-action="supprimer" data-id="${echapper(p.id)}" data-titre="${echapper(p.titre)}" title="Supprimer" aria-label="Supprimer ${echapper(p.titre)}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+        </div></td>
+      </tr>`).join('');
+      tbody.querySelectorAll('[data-action="editer"]').forEach(b => b.addEventListener('click', () => afficherEditeur(b.dataset.id)));
+      tbody.querySelectorAll('[data-action="supprimer"]').forEach(b => b.addEventListener('click', () => supprimerProjet(b.dataset.id, b.dataset.titre)));
+    }
+    rendrePaginationAdmin('pagination-projets', { page:etat.page, total, parPage:etat.parPage, onChange:async p => { etat.page=p; await chargerListe(); } });
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="7" style="padding:var(--espace-6);color:var(--couleur-erreur);font-family:var(--police-mono);font-size:var(--taille-xs);">${echapper(err.message)}</td></tr>`;
+  }
+}
+
+async function afficherEditeur(id) {
+  basculer('editeur');
+  etat.projetId = id || null;
+  etat.gestTechnos = initialiserSaisieTags('saisie-technos', { placeholder: 'Ajouter une techno…' });
+  etat.gestImage = initialiserUploadImage({ inputId:'input-img-projet', previewId:'preview-image-projet', zoneId:'zone-upload-projet', barreId:'barre-upload-projet', supprimerId:'btn-supprimer-img-projet', destination:'projets', onURL: url => document.getElementById('champ-image-projet').value = url });
+  lierSlugAuTitre('champ-titre-projet', 'champ-slug-projet');
+  document.getElementById('topbar-h1').textContent = id ? 'Modifier le projet' : 'Nouveau projet';
+  if (id) {
+    try {
+      const p = await stockage.obtenirParId(COLLECTIONS.PROJETS, id);
+      document.getElementById('projet-id-cache').value = p.id;
+      document.getElementById('champ-titre-projet').value  = p.titre || '';
+      document.getElementById('champ-slug-projet').value   = p.slug  || '';
+      document.getElementById('champ-cat-projet').value    = p.categorie || '';
+      document.getElementById('champ-annee-projet').value  = p.annee || '';
+      document.getElementById('champ-duree-projet').value  = p.duree || '';
+      document.getElementById('champ-role-projet').value   = p.role  || '';
+      document.getElementById('champ-desc-courte').value   = p.description_courte || '';
+      document.getElementById('champ-desc-projet').value   = p.description || '';
+      document.getElementById('champ-url-demo').value      = p.url_demo || '';
+      document.getElementById('champ-url-code').value      = p.url_code || '';
+      document.getElementById('champ-statut-projet').value = p.statut || 'brouillon';
+      document.getElementById('champ-ordre-projet').value  = p.ordre  || 1;
+      document.getElementById('champ-vedette-projet').checked = !!p.vedette;
+      etat.gestTechnos?.setTags(p.technologies || []);
+      if (p.image) etat.gestImage?.setURL(p.image);
+    } catch (err) { toast(`Erreur : ${err.message}`, 'erreur'); basculer('liste'); }
+  }
+}
+
+async function sauvegarder(publier = false) {
+  const titre = document.getElementById('champ-titre-projet').value.trim();
+  if (!titre) { toast('Le titre est obligatoire.', 'erreur'); return; }
+  etat.indicSauv.chargement();
+  const donnees = {
+    titre, slug: document.getElementById('champ-slug-projet').value || slugifier(titre),
+    categorie: document.getElementById('champ-cat-projet').value,
+    annee: parseInt(document.getElementById('champ-annee-projet').value) || null,
+    duree: document.getElementById('champ-duree-projet').value,
+    role:  document.getElementById('champ-role-projet').value,
+    description_courte: document.getElementById('champ-desc-courte').value.trim(),
+    description:        document.getElementById('champ-desc-projet').value.trim(),
+    url_demo:    document.getElementById('champ-url-demo').value,
+    url_code:    document.getElementById('champ-url-code').value,
+    statut:      publier ? 'publié' : document.getElementById('champ-statut-projet').value,
+    ordre:       parseInt(document.getElementById('champ-ordre-projet').value) || 1,
+    vedette:     document.getElementById('champ-vedette-projet').checked,
+    technologies: etat.gestTechnos?.getTags() || [],
+    image:       document.getElementById('champ-image-projet').value || null,
+  };
+  try {
+    if (etat.projetId) { await stockage.metAJour(COLLECTIONS.PROJETS, etat.projetId, donnees); }
+    else { const n = await stockage.creer(COLLECTIONS.PROJETS, donnees); etat.projetId = n.id; history.replaceState({}, '', `?id=${n.id}`); }
+    etat.indicSauv.succes(publier ? 'Publié !' : 'Sauvegardé');
+    toast(publier ? 'Projet publié.' : 'Projet sauvegardé.', 'succes');
+  } catch (err) { etat.indicSauv.erreur(); toast(`Erreur : ${err.message}`, 'erreur'); }
+}
+
+async function supprimerProjet(id, titre) {
+  const ok = await confirmer({ titre:'Supprimer le projet', message:`Supprimer « ${titre} » ?`, labelOk:'Supprimer', danger:true });
+  if (!ok) return;
+  try { await stockage.supprimer(COLLECTIONS.PROJETS, id); toast('Projet supprimé.', 'succes'); await chargerListe(); }
+  catch (err) { toast(`Erreur : ${err.message}`, 'erreur'); }
+}
+
+function basculer(vue) {
+  etat.vue = vue;
+  document.getElementById('vue-liste').style.display   = vue === 'liste' ? '' : 'none';
+  document.getElementById('vue-editeur').style.display = vue === 'editeur' ? '' : 'none';
+  document.getElementById('btn-retour-liste').style.display  = vue === 'editeur' ? '' : 'none';
+  document.getElementById('btn-nouveau-projet').style.display = vue === 'liste'   ? '' : 'none';
+  if (vue === 'liste') { etat.projetId = null; document.getElementById('topbar-h1').textContent = 'Projets'; history.replaceState({}, '', '/admin/projets.html'); }
+}
+
+function brancherEvenements() {
+  document.getElementById('btn-nouveau-projet')?.addEventListener('click', () => afficherEditeur(null));
+  document.getElementById('btn-retour-liste')?.addEventListener('click', async () => { basculer('liste'); await chargerListe(); });
+  document.getElementById('btn-sauv-projet')?.addEventListener('click',    () => sauvegarder(false));
+  document.getElementById('btn-publier-projet')?.addEventListener('click', () => sauvegarder(true));
+  let t = null;
+  document.getElementById('recherche-projets')?.addEventListener('input', e => { clearTimeout(t); t = setTimeout(async () => { etat.recherche = e.target.value; etat.page = 1; await chargerListe(); }, 320); });
+  document.getElementById('filtre-statut-projet')?.addEventListener('change', async e => { etat.filtreStat = e.target.value; etat.page = 1; await chargerListe(); });
+  document.addEventListener('keydown', e => { if ((e.ctrlKey||e.metaKey) && e.key === 's' && etat.vue === 'editeur') { e.preventDefault(); sauvegarder(false); } });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

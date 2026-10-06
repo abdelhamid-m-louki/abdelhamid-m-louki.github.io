@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO dynamique — complété par blog.js -->
+  <title>Blog — Portfolio Éditorial</title>
+  <meta name="description" content="Toutes mes publications : design, code et culture numérique. Blog éditorial indépendant.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://www.exemple.fr/blog/index.html">
+
+  <meta property="og:type"      content="website">
+  <meta property="og:title"     content="Blog — Portfolio Éditorial">
+  <meta property="og:description" content="Toutes mes publications : design, code et culture numérique.">
+  <meta property="og:url"       content="https://www.exemple.fr/blog/index.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/navigation.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+  <link rel="stylesheet" href="/styles/components/cartes.css">
+  <link rel="stylesheet" href="/styles/pages/blog.css">
+
+  <script>
+    window.CONFIG = {
+      SITE_NOM:  'Portfolio Éditorial',
+      SITE_URL:  'https://www.exemple.fr',
+      SUPABASE_URL: '',
+      SUPABASE_ANON_KEY: '',
+    };
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": "https://www.exemple.fr/blog/#blog",
+    "name": "Blog — Portfolio Éditorial",
+    "description": "Toutes mes publications : design, code et culture numérique.",
+    "url": "https://www.exemple.fr/blog/index.html",
+    "inLanguage": "fr",
+    "publisher": {
+      "@type": "Person",
+      "@id": "https://www.exemple.fr/#personne",
+      "name": "Prénom Nom"
+    }
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- Navigation (identique à l'accueil) -->
+  <header class="en-tete" role="banner" id="en-tete-principal">
+    <div class="bandeau-superieur" aria-label="Informations éditoriales">
+      <div class="conteneur">
+        <div class="bandeau-interieur">
+          <span class="bandeau-date" id="date-bandeau"></span>
+          <span class="bandeau-edition">Blog — Édition numérique</span>
+          <div class="bandeau-actions">
+            <a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Accès administration">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="conteneur">
+      <div class="en-tete-masthead">
+        <a href="/" class="logo-journal" aria-label="Portfolio Éditorial — Accueil">Portfolio Éditorial</a>
+        <span class="sous-titre-journal">Revue de création &amp; de code</span>
+        <button class="bouton-hamburger" id="btn-hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <nav class="nav-rubriques" aria-label="Navigation principale">
+      <div class="conteneur">
+        <div class="nav-rubriques-interieur" role="list">
+          <a href="/"                 class="nav-lien" role="listitem">Accueil</a>
+          <a href="/a-propos.html"    class="nav-lien" role="listitem">À propos</a>
+          <a href="/projets.html"     class="nav-lien" role="listitem">Projets</a>
+          <a href="/blog/index.html"  class="nav-lien actif" role="listitem" aria-current="page">Blog</a>
+          <a href="/contact.html"     class="nav-lien" role="listitem">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Menu mobile -->
+  <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile" hidden>
+    <div class="menu-mobile-en-tete">
+      <span class="logo-journal" style="font-size:var(--taille-xl)">Portfolio Éditorial</span>
+      <button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer le menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <nav class="menu-mobile-nav" aria-label="Navigation mobile">
+      <a href="/"                 class="menu-mobile-lien">Accueil</a>
+      <a href="/a-propos.html"    class="menu-mobile-lien">À propos</a>
+      <a href="/projets.html"     class="menu-mobile-lien">Projets</a>
+      <a href="/blog/index.html"  class="menu-mobile-lien">Blog</a>
+      <a href="/contact.html"     class="menu-mobile-lien">Contact</a>
+    </nav>
+  </div>
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <main id="contenu-principal" role="main">
+
+    <!-- ============================================================
+         EN-TÊTE DU BLOG
+         ============================================================ -->
+
+    <div class="blog-en-tete">
+      <div class="conteneur">
+
+        <!-- Fil d'Ariane -->
+        <nav aria-label="Fil d'Ariane" class="fil-ariane-wrapper">
+          <ol class="fil-ariane" role="list" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="fil-ariane-element" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+              <a href="/" class="fil-ariane-lien" itemprop="item">
+                <span itemprop="name">Accueil</span>
+              </a>
+              <meta itemprop="position" content="1">
+              <span class="fil-ariane-separateur" aria-hidden="true">/</span>
+            </li>
+            <li class="fil-ariane-element" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+              <span class="fil-ariane-courant" itemprop="name">Blog</span>
+              <meta itemprop="position" content="2">
+            </li>
+          </ol>
+        </nav>
+
+        <div class="blog-en-tete-interieur">
+          <div>
+            <h1 class="titre-grand" id="titre-page-blog">
+              Le Blog
+            </h1>
+            <p class="chapeau" style="max-width:52ch;margin-top:var(--espace-4);">
+              Réflexions sur le design, le code et la culture numérique.
+              <span id="compteur-resultats" aria-live="polite" aria-atomic="true" style="font-size:var(--taille-base);font-style:normal;color:var(--texte-tertiaire);margin-left:var(--espace-2);"></span>
+            </p>
+          </div>
+
+          <!-- Recherche -->
+          <div class="blog-recherche-wrapper">
+            <div class="recherche-wrapper">
+              <svg class="recherche-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+              </svg>
+              <input
+                type="search"
+                id="recherche-blog"
+                class="champ-recherche"
+                placeholder="Rechercher un article…"
+                aria-label="Rechercher dans les articles du blog"
+                autocomplete="off"
+                spellcheck="false"
+              >
+              <button
+                type="button"
+                id="btn-effacer-recherche"
+                class="btn-effacer-recherche"
+                aria-label="Effacer la recherche"
+                hidden
+                style="position:absolute;right:var(--espace-3);background:none;border:none;cursor:pointer;color:var(--texte-tertiaire);"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation catégories -->
+        <nav
+          id="nav-categories"
+          class="nav-categories-blog"
+          aria-label="Filtrer par catégorie"
+          role="list"
+        >
+          <!-- Chargé dynamiquement -->
+          <a href="/blog/index.html" class="pilule-categorie actif" role="listitem" aria-current="true">
+            Tous
+          </a>
+        </nav>
+
+      </div>
+    </div>
+
+    <!-- ============================================================
+         GRILLE D'ARTICLES
+         ============================================================ -->
+
+    <div class="blog-corps">
+      <div class="conteneur">
+        <div class="grille-blog-magazine">
+
+          <!-- Articles principaux -->
+          <div>
+            <div
+              id="grille-articles"
+              class="grille-articles-listing"
+              role="list"
+              aria-live="polite"
+              aria-label="Liste des articles"
+            >
+              <!-- Placeholders de chargement -->
+              <article class="carte-vedette squelette-carte" role="listitem" aria-label="Chargement en cours" aria-busy="true">
+                <div class="squelette-image"></div>
+                <div class="carte-vedette-corps">
+                  <div class="squelette-texte squelette-court"></div>
+                  <div class="squelette-texte squelette-long"></div>
+                  <div class="squelette-texte squelette-moyen"></div>
+                  <div class="squelette-texte squelette-court"></div>
+                </div>
+              </article>
+              <article class="carte-vedette squelette-carte" role="listitem" aria-label="Chargement en cours" aria-busy="true">
+                <div class="squelette-image"></div>
+                <div class="carte-vedette-corps">
+                  <div class="squelette-texte squelette-court"></div>
+                  <div class="squelette-texte squelette-long"></div>
+                  <div class="squelette-texte squelette-moyen"></div>
+                  <div class="squelette-texte squelette-court"></div>
+                </div>
+              </article>
+              <article class="carte-vedette squelette-carte" role="listitem" aria-label="Chargement en cours" aria-busy="true">
+                <div class="squelette-image"></div>
+                <div class="carte-vedette-corps">
+                  <div class="squelette-texte squelette-court"></div>
+                  <div class="squelette-texte squelette-long"></div>
+                  <div class="squelette-texte squelette-moyen"></div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination-blog" aria-label="Navigation entre les pages"></div>
+          </div>
+
+          <!-- Sidebar blog -->
+          <aside class="sidebar-blog" aria-label="Informations complémentaires du blog">
+
+            <!-- À propos de l'auteur -->
+            <div class="widget-sidebar">
+              <div class="widget-sidebar-titre">L'auteur</div>
+              <div class="auteur-widget">
+                <div class="auteur-widget-avatar" aria-hidden="true">PN</div>
+                <div>
+                  <div class="auteur-widget-nom">Prénom Nom</div>
+                  <div class="auteur-widget-role">Développeur &amp; auteur éditorial</div>
+                </div>
+              </div>
+              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin-top:var(--espace-4);line-height:var(--ligne-lache);">
+                J'écris sur le design, le code et la culture numérique depuis 2016.
+              </p>
+              <a href="/a-propos.html" class="btn btn-contour btn-sm btn-pleine-largeur" style="margin-top:var(--espace-4);">
+                En savoir plus
+              </a>
+            </div>
+
+            <!-- Tags populaires -->
+            <div class="widget-sidebar">
+              <div class="widget-sidebar-titre">Tags populaires</div>
+              <div id="tags-populaires" class="tags-nuage" aria-label="Tags populaires">
+                <!-- Chargé dynamiquement -->
+              </div>
+            </div>
+
+            <!-- Archives -->
+            <div class="widget-sidebar">
+              <div class="widget-sidebar-titre">Newsletter</div>
+              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin-bottom:var(--espace-4);">
+                Recevez mes derniers articles directement dans votre boîte mail.
+              </p>
+              <form id="form-newsletter" novalidate aria-label="Inscription à la newsletter">
+                <div style="display:flex;flex-direction:column;gap:var(--espace-3);">
+                  <input
+                    type="email"
+                    class="champ champ-sm"
+                    placeholder="votre@email.fr"
+                    aria-label="Votre adresse email pour la newsletter"
+                    required
+                  >
+                  <button type="submit" class="btn btn-accent btn-sm btn-pleine-largeur">
+                    S'abonner
+                  </button>
+                </div>
+              </form>
+            </div>
+
+          </aside>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Pied de page -->
+  <footer class="pied-de-page" role="contentinfo">
+    <div class="conteneur">
+      <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
+        <p class="pied-copyright">
+          &copy; <span id="annee-copyright">2024</span> Prénom Nom. Tous droits réservés.
+        </p>
+        <p class="pied-copyright">
+          <a href="/" style="color:inherit;">Portfolio Éditorial</a>
+          &mdash;
+          <a href="/sitemap.xml" style="color:inherit;">Plan du site</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bouton retour en haut -->
+  <button class="btn-haut-page" id="btn-haut-page" aria-label="Retourner en haut de la page" hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <path d="M12 19V5"/><path d="m5 12 7-7 7 7"/>
+    </svg>
+  </button>
+
+  <script type="module" src="/scripts/app.js"></script>
+  <script type="module">
+    import blog from '/scripts/blog/blog.js';
+    import stockage, { COLLECTIONS } from '/scripts/storage/storage-manager.js';
+    import { echapper } from '/scripts/app.js';
+
+    // Initialise le blog
+    await blog.initialiserListingBlog();
+
+    // Charge les tags populaires
+    try {
+      const { donnees: tags } = await stockage.obtenirTous(COLLECTIONS.TAGS, {
+        tri: 'nombre_articles',
+        ordre: 'desc',
+        limite: 12,
+      });
+      const conteneurTags = document.getElementById('tags-populaires');
+      if (conteneurTags && tags?.length) {
+        conteneurTags.innerHTML = tags.map(tag => `
+          <a href="/blog/index.html?tag=${encodeURIComponent(tag.slug)}"
+             class="tag-sidebar"
+             rel="tag"
+             aria-label="${echapper(tag.nom)} — ${tag.nombre_articles || 0} articles">
+            ${echapper(tag.nom)}
+          </a>
+        `).join('');
+      }
+    } catch (_) {}
+
+    // Newsletter (simulée)
+    document.getElementById('form-newsletter')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = e.target.querySelector('input[type="email"]');
+      if (input?.value) {
+        e.target.innerHTML = `
+          <p style="font-family:var(--police-mono);font-size:var(--taille-xs);
+                    color:var(--couleur-succes);letter-spacing:var(--espacement-large);">
+            Inscription confirmée. Merci !
+          </p>
+        `;
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Médiathèque — Administration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=EB+Garamond:wght@400;600&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+  <link rel="stylesheet" href="/styles/components/cartes.css">
+  <link rel="stylesheet" href="/styles/pages/admin.css">
+  <link rel="stylesheet" href="/styles/pages/admin-crud.css">
+  <script>window.CONFIG = { SITE_NOM:'Portfolio Éditorial', SITE_URL:'http://www.amlouki.me', SUPABASE_URL:'https://qayrcorszsyiujzxfmxw.supabase.co', SUPABASE_ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFheXJjb3JzenN5aXVqenhmbXh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxOTk1MzcsImV4cCI6MjA5NDc3NTUzN30.4vwMex2ddoD3bCLPzdj60LoDZ5ba2igmBpVtOauQa7I' };</script>
+</head>
+<body class="corps-admin">
+<div class="gabarit-admin">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar-admin" id="sidebar-admin" aria-label="Navigation">
+    <div class="sidebar-logo"><a href="/" class="sidebar-logo-lien"><div class="sidebar-logo-icone" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/></svg></div><div><div class="sidebar-logo-nom">Portfolio</div><div class="sidebar-logo-sous">Administration</div></div></a></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-titre">Principal</div>
+      <a href="/admin/tableau-de-bord.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>Tableau de bord</a>
+      <div class="sidebar-section-titre" style="margin-top:var(--espace-5)">Contenu</div>
+      <a href="/admin/articles.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/></svg>Articles</a>
+      <a href="/admin/projets.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Projets</a>
+      <a href="/admin/medias.html" class="nav-admin-lien actif" aria-current="page"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>Médiathèque</a>
+      <div class="sidebar-section-titre" style="margin-top:var(--espace-5)">Profil</div>
+      <a href="/admin/competences.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Compétences</a>
+      <a href="/admin/experiences.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>Expériences</a>
+      <a href="/admin/formations.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>Formations</a>
+      <a href="/admin/certifications.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>Certifications</a>
+      <div class="sidebar-section-titre" style="margin-top:var(--espace-5)">Système</div>
+      <a href="/admin/seo.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>SEO</a>
+      <a href="/admin/utilisateurs.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>Utilisateurs</a>
+      <a href="/admin/parametres.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/></svg>Paramètres</a>
+    </nav>
+    <div class="sidebar-utilisateur"><div class="sidebar-utilisateur-avatar" id="avatar-utilisateur" aria-hidden="true">A</div><div class="sidebar-utilisateur-info"><div class="sidebar-utilisateur-nom" id="nom-utilisateur">Chargement…</div><div class="sidebar-utilisateur-role" id="role-utilisateur">Administrateur</div></div><button class="btn-deconnexion" id="btn-deconnexion" aria-label="Se déconnecter"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button></div>
+  </aside>
+
+  <div class="contenu-admin">
+    <header class="topbar-admin">
+      <div class="topbar-titre"><h1 class="topbar-h1">Médiathèque</h1><p class="topbar-sous-titre" id="topbar-date"></p></div>
+      <div class="topbar-actions">
+        <span class="barre-filtres-compteur" id="compteur-medias" aria-live="polite"></span>
+        <label class="btn btn-accent btn-sm" for="input-upload-global" style="cursor:pointer;" role="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Uploader des fichiers
+        </label>
+        <input type="file" id="input-upload-global" accept="image/*" multiple style="display:none" aria-label="Uploader des fichiers">
+      </div>
+    </header>
+
+    <main class="main-admin" id="contenu-principal" role="main">
+
+      <!-- Zone de dépôt globale -->
+      <div id="zone-depot-global" class="zone-depot-global" aria-label="Zone de dépôt de fichiers" role="region">
+        <div class="barre-filtres" style="margin-bottom:var(--espace-5)">
+          <div class="barre-filtres-recherche">
+            <svg class="recherche-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="search" id="recherche-medias" class="champ" placeholder="Rechercher un fichier…" aria-label="Rechercher dans la médiathèque">
+          </div>
+          <div class="barre-filtres-separateur" aria-hidden="true"></div>
+          <select id="filtre-type-media" class="selecteur filtre-select" aria-label="Filtrer par type">
+            <option value="">Tous les types</option>
+            <option value="image">Images</option>
+            <option value="document">Documents</option>
+          </select>
+          <button class="btn btn-danger btn-sm" id="btn-suppr-selection" style="display:none" aria-label="Supprimer la sélection">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/></svg>
+            Supprimer la sélection
+          </button>
+        </div>
+
+        <!-- Barre de progression upload -->
+        <div id="barre-upload-global" class="barre-upload" style="margin-bottom:var(--espace-4);display:none">
+          <div class="barre-upload-fill" id="fill-upload-global"></div>
+        </div>
+        <div id="texte-upload-global" style="font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-tertiaire);letter-spacing:var(--espacement-large);margin-bottom:var(--espace-4);display:none;" aria-live="polite"></div>
+
+        <!-- Grille médias -->
+        <div id="grille-medias" class="grille-medias" role="list" aria-label="Fichiers de la médiathèque" aria-live="polite">
+          <!-- Chargé dynamiquement -->
+        </div>
+
+        <!-- Message vide -->
+        <div id="msg-vide-medias" style="display:none;text-align:center;padding:var(--espace-20);font-family:var(--police-mono);font-size:var(--taille-sm);color:var(--texte-tertiaire);letter-spacing:var(--espacement-large);">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin:0 auto var(--espace-4);color:var(--texte-fantome);" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          <p>Aucun fichier dans la médiathèque.</p>
+          <p style="margin-top:var(--espace-2);font-size:var(--taille-xs);">Glissez des fichiers ici ou cliquez sur « Uploader ».</p>
+        </div>
+
+        <div id="pagination-medias"></div>
+      </div>
+
+      <!-- Panneau détail (masqué par défaut) -->
+      <div id="panneau-detail-media" style="display:none;position:fixed;right:0;top:0;bottom:0;width:320px;background:var(--couleur-fond);border-left:var(--bordure-tres-forte);z-index:var(--z-eleve);overflow-y:auto;box-shadow:var(--ombre-profonde);">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--espace-5);border-bottom:var(--bordure-forte);position:sticky;top:0;background:var(--couleur-fond-alt);">
+          <span style="font-family:var(--police-condensee);font-size:var(--taille-xs);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-secondaire);">Détails du fichier</span>
+          <button class="btn-action-crud" id="btn-fermer-detail" aria-label="Fermer le panneau">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+        <div id="contenu-detail-media" style="padding:var(--espace-5)"></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+<div class="zone-toasts" id="zone-toasts" aria-live="assertive" role="status"></div>
+
+<style>
+.zone-depot-global {
+  transition: all var(--transition-normale);
+}
+.zone-depot-global.glisser-actif {
+  outline: 3px dashed var(--couleur-accent);
+  outline-offset: 8px;
+  background: var(--couleur-accent-tache);
+  border-radius: var(--rayon-md);
+}
+.media-item.selectionne {
+  outline: 3px solid var(--couleur-accent);
+  outline-offset: 2px;
+}
+</style>
+
+<script type="module">
+import stockage, { COLLECTIONS } from '/scripts/storage/storage-manager.js';
+import { protegerPage, toast, confirmer, echapper, formaterDate, rendrePaginationAdmin } from '/scripts/admin/utils-admin.js';
+
+const etat = { page:1, parPage:24, total:0, recherche:'', filtreTy:'', selection:new Set(), medias:[] };
+
+async function init() {
+  const ok = await protegerPage();
+  if (!ok) return;
+  configurerZoneDepot();
+  configurerInputUpload();
+  brancherEvenements();
+  await chargerMedias();
+}
+
+async function chargerMedias() {
+  const grille = document.getElementById('grille-medias');
+  const msgVide = document.getElementById('msg-vide-medias');
+  grille.innerHTML = Array.from({length:6}, () => `<div class="media-item" style="background:var(--couleur-fond-alt);animation:squelette-anim 1.5s ease-in-out infinite;" aria-label="Chargement"></div>`).join('');
+
+  try {
+    const options = { parPage:etat.parPage, page:etat.page, tri:'cree_le', ordre:'desc' };
+    if (etat.recherche.length >= 2) { options.recherche = etat.recherche; options.champsRecherche = ['nom']; }
+    if (etat.filtreTy) options.filtres = { type_prefixe: etat.filtreTy };
+
+    const { donnees, total } = await stockage.obtenirTous(COLLECTIONS.MEDIAS, options);
+    etat.total = total;
+    etat.medias = donnees || [];
+
+    document.getElementById('compteur-medias').textContent = `${total} fichier${total !== 1 ? 's' : ''}`;
+
+    if (!donnees?.length) {
+      grille.innerHTML = '';
+      msgVide.style.display = 'block';
+    } else {
+      msgVide.style.display = 'none';
+      grille.innerHTML = donnees.map(m => carteMedia(m)).join('');
+      grille.querySelectorAll('.media-item').forEach(el => {
+        el.addEventListener('click', () => toggleSelection(el.dataset.id));
+        el.querySelector('.btn-copier-url')?.addEventListener('click', e => { e.stopPropagation(); copierURL(el.dataset.url); });
+        el.querySelector('.btn-suppr-media')?.addEventListener('click', e => { e.stopPropagation(); supprimerMedia(el.dataset.id, el.dataset.nom); });
+        el.querySelector('.btn-detail-media')?.addEventListener('click', e => { e.stopPropagation(); afficherDetail(el.dataset.id); });
+      });
+    }
+
+    rendrePaginationAdmin('pagination-medias', { page:etat.page, total, parPage:etat.parPage, onChange: async p => { etat.page = p; await chargerMedias(); } });
+  } catch (err) {
+    grille.innerHTML = `<div style="grid-column:1/-1;padding:var(--espace-8);color:var(--couleur-erreur);font-family:var(--police-mono);font-size:var(--taille-xs);">${echapper(err.message)}</div>`;
+  }
+}
+
+function carteMedia(m) {
+  const estImage = m.type?.startsWith('image/') || m.url?.match(/\.(jpg|jpeg|png|webp|gif|svg)$/i);
+  const taille = m.taille ? formaterTaille(m.taille) : '';
+  return `
+    <div class="media-item" data-id="${echapper(m.id)}" data-url="${echapper(m.url||'')}" data-nom="${echapper(m.nom||'')}" role="listitem" tabindex="0" aria-label="${echapper(m.nom||'Fichier')}">
+      ${estImage
+        ? `<img src="${echapper(m.url)}" alt="${echapper(m.nom||'Image')}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">`
+        : `<div class="media-non-image"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span style="font-family:var(--police-mono);font-size:9px;text-transform:uppercase;">${echapper(m.nom?.split('.').pop()||'')}</span></div>`
+      }
+      <div class="media-overlay">
+        <p class="media-nom">${echapper(m.nom||'Fichier')}</p>
+        <div class="media-overlay-actions">
+          <button class="btn-media-action btn-copier-url" title="Copier l'URL" aria-label="Copier l'URL">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          </button>
+          <button class="btn-media-action btn-detail-media" title="Voir les détails" aria-label="Voir les détails">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          </button>
+          <button class="btn-media-action btn-suppr-media" title="Supprimer" aria-label="Supprimer ce fichier" style="background:var(--couleur-erreur);color:white;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/></svg>
+          </button>
+        </div>
+        ${taille ? `<span style="font-family:var(--police-mono);font-size:9px;color:rgba(240,235,224,0.5);">${echapper(taille)}</span>` : ''}
+      </div>
+    </div>`;
+}
+
+function toggleSelection(id) {
+  if (etat.selection.has(id)) etat.selection.delete(id);
+  else etat.selection.add(id);
+  document.querySelectorAll('.media-item').forEach(el => {
+    el.classList.toggle('selectionne', etat.selection.has(el.dataset.id));
+  });
+  document.getElementById('btn-suppr-selection').style.display = etat.selection.size > 0 ? '' : 'none';
+}
+
+async function supprimerMedia(id, nom) {
+  const ok = await confirmer({ titre:'Supprimer le fichier', message:`Supprimer « ${nom} » ? Cette action est irréversible.`, labelOk:'Supprimer', danger:true });
+  if (!ok) return;
+  try {
+    await stockage.supprimer(COLLECTIONS.MEDIAS, id);
+    if (stockage.estSupabase) await stockage.supprimerFichier(nom);
+    toast('Fichier supprimé.', 'succes');
+    etat.selection.delete(id);
+    await chargerMedias();
+  } catch (err) { toast(`Erreur : ${err.message}`, 'erreur'); }
+}
+
+async function supprimerSelection() {
+  if (!etat.selection.size) return;
+  const ok = await confirmer({ titre:'Supprimer la sélection', message:`Supprimer ${etat.selection.size} fichier(s) sélectionné(s) ?`, labelOk:'Supprimer tout', danger:true });
+  if (!ok) return;
+  try {
+    await Promise.all([...etat.selection].map(id => stockage.supprimer(COLLECTIONS.MEDIAS, id)));
+    etat.selection.clear();
+    toast('Fichiers supprimés.', 'succes');
+    await chargerMedias();
+  } catch (err) { toast(`Erreur : ${err.message}`, 'erreur'); }
+}
+
+function copierURL(url) {
+  if (!url) return;
+  navigator.clipboard.writeText(url).then(() => toast('URL copiée dans le presse-papiers.', 'succes')).catch(() => toast('Impossible de copier l\'URL.', 'erreur'));
+}
+
+function afficherDetail(id) {
+  const media = etat.medias.find(m => m.id === id);
+  if (!media) return;
+  const estImage = media.type?.startsWith('image/') || media.url?.match(/\.(jpg|jpeg|png|webp|gif)$/i);
+  const panneau = document.getElementById('panneau-detail-media');
+  const contenu = document.getElementById('contenu-detail-media');
+  contenu.innerHTML = `
+    ${estImage ? `<img src="${echapper(media.url)}" alt="${echapper(media.nom||'')}" style="width:100%;height:180px;object-fit:cover;border:var(--bordure-fine);margin-bottom:var(--espace-5);">` : ''}
+    <div style="display:flex;flex-direction:column;gap:var(--espace-4);">
+      <div><div style="font-family:var(--police-mono);font-size:10px;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:2px;">Nom</div><div style="font-size:var(--taille-sm);word-break:break-all;">${echapper(media.nom||'—')}</div></div>
+      <div><div style="font-family:var(--police-mono);font-size:10px;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:2px;">Type</div><div style="font-size:var(--taille-sm);">${echapper(media.type||'—')}</div></div>
+      ${media.taille ? `<div><div style="font-family:var(--police-mono);font-size:10px;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:2px;">Taille</div><div style="font-size:var(--taille-sm);">${formaterTaille(media.taille)}</div></div>` : ''}
+      <div><div style="font-family:var(--police-mono);font-size:10px;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:2px;">Ajouté le</div><div style="font-size:var(--taille-sm);">${formaterDate(media.cree_le)}</div></div>
+      <div><div style="font-family:var(--police-mono);font-size:10px;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:4px;">URL</div>
+        <div style="display:flex;gap:var(--espace-2);">
+          <input type="text" value="${echapper(media.url||'')}" readonly class="champ champ-sm" style="flex:1;font-family:var(--police-mono);font-size:10px;" aria-label="URL du fichier">
+          <button class="btn btn-accent btn-sm" onclick="navigator.clipboard.writeText('${echapper(media.url||'')}').then(()=>{})" aria-label="Copier l'URL">Copier</button>
+        </div>
+      </div>
+      <button class="btn btn-danger btn-sm btn-pleine-largeur" onclick="document.getElementById('panneau-detail-media').style.display='none';" style="margin-top:var(--espace-4);" aria-label="Fermer le panneau">Fermer</button>
+    </div>`;
+  panneau.style.display = 'block';
+}
+
+async function uploaderFichiers(fichiers) {
+  const barre = document.getElementById('barre-upload-global');
+  const texte = document.getElementById('texte-upload-global');
+  const fill  = document.getElementById('fill-upload-global');
+
+  barre.style.display = 'block';
+  texte.style.display = 'block';
+
+  try {
+    const { default: upload } = await import('/scripts/utils/upload.js');
+    for (let i = 0; i < fichiers.length; i++) {
+      const f = fichiers[i];
+      texte.textContent = `Upload ${i + 1}/${fichiers.length} : ${f.name}`;
+
+      const { url, chemin, meta } = await upload.traiterEtUploader(f, {
+        destination: 'medias',
+        onProgression: pct => {
+          fill.style.transform = `scaleX(${((i + pct/100) / fichiers.length)})`;
+        },
+      });
+
+      await stockage.creer(COLLECTIONS.MEDIAS, {
+        nom: f.name, type: f.type, taille: meta.tailleCompresse,
+        url, chemin, format: 'image/webp', cree_le: new Date().toISOString(),
+      });
+    }
+    toast(`${fichiers.length} fichier(s) uploadé(s).`, 'succes');
+    await chargerMedias();
+  } catch (err) {
+    toast(`Erreur upload : ${err.message}`, 'erreur');
+  } finally {
+    barre.style.display = 'none';
+    texte.style.display = 'none';
+    fill.style.transform = 'scaleX(0)';
+  }
+}
+
+function configurerZoneDepot() {
+  const zone = document.getElementById('zone-depot-global');
+  zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('glisser-actif'); });
+  zone.addEventListener('dragleave', e => { if (!zone.contains(e.relatedTarget)) zone.classList.remove('glisser-actif'); });
+  zone.addEventListener('drop', async e => {
+    e.preventDefault();
+    zone.classList.remove('glisser-actif');
+    const fichiers = [...e.dataTransfer.files].filter(f => f.type.startsWith('image/'));
+    if (fichiers.length) await uploaderFichiers(fichiers);
+  });
+}
+
+function configurerInputUpload() {
+  document.getElementById('input-upload-global')?.addEventListener('change', async e => {
+    const fichiers = [...e.target.files];
+    if (fichiers.length) await uploaderFichiers(fichiers);
+    e.target.value = '';
+  });
+}
+
+function formaterTaille(octets) {
+  if (!octets) return '';
+  if (octets < 1024)       return `${octets} o`;
+  if (octets < 1048576)    return `${(octets/1024).toFixed(1)} Ko`;
+  return `${(octets/1048576).toFixed(1)} Mo`;
+}
+
+function brancherEvenements() {
+  document.getElementById('btn-fermer-detail')?.addEventListener('click', () => {
+    document.getElementById('panneau-detail-media').style.display = 'none';
+  });
+  document.getElementById('btn-suppr-selection')?.addEventListener('click', supprimerSelection);
+
+  let t = null;
+  document.getElementById('recherche-medias')?.addEventListener('input', e => {
+    clearTimeout(t);
+    t = setTimeout(async () => { etat.recherche = e.target.value; etat.page = 1; await chargerMedias(); }, 320);
+  });
+
+  document.getElementById('filtre-type-media')?.addEventListener('change', async e => {
+    etat.filtreTy = e.target.value;
+    etat.page = 1;
+    await chargerMedias();
+  });
+
+  // Clic en dehors du panneau de détail → fermer
+  document.addEventListener('click', e => {
+    const panneau = document.getElementById('panneau-detail-media');
+    if (panneau.style.display !== 'none' && !panneau.contains(e.target) && !e.target.closest('.btn-detail-media')) {
+      panneau.style.display = 'none';
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

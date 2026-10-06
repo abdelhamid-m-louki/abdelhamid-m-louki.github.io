@@ -1,0 +1,387 @@
+/**
+ * SYSTÈME TYPOGRAPHIQUE ÉDITORIAL
+ * Portfolio — Hiérarchie typographique journal
+ *
+ * Inspiré de la typographie de presse française :
+ * Le Monde, Libération, Les Inrockuptibles.
+ * Conventions typographiques françaises appliquées.
+ */
+
+/* --- Import des polices --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Oswald:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ============================================================
+   TITRES — HIÉRARCHIE ÉDITORIALE
+   ============================================================ */
+
+/* Manchette — Titre principal de une */
+.manchette,
+.titre-manchette {
+  font-family: var(--police-display);
+  font-size: clamp(var(--taille-4xl), 8vw, var(--taille-7xl));
+  font-weight: 900;
+  line-height: var(--ligne-serre);
+  letter-spacing: var(--espacement-serre);
+  color: var(--texte-primaire);
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-wrap: balance;
+}
+
+/* Grand titre — Section principale */
+.titre-grand,
+h1 {
+  font-family: var(--police-display);
+  font-size: clamp(var(--taille-3xl), 5vw, var(--taille-5xl));
+  font-weight: 700;
+  line-height: var(--ligne-titre);
+  letter-spacing: var(--espacement-serre);
+  color: var(--texte-primaire);
+  text-wrap: balance;
+}
+
+/* Titre section */
+.titre-section,
+h2 {
+  font-family: var(--police-display);
+  font-size: clamp(var(--taille-2xl), 3.5vw, var(--taille-4xl));
+  font-weight: 700;
+  line-height: var(--ligne-titre);
+  letter-spacing: -0.02em;
+  color: var(--texte-primaire);
+}
+
+/* Intertitre */
+.intertitre,
+h3 {
+  font-family: var(--police-display);
+  font-size: clamp(var(--taille-xl), 2.5vw, var(--taille-2xl));
+  font-weight: 700;
+  line-height: var(--ligne-sous);
+  letter-spacing: -0.01em;
+  font-style: italic;
+  color: var(--texte-primaire);
+}
+
+h4 {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-lg);
+  font-weight: 600;
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  line-height: var(--ligne-normale);
+  color: var(--texte-primaire);
+}
+
+h5 {
+  font-family: var(--police-mono);
+  font-size: var(--taille-base);
+  font-weight: 700;
+  letter-spacing: var(--espacement-tres);
+  text-transform: uppercase;
+  line-height: var(--ligne-normale);
+  color: var(--texte-secondaire);
+}
+
+h6 {
+  font-family: var(--police-corps);
+  font-size: var(--taille-sm);
+  font-weight: 600;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  line-height: var(--ligne-normale);
+  color: var(--texte-tertiaire);
+}
+
+/* ============================================================
+   TEXTE CORPS — LECTURE LONGUE FORME
+   ============================================================ */
+
+/* Chapô — texte introductif */
+.chapeau {
+  font-family: var(--police-corps);
+  font-size: clamp(var(--taille-lg), 2vw, var(--taille-xl));
+  font-weight: 400;
+  line-height: var(--ligne-lache);
+  color: var(--texte-secondaire);
+  font-style: italic;
+}
+
+/* Corps de texte éditorial */
+.corps-texte,
+.prose p {
+  font-family: var(--police-corps);
+  font-size: var(--taille-md);
+  line-height: var(--ligne-lache);
+  color: var(--texte-secondaire);
+  max-width: var(--largeur-prose);
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+/* Note de bas de page / légende */
+.legende,
+.note {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  line-height: var(--ligne-normale);
+  color: var(--texte-tertiaire);
+  letter-spacing: var(--espacement-large);
+}
+
+/* ============================================================
+   ÉTIQUETTES ÉDITORIALES
+   ============================================================ */
+
+/* Rubrique — Catégorie en-tête */
+.rubrique {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-2);
+  font-family: var(--police-condensee);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--couleur-accent-sombre);
+  border-bottom: 2px solid var(--couleur-accent);
+  padding-bottom: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .rubrique {
+    color: var(--couleur-accent-vif);
+  }
+}
+
+/* Kicker — Ligne avant le titre */
+.kicker {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--texte-tertiaire);
+  margin-bottom: var(--espace-3);
+  display: block;
+}
+
+/* Signature — Auteur / byline */
+.byline {
+  font-family: var(--police-corps);
+  font-size: var(--taille-sm);
+  font-style: italic;
+  color: var(--texte-tertiaire);
+}
+
+/* Numéro / index décoratif */
+.numero-decoration {
+  font-family: var(--police-display);
+  font-size: var(--taille-7xl);
+  font-weight: 900;
+  color: var(--couleur-accent-tache);
+  line-height: 1;
+  position: absolute;
+  user-select: none;
+  aria-hidden: true;
+}
+
+/* Pull quote — Citation extraite */
+.citation-extraite {
+  font-family: var(--police-display);
+  font-size: clamp(var(--taille-xl), 2.5vw, var(--taille-3xl));
+  font-style: italic;
+  font-weight: 400;
+  line-height: var(--ligne-sous);
+  letter-spacing: -0.02em;
+  color: var(--texte-primaire);
+  border-left: 4px solid var(--couleur-accent);
+  padding-left: var(--espace-6);
+  position: relative;
+}
+
+.citation-extraite::before {
+  content: '\201C';
+  font-family: var(--police-display);
+  font-size: var(--taille-6xl);
+  line-height: 0;
+  position: absolute;
+  left: var(--espace-2);
+  top: var(--espace-4);
+  color: var(--couleur-accent);
+  opacity: 0.3;
+}
+
+/* ============================================================
+   UTILITAIRES TYPOGRAPHIQUES
+   ============================================================ */
+
+.texte-centre    { text-align: center; }
+.texte-droite    { text-align: right; }
+.texte-gauche    { text-align: left; }
+.texte-justifie  { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+
+.maj       { text-transform: uppercase; }
+.italique  { font-style: italic; }
+.gras      { font-weight: 700; }
+.fin       { font-weight: 300; }
+
+.texte-primaire   { color: var(--texte-primaire) !important; }
+.texte-secondaire { color: var(--texte-secondaire) !important; }
+.texte-tertiaire  { color: var(--texte-tertiaire) !important; }
+.texte-accent     { color: var(--texte-accent) !important; }
+.texte-erreur     { color: var(--couleur-erreur) !important; }
+
+/* Troncature */
+.tronquer {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ============================================================
+   PROSE — ARTICLE LONG FORMAT
+   ============================================================ */
+
+.prose {
+  font-family: var(--police-corps);
+  font-size: var(--taille-md);
+  line-height: var(--ligne-lache);
+  color: var(--texte-secondaire);
+  max-width: var(--largeur-prose);
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: var(--texte-primaire);
+  margin-top: var(--espace-12);
+  margin-bottom: var(--espace-4);
+}
+
+.prose h2 {
+  font-size: clamp(var(--taille-xl), 2.5vw, var(--taille-2xl));
+  padding-bottom: var(--espace-3);
+  border-bottom: var(--bordure-fine);
+}
+
+.prose h3 {
+  font-size: var(--taille-xl);
+}
+
+.prose p {
+  margin-bottom: var(--espace-6);
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Première lettre ornementale */
+.prose p:first-of-type::first-letter {
+  font-family: var(--police-display);
+  font-size: 4em;
+  font-weight: 900;
+  float: left;
+  line-height: 0.75;
+  margin-right: 0.1em;
+  margin-bottom: -0.05em;
+  color: var(--couleur-accent-sombre);
+}
+
+@media (prefers-color-scheme: dark) {
+  .prose p:first-of-type::first-letter {
+    color: var(--couleur-accent-vif);
+  }
+}
+
+.prose ul, .prose ol {
+  margin-bottom: var(--espace-6);
+  padding-left: var(--espace-6);
+}
+
+.prose li {
+  margin-bottom: var(--espace-2);
+}
+
+.prose a {
+  color: var(--couleur-accent-sombre);
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color var(--transition-rapide);
+}
+
+.prose a:hover {
+  color: var(--texte-primaire);
+}
+
+.prose strong {
+  font-weight: 700;
+  color: var(--texte-primaire);
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--couleur-accent);
+  margin: var(--espace-8) 0;
+  padding: var(--espace-5) var(--espace-6);
+  background: var(--couleur-accent-tache);
+  font-style: italic;
+  font-size: var(--taille-lg);
+}
+
+.prose code {
+  font-family: var(--police-mono);
+  font-size: 0.875em;
+  background: var(--couleur-surface-alt);
+  padding: 0.1em 0.4em;
+  border: var(--bordure-fine);
+}
+
+.prose pre {
+  background: var(--couleur-encre);
+  color: var(--couleur-fond);
+  padding: var(--espace-6);
+  overflow-x: auto;
+  margin: var(--espace-8) 0;
+  font-family: var(--police-mono);
+  font-size: var(--taille-sm);
+  border-left: 4px solid var(--couleur-accent);
+}
+
+.prose img {
+  margin: var(--espace-8) auto;
+  border: var(--bordure-fine);
+  box-shadow: var(--ombre-carte);
+}
+
+.prose hr {
+  border: none;
+  border-top: var(--bordure-tres-forte);
+  margin: var(--espace-12) 0;
+}
+
+.prose figure {
+  margin: var(--espace-10) 0;
+}
+
+.prose figcaption {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+  margin-top: var(--espace-2);
+  text-align: center;
+  letter-spacing: var(--espacement-large);
+}

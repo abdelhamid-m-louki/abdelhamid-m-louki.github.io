@@ -1,0 +1,215 @@
+/**
+ * UTILITAIRES GÉNÉRAUX ET ANIMATIONS D'ENTRÉE
+ * Portfolio Éditorial
+ *
+ * Classes utilitaires partagées, animations d'entrée
+ * au défilement et styles de composants transversaux.
+ */
+
+/* ============================================================
+   ANIMATIONS D'ENTRÉE AU DÉFILEMENT
+   ============================================================ */
+
+[data-animer] {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  transition:
+    opacity 0.5s ease var(--delai, 0ms),
+    transform 0.5s ease var(--delai, 0ms);
+}
+
+[data-animer].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Délais d'animation */
+[data-delai="100"] { --delai: 100ms; }
+[data-delai="200"] { --delai: 200ms; }
+[data-delai="300"] { --delai: 300ms; }
+[data-delai="400"] { --delai: 400ms; }
+[data-delai="500"] { --delai: 500ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animer] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   OVERLAY DU MENU MOBILE
+   ============================================================ */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.6);
+  z-index: calc(var(--z-modal) - 1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-lente);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.menu-overlay.actif {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================================================
+   NAVIGATION CLAVIER — FOCUS GLOBAL
+   ============================================================ */
+
+body.navigation-clavier *:focus {
+  outline: 2px solid var(--couleur-accent);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   LIEN SKIP (ACCESSIBILITÉ)
+   ============================================================ */
+
+/* Défini dynamiquement dans app.js */
+
+/* ============================================================
+   BARRE DE PROGRESSION DE LECTURE
+   ============================================================ */
+
+.barre-progression-lecture {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  z-index: calc(var(--z-fixe) + 1);
+  pointer-events: none;
+}
+
+.barre-progression-fill {
+  height: 100%;
+  background: var(--couleur-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 100ms linear;
+  will-change: transform;
+}
+
+/* ============================================================
+   UTILITAIRES AFFICHAGE
+   ============================================================ */
+
+.masquer-mobile { display: block; }
+.afficher-mobile { display: none; }
+
+@media (max-width: 767px) {
+  .masquer-mobile { display: none !important; }
+  .afficher-mobile { display: block !important; }
+}
+
+@media (max-width: 1023px) {
+  .masquer-tablette { display: none !important; }
+}
+
+/* ============================================================
+   BOUTON RETOUR EN HAUT
+   ============================================================ */
+
+/* Défini dans accueil.css et réutilisé sur toutes les pages */
+.btn-haut-page {
+  position: fixed;
+  bottom: var(--espace-6);
+  right: var(--espace-6);
+  z-index: var(--z-fixe);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--couleur-encre);
+  color: var(--couleur-fond);
+  border: 2px solid var(--couleur-encre);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--couleur-accent);
+  transition: all var(--transition-normale);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.btn-haut-page:not([hidden]) {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.btn-haut-page:hover {
+  background: var(--couleur-accent);
+  color: var(--couleur-encre);
+  border-color: var(--couleur-accent-sombre);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--couleur-encre);
+}
+
+/* ============================================================
+   IMAGE PLACEHOLDER
+   ============================================================ */
+
+.image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--couleur-fond-alt);
+  color: var(--texte-fantome);
+}
+
+/* ============================================================
+   LIEN "ADMIN DISCRET"
+   ============================================================ */
+
+.lien-admin-discret {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: rgba(240, 235, 224, 0.30);
+  text-decoration: none;
+  transition: color var(--transition-rapide);
+}
+
+.lien-admin-discret:hover {
+  color: var(--couleur-accent);
+}
+
+/* ============================================================
+   SQUELETTES GLOBAUX
+   ============================================================ */
+
+.squelette-texte {
+  height: 12px;
+  background: linear-gradient(
+    90deg,
+    var(--couleur-fond-alt) 25%,
+    var(--couleur-fond-papier) 50%,
+    var(--couleur-fond-alt) 75%
+  );
+  background-size: 400% 100%;
+  animation: squelette-anim 1.5s ease-in-out infinite;
+  margin-bottom: var(--espace-3);
+}
+
+.squelette-texte.squelette-court  { width: 35%; }
+.squelette-texte.squelette-moyen  { width: 65%; }
+.squelette-texte.squelette-long   { width: 100%; }
+
+@keyframes squelette-anim {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

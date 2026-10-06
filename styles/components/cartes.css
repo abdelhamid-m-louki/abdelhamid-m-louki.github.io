@@ -1,0 +1,543 @@
+/**
+ * CARTES ÉDITORIALES
+ * Portfolio — Articles, projets, cartes de contenu
+ *
+ * Cartes inspirées de la mise en page presse :
+ * vedette, article, brève, reportage, colonne.
+ */
+
+/* ============================================================
+   CARTE DE BASE
+   ============================================================ */
+
+.carte {
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-fine);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition-normale), transform var(--transition-normale);
+  will-change: transform;
+}
+
+.carte:hover {
+  box-shadow: var(--ombre-elevee);
+}
+
+/* Carte avec filet supérieur coloré */
+.carte-rubrique {
+  border-top: 3px solid var(--couleur-accent);
+}
+
+.carte-rubrique-encre {
+  border-top: 3px solid var(--couleur-encre);
+}
+
+/* ============================================================
+   CARTE VEDETTE — Article principale
+   ============================================================ */
+
+.carte-vedette {
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-fine);
+  position: relative;
+  border-radius: var(--arrondi-md);
+  overflow: hidden; /* Coupe ce qui dépasse des coins arrondis */
+}
+
+.carte-vedette-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--couleur-surface-alt);
+  position: relative;
+}
+
+.carte-vedette-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-lente);
+  filter: contrast(1.05) grayscale(0.2);
+}
+
+.carte-vedette:hover .carte-vedette-image img {
+  transform: scale(1.03);
+}
+
+.carte-vedette-corps {
+  padding: var(--espace-6);
+}
+
+.carte-vedette-rubrique {
+  display: inline-block;
+  font-family: var(--police-condensee);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--couleur-accent-sombre);
+  border-bottom: 2px solid var(--couleur-accent);
+  padding-bottom: 1px;
+  margin-bottom: var(--espace-3);
+}
+
+.carte-vedette-titre {
+  font-family: var(--police-display);
+  font-size: clamp(var(--taille-xl), 2.5vw, var(--taille-3xl));
+  font-weight: 700;
+  line-height: var(--ligne-titre);
+  letter-spacing: -0.02em;
+  color: var(--texte-primaire);
+  margin-bottom: var(--espace-4);
+  transition: color var(--transition-rapide);
+  text-decoration: none;
+  display: block;
+}
+
+.carte-vedette-titre:hover {
+  color: var(--couleur-accent-sombre);
+}
+
+.carte-vedette-extrait {
+  font-family: var(--police-corps);
+  font-size: var(--taille-base);
+  line-height: var(--ligne-lache);
+  color: var(--texte-secondaire);
+  margin-bottom: var(--espace-5);
+}
+
+.carte-vedette-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-4);
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+  letter-spacing: var(--espacement-large);
+  padding-top: var(--espace-4);
+  border-top: var(--bordure-fine);
+}
+
+/* ============================================================
+   CARTE ARTICLE COMPACT
+   ============================================================ */
+
+.carte-article {
+  display: flex;
+  gap: 0;
+  border-bottom: var(--bordure-fine);
+  padding-bottom: var(--espace-5);
+  margin-bottom: var(--espace-5);
+  border-radius: var(--arrondi-md);
+  overflow: hidden; /* Coupe ce qui dépasse des coins arrondis */
+}
+
+.carte-article:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.carte-article-image {
+  width: 120px;
+  flex-shrink: 0;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--couleur-surface-alt);
+  margin-right: var(--espace-4);
+}
+
+.carte-article-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.3) contrast(1.05);
+  transition: transform var(--transition-lente), filter var(--transition-normale);
+}
+
+.carte-article:hover .carte-article-image img {
+  transform: scale(1.05);
+  filter: grayscale(0) contrast(1.05);
+}
+
+.carte-article-corps {
+  flex: 1;
+  min-width: 0;
+}
+
+.carte-article-numero {
+  font-family: var(--police-display);
+  font-size: var(--taille-4xl);
+  font-weight: 900;
+  color: var(--couleur-accent-tache);
+  line-height: 1;
+  float: left;
+  margin-right: var(--espace-2);
+  margin-bottom: 0;
+  margin-top: -4px;
+}
+
+.carte-article-titre {
+  font-family: var(--police-display);
+  font-size: var(--taille-lg);
+  font-weight: 700;
+  line-height: var(--ligne-sous);
+  color: var(--texte-primaire);
+  text-decoration: none;
+  display: block;
+  margin-bottom: var(--espace-2);
+  transition: color var(--transition-rapide);
+}
+
+.carte-article-titre:hover {
+  color: var(--couleur-accent-sombre);
+}
+
+.carte-article-meta {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+  letter-spacing: var(--espacement-large);
+}
+
+/* ============================================================
+   CARTE BRÈVE
+   ============================================================ */
+
+.breve {
+  padding: var(--espace-4) 0;
+  border-bottom: var(--bordure-fine);
+}
+
+.breve:last-child {
+  border-bottom: none;
+}
+
+.breve-titre {
+  font-family: var(--police-display);
+  font-size: var(--taille-base);
+  font-weight: 700;
+  line-height: var(--ligne-sous);
+  color: var(--texte-primaire);
+  text-decoration: none;
+  display: block;
+  margin-bottom: var(--espace-2);
+  transition: color var(--transition-rapide);
+}
+
+.breve-titre:hover {
+  color: var(--couleur-accent-sombre);
+}
+
+.breve-date {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+  letter-spacing: var(--espacement-large);
+}
+
+/* ============================================================
+   CARTE PROJET
+   ============================================================ */
+
+.carte-projet {
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-forte);
+  position: relative;
+  transition: all var(--transition-normale);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--arrondi-md);
+  overflow: hidden; /* Coupe ce qui dépasse des coins arrondis */
+}
+
+.carte-projet:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 var(--couleur-accent);
+}
+
+.carte-projet-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--couleur-surface-alt);
+  position: relative;
+}
+
+.carte-projet-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.5) contrast(1.1);
+  transition: all var(--transition-lente);
+}
+
+.carte-projet:hover .carte-projet-image img {
+  filter: grayscale(0) contrast(1.05);
+  transform: scale(1.04);
+}
+
+/* Numéro de projet en overlay */
+.carte-projet-numero {
+  position: absolute;
+  bottom: var(--espace-3);
+  left: var(--espace-3);
+  font-family: var(--police-display);
+  font-size: var(--taille-5xl);
+  font-weight: 900;
+  color: rgba(255,255,255,0.15);
+  line-height: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.carte-projet-corps {
+  padding: var(--espace-5);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.carte-projet-categorie {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--texte-tertiaire);
+  margin-bottom: var(--espace-2);
+}
+
+.carte-projet-titre {
+  font-family: var(--police-display);
+  font-size: var(--taille-xl);
+  font-weight: 700;
+  line-height: var(--ligne-sous);
+  letter-spacing: -0.01em;
+  color: var(--texte-primaire);
+  margin-bottom: var(--espace-3);
+}
+
+.carte-projet-description {
+  font-family: var(--police-corps);
+  font-size: var(--taille-sm);
+  color: var(--texte-secondaire);
+  line-height: var(--ligne-lache);
+  flex: 1;
+  margin-bottom: var(--espace-5);
+}
+
+.carte-projet-pied {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--espace-4);
+  border-top: var(--bordure-fine);
+  flex-wrap: wrap;
+  gap: var(--espace-3);
+}
+
+/* Technologies utilisées */
+.technos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-2);
+}
+
+.techno-tag {
+  display: inline-block;
+  padding: 1px var(--espace-2);
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+  border: 1px solid var(--couleur-encre-fantome);
+  letter-spacing: var(--espacement-large);
+}
+
+/* ============================================================
+   CARTE COMPÉTENCE
+   ============================================================ */
+
+.carte-competence {
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-fine);
+  padding: var(--espace-5);
+  position: relative;
+  transition: all var(--transition-normale);
+  border-radius: var(--arrondi-md);
+  overflow: hidden;
+}
+
+.carte-competence:hover {
+  border-color: var(--couleur-accent-sombre);
+  box-shadow: 3px 3px 0 var(--couleur-accent-pale);
+}
+
+.carte-competence-nom {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-base);
+  font-weight: 600;
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  color: var(--texte-primaire);
+  margin-bottom: var(--espace-3);
+}
+
+/* Barre de niveau — style thermomètre journal */
+.barre-niveau {
+  height: 6px;
+  background: var(--couleur-fond-alt);
+  border: 1px solid var(--couleur-encre-fantome);
+  position: relative;
+  overflow: hidden;
+}
+
+.barre-niveau-remplissage {
+  height: 100%;
+  background: var(--couleur-encre);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.barre-niveau-remplissage.anime {
+  transform: scaleX(var(--niveau, 0));
+}
+
+.carte-competence-pourcentage {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+  margin-top: var(--espace-2);
+  letter-spacing: var(--espacement-large);
+}
+
+/* ============================================================
+   CARTE EXPÉRIENCE — TIMELINE
+   ============================================================ */
+
+.frise-chronologique {
+  position: relative;
+  padding-left: var(--espace-8);
+}
+
+.frise-chronologique::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: var(--espace-3);
+  bottom: var(--espace-3);
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--texte-primaire) 0,
+    var(--texte-primaire) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+.element-frise {
+  position: relative;
+  padding-bottom: var(--espace-10);
+}
+
+.element-frise:last-child {
+  padding-bottom: 0;
+}
+
+.frise-point {
+  position: absolute;
+  left: calc(-1 * var(--espace-8) + 2px - 6px);
+  top: var(--espace-3);
+  width: 14px;
+  height: 14px;
+  background: var(--couleur-accent);
+  border: 2px solid var(--texte-primaire);
+  z-index: 1;
+}
+
+.frise-date {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--texte-tertiaire);
+  margin-bottom: var(--espace-2);
+}
+
+.frise-poste {
+  font-family: var(--police-display);
+  font-size: var(--taille-xl);
+  font-weight: 700;
+  color: var(--texte-primaire);
+  margin-bottom: var(--espace-1);
+}
+
+.frise-entreprise {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-base);
+  font-weight: 600;
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  color: var(--couleur-accent-sombre);
+  margin-bottom: var(--espace-3);
+}
+
+.frise-description {
+  font-family: var(--police-corps);
+  font-size: var(--taille-base);
+  color: var(--texte-secondaire);
+  line-height: var(--ligne-lache);
+}
+
+/* ============================================================
+   PAGINATION
+   ============================================================ */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-2);
+  margin-top: var(--espace-16);
+}
+
+.page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-family: var(--police-condensee);
+  font-size: var(--taille-sm);
+  font-weight: 600;
+  letter-spacing: var(--espacement-large);
+  color: var(--texte-secondaire);
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-forte);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-rapide);
+}
+
+.page-btn:hover {
+  background: var(--couleur-accent-tache);
+  border-color: var(--couleur-accent-sombre);
+  color: var(--texte-primaire);
+}
+
+.page-btn.actif {
+  background: var(--couleur-encre);
+  color: var(--couleur-fond);
+  border-color: var(--couleur-encre);
+}
+
+.page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}

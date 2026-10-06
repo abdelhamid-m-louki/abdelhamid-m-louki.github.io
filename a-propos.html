@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À propos — Portfolio Éditorial</title>
+  <meta name="description" content="Développeur Full-Stack et auteur éditorial. Découvrez mon parcours, mes compétences et mon approche du design numérique.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.amlouki.me/a-propos.html">
+
+  <meta property="og:type"        content="profile">
+  <meta property="og:title"       content="À propos — Portfolio Éditorial">
+  <meta property="og:description" content="Développeur Full-Stack et auteur éditorial. Parcours, compétences et approche du design numérique.">
+  <meta property="og:url"         content="https://www.amlouki.me/a-propos.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/navigation.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+  <link rel="stylesheet" href="/styles/components/cartes.css">
+
+  <script>window.CONFIG = { SITE_NOM:'Portfolio Éditorial', SITE_URL:'http://www.amlouki.me', SUPABASE_URL:'https://qayrcorszsyiujzxfmxw.supabase.co', SUPABASE_ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFheXJjb3JzenN5aXVqenhmbXh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxOTk1MzcsImV4cCI6MjA5NDc3NTUzN30.4vwMex2ddoD3bCLPzdj60LoDZ5ba2igmBpVtOauQa7I' };</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "name": "À propos — Portfolio Éditorial",
+    "url": "https://www.amlouki.me/a-propos.html",
+    "mainEntity": {
+      "@type": "Person",
+      "@id": "https://www.amlouki.me/#personne",
+      "name": "Prénom Nom",
+      "jobTitle": "Security Engineer & Author",
+      "url": "https://www.amlouki.me/"
+    }
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header class="en-tete" role="banner" id="en-tete-principal">
+    <div class="bandeau-superieur" aria-label="Informations éditoriales">
+      <div class="conteneur">
+        <div class="bandeau-interieur">
+          <span class="bandeau-date" id="date-bandeau"></span>
+          <span class="bandeau-edition">Édition numérique</span>
+          <div class="bandeau-actions">
+            <a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Administration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="conteneur">
+      <div class="en-tete-masthead">
+        <a href="/" class="logo-journal" aria-label="Portfolio Éditorial — Accueil">Portfolio Éditorial</a>
+        <span class="sous-titre-journal">Revue de création &amp; de code</span>
+        <button class="bouton-hamburger" id="btn-hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+      </div>
+    </div>
+    <nav class="nav-rubriques" aria-label="Navigation principale">
+      <div class="conteneur">
+        <div class="nav-rubriques-interieur" role="list">
+          <a href="/"                class="nav-lien" role="listitem">Accueil</a>
+          <a href="/a-propos.html"   class="nav-lien actif" role="listitem" aria-current="page">À propos</a>
+          <a href="/projets.html"    class="nav-lien" role="listitem">Projets</a>
+          <a href="/blog/index.html" class="nav-lien" role="listitem">Blog</a>
+          <a href="/contact.html"    class="nav-lien" role="listitem">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <div class="menu-mobile-en-tete"><span class="logo-journal" style="font-size:var(--taille-xl)">Portfolio Éditorial</span><button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <nav class="menu-mobile-nav"><a href="/" class="menu-mobile-lien">Accueil</a><a href="/a-propos.html" class="menu-mobile-lien">À propos</a><a href="/projets.html" class="menu-mobile-lien">Projets</a><a href="/blog/index.html" class="menu-mobile-lien">Blog</a><a href="/contact.html" class="menu-mobile-lien">Contact</a></nav>
+  </div>
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <main id="contenu-principal" role="main">
+
+    <!-- En-tête About -->
+    <div style="padding:calc(var(--hauteur-nav) + var(--espace-16)) 0 var(--espace-16);border-bottom:var(--bordure-tres-forte);background:var(--couleur-fond);">
+      <div class="conteneur">
+        <div style="display:grid;grid-template-columns:1fr 320px;gap:var(--espace-12);align-items:center;" class="apropos-hero-grid">
+          <div>
+            <span class="kicker">À propos</span>
+            <h1 class="titre-grand" style="margin-bottom:var(--espace-6);">
+              Prénom Nom,<br>
+              <em>développeur &amp; auteur.</em>
+            </h1>
+            <p class="chapeau" style="margin-bottom:var(--espace-8);">
+              Artisan du numérique depuis plus de 8 ans. Je construis des interfaces
+              performantes et j'écris sur le design, le code et la culture numérique.
+            </p>
+            <div style="display:flex;gap:var(--espace-4);flex-wrap:wrap;">
+              <a href="/contact.html" class="btn btn-primaire">Me contacter</a>
+              <a href="#parcours" class="btn btn-contour">Voir mon parcours</a>
+            </div>
+          </div>
+          <div style="position:relative;">
+            <div class="feuille-papier feuille-inclinee" style="padding:var(--espace-4);background:var(--couleur-fond-papier);">
+              <img
+                src="/assets/images/portrait.png"
+                alt="Portrait de Prénom Nom"
+                width="280"
+                height="360"
+                loading="eager"
+                style="width:100%;height:auto;filter:grayscale(0.4) contrast(1.1);"
+              >
+            </div>
+            <div class="etiquette-volante etiquette-jaune etiquette-inclinee-2" style="position:absolute;bottom:var(--espace-4);right:calc(-1 * var(--espace-6));">
+              Disponible en freelance
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bio complète -->
+    <section class="section" style="border-bottom:var(--bordure-tres-forte);" aria-labelledby="titre-bio">
+      <div class="conteneur">
+        <div style="display:grid;grid-template-columns:1fr 2fr;gap:var(--espace-16);align-items:start;">
+          <div>
+            <div class="filet-epais" style="margin-bottom:var(--espace-4);"></div>
+            <h2 id="titre-bio" class="titre-section" style="margin-bottom:var(--espace-6);">Qui suis-je ?</h2>
+            <div style="display:flex;flex-direction:column;gap:var(--espace-4);">
+              <div style="padding:var(--espace-4);background:var(--couleur-fond-alt);border-left:3px solid var(--couleur-accent);">
+                <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-2);">Localisation</div>
+                <div style="font-family:var(--police-corps);color:var(--texte-primaire);">Paris, France</div>
+              </div>
+              <div style="padding:var(--espace-4);background:var(--couleur-fond-alt);border-left:3px solid var(--couleur-accent);">
+                <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-2);">Expérience</div>
+                <div style="font-family:var(--police-corps);color:var(--texte-primaire);">8+ années</div>
+              </div>
+              <div style="padding:var(--espace-4);background:var(--couleur-fond-alt);border-left:3px solid var(--couleur-accent);">
+                <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-2);">Spécialité</div>
+                <div style="font-family:var(--police-corps);color:var(--texte-primaire);">Full-Stack &amp; Design</div>
+              </div>
+            </div>
+          </div>
+          <div class="prose">
+            <p>
+              Avec plus de 8 ans d'expérience dans le développement web et le design,
+              j'ai accompagné des startups, des PME et des institutions culturelles dans
+              leurs projets digitaux. Mon approche croise la rigueur de l'ingénierie
+              et la vision d'un directeur artistique.
+            </p>
+            <p>
+              Je suis spécialisé dans la conception d'architectures front-end performantes,
+              l'optimisation SEO technique et la création d'expériences utilisateur
+              qui restent mémorables. Je crois que le code bien écrit et le design
+              soigné ne sont pas opposés — ils se renforcent mutuellement.
+            </p>
+            <p>
+              Parallèlement à mon activité de développeur, j'écris sur le design,
+              la technologie et la culture numérique. Mon blog reçoit chaque mois
+              plusieurs milliers de lecteurs qui apprécient une écriture claire,
+              informée et sans concession.
+            </p>
+            <blockquote>
+              Le code est un médium, pas une fin en soi. Ce qui compte, c'est
+              l'expérience que l'on crée pour les gens qui utilisent ce qu'on construit.
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compétences -->
+    <section class="section" style="border-bottom:var(--bordure-tres-forte);" aria-labelledby="titre-competences">
+      <div class="conteneur">
+        <div class="filet-epais" style="margin-bottom:var(--espace-4);"></div>
+        <h2 id="titre-competences" class="titre-section" style="margin-bottom:var(--espace-10);">Compétences</h2>
+        <div id="grille-competences" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--espace-5);" role="list" aria-label="Compétences techniques">
+          <!-- Chargé dynamiquement -->
+          <div class="squelette-texte" style="height:80px;"></div>
+          <div class="squelette-texte" style="height:80px;"></div>
+          <div class="squelette-texte" style="height:80px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parcours -->
+    <section class="section" id="parcours" style="border-bottom:var(--bordure-tres-forte);" aria-labelledby="titre-parcours">
+      <div class="conteneur">
+        <div class="filet-epais" style="margin-bottom:var(--espace-4);"></div>
+        <h2 id="titre-parcours" class="titre-section" style="margin-bottom:var(--espace-10);">Parcours professionnel</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--espace-12);">
+          <div>
+            <h3 style="font-family:var(--police-condensee);font-size:var(--taille-sm);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-8);padding-bottom:var(--espace-3);border-bottom:var(--bordure-forte);">Expériences</h3>
+            <div id="frise-experience" class="frise-chronologique" role="list"></div>
+          </div>
+          <div>
+            <h3 style="font-family:var(--police-condensee);font-size:var(--taille-sm);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-8);padding-bottom:var(--espace-3);border-bottom:var(--bordure-forte);">Formations</h3>
+            <div id="frise-formation" class="frise-chronologique" role="list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="section" style="border-bottom:var(--bordure-tres-forte);" aria-labelledby="titre-certs">
+      <div class="conteneur">
+        <div class="filet-epais" style="margin-bottom:var(--espace-4);"></div>
+        <h2 id="titre-certs" class="titre-section" style="margin-bottom:var(--espace-10);">Certifications</h2>
+        <div id="grille-certifications" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--espace-5);" role="list"></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section section-contact" style="text-align:center;" aria-labelledby="titre-cta">
+      <div class="conteneur">
+        <div class="contact-contenu" style="margin:0 auto;">
+          <span class="kicker" style="color:var(--couleur-accent);">Travaillons ensemble</span>
+          <h2 id="titre-cta" class="titre-grand" style="color:var(--couleur-fond);margin-top:var(--espace-4);margin-bottom:var(--espace-6);">
+            Un projet ? <em>Parlons-en.</em>
+          </h2>
+          <div style="display:flex;gap:var(--espace-4);justify-content:center;flex-wrap:wrap;">
+            <a href="mailto:contact@exemple.fr" class="btn btn-accent btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              Écrire un email
+            </a>
+            <a href="/contact.html" class="btn btn-contour btn-lg" style="border-color:rgba(240,235,224,0.4);color:var(--couleur-fond);">
+              Formulaire de contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pied-de-page" role="contentinfo">
+    <div class="conteneur">
+      <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
+        <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Prénom Nom.</p>
+        <p class="pied-copyright"><a href="/" style="color:inherit;">Portfolio Éditorial</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn-haut-page" id="btn-haut-page" aria-label="Retourner en haut" hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <script type="module" src="/scripts/app.js"></script>
+  <script type="module">
+    import stockage, { COLLECTIONS } from '/scripts/storage/storage-manager.js';
+    import { echapper, formaterDateCourte } from '/scripts/app.js';
+
+    async function chargerDonnees() {
+      try {
+        const [
+          { donnees: competences },
+          { donnees: experiences },
+          { donnees: formations },
+          { donnees: certifications },
+        ] = await Promise.all([
+          stockage.obtenirTous(COLLECTIONS.COMPETENCES, { filtres:{ vedette:true }, limite:8, tri:'ordre' }),
+          stockage.obtenirTous(COLLECTIONS.EXPERIENCES, { tri:'date_debut', ordre:'desc', limite:4 }),
+          stockage.obtenirTous(COLLECTIONS.FORMATIONS,  { tri:'date_debut', ordre:'desc', limite:3 }),
+          stockage.obtenirTous(COLLECTIONS.CERTIFICATIONS, { filtres:{ statut:'actif' }, limite:6 }),
+        ]);
+
+        // Compétences
+        const gc = document.getElementById('grille-competences');
+        if (competences?.length) {
+          gc.innerHTML = competences.map(c => `
+            <div class="carte-competence" role="listitem" data-animer>
+              <div class="carte-competence-nom">${echapper(c.nom)}</div>
+              <div class="barre-niveau" role="progressbar" aria-valuenow="${c.niveau||80}" aria-valuemin="0" aria-valuemax="100" aria-label="${echapper(c.nom)} : ${c.niveau||80}%">
+                <div class="barre-niveau-remplissage" style="--niveau:${(c.niveau||80)/100}"></div>
+              </div>
+              <div class="carte-competence-pourcentage">${c.niveau||80}% maîtrise</div>
+            </div>`).join('');
+          // Animer les barres
+          const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('anime'); obs.unobserve(e.target); } });
+          }, { threshold:0.5 });
+          gc.querySelectorAll('.barre-niveau-remplissage').forEach(b => obs.observe(b));
+        }
+
+        // Expériences
+        const fe = document.getElementById('frise-experience');
+        if (experiences?.length) {
+          fe.innerHTML = experiences.map(ex => `
+            <div class="element-frise" role="listitem" data-animer>
+              <div class="frise-point" aria-hidden="true"></div>
+              <div class="frise-date">${formaterDateCourte(ex.date_debut)} — ${ex.date_fin ? formaterDateCourte(ex.date_fin) : 'Présent'}</div>
+              <div class="frise-poste">${echapper(ex.titre||ex.poste||'')}</div>
+              <div class="frise-entreprise">${echapper(ex.organisation||ex.entreprise||'')}</div>
+              ${ex.description ? `<p class="frise-description">${echapper(ex.description)}</p>` : ''}
+            </div>`).join('');
+        }
+
+        // Formations
+        const ff = document.getElementById('frise-formation');
+        if (formations?.length) {
+          ff.innerHTML = formations.map(f => `
+            <div class="element-frise" role="listitem" data-animer>
+              <div class="frise-point" aria-hidden="true"></div>
+              <div class="frise-date">${formaterDateCourte(f.date_debut)} — ${f.date_fin ? formaterDateCourte(f.date_fin) : ''}</div>
+              <div class="frise-poste">${echapper(f.titre||'')}</div>
+              <div class="frise-entreprise">${echapper(f.organisation||'')}</div>
+              ${f.mention ? `<div class="frise-description">${echapper(f.mention)}</div>` : ''}
+            </div>`).join('');
+        }
+
+        // Certifications
+        const gcert = document.getElementById('grille-certifications');
+        if (certifications?.length) {
+          gcert.innerHTML = certifications.map(c => `
+            <div role="listitem" style="padding:var(--espace-5);background:var(--couleur-fond-papier);border:var(--bordure-forte);display:flex;flex-direction:column;gap:var(--espace-3);" data-animer>
+              <div style="font-family:var(--police-display);font-weight:700;font-size:var(--taille-base);color:var(--texte-primaire);">${echapper(c.titre||'')}</div>
+              <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-large);text-transform:uppercase;color:var(--couleur-accent-sombre);">${echapper(c.organisme||'')}</div>
+              <div style="font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-tertiaire);">Obtenu le ${formaterDateCourte(c.date_obtention)}</div>
+              ${c.url_credential ? `<a href="${echapper(c.url_credential)}" target="_blank" rel="noopener noreferrer" class="btn btn-contour btn-xs" style="width:fit-content;">Voir le certificat</a>` : ''}
+            </div>`).join('');
+        }
+
+      } catch (err) {
+        console.error('[À propos] Erreur chargement :', err.message);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', chargerDonnees);
+  </script>
+
+</body>
+</html>

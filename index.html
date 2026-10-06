@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO Primaire -->
+  <title>Prénom Nom — Portfolio Éditorial & Blog</title>
+  <meta name="description" content="Portfolio éditorial de Prénom Nom — Développeur, designer et auteur. Projets, réflexions et publications au croisement du code, du design et de la culture.">
+  <meta name="author" content="Prénom Nom">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="generator" content="Portfolio Éditorial CMS">
+  <meta name="theme-color" content="#0A0A0A">
+  <meta name="keywords" content="portfolio, développeur, designer, blog, éditorial, projets, créatif">
+  <link rel="canonical" href="https://www.amlouki.me/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:site_name"   content="Portfolio Éditorial">
+  <meta property="og:locale"      content="fr_FR">
+  <meta property="og:url"         content="https://www.amlouki.me/">
+  <meta property="og:title"       content="Prénom Nom — Portfolio Éditorial & Blog">
+  <meta property="og:description" content="Portfolio éditorial de Prénom Nom — Développeur, designer et auteur.">
+  <meta property="og:image"       content="https://www.amlouki.me/assets/og-accueil.jpg">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"   content="Portfolio Éditorial — Page d'accueil">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card"    content="summary_large_image">
+  <meta name="twitter:site"    content="@votre_twitter">
+  <meta name="twitter:creator" content="@votre_twitter">
+  <meta name="twitter:title"   content="Prénom Nom — Portfolio Éditorial">
+  <meta name="twitter:description" content="Portfolio éditorial de Prénom Nom.">
+  <meta name="twitter:image"   content="https://www.amlouki.me/assets/og-accueil.jpg">
+
+  <!-- Icônes et manifeste -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Polices : préchargement critique -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap">
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap"
+        media="print" onload="this.media='all'">
+
+  <!-- CSS — Architecture modulaire -->
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/navigation.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+  <link rel="stylesheet" href="/styles/components/cartes.css">
+  <link rel="stylesheet" href="/styles/pages/accueil.css">
+
+  <!-- JSON-LD — WebSite + Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.amlouki.me/#website",
+        "name": "AM. LOUKI",
+        "url": "https://www.amlouki.me/",
+        "description": "AM. LOUKI - Portfolio éditorial et blog de sécurité informatique",
+        "inLanguage": "fr",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.amlouki.me/blog/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.amlouki.me/#personne",
+        "name": "Abdel-hamid M. LOUKI",
+        "url": "https://www.amlouki.me/",
+        "description": "Etudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique. Sur ce blog, je partage mes projets, mes réflexions et mes découvertes dans le domaine de la sécurité informatique.",
+        "jobTitle": "Etudiant en ingénierie de la sécurité informatique",
+        "sameAs": [
+          "https://github.com/votre-profil",
+          "https://linkedin.com/in/votre-profil"
+        ],
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://www.amlouki.me/assets/portrait.png"
+        },
+        "knowsLanguage": ["fr", "en"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Configuration globale (non-secrète) -->
+  <script>
+    window.CONFIG = {
+      SITE_NOM:         'AM. LOUKI',
+      SITE_URL:         'https://www.amlouki.me',
+      AUTEUR_NOM:       'Abdel-hamid M. LOUKI',
+      SUPABASE_URL:     'https://qayrcorszsyiujzxfmxw.supabase.co',  /* Remplir en production */
+      SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFheXJjb3JzenN5aXVqenhmbXh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxOTk1MzcsImV4cCI6MjA5NDc3NTUzN30.4vwMex2ddoD3bCLPzdj60LoDZ5ba2igmBpVtOauQa7I', /* Remplir en production */
+    };
+  </script>
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+
+  <header class="en-tete" role="banner" id="en-tete-principal">
+
+    <!-- Bandeau supérieur — informations éditoriales -->
+    <div class="bandeau-superieur" aria-label="Informations éditoriales">
+      <div class="conteneur">
+        <div class="bandeau-interieur">
+          <time class="bandeau-date" id="date-bandeau" datetime="">
+            Samedi, 17 mai 2026
+          </time>
+          <span class="bandeau-edition">Édition No. 001</span>
+          <div class="bandeau-actions">
+            <a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Accès administration">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Masthead — Logo journal -->
+    <div class="conteneur">
+      <div class="en-tete-masthead">
+        <a href="/" class="logo-journal" aria-label="AM. LOUKI — Accueil">
+          AM. LOUKI
+        </a>
+        <span class="sous-titre-journal">
+          Conception et Management des SI &amp; Reseaux IT &mdash; Elève ingénieur en 4e année à l'Université Mundiapolis de Casa
+        </span>
+        <!-- Bouton hamburger mobile -->
+        <button class="bouton-hamburger" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="menu-mobile" id="btn-hamburger">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <line x1="4" y1="18" x2="20" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation rubriques -->
+    <nav class="nav-rubriques" aria-label="Navigation principale">
+      <div class="conteneur">
+        <div class="nav-rubriques-interieur" role="list">
+          <a href="/" class="nav-lien actif" role="listitem" aria-current="page">
+            <svg class="nav-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Accueil
+          </a>
+          <a href="/a-propos.html" class="nav-lien" role="listitem">
+            <svg class="nav-icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+            À propos
+          </a>
+          <a href="/projets.html" class="nav-lien" role="listitem">
+            <svg class="nav-icone" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Projets
+          </a>
+          <a href="/blog/index.html" class="nav-lien" role="listitem">
+            <svg class="nav-icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+            Blog
+          </a>
+          <a href="/contact.html" class="nav-lien" role="listitem">
+            <svg class="nav-icone" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Contact
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Menu mobile -->
+  <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu de navigation mobile" hidden>
+    <div class="menu-mobile-en-tete">
+      <span class="logo-journal" style="font-size: var(--taille-2xl)">AM. LOUKI</span>
+      <button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer le menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-mobile-nav" aria-label="Navigation mobile">
+      <a href="/" class="menu-mobile-lien">
+        Accueil
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="/a-propos.html" class="menu-mobile-lien">
+        À propos
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="/projets.html" class="menu-mobile-lien">
+        Projets
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="/blog/index.html" class="menu-mobile-lien">
+        Blog
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="/contact.html" class="menu-mobile-lien">
+        Contact
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </nav>
+  </div>
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       CONTENU PRINCIPAL
+       ============================================================ -->
+
+  <main class="contenu-principal" id="contenu-principal" role="main">
+
+    <!-- ============================================================
+         SECTION HÉROS — Portrait éditorial, collage
+         ============================================================ -->
+
+    <section class="section-hero" aria-labelledby="titre-hero">
+      <div class="conteneur">
+        <div class="hero-grille">
+
+          <!-- Contenu texte gauche -->
+          <div class="hero-contenu">
+
+            <!-- Étiquette volante — genre éditorial -->
+            <div class="etiquettes-hero" aria-hidden="true">
+              <span class="etiquette-volante etiquette-jaune etiquette-inclinee-2">N° 001</span>
+              <span class="etiquette-volante etiquette-inclinee-moins-1" style="margin-left: var(--espace-4);">Édition 2026</span>
+            </div>
+
+            <!-- Kicker -->
+            <span class="kicker" id="sous-titre-hero">Elève &amp; Ingénieur en sécurité informatique</span>
+
+            <!-- Manchette principale -->
+            <h1 class="manchette" id="titre-hero">
+              Abdel-hamid<br>
+              <em>Mahamat LOUKI</em>
+            </h1>
+
+            <!-- Chapô -->
+            <p class="chapeau hero-chapo">
+              Étudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique. Sur ce blog, je partage mes projets, mes réflexions et mes découvertes dans le domaine de la sécurité informatique.
+            </p>
+
+            <!-- Filet de séparation -->
+            <div class="filet-epais hero-filet" aria-hidden="true"></div>
+
+            <!-- Métriques éditoriales -->
+            <div class="hero-metriques" role="list" aria-label="Statistiques clés">
+              <div class="metrique-item" role="listitem">
+                <div class="metrique-nombre" data-compteur="47" aria-label="47 projets réalisés">10+</div>
+                <div class="metrique-label">Projets réalisés</div>
+              </div>
+              <div class="metrique-separateur" aria-hidden="true"></div>
+              <div class="metrique-item" role="listitem">
+                <div class="metrique-nombre" data-compteur="128" aria-label="128 articles publiés">3</div>
+                <div class="metrique-label">Articles publiés</div>
+              </div>
+              <div class="metrique-separateur" aria-hidden="true"></div>
+              <div class="metrique-item" role="listitem">
+                <div class="metrique-nombre" data-compteur="8" aria-label="8 années d'expérience">4e</div>
+                <div class="metrique-label">Année d'études</div>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="hero-actions">
+              <a href="/projets.html" class="btn btn-primaire btn-lg" aria-label="Voir mes projets">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Voir mes projets
+              </a>
+              <a href="/contact.html" class="btn btn-contour btn-lg" aria-label="Me contacter">
+                Me contacter
+              </a>
+            </div>
+
+            <!-- Liens sociaux -->
+            <div class="hero-sociaux" aria-label="Réseaux sociaux">
+              <a href="https://github.com/dirdaymi" class="lien-social" aria-label="GitHub" rel="noopener noreferrer" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+              </a>
+              <a href="https://linkedin.com/in/amlouki" class="lien-social" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="mailto:amlouki@outlook.fr" class="lien-social" aria-label="Envoyer un email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Portrait éditorial droit -->
+          <div class="hero-portrait-zone" aria-hidden="true">
+            <!-- Fond texturé -->
+            <div class="portrait-fond-journal">
+              <div class="portrait-fond-colonnes"></div>
+            </div>
+
+            <!-- Cadre principal du portrait -->
+            <div class="portrait-cadre">
+              <!-- Image portrait — PNG transparent requis -->
+              <div class="portrait-image-wrapper halftone-conteneur">
+                <img
+                  src="/assets/images/portrait.png"
+                  alt="Portrait éditorial de Prénom Nom, assis avec un ordinateur portable"
+                  class="portrait-image portrait-editorial"
+                  width="460"
+                  height="580"
+                  loading="eager"
+                  decoding="async"
+                  fetchpriority="high"
+                >
+                <!-- Trame halftone overlay -->
+                <div class="halftone-overlay" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Étiquettes flottantes collage -->
+            <div class="portrait-etiquettes">
+              <div class="etiquette-flottante etiquette-flottante-1 feuille-papier">
+                <div class="etiquette-flottante-icone" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <div class="etiquette-flottante-texte">Sécurité & gestion de risques</div>
+                <div class="etiquette-flottante-sous">AD, GPO, Firewall</div>
+              </div>
+
+              <div class="etiquette-flottante etiquette-flottante-2 feuille-papier">
+                <div class="etiquette-flottante-icone" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                </div>
+                <div class="etiquette-flottante-texte">128 articles</div>
+                <div class="etiquette-flottante-sous">publiés &amp; indexés</div>
+              </div>
+
+              <div class="etiquette-flottante etiquette-flottante-3 feuille-papier">
+                <div class="etiquette-flottante-icone" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div class="etiquette-flottante-texte">En stage</div>
+                <div class="etiquette-flottante-sous">Chez Computime Sarl</div>
+              </div>
+            </div>
+
+            <!-- Tampon superposé -->
+            <div class="portrait-tampon tampon tampon-rouge" aria-hidden="true">Certifié</div>
+
+            <!-- Numéro décoratif -->
+            <div class="portrait-numero" aria-hidden="true">01</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION PROJETS VEDETTES
+         ============================================================ -->
+
+    <section class="section section-projets" aria-labelledby="titre-projets">
+      <div class="conteneur">
+
+        <!-- En-tête section — style manchette -->
+        <div class="section-header-editorial">
+          <div class="filet-epais" aria-hidden="true"></div>
+          <div class="flex aligner-centre justifier-entre" style="padding: var(--espace-3) 0;">
+            <h2 class="titre-section-editorial" id="titre-projets">
+              Projets Sélectionnés
+            </h2>
+            <a href="/projets.html" class="lien-voir-tout" aria-label="Voir tous les projets">
+              Voir tout
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="filet-double" aria-hidden="true"></div>
+        </div>
+
+        <!-- Grille projets -->
+        <div class="grille-projets" id="grille-projets" role="list" aria-live="polite" aria-label="Projets vedettes">
+          <!-- Chargé dynamiquement par projets.js -->
+          <!-- Placeholders de chargement -->
+          <article class="carte-projet squelette-carte" role="listitem" aria-label="Chargement en cours">
+            <div class="squelette-image"></div>
+            <div class="carte-projet-corps">
+              <div class="squelette-texte squelette-court"></div>
+              <div class="squelette-texte squelette-long"></div>
+              <div class="squelette-texte squelette-moyen"></div>
+            </div>
+          </article>
+          <article class="carte-projet squelette-carte" role="listitem" aria-label="Chargement en cours">
+            <div class="squelette-image"></div>
+            <div class="carte-projet-corps">
+              <div class="squelette-texte squelette-court"></div>
+              <div class="squelette-texte squelette-long"></div>
+              <div class="squelette-texte squelette-moyen"></div>
+            </div>
+          </article>
+          <article class="carte-projet squelette-carte" role="listitem" aria-label="Chargement en cours">
+            <div class="squelette-image"></div>
+            <div class="carte-projet-corps">
+              <div class="squelette-texte squelette-court"></div>
+              <div class="squelette-texte squelette-long"></div>
+              <div class="squelette-texte squelette-moyen"></div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION À PROPOS — Style interview journal
+         ============================================================ -->
+
+    <section class="section section-apropos" aria-labelledby="titre-apropos">
+      <div class="conteneur">
+        <div class="apropos-grille">
+
+          <!-- Colonne texte -->
+          <div class="apropos-contenu">
+            <div class="section-header-editorial">
+              <div class="filet-epais" aria-hidden="true"></div>
+              <h2 class="titre-section-editorial" id="titre-apropos" style="padding: var(--espace-3) 0;">
+                Qui suis-je ?
+              </h2>
+              <div class="filet-double" aria-hidden="true"></div>
+            </div>
+
+            <div class="apropos-texte prose" itemscope itemtype="https://schema.org/Person">
+              <p class="chapeau" itemprop="description">
+                Artisan du numérique, je construis des interfaces qui allient 
+                performance technique et sensibilité éditoriale.
+              </p>
+
+              <p>
+                Avec plus de <strong>8 ans d'expérience</strong> dans le développement web et le design, 
+                j'ai accompagné des startups, des PME et des institutions culturelles dans 
+                leurs projets digitaux. Mon approche croise la rigueur de l'ingénierie 
+                et la vision d'un directeur artistique.
+              </p>
+
+              <p>
+                Parallèlement, j'écris sur le design, la technologie et la culture numérique. 
+                Mon blog reçoit chaque mois plusieurs milliers de lecteurs qui apprécient 
+                une écriture claire, informée et sans concession.
+              </p>
+            </div>
+
+            <div style="margin-top: var(--espace-8);">
+              <a href="/a-propos.html" class="btn btn-accent" aria-label="En savoir plus sur mon parcours">
+                Lire mon parcours complet
+              </a>
+            </div>
+          </div>
+
+          <!-- Colonne compétences — style journal -->
+          <div class="apropos-competences">
+            <h3 class="competences-titre">
+              <span class="rubrique">Expertise technique</span>
+            </h3>
+            <div id="liste-competences" role="list" aria-label="Compétences techniques">
+              <!-- Chargé dynamiquement -->
+            </div>
+
+            <!-- Certifications -->
+            <div class="certifications-bloc" aria-label="Certifications">
+              <span class="kicker">Certifications</span>
+              <div id="liste-certifications" role="list">
+                <!-- Chargé dynamiquement -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION BLOG — Grille éditoriale
+         ============================================================ -->
+
+    <section class="section section-blog" aria-labelledby="titre-blog">
+      <div class="conteneur">
+
+        <div class="section-header-editorial">
+          <div class="filet-epais" aria-hidden="true"></div>
+          <div class="flex aligner-centre justifier-entre" style="padding: var(--espace-3) 0;">
+            <h2 class="titre-section-editorial" id="titre-blog">
+              Dernières Publications
+            </h2>
+            <a href="/blog/index.html" class="lien-voir-tout" aria-label="Voir toutes les publications">
+              Tout lire
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="filet-double" aria-hidden="true"></div>
+        </div>
+
+        <!-- Grille blog — layout journal avec vedette -->
+        <div class="grille-blog-accueil" id="grille-blog" role="list" aria-label="Derniers articles">
+          <!-- Chargé dynamiquement par blog.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION EXPÉRIENCE — Frise chronologique
+         ============================================================ -->
+
+    <section class="section section-experience fond-journal" aria-labelledby="titre-experience">
+      <div class="conteneur">
+        <div class="section-header-editorial">
+          <div class="filet-epais" aria-hidden="true"></div>
+          <h2 class="titre-section-editorial" id="titre-experience" style="padding: var(--espace-3) 0;">
+            Parcours professionnel
+          </h2>
+          <div class="filet-double" aria-hidden="true"></div>
+        </div>
+
+        <div class="grille-2 experience-grille" style="margin-top: var(--espace-10);">
+          <div id="frise-experience" class="frise-chronologique" role="list" aria-label="Expériences professionnelles">
+            <!-- Chargé dynamiquement -->
+          </div>
+          <div id="frise-formation" class="frise-chronologique" role="list" aria-label="Formations">
+            <!-- Chargé dynamiquement -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION CONTACT — Appel à l'action
+         ============================================================ -->
+
+    <section class="section section-contact" aria-labelledby="titre-contact">
+      <div class="conteneur">
+        <div class="contact-bloc">
+
+          <!-- Décoration typographique -->
+          <div class="contact-numero" aria-hidden="true">C</div>
+
+          <div class="contact-contenu">
+            <span class="kicker">Travaillons ensemble</span>
+            <h2 class="titre-grand" id="titre-contact" style="font-size: clamp(var(--taille-3xl), 5vw, var(--taille-5xl));">
+              Un projet en tête ?<br>
+              <em>Parlons-en.</em>
+            </h2>
+            <p class="chapeau" style="margin-top: var(--espace-6); max-width: 54ch;">
+              Je suis disponible pour des missions freelance, des collaborations 
+              éditoriales et des projets ambitieux qui méritent d'être bien faits.
+            </p>
+            <div class="contact-actions" style="margin-top: var(--espace-8);">
+              <a href="mailto:contact@exemple.fr" class="btn btn-primaire btn-lg" aria-label="Envoyer un email">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                Écrire un email
+              </a>
+              <a href="/contact.html" class="btn btn-contour btn-lg" aria-label="Formulaire de contact complet">
+                Formulaire de contact
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       PIED DE PAGE
+       ============================================================ -->
+
+  <footer class="pied-de-page" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
+
+    <div class="conteneur">
+      <div class="pied-grille">
+
+        <!-- Colonne principale — Description -->
+        <div class="pied-colonne-principale">
+          <div class="logo-journal" style="font-size: var(--taille-2xl); color: var(--couleur-fond); margin-bottom: var(--espace-4);">
+            Portfolio Éditorial
+          </div>
+          <p style="font-family: var(--police-corps); font-size: var(--taille-sm); color: rgba(240,235,224,0.55); line-height: var(--ligne-lache); max-width: 30ch;">
+            Revue personnelle de création, de code et de culture numérique.
+            Indépendante depuis 2024.
+          </p>
+          <div class="pied-sociaux" style="margin-top: var(--espace-6);">
+            <a href="https://github.com/votre-profil" class="lien-social pied-social" aria-label="GitHub" rel="noopener noreferrer" target="_blank">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/votre-profil" class="lien-social pied-social" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div>
+          <h3 class="pied-section-titre">Navigation</h3>
+          <nav aria-label="Navigation pied de page">
+            <a href="/"                  class="pied-lien">Accueil</a>
+            <a href="/a-propos.html"     class="pied-lien">À propos</a>
+            <a href="/projets.html"      class="pied-lien">Projets</a>
+            <a href="/blog/index.html"   class="pied-lien">Blog</a>
+            <a href="/contact.html"      class="pied-lien">Contact</a>
+          </nav>
+        </div>
+
+        <!-- Blog -->
+        <div>
+          <h3 class="pied-section-titre">Blog</h3>
+          <nav aria-label="Navigation blog">
+            <a href="/blog/index.html"        class="pied-lien">Tous les articles</a>
+            <a href="/blog/index.html?cat=design"  class="pied-lien">Design</a>
+            <a href="/blog/index.html?cat=code"    class="pied-lien">Code</a>
+            <a href="/blog/index.html?cat=culture" class="pied-lien">Culture</a>
+          </nav>
+        </div>
+
+        <!-- Légal -->
+        <div>
+          <h3 class="pied-section-titre">Informations</h3>
+          <nav aria-label="Informations légales">
+            <a href="/mentions-legales.html"    class="pied-lien">Mentions légales</a>
+            <a href="/confidentialite.html"     class="pied-lien">Confidentialité</a>
+            <a href="/sitemap.xml"              class="pied-lien">Plan du site</a>
+            <a href="/admin/connexion.html"     class="pied-lien">Administration</a>
+          </nav>
+        </div>
+
+      </div>
+
+      <!-- Ligne de copyright -->
+      <div class="pied-bas">
+        <p class="pied-copyright">
+          &copy; <span id="annee-copyright">2024</span> Prénom Nom.
+          Tous droits réservés.
+        </p>
+        <p class="pied-copyright">
+          Construit avec HTML5, CSS3 &amp; JavaScript pur &mdash; 
+          Hébergé sur Supabase
+        </p>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Bouton retour en haut -->
+  <button
+    class="btn-haut-page"
+    id="btn-haut-page"
+    aria-label="Retourner en haut de la page"
+    hidden
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <path d="M12 19V5"/><path d="m5 12 7-7 7 7"/>
+    </svg>
+  </button>
+
+  <!-- ============================================================
+       SCRIPTS — Chargement différé
+       ============================================================ -->
+
+  <!-- Script principal — module ES6 -->
+  <script type="module" src="/scripts/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,380 @@
+/**
+ * SYSTÈME DE MISE EN PAGE ÉDITORIALE
+ * Portfolio — Grille journal, colonnes, conteneurs
+ *
+ * Grille multi-colonnes inspirée de la mise en page
+ * des journaux français de référence.
+ */
+
+/* ============================================================
+   CONTENEURS
+   ============================================================ */
+
+.conteneur {
+  width: 100%;
+  max-width: var(--largeur-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--espace-6);
+  padding-right: var(--espace-6);
+}
+
+.conteneur-etroit {
+  max-width: var(--largeur-etroite);
+}
+
+.conteneur-prose {
+  max-width: var(--largeur-prose);
+}
+
+.conteneur-plein {
+  max-width: none;
+}
+
+@media (min-width: 768px) {
+  .conteneur {
+    padding-left: var(--espace-8);
+    padding-right: var(--espace-8);
+  }
+}
+
+@media (min-width: 1280px) {
+  .conteneur {
+    padding-left: var(--espace-12);
+    padding-right: var(--espace-12);
+  }
+}
+
+/* ============================================================
+   SECTION
+   ============================================================ */
+
+.section {
+  padding-top: var(--espace-20);
+  padding-bottom: var(--espace-20);
+  position: relative;
+}
+
+.section-sm {
+  padding-top: var(--espace-12);
+  padding-bottom: var(--espace-12);
+}
+
+.section-lg {
+  padding-top: var(--espace-32);
+  padding-bottom: var(--espace-32);
+}
+
+/* ============================================================
+   GRILLE ÉDITORIALE — COLONNES JOURNAL
+   ============================================================ */
+
+/* Grille principale multi-colonnes */
+.grille-journal {
+  display: grid;
+  gap: 0;
+  border-top: var(--bordure-tres-forte);
+}
+
+/* Grille 2 colonnes */
+.grille-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+/* Grille 3 colonnes */
+.grille-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+/* Grille 4 colonnes */
+.grille-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+/* Grille asymétrique — vedette + liste */
+.grille-asymetrique {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0;
+}
+
+.grille-asymetrique-inverse {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0;
+}
+
+/* Grille avec sidebar */
+.grille-sidebar {
+  display: grid;
+  grid-template-columns: 1fr var(--largeur-sidebar);
+  gap: var(--espace-8);
+  align-items: start;
+}
+
+/* Grille magazine — colonne principale + colonnes latérales */
+.grille-magazine {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 0;
+}
+
+/* ============================================================
+   COLONNES AVEC FILETS DE SÉPARATION
+   ============================================================ */
+
+/* Filet vertical entre colonnes */
+.colonne-filet {
+  padding: var(--espace-6);
+  border-right: var(--bordure-fine);
+}
+
+.colonne-filet:last-child {
+  border-right: none;
+}
+
+.colonne-filet-epais {
+  padding: var(--espace-6);
+  border-right: var(--bordure-forte);
+}
+
+.colonne-filet-epais:last-child {
+  border-right: none;
+}
+
+/* ============================================================
+   FLEXBOX UTILITAIRES
+   ============================================================ */
+
+.flex          { display: flex; }
+.flex-colonne  { flex-direction: column; }
+.flex-enrouler { flex-wrap: wrap; }
+.aligner-centre { align-items: center; }
+.aligner-debut  { align-items: flex-start; }
+.aligner-fin    { align-items: flex-end; }
+.aligner-etirer { align-items: stretch; }
+.justifier-centre  { justify-content: center; }
+.justifier-entre   { justify-content: space-between; }
+.justifier-fin     { justify-content: flex-end; }
+.flex-1       { flex: 1 1 0%; }
+.flex-auto    { flex: 1 1 auto; }
+.flex-aucun   { flex: none; }
+
+/* Ecarts */
+.ecart-1  { gap: var(--espace-1); }
+.ecart-2  { gap: var(--espace-2); }
+.ecart-3  { gap: var(--espace-3); }
+.ecart-4  { gap: var(--espace-4); }
+.ecart-5  { gap: var(--espace-5); }
+.ecart-6  { gap: var(--espace-6); }
+.ecart-8  { gap: var(--espace-8); }
+.ecart-10 { gap: var(--espace-10); }
+.ecart-12 { gap: var(--espace-12); }
+
+/* ============================================================
+   GRILLE AUTO
+   ============================================================ */
+
+.grille-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--espace-6);
+}
+
+.grille-auto-sm {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: var(--espace-4);
+}
+
+.grille-auto-lg {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+  gap: var(--espace-8);
+}
+
+/* ============================================================
+   ESPACEMENT UTILITAIRES
+   ============================================================ */
+
+/* Marges */
+.m-auto  { margin: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+.mt-4  { margin-top: var(--espace-4); }
+.mt-6  { margin-top: var(--espace-6); }
+.mt-8  { margin-top: var(--espace-8); }
+.mt-12 { margin-top: var(--espace-12); }
+.mt-16 { margin-top: var(--espace-16); }
+.mt-24 { margin-top: var(--espace-24); }
+
+.mb-2  { margin-bottom: var(--espace-2); }
+.mb-4  { margin-bottom: var(--espace-4); }
+.mb-6  { margin-bottom: var(--espace-6); }
+.mb-8  { margin-bottom: var(--espace-8); }
+.mb-12 { margin-bottom: var(--espace-12); }
+
+/* Paddings */
+.p-4  { padding: var(--espace-4); }
+.p-6  { padding: var(--espace-6); }
+.p-8  { padding: var(--espace-8); }
+.px-4 { padding-left: var(--espace-4); padding-right: var(--espace-4); }
+.px-6 { padding-left: var(--espace-6); padding-right: var(--espace-6); }
+.py-4 { padding-top: var(--espace-4); padding-bottom: var(--espace-4); }
+.py-6 { padding-top: var(--espace-6); padding-bottom: var(--espace-6); }
+.py-8 { padding-top: var(--espace-8); padding-bottom: var(--espace-8); }
+
+/* ============================================================
+   POSITION
+   ============================================================ */
+
+.relatif   { position: relative; }
+.absolu    { position: absolute; }
+.fixe      { position: fixed; }
+.collant   { position: sticky; }
+
+.inset-0   { inset: 0; }
+.haut-0    { top: 0; }
+.bas-0     { bottom: 0; }
+.gauche-0  { left: 0; }
+.droite-0  { right: 0; }
+
+/* ============================================================
+   VISIBILITÉ ET AFFICHAGE
+   ============================================================ */
+
+.bloc         { display: block; }
+.bloc-inline  { display: inline-block; }
+.inline-flex  { display: inline-flex; }
+.cache        { display: none; }
+.invisible    { visibility: hidden; }
+
+/* Accessible uniquement aux lecteurs d'écran */
+.sr-seulement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================================
+   TAILLES
+   ============================================================ */
+
+.w-pleine   { width: 100%; }
+.h-pleine   { height: 100%; }
+.h-ecran    { height: 100vh; }
+.min-h-ecran { min-height: 100vh; }
+
+/* ============================================================
+   MISE EN PAGE RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .grille-3,
+  .grille-asymetrique {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grille-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grille-magazine,
+  .grille-sidebar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .grille-2,
+  .grille-3,
+  .grille-4,
+  .grille-asymetrique,
+  .grille-asymetrique-inverse,
+  .grille-magazine {
+    grid-template-columns: 1fr;
+  }
+
+  .colonne-filet,
+  .colonne-filet-epais {
+    border-right: none;
+    border-bottom: var(--bordure-fine);
+    padding: var(--espace-5);
+  }
+
+  .masquer-mobile { display: none !important; }
+  .afficher-mobile { display: block !important; }
+}
+
+@media (min-width: 768px) {
+  .masquer-tablette-haut { display: none !important; }
+}
+
+/* ============================================================
+   MISE EN PAGE PAGE PRINCIPALE
+   ============================================================ */
+
+.gabarit-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contenu-principal {
+  flex: 1;
+}
+
+/* ============================================================
+   EN-TÊTE JOURNAL — MASTHEAD
+   ============================================================ */
+
+.masthead {
+  border-bottom: var(--bordure-tres-forte);
+  padding: var(--espace-4) 0;
+  position: relative;
+}
+
+.masthead-superieur {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--espace-3);
+  margin-bottom: var(--espace-3);
+  border-bottom: var(--bordure-fine);
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  color: var(--texte-tertiaire);
+}
+
+.masthead-logo {
+  font-family: var(--police-display);
+  font-size: clamp(var(--taille-3xl), 7vw, var(--taille-6xl));
+  font-weight: 900;
+  letter-spacing: var(--espacement-serre);
+  line-height: 1;
+  color: var(--texte-primaire);
+  text-decoration: none;
+}
+
+.masthead-sous-titre {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-sm);
+  font-weight: 400;
+  letter-spacing: var(--espacement-tres);
+  text-transform: uppercase;
+  color: var(--texte-tertiaire);
+  text-align: center;
+  margin-top: var(--espace-1);
+}

@@ -1,0 +1,215 @@
+/**
+ * RÉINITIALISATION ET BASE TYPOGRAPHIQUE
+ * Portfolio Éditorial
+ *
+ * Réinitialisation moderne combinant les meilleures pratiques
+ * avec les fondations du style éditorial vintage.
+ */
+
+/* --- Boîte universelle --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* --- Document --- */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+  /* Rendu typographique amélioré */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+}
+
+/* --- Corps du document --- */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--couleur-fond);
+  color: var(--texte-primaire);
+  font-family: var(--police-corps);
+  font-size: var(--taille-md);
+  line-height: var(--ligne-lache);
+  font-weight: 400;
+  overflow-x: hidden;
+  transition:
+    background-color 400ms ease,
+    color 400ms ease;
+  position: relative;
+}
+
+/* Grain de papier — texture photographique subtile */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dessous);
+  pointer-events: none;
+  opacity: var(--grain-opacite);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-color-scheme: dark) {
+  body::before {
+    mix-blend-mode: screen;
+  }
+}
+
+/* --- Éléments médias --- */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+img { height: auto; }
+
+/* --- Réinitialisation typographique --- */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--police-display);
+  font-weight: 700;
+  line-height: var(--ligne-titre);
+  color: var(--texte-primaire);
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+p {
+  margin: 0;
+  line-height: var(--ligne-lache);
+}
+
+/* Listes neutres avec rôle */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Liens --- */
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* --- Éléments interactifs --- */
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+textarea {
+  resize: vertical;
+}
+
+select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Sélection de texte --- */
+::selection {
+  background-color: var(--couleur-accent-pale);
+  color: var(--couleur-encre);
+}
+
+/* --- Focus clavier accessible --- */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--couleur-accent);
+  outline-offset: 3px;
+}
+
+/* --- Scrollbar éditoriale --- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--couleur-fond-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--couleur-encre-fantome);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--couleur-encre-tertiaire);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--couleur-encre-fantome) var(--couleur-fond-alt);
+}
+
+/* --- Tables --- */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* --- Code --- */
+code, kbd, samp, pre {
+  font-family: var(--police-mono);
+  font-size: 0.9em;
+}
+
+/* --- Réduction du mouvement --- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Impression --- */
+@media print {
+  *, *::before, *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+  }
+
+  body::before { display: none; }
+
+  @page {
+    margin: 2cm;
+  }
+}

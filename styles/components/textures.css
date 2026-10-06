@@ -1,0 +1,468 @@
+/**
+ * TEXTURES ET EFFETS ÉDITORIAUX
+ * Portfolio — Collage, papier déchiré, trame halftone
+ *
+ * Effets visuels inspirés des techniques d'impression vintage :
+ * lithographie, offset, sérigraphie, découpage journal.
+ */
+
+/* ============================================================
+   PAPIER DÉCHIRÉ — BORDS ORGANIQUES
+   ============================================================ */
+
+/* Bord déchiré haut */
+.papier-dechire-haut {
+  position: relative;
+  padding-top: var(--espace-8);
+}
+
+.papier-dechire-haut::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: var(--couleur-fond);
+  clip-path: polygon(
+    0% 100%,
+    1.5% 60%,
+    3% 85%,
+    5% 45%,
+    7% 70%,
+    9% 30%,
+    11% 65%,
+    13% 40%,
+    15% 80%,
+    17% 50%,
+    19% 75%,
+    21% 25%,
+    23% 60%,
+    25% 45%,
+    27% 80%,
+    29% 35%,
+    31% 70%,
+    33% 50%,
+    35% 85%,
+    37% 40%,
+    39% 65%,
+    41% 30%,
+    43% 75%,
+    45% 55%,
+    47% 80%,
+    49% 40%,
+    51% 70%,
+    53% 45%,
+    55% 85%,
+    57% 35%,
+    59% 60%,
+    61% 30%,
+    63% 75%,
+    65% 50%,
+    67% 80%,
+    69% 40%,
+    71% 65%,
+    73% 45%,
+    75% 85%,
+    77% 35%,
+    79% 70%,
+    81% 50%,
+    83% 80%,
+    85% 30%,
+    87% 65%,
+    89% 45%,
+    91% 75%,
+    93% 55%,
+    95% 80%,
+    97% 40%,
+    99% 70%,
+    100% 45%,
+    100% 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Bord déchiré bas */
+.papier-dechire-bas {
+  position: relative;
+  padding-bottom: var(--espace-8);
+}
+
+.papier-dechire-bas::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: var(--couleur-fond);
+  clip-path: polygon(
+    0% 0%,
+    2% 40%,
+    4% 15%,
+    6% 55%,
+    8% 30%,
+    10% 70%,
+    12% 35%,
+    14% 60%,
+    16% 20%,
+    18% 50%,
+    20% 25%,
+    22% 75%,
+    24% 40%,
+    26% 55%,
+    28% 20%,
+    30% 65%,
+    32% 30%,
+    34% 50%,
+    36% 15%,
+    38% 60%,
+    40% 35%,
+    42% 70%,
+    44% 25%,
+    46% 45%,
+    48% 20%,
+    50% 60%,
+    52% 30%,
+    54% 55%,
+    56% 15%,
+    58% 65%,
+    60% 40%,
+    62% 70%,
+    64% 25%,
+    66% 50%,
+    68% 20%,
+    70% 60%,
+    72% 35%,
+    74% 55%,
+    76% 15%,
+    78% 65%,
+    80% 30%,
+    82% 50%,
+    84% 20%,
+    86% 70%,
+    88% 35%,
+    90% 55%,
+    92% 25%,
+    94% 60%,
+    96% 30%,
+    98% 50%,
+    100% 20%,
+    100% 0%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ============================================================
+   FEUILLE DE PAPIER — EFFET CARNET
+   ============================================================ */
+
+.feuille-papier {
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-fine);
+  box-shadow: var(--ombre-carte);
+  position: relative;
+  padding: var(--espace-8);
+}
+
+/* Effet incliné — papier posé en biais */
+.feuille-inclinee {
+  transform: rotate(var(--papier-angle));
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.feuille-inclinee-alt {
+  transform: rotate(var(--papier-angle-alt));
+  transform-origin: center center;
+}
+
+/* Lignes du carnet */
+.feuille-lignes {
+  background-image:
+    linear-gradient(transparent calc(var(--espace-8) - 1px), rgba(0,0,0,0.08) calc(var(--espace-8) - 1px));
+  background-size: 100% var(--espace-8);
+  background-position: 0 var(--espace-10);
+}
+
+/* Trou de reliure */
+.feuille-reliure::before {
+  content: '';
+  position: absolute;
+  left: var(--espace-6);
+  top: var(--espace-6);
+  bottom: var(--espace-6);
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15) 0,
+    rgba(0,0,0,0.15) 24px,
+    transparent 24px,
+    transparent 32px
+  );
+}
+
+/* ============================================================
+   TRAME HALFTONE — PORTRAIT ÉDITORIAL
+   ============================================================ */
+
+.halftone-conteneur {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Overlay trame halftone via SVG filter */
+.halftone-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(0,0,0,0.8) 30%, transparent 31%),
+    radial-gradient(circle, rgba(0,0,0,0.6) 30%, transparent 31%);
+  background-size:
+    var(--halftone-taille) var(--halftone-taille),
+    calc(var(--halftone-taille) * 1.5) calc(var(--halftone-taille) * 1.5);
+  background-position:
+    0 0,
+    calc(var(--halftone-taille) * 0.75) calc(var(--halftone-taille) * 0.75);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+@media (prefers-color-scheme: dark) {
+  .halftone-overlay::after {
+    mix-blend-mode: screen;
+    opacity: 0.18;
+  }
+}
+
+/* Portrait monochromatique */
+.portrait-editorial {
+  filter:
+    contrast(1.15)
+    grayscale(0.85)
+    brightness(1.05);
+  mix-blend-mode: multiply;
+  position: relative;
+}
+
+@media (prefers-color-scheme: dark) {
+  .portrait-editorial {
+    mix-blend-mode: screen;
+    filter: contrast(1.2) grayscale(0.9) brightness(0.95);
+  }
+}
+
+/* ============================================================
+   ÉTIQUETTES VOLANTES — COLLAGE
+   ============================================================ */
+
+.etiquette-volante {
+  display: inline-block;
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-forte);
+  padding: var(--espace-2) var(--espace-4);
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--texte-primaire);
+  box-shadow: var(--ombre-encre);
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.etiquette-jaune {
+  background: var(--couleur-accent);
+  color: var(--couleur-encre);
+  border-color: var(--couleur-accent-sombre);
+  box-shadow: 2px 2px 0 var(--couleur-accent-sombre);
+}
+
+.etiquette-inclinee-1 { transform: rotate(-2.5deg); }
+.etiquette-inclinee-2 { transform: rotate(1.8deg); }
+.etiquette-inclinee-3 { transform: rotate(-1.2deg); }
+.etiquette-inclinee-4 { transform: rotate(3deg); }
+
+/* Scotch / ruban adhésif simulé */
+.ruban::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 60px;
+  height: 22px;
+  background: rgba(255, 230, 100, 0.45);
+  border: 1px solid rgba(200, 168, 64, 0.30);
+  z-index: 3;
+}
+
+/* ============================================================
+   COUPURES DE PRESSE — ARTICLE DÉCOUPÉ
+   ============================================================ */
+
+.coupure-presse {
+  position: relative;
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-fine);
+  box-shadow: var(--ombre-carte);
+  padding: var(--espace-5) var(--espace-6);
+  /* Effet papier jauni */
+  background-image: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(200, 168, 64, 0.04) 50%,
+    transparent 100%
+  );
+}
+
+/* Coins pliés */
+.coin-plie::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(
+    225deg,
+    var(--couleur-fond-alt) 0%,
+    var(--couleur-fond-alt) 50%,
+    transparent 50%
+  );
+  border-top: 1px solid rgba(0,0,0,0.12);
+  border-left: 1px solid rgba(0,0,0,0.12);
+}
+
+/* ============================================================
+   LIGNE DE SÉPARATION ÉDITORIALE
+   ============================================================ */
+
+/* Filet de presse */
+.filet-presse {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  margin: var(--espace-8) 0;
+}
+
+.filet-presse::before,
+.filet-presse::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--texte-primaire);
+}
+
+.filet-epais {
+  height: 3px;
+  background: var(--texte-primaire);
+  border: none;
+  margin: var(--espace-6) 0;
+}
+
+.filet-double {
+  border: none;
+  height: 5px;
+  background:
+    linear-gradient(to bottom, var(--texte-primaire) 1px, transparent 1px, transparent 3px, var(--texte-primaire) 3px, var(--texte-primaire) 4px);
+  margin: var(--espace-6) 0;
+}
+
+/* Étoile séparatrice */
+.separateur-etoile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-4);
+  margin: var(--espace-10) 0;
+  color: var(--texte-tertiaire);
+  font-family: var(--police-display);
+  font-size: var(--taille-lg);
+  letter-spacing: var(--espace-4);
+}
+
+.separateur-etoile::before,
+.separateur-etoile::after {
+  content: '* * *';
+  letter-spacing: 0.5em;
+}
+
+/* ============================================================
+   TAMPON / CACHET
+   ============================================================ */
+
+.tampon {
+  display: inline-block;
+  border: 3px solid currentColor;
+  padding: var(--espace-1) var(--espace-4);
+  font-family: var(--police-condensee);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  transform: rotate(-8deg);
+  opacity: 0.65;
+  position: relative;
+  mix-blend-mode: multiply;
+}
+
+.tampon-rouge { color: var(--couleur-rouge); }
+.tampon-encre { color: var(--couleur-encre); }
+
+@media (prefers-color-scheme: dark) {
+  .tampon { mix-blend-mode: screen; }
+}
+
+/* ============================================================
+   FOND TEXTURE JOURNAL
+   ============================================================ */
+
+.fond-journal {
+  background-color: var(--couleur-fond);
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,0.015) 1px,
+      transparent 1px
+    );
+  background-size: 100% calc(var(--taille-md) * var(--ligne-lache));
+}
+
+/* ============================================================
+   ANIMATION GRAIN — SUBTIL
+   ============================================================ */
+
+@keyframes grain-anim {
+  0%, 100% { transform: translate(0, 0); }
+  10%  { transform: translate(-2%, -3%); }
+  20%  { transform: translate(3%, 1%); }
+  30%  { transform: translate(-1%, 4%); }
+  40%  { transform: translate(4%, -2%); }
+  50%  { transform: translate(-3%, 3%); }
+  60%  { transform: translate(1%, -4%); }
+  70%  { transform: translate(-4%, 1%); }
+  80%  { transform: translate(2%, -1%); }
+  90%  { transform: translate(-1%, 2%); }
+}
+
+.grain-anime::before {
+  animation: grain-anim 8s steps(1) infinite;
+}
+
+/* ============================================================
+   UTILITAIRES DE ROTATION ÉDITORIALE
+   ============================================================ */
+
+.rotation-moins-3 { transform: rotate(-3deg); }
+.rotation-moins-2 { transform: rotate(-2deg); }
+.rotation-moins-1 { transform: rotate(-1deg); }
+.rotation-0       { transform: rotate(0deg); }
+.rotation-1       { transform: rotate(1deg); }
+.rotation-2       { transform: rotate(2deg); }
+.rotation-3       { transform: rotate(3deg); }

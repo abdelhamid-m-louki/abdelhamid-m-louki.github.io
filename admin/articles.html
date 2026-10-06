@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Articles — Administration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=EB+Garamond:wght@400;600&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+  <link rel="stylesheet" href="/styles/components/cartes.css">
+  <link rel="stylesheet" href="/styles/pages/admin.css">
+  <link rel="stylesheet" href="/styles/pages/admin-crud.css">
+  <script>window.CONFIG = { SITE_NOM:'Portfolio Éditorial', SITE_URL:'http://www.amlouki.me', SUPABASE_URL:'https://qayrcorszsyiujzxfmxw.supabase.co', SUPABASE_ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFheXJjb3JzenN5aXVqenhmbXh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxOTk1MzcsImV4cCI6MjA5NDc3NTUzN30.4vwMex2ddoD3bCLPzdj60LoDZ5ba2igmBpVtOauQa7I' };</script>
+</head>
+<body class="corps-admin">
+<div class="gabarit-admin">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar-admin" id="sidebar-admin" aria-label="Navigation administration">
+    <div class="sidebar-logo">
+      <a href="/" class="sidebar-logo-lien"><div class="sidebar-logo-icone" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/></svg></div><div><div class="sidebar-logo-nom">Portfolio</div><div class="sidebar-logo-sous">Administration</div></div></a>
+    </div>
+    <nav class="sidebar-nav" aria-label="Menu">
+      <div class="sidebar-section-titre">Principal</div>
+      <a href="/admin/tableau-de-bord.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>Tableau de bord</a>
+      <div class="sidebar-section-titre" style="margin-top:var(--espace-5)">Contenu</div>
+      <a href="/admin/articles.html" class="nav-admin-lien actif" aria-current="page"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/></svg>Articles</a>
+      <a href="/admin/projets.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Projets</a>
+      <a href="/admin/medias.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>Médiathèque</a>
+      <div class="sidebar-section-titre" style="margin-top:var(--espace-5)">Profil</div>
+      <a href="/admin/competences.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Compétences</a>
+      <a href="/admin/experiences.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>Expériences</a>
+      <a href="/admin/formations.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Formations</a>
+      <a href="/admin/certifications.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>Certifications</a>
+      <div class="sidebar-section-titre" style="margin-top:var(--espace-5)">Système</div>
+      <a href="/admin/seo.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>SEO</a>
+      <a href="/admin/utilisateurs.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>Utilisateurs</a>
+      <a href="/admin/parametres.html" class="nav-admin-lien"><svg class="nav-admin-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>Paramètres</a>
+    </nav>
+    <div class="sidebar-utilisateur"><div class="sidebar-utilisateur-avatar" id="avatar-utilisateur" aria-hidden="true">A</div><div class="sidebar-utilisateur-info"><div class="sidebar-utilisateur-nom" id="nom-utilisateur">Chargement…</div><div class="sidebar-utilisateur-role" id="role-utilisateur">Administrateur</div></div><button class="btn-deconnexion" id="btn-deconnexion" aria-label="Se déconnecter"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button></div>
+  </aside>
+
+  <!-- CONTENU -->
+  <div class="contenu-admin">
+    <header class="topbar-admin">
+      <div class="topbar-titre">
+        <h1 class="topbar-h1" id="topbar-h1">Articles</h1>
+        <p class="topbar-sous-titre" id="topbar-date"></p>
+      </div>
+      <div class="topbar-actions">
+        <span class="indicateur-sauvegarde" id="indicateur-sauvegarde"></span>
+        <button class="btn btn-fantome btn-sm" id="btn-retour-liste" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          Retour à la liste
+        </button>
+        <button class="btn btn-accent btn-sm" id="btn-nouvel-article">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          Nouvel article
+        </button>
+      </div>
+    </header>
+
+    <main class="main-admin" id="contenu-principal" role="main">
+
+      <!-- ===== VUE LISTE ===== -->
+      <div id="vue-liste">
+        <div class="barre-filtres">
+          <div class="barre-filtres-recherche">
+            <svg class="recherche-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="search" id="recherche-articles" class="champ" placeholder="Rechercher un article…" aria-label="Rechercher dans les articles">
+          </div>
+          <div class="barre-filtres-separateur" aria-hidden="true"></div>
+          <select id="filtre-statut" class="selecteur filtre-select" aria-label="Filtrer par statut">
+            <option value="">Tous les statuts</option>
+            <option value="publié">Publiés</option>
+            <option value="brouillon">Brouillons</option>
+            <option value="archivé">Archivés</option>
+          </select>
+          <select id="filtre-categorie" class="selecteur filtre-select" aria-label="Filtrer par catégorie">
+            <option value="">Toutes les catégories</option>
+          </select>
+          <span class="barre-filtres-compteur" id="compteur-articles" aria-live="polite"></span>
+        </div>
+
+        <div class="tableau-crud-wrapper">
+          <table class="tableau-crud" aria-label="Liste des articles">
+            <thead>
+              <tr>
+                <th class="col-checkbox"><input type="checkbox" id="tout-selectionner" class="case-cochee" aria-label="Tout sélectionner"></th>
+                <th class="col-image" aria-label="Image"></th>
+                <th data-tri="titre">Titre <span class="tri-icone" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></span></th>
+                <th data-tri="statut">Statut</th>
+                <th data-tri="categorie">Catégorie</th>
+                <th data-tri="date_publication">Publication</th>
+                <th data-tri="vues">Vues</th>
+                <th class="col-actions" aria-label="Actions"></th>
+              </tr>
+            </thead>
+            <tbody id="corps-tableau-articles" aria-live="polite">
+              <!-- Chargé dynamiquement -->
+            </tbody>
+          </table>
+        </div>
+        <div id="pagination-articles"></div>
+      </div>
+
+      <!-- ===== VUE ÉDITEUR ===== -->
+      <div id="vue-editeur" style="display:none">
+        <div class="gabarit-editeur">
+
+          <!-- Colonne principale -->
+          <div class="editeur-colonne-principale">
+
+            <!-- Titre -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete">
+                <span class="bloc-editeur-titre">Titre de l'article</span>
+              </div>
+              <div class="bloc-editeur-corps">
+                <input type="text" id="champ-titre" class="champ" placeholder="Saisissez le titre de l'article…" aria-label="Titre de l'article" style="font-family:var(--police-display);font-size:var(--taille-xl);font-weight:700;">
+                <div class="groupe-champ">
+                  <label for="champ-slug" class="etiquette">Slug URL</label>
+                  <div class="champ-slug-wrapper">
+                    <span class="champ-slug-prefixe">/blog/</span>
+                    <input type="text" id="champ-slug" class="champ" placeholder="slug-de-larticle" aria-label="Slug URL de l'article">
+                  </div>
+                </div>
+                <div class="groupe-champ">
+                  <label for="champ-extrait" class="etiquette">Extrait / Chapô</label>
+                  <textarea id="champ-extrait" class="zone-texte" rows="3" placeholder="Résumé accrocheur de l'article (affiché dans les listes et les résultats de recherche)…" aria-label="Extrait de l'article"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contenu riche -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete">
+                <span class="bloc-editeur-titre">Contenu</span>
+                <div style="display:flex;gap:var(--espace-2)">
+                  <button class="btn btn-fantome btn-xs" id="btn-ia-ameliorer" title="Améliorer avec l'IA" type="button">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3c-4.2 5.4-6 9.5-6 12.5A6 6 0 0 0 12 21a6 6 0 0 0 6-5.5c0-3-1.8-7.1-6-12.5z"/></svg>
+                    IA
+                  </button>
+                </div>
+              </div>
+
+              <!-- Barre d'outils éditeur -->
+              <div class="editeur-riche-barre" role="toolbar" aria-label="Outils de mise en forme">
+                <button class="btn-editeur" id="btn-gras" title="Gras (Ctrl+B)" type="button" aria-label="Gras"><strong>G</strong></button>
+                <button class="btn-editeur" id="btn-italique" title="Italique (Ctrl+I)" type="button" aria-label="Italique"><em>I</em></button>
+                <button class="btn-editeur" id="btn-souligne" title="Souligné (Ctrl+U)" type="button" aria-label="Souligné" style="text-decoration:underline;">S</button>
+                <div class="separateur-editeur" aria-hidden="true"></div>
+                <button class="btn-editeur" id="btn-h2" title="Titre H2" type="button" aria-label="Titre de niveau 2" style="font-size:11px;font-weight:700;">H2</button>
+                <button class="btn-editeur" id="btn-h3" title="Titre H3" type="button" aria-label="Titre de niveau 3" style="font-size:11px;font-weight:700;">H3</button>
+                <button class="btn-editeur" id="btn-para" title="Paragraphe" type="button" aria-label="Paragraphe" style="font-size:11px;">P</button>
+                <div class="separateur-editeur" aria-hidden="true"></div>
+                <button class="btn-editeur" id="btn-liste-ul" title="Liste à puces" type="button" aria-label="Liste à puces">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+                </button>
+                <button class="btn-editeur" id="btn-liste-ol" title="Liste numérotée" type="button" aria-label="Liste numérotée">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+                </button>
+                <button class="btn-editeur" id="btn-quote" title="Citation" type="button" aria-label="Citation">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+                </button>
+                <button class="btn-editeur" id="btn-lien" title="Insérer un lien" type="button" aria-label="Insérer un lien">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                </button>
+                <div class="separateur-editeur" aria-hidden="true"></div>
+                <button class="btn-editeur" id="btn-effacer-format" title="Effacer la mise en forme" type="button" aria-label="Effacer la mise en forme">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 5H9l-7 7 7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
+                </button>
+              </div>
+
+              <!-- Zone d'édition -->
+              <div id="zone-editeur" class="zone-editeur" data-placeholder="Commencez à écrire le contenu de votre article…" aria-label="Contenu de l'article"></div>
+            </div>
+
+            <!-- SEO -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete">
+                <span class="bloc-editeur-titre">Référencement (SEO)</span>
+                <button class="btn btn-fantome btn-xs" id="btn-ia-seo" type="button">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3c-4.2 5.4-6 9.5-6 12.5A6 6 0 0 0 12 21a6 6 0 0 0 6-5.5c0-3-1.8-7.1-6-12.5z"/></svg>
+                  Générer avec l'IA
+                </button>
+              </div>
+              <div class="bloc-editeur-corps">
+                <div class="groupe-champ">
+                  <label for="champ-meta-titre" class="etiquette">Titre SEO <span style="color:var(--texte-tertiaire);font-weight:400;" id="compteur-meta-titre">(0/60)</span></label>
+                  <input type="text" id="champ-meta-titre" class="champ" placeholder="Titre optimisé pour les moteurs de recherche…" maxlength="60" aria-label="Titre SEO" aria-describedby="compteur-meta-titre">
+                </div>
+                <div class="groupe-champ">
+                  <label for="champ-meta-desc" class="etiquette">Description méta <span style="color:var(--texte-tertiaire);font-weight:400;" id="compteur-meta-desc">(0/160)</span></label>
+                  <textarea id="champ-meta-desc" class="zone-texte" rows="3" placeholder="Description affichée dans les résultats Google…" maxlength="160" aria-label="Description méta" aria-describedby="compteur-meta-desc"></textarea>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sidebar éditeur -->
+          <div class="editeur-sidebar">
+
+            <!-- Publication -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Publication</span></div>
+              <div class="bloc-editeur-corps">
+                <div class="panneau-publication">
+                  <div class="publication-ligne">
+                    <span class="publication-cle">Statut</span>
+                    <select id="champ-statut" class="selecteur" style="height:32px;font-size:var(--taille-xs);" aria-label="Statut de publication">
+                      <option value="brouillon">Brouillon</option>
+                      <option value="publié">Publié</option>
+                      <option value="archivé">Archivé</option>
+                    </select>
+                  </div>
+                  <div class="publication-ligne">
+                    <span class="publication-cle">Date de publication</span>
+                    <input type="date" id="champ-date-pub" class="champ" style="height:32px;font-size:var(--taille-xs);width:auto;" aria-label="Date de publication">
+                  </div>
+                  <div class="ligne-interrupteur">
+                    <span class="ligne-interrupteur-label">Article vedette</span>
+                    <label class="interrupteur" aria-label="Marquer comme article vedette">
+                      <input type="checkbox" class="interrupteur-entree" id="champ-vedette">
+                      <div class="interrupteur-piste"><div class="interrupteur-curseur"></div></div>
+                    </label>
+                  </div>
+                  <div class="boutons-publication">
+                    <button class="btn btn-fantome btn-sm" id="btn-brouillon" type="button">Enregistrer</button>
+                    <button class="btn btn-primaire btn-sm" id="btn-publier" type="button">Publier</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image de couverture -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Image de couverture</span></div>
+              <div class="bloc-editeur-corps" style="padding:var(--espace-4)">
+                <div class="preview-image-wrapper" id="wrapper-preview-couverture">
+                  <img id="preview-image-couverture" class="preview-image" src="" alt="Aperçu de l'image de couverture">
+                  <button class="btn-supprimer-preview" id="btn-supprimer-couverture" type="button" aria-label="Supprimer l'image de couverture">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                  </button>
+                </div>
+                <div class="zone-upload-image" id="zone-upload-couverture">
+                  <input type="file" id="input-couverture" accept="image/*" aria-label="Choisir une image de couverture">
+                  <svg class="upload-icone" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                  <p class="upload-texte"><strong>Cliquer</strong> ou glisser-déposer</p>
+                  <p class="upload-sous-texte">JPG, PNG, WebP — max 10 Mo</p>
+                </div>
+                <div class="barre-upload" id="barre-upload-couverture"><div class="barre-upload-fill"></div></div>
+                <input type="hidden" id="champ-image-couverture" name="image_couverture">
+              </div>
+            </div>
+
+            <!-- Catégorie et tags -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Classement</span></div>
+              <div class="bloc-editeur-corps">
+                <div class="groupe-champ">
+                  <label for="champ-categorie-article" class="etiquette">Catégorie</label>
+                  <select id="champ-categorie-article" class="selecteur" aria-label="Catégorie de l'article">
+                    <option value="">Sans catégorie</option>
+                  </select>
+                </div>
+                <div class="groupe-champ">
+                  <label class="etiquette">Tags</label>
+                  <div class="saisie-tags" id="saisie-tags-article" role="group" aria-label="Tags de l'article"></div>
+                  <p class="indication">Appuyez sur Entrée ou virgule pour ajouter un tag</p>
+                </div>
+                <div class="groupe-champ">
+                  <label for="champ-temps-lecture" class="etiquette">Temps de lecture (min)</label>
+                  <input type="number" id="champ-temps-lecture" class="champ champ-sm" min="1" max="120" placeholder="Auto" aria-label="Temps de lecture estimé en minutes">
+                </div>
+              </div>
+            </div>
+
+            <!-- Panneau IA -->
+            <div class="bloc-editeur">
+              <div class="bloc-editeur-en-tete">
+                <span class="bloc-editeur-titre">Assistant IA</span>
+                <select id="fournisseur-ia" class="selecteur" style="height:28px;font-size:var(--taille-xs);" aria-label="Fournisseur IA">
+                  <option value="gemini">Gemini</option>
+                  <option value="openai">OpenAI</option>
+                </select>
+              </div>
+              <div class="bloc-editeur-corps" style="gap:var(--espace-3)">
+                <button class="btn btn-contour btn-sm btn-pleine-largeur" id="btn-ia-resumer" type="button">Générer un résumé</button>
+                <button class="btn btn-contour btn-sm btn-pleine-largeur" id="btn-ia-titres" type="button">Suggérer des titres</button>
+                <button class="btn btn-contour btn-sm btn-pleine-largeur" id="btn-ia-tags" type="button">Générer des tags</button>
+                <button class="btn btn-contour btn-sm btn-pleine-largeur" id="btn-ia-humaniser" type="button">Humaniser le texte</button>
+                <div id="ia-resultat" style="display:none;margin-top:var(--espace-3);padding:var(--espace-4);background:var(--couleur-accent-tache);border:1px solid var(--couleur-accent);font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);"></div>
+                <div id="ia-chargement" style="display:none;text-align:center;font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-tertiaire);letter-spacing:var(--espacement-large);">
+                  Génération en cours…
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- ID caché de l'article en édition -->
+        <input type="hidden" id="article-id-cache">
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="zone-toasts" id="zone-toasts" aria-live="assertive" aria-atomic="true" role="status"></div>
+
+<script type="module" src="/scripts/admin/articles.js"></script>
+</body>
+</html>

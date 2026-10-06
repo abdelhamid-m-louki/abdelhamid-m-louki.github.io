@@ -1,0 +1,313 @@
+/**
+ * RÈGLES RESPONSIVES GLOBALES
+ * Portfolio Éditorial — Points de rupture et ajustements mobiles
+ *
+ * Ce fichier gère uniquement les règles responsives transversales
+ * qui ne sont pas couvertes par les fichiers de composants individuels.
+ * Chaque composant gère ses propres media queries localement.
+ */
+
+/* ============================================================
+   GRILLE CONTACT — RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .contact-grid > :last-child {
+    position: static !important;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espace-5);
+  }
+}
+
+@media (max-width: 767px) {
+  .contact-grid > :last-child {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid > :first-child > div:first-child {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ============================================================
+   À PROPOS — RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .apropos-hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .apropos-hero-grid > :last-child {
+    display: none;
+  }
+}
+
+/* ============================================================
+   NAVIGATION STICKY AU DÉFILEMENT
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .en-tete-masthead {
+    padding: var(--espace-3) 0;
+  }
+
+  .nav-rubriques {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav-rubriques::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-rubriques-interieur {
+    flex-wrap: nowrap;
+    min-width: max-content;
+  }
+
+  .nav-lien {
+    padding: var(--espace-3) var(--espace-4);
+    font-size: var(--taille-xs);
+  }
+}
+
+/* ============================================================
+   TEXTE RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .manchette {
+    font-size: clamp(var(--taille-3xl), 12vw, var(--taille-5xl));
+  }
+
+  .titre-grand {
+    font-size: clamp(var(--taille-2xl), 8vw, var(--taille-4xl));
+  }
+
+  .chapeau {
+    font-size: var(--taille-lg);
+  }
+
+  .section {
+    padding-top: var(--espace-12);
+    padding-bottom: var(--espace-12);
+  }
+
+  .section-lg {
+    padding-top: var(--espace-16);
+    padding-bottom: var(--espace-16);
+  }
+}
+
+/* ============================================================
+   FRISE CHRONOLOGIQUE — RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .experience-grille,
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: var(--espace-8) !important;
+  }
+}
+
+/* ============================================================
+   FORMULAIRES — RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 600px) {
+  .grille-form-2,
+  form > div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ============================================================
+   PIED DE PAGE — RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .pied-grille {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espace-8);
+  }
+}
+
+@media (max-width: 767px) {
+  .pied-grille {
+    grid-template-columns: 1fr;
+  }
+
+  .pied-de-page {
+    padding-top: var(--espace-10);
+    margin-top: var(--espace-20);
+  }
+
+  .pied-bas {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--espace-2);
+  }
+}
+
+/* ============================================================
+   ADMIN — RESPONSIVE SIDEBAR MOBILE
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .sidebar-admin {
+    transform: translateX(-100%);
+    transition: transform var(--transition-lente);
+    z-index: var(--z-modal);
+  }
+
+  .sidebar-admin.ouverte {
+    transform: translateX(0);
+    box-shadow: var(--ombre-profonde);
+  }
+
+  .contenu-admin {
+    margin-left: 0 !important;
+  }
+
+  .topbar-admin {
+    padding: 0 var(--espace-5) !important;
+  }
+
+  /* Bouton hamburger admin */
+  .btn-sidebar-toggle {
+    display: flex !important;
+  }
+}
+
+/* ============================================================
+   IMAGES — OPTIMISATION MOBILE
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .article-image-couverture {
+    aspect-ratio: 16 / 9;
+  }
+
+  .article-gabarit {
+    padding-left: var(--espace-5);
+    padding-right: var(--espace-5);
+  }
+}
+
+/* ============================================================
+   IMPRESSION
+   ============================================================ */
+
+@media print {
+  .en-tete,
+  .pied-de-page,
+  .btn-haut-page,
+  .bouton-hamburger,
+  .bandeau-superieur,
+  .barre-progression-lecture,
+  .menu-mobile,
+  .menu-overlay {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  .conteneur {
+    max-width: none;
+    padding: 0;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  .carte-projet,
+  .carte-vedette {
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================================
+   UTILITAIRES DE VISIBILITÉ RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .masquer-mobile   { display: none !important; }
+  .afficher-mobile  { display: block !important; }
+}
+
+@media (min-width: 768px) {
+  .masquer-tablette-haut { display: none !important; }
+  .afficher-mobile       { display: none !important; }
+}
+
+@media (max-width: 1023px) {
+  .masquer-tablette { display: none !important; }
+}
+
+@media (min-width: 1024px) {
+  .masquer-bureau { display: none !important; }
+}
+
+/* ============================================================
+   REDUCED MOTION — GLOBAL OVERRIDE
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .etiquette-flottante {
+    animation: none !important;
+  }
+
+  [data-animer] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .barre-niveau-remplissage {
+    transition: none !important;
+  }
+
+  .carte-projet:hover,
+  .carte-vedette:hover,
+  .carte-competence:hover {
+    transform: none !important;
+  }
+}
+
+/* ============================================================
+   HIGH CONTRAST MODE
+   ============================================================ */
+
+@media (forced-colors: active) {
+  .btn-primaire,
+  .btn-accent {
+    border: 2px solid ButtonText;
+  }
+
+  .nav-lien.actif {
+    border-bottom: 3px solid Highlight;
+  }
+
+  .barre-niveau-remplissage {
+    background: Highlight;
+  }
+}

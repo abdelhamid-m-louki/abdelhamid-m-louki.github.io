@@ -1,0 +1,50 @@
+[
+  {
+    "id": "param-001",
+    "cle": "site_nom",
+    "valeur": "AM. LOUKI",
+    "type": "string",
+    "description": "AM. LOUKI - Portfolio éditorial et blog de sécurité informatique",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-002",
+    "cle": "site_url",
+    "valeur": "https://www.amlouki.me",
+    "type": "string",
+    "description": "URL principale du site",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-003",
+    "cle": "auteur_nom",
+    "valeur": "Abdel-hamid M. LOUKI",
+    "type": "string",
+    "description": "Abdel-hamid Mahamat LOUKI",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-004",
+    "cle": "auteur_bio",
+    "valeur": "Etudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique. Sur ce blog, je partage mes projets, mes réflexions et mes découvertes dans le domaine de la sécurité informatique.",
+    "type": "text",
+    "description": "Biographie courte",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-005",
+    "cle": "articles_par_page",
+    "valeur": "9",
+    "type": "number",
+    "description": "Nombre d'articles par page de listing",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-006",
+    "cle": "maintenance",
+    "valeur": "false",
+    "type": "boolean",
+    "description": "Mode maintenance activé",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  }
+]

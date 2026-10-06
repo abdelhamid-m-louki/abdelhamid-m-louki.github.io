@@ -1,0 +1,32 @@
+[
+  {
+    "id": "form-001",
+    "titre": "Master Design Numérique",
+    "organisation": "École des Beaux-Arts Numériques",
+    "type": "formation",
+    "specialite": "Design d'interface et typographie numérique",
+    "description": "Formation approfondie en design d'interface, typographie, et stratégie de communication visuelle numérique.",
+    "date_debut": "2014-09-01T00:00:00Z",
+    "date_fin": "2016-06-30T00:00:00Z",
+    "lieu": "Paris, France",
+    "diplome": "Master 2",
+    "mention": "Mention Très Bien",
+    "ordre": 1,
+    "cree_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "form-002",
+    "titre": "Licence Informatique",
+    "organisation": "Université Paris Sciences",
+    "type": "formation",
+    "specialite": "Développement Web et Systèmes d'Information",
+    "description": "Fondements du développement logiciel, algorithmique, bases de données et réseaux.",
+    "date_debut": "2011-09-01T00:00:00Z",
+    "date_fin": "2014-06-30T00:00:00Z",
+    "lieu": "Paris, France",
+    "diplome": "Licence",
+    "mention": "Mention Bien",
+    "ordre": 2,
+    "cree_le": "2024-01-01T00:00:00Z"
+  }
+]

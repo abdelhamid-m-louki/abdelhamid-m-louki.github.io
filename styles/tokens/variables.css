@@ -1,0 +1,217 @@
+/**
+ * SYSTÈME DE TOKENS DE DESIGN
+ * Portfolio Éditorial — Variables CSS globales
+ *
+ * Ce fichier centralise toutes les variables de design.
+ * Modifiez uniquement ici pour propager les changements partout.
+ *
+ * Architecture : tokens → composants → mises en page
+ */
+
+/* ============================================================
+   THÈME CLAIR (par défaut)
+   Mode : prefers-color-scheme light
+   ============================================================ */
+
+:root {
+  /* --- Palette principale --- */
+  --couleur-fond:            #F5F0E8;
+  --couleur-fond-alt:        #EDE8DC;
+  --couleur-fond-papier:     #FAF7F0;
+  --couleur-surface:         #FFFFFF;
+  --couleur-surface-alt:     #F0EBE0;
+
+  --couleur-encre:           #0A0A0A;
+  --couleur-encre-doux:      #1A1A1A;
+  --couleur-encre-secondaire: #3D3D3D;
+  --couleur-encre-tertiaire: #6B6B6B;
+  --couleur-encre-fantome:   #9A9A9A;
+
+  --couleur-accent:          #C8A840;   /* Jaune vintage doré */
+  --couleur-accent-vif:      #E6C245;   /* Jaune éditorial vif */
+  --couleur-accent-sombre:   #8A7020;   /* Jaune brûlé */
+  --couleur-accent-pale:     #F5E6B0;   /* Jaune pâle */
+  --couleur-accent-tache:    rgba(200, 168, 64, 0.18);
+
+  --couleur-rouge:           #8B1A1A;   /* Rouge journal */
+  --couleur-bleu-encre:      #1A2744;   /* Bleu nuit profond */
+  --couleur-sepia:           #8B7355;   /* Sépia papier vieilli */
+
+  /* --- Texte --- */
+  --texte-primaire:          var(--couleur-encre);
+  --texte-secondaire:        var(--couleur-encre-secondaire);
+  --texte-tertiaire:         var(--couleur-encre-tertiaire);
+  --texte-fantome:           var(--couleur-encre-fantome);
+  --texte-accent:            var(--couleur-accent-sombre);
+  --texte-inverse:           var(--couleur-fond);
+  --texte-sur-accent:        var(--couleur-encre);
+
+  /* --- Bordures --- */
+  --bordure-fine:            1px solid rgba(10, 10, 10, 0.12);
+  --bordure-moyenne:         1px solid rgba(10, 10, 10, 0.22);
+  --bordure-forte:           2px solid rgba(10, 10, 10, 0.80);
+  --bordure-tres-forte:      3px solid var(--couleur-encre);
+  --bordure-accent:          2px solid var(--couleur-accent);
+  --bordure-pointillee:      1px dashed rgba(10, 10, 10, 0.30);
+  --bordure-tirets:          2px dashed rgba(10, 10, 10, 0.50);
+
+  /* Rayons de bordure (Border Radius) */
+  --arrondi-sm: 4px;  /* Pour les petits éléments (boutons, champs) */
+  --arrondi-md: 8px;  /* Pour les éléments moyens (cartes) */
+  --arrondi-lg: 16px; /* Pour les grands blocs */
+
+  /* --- Ombres --- */
+  --ombre-papier:            2px 3px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --ombre-carte:             4px 6px 16px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
+  --ombre-elevee:            8px 12px 32px rgba(0,0,0,0.14), 0 2px 6px rgba(0,0,0,0.08);
+  --ombre-profonde:          16px 24px 56px rgba(0,0,0,0.18);
+  --ombre-encre:             3px 3px 0 var(--couleur-encre);
+  --ombre-accent:            3px 3px 0 var(--couleur-accent);
+  --ombre-interne:           inset 0 2px 8px rgba(0,0,0,0.08);
+
+  /* --- Typographie --- */
+  --police-display:          'Playfair Display', Georgia, 'Times New Roman', serif;
+  --police-corps:            'EB Garamond', Georgia, serif;
+  --police-grotesk:          'Libre Baskerville', Georgia, serif;
+  --police-mono:             'Courier Prime', 'Courier New', monospace;
+  --police-condensee:        'Oswald', 'Impact', sans-serif;
+
+  /* Échelle typographique */
+  --taille-xs:    0.6875rem;  /* 11px */
+  --taille-sm:    0.8125rem;  /* 13px */
+  --taille-base:  1rem;       /* 16px */
+  --taille-md:    1.0625rem;  /* 17px */
+  --taille-lg:    1.25rem;    /* 20px */
+  --taille-xl:    1.5rem;     /* 24px */
+  --taille-2xl:   2rem;       /* 32px */
+  --taille-3xl:   2.5rem;     /* 40px */
+  --taille-4xl:   3.5rem;     /* 56px */
+  --taille-5xl:   4.5rem;     /* 72px */
+  --taille-6xl:   6rem;       /* 96px */
+  --taille-7xl:   8rem;       /* 128px */
+
+  /* Interlignage */
+  --ligne-serre:    1.1;
+  --ligne-titre:    1.2;
+  --ligne-sous:     1.35;
+  --ligne-normale:  1.5;
+  --ligne-lache:    1.7;
+  --ligne-aere:     2.0;
+
+  /* Espacement lettres */
+  --espacement-serre:   -0.04em;
+  --espacement-normal:  0em;
+  --espacement-large:   0.05em;
+  --espacement-tres:    0.12em;
+  --espacement-journal: 0.18em;
+
+  /* --- Espacement --- */
+  --espace-1:   0.25rem;
+  --espace-2:   0.5rem;
+  --espace-3:   0.75rem;
+  --espace-4:   1rem;
+  --espace-5:   1.25rem;
+  --espace-6:   1.5rem;
+  --espace-8:   2rem;
+  --espace-10:  2.5rem;
+  --espace-12:  3rem;
+  --espace-16:  4rem;
+  --espace-20:  5rem;
+  --espace-24:  6rem;
+  --espace-32:  8rem;
+  --espace-40:  10rem;
+  --espace-48:  12rem;
+
+  /* --- Rayons --- */
+  --rayon-aucun:  0;
+  --rayon-sm:     2px;
+  --rayon-md:     4px;
+  --rayon-lg:     8px;
+  --rayon-xl:     12px;
+  --rayon-rond:   9999px;
+
+  /* --- Indices Z --- */
+  --z-dessous:   -1;
+  --z-base:       0;
+  --z-eleve:      10;
+  --z-menu:       100;
+  --z-fixe:       200;
+  --z-modal:      300;
+  --z-toast:      400;
+  --z-tooltip:    500;
+
+  /* --- Disposition --- */
+  --largeur-max:    1400px;
+  --largeur-prose:  680px;
+  --largeur-etroite: 520px;
+  --hauteur-nav:    64px;
+  --largeur-sidebar: 280px;
+
+  /* --- Transitions --- */
+  --transition-rapide:   120ms ease;
+  --transition-normale:  220ms ease;
+  --transition-lente:    380ms ease;
+  --transition-ressort:  480ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --- Textures et effets --- */
+  --grain-opacite:       0.06;
+  --halftone-taille:     3px;
+  --papier-angle:        -1.5deg;
+  --papier-angle-alt:    1.2deg;
+
+  /* --- Couleurs sémantiques --- */
+  --couleur-succes:      #2D6A4F;
+  --couleur-erreur:      #8B1A1A;
+  --couleur-avertissement: var(--couleur-accent-sombre);
+  --couleur-info:        var(--couleur-bleu-encre);
+}
+
+/* ============================================================
+   THÈME SOMBRE — automatique via prefers-color-scheme
+   ============================================================ 
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --couleur-fond:            #0D0C0A;
+    --couleur-fond-alt:        #141210;
+    --couleur-fond-papier:     #111009;
+    --couleur-surface:         #1A1815;
+    --couleur-surface-alt:     #201E1A;
+
+    --couleur-encre:           #F0EBE0;
+    --couleur-encre-doux:      #E0D9CC;
+    --couleur-encre-secondaire: #B8B0A0;
+    --couleur-encre-tertiaire: #807870;
+    --couleur-encre-fantome:   #504840;
+
+    --couleur-accent:          #C8A840;
+    --couleur-accent-vif:      #E6C245;
+    --couleur-accent-sombre:   #F0D060;
+    --couleur-accent-pale:     rgba(200, 168, 64, 0.15);
+    --couleur-accent-tache:    rgba(200, 168, 64, 0.12);
+
+    --couleur-sepia:           #6B5D45;
+
+    --texte-primaire:          var(--couleur-encre);
+    --texte-secondaire:        var(--couleur-encre-secondaire);
+    --texte-tertiaire:         var(--couleur-encre-tertiaire);
+    --texte-fantome:           var(--couleur-encre-fantome);
+    --texte-accent:            var(--couleur-accent-sombre);
+    --texte-inverse:           var(--couleur-encre);
+
+    --bordure-fine:            1px solid rgba(240, 235, 224, 0.10);
+    --bordure-moyenne:         1px solid rgba(240, 235, 224, 0.18);
+    --bordure-forte:           2px solid rgba(240, 235, 224, 0.70);
+    --bordure-tres-forte:      3px solid var(--couleur-encre);
+    --bordure-pointillee:      1px dashed rgba(240, 235, 224, 0.25);
+    --bordure-tirets:          2px dashed rgba(240, 235, 224, 0.40);
+
+    --ombre-papier:            2px 3px 8px rgba(0,0,0,0.40);
+    --ombre-carte:             4px 6px 16px rgba(0,0,0,0.50);
+    --ombre-elevee:            8px 12px 32px rgba(0,0,0,0.60);
+    --ombre-encre:             3px 3px 0 var(--couleur-encre);
+
+    --grain-opacite:           0.05;
+  }
+}
+*/

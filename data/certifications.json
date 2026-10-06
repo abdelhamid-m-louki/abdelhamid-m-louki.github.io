@@ -1,0 +1,5 @@
+[
+  {"id":"cert-001","titre":"Google Analytics Certified","organisme":"Google","date_obtention":"2023-06-15","date_expiration":"2024-06-15","url_credential":"https://skillshop.credential.net/xxx","statut":"actif","cree_le":"2024-01-01T00:00:00Z"},
+  {"id":"cert-002","titre":"Accessibility Specialist","organisme":"IAAP","date_obtention":"2022-11-20","date_expiration":null,"url_credential":"","statut":"actif","cree_le":"2024-01-01T00:00:00Z"},
+  {"id":"cert-003","titre":"AWS Cloud Practitioner","organisme":"Amazon Web Services","date_obtention":"2022-03-10","date_expiration":"2025-03-10","url_credential":"","statut":"actif","cree_le":"2024-01-01T00:00:00Z"}
+]

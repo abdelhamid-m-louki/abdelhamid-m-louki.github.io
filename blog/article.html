@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO — complété dynamiquement par blog.js -->
+  <title>Article — Portfolio Éditorial</title>
+  <meta name="description" content="">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="">
+
+  <meta property="og:type"   content="article">
+  <meta property="og:title"  content="">
+  <meta property="og:description" content="">
+  <meta property="og:image"  content="">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/navigation.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+  <link rel="stylesheet" href="/styles/components/cartes.css">
+  <link rel="stylesheet" href="/styles/pages/blog.css">
+
+  <script>
+    window.CONFIG = {
+      SITE_NOM:  'Portfolio Éditorial',
+      SITE_URL:  'https://www.exemple.fr',
+      SUPABASE_URL: '',
+      SUPABASE_ANON_KEY: '',
+    };
+  </script>
+</head>
+
+<body>
+
+  <!-- Barre de progression de lecture -->
+  <div class="barre-progression-lecture" aria-hidden="true">
+    <div class="barre-progression-fill" id="barre-progression-lecture"></div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="en-tete" role="banner" id="en-tete-principal">
+    <div class="bandeau-superieur" aria-label="Informations éditoriales">
+      <div class="conteneur">
+        <div class="bandeau-interieur">
+          <span class="bandeau-date" id="date-bandeau"></span>
+          <span class="bandeau-edition">Édition numérique</span>
+          <div class="bandeau-actions">
+            <a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Administration">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="conteneur">
+      <div class="en-tete-masthead">
+        <a href="/" class="logo-journal" aria-label="Portfolio Éditorial — Accueil">Portfolio Éditorial</a>
+        <span class="sous-titre-journal">Revue de création &amp; de code</span>
+        <button class="bouton-hamburger" id="btn-hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="nav-rubriques" aria-label="Navigation principale">
+      <div class="conteneur">
+        <div class="nav-rubriques-interieur" role="list">
+          <a href="/"                class="nav-lien" role="listitem">Accueil</a>
+          <a href="/a-propos.html"   class="nav-lien" role="listitem">À propos</a>
+          <a href="/projets.html"    class="nav-lien" role="listitem">Projets</a>
+          <a href="/blog/index.html" class="nav-lien actif" role="listitem" aria-current="page">Blog</a>
+          <a href="/contact.html"    class="nav-lien" role="listitem">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Menu mobile -->
+  <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile" hidden>
+    <div class="menu-mobile-en-tete">
+      <span class="logo-journal" style="font-size:var(--taille-xl)">Portfolio Éditorial</span>
+      <button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer le menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <nav class="menu-mobile-nav">
+      <a href="/"                class="menu-mobile-lien">Accueil</a>
+      <a href="/a-propos.html"   class="menu-mobile-lien">À propos</a>
+      <a href="/projets.html"    class="menu-mobile-lien">Projets</a>
+      <a href="/blog/index.html" class="menu-mobile-lien">Blog</a>
+      <a href="/contact.html"    class="menu-mobile-lien">Contact</a>
+    </nav>
+  </div>
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main id="contenu-principal" role="main" class="article-gabarit">
+
+    <!-- Fil d'Ariane -->
+    <nav aria-label="Fil d'Ariane" id="fil-ariane-conteneur" style="margin-bottom:var(--espace-8)">
+      <!-- Injecté par blog.js -->
+    </nav>
+
+    <!-- En-tête de l'article -->
+    <header class="article-en-tete" id="article-en-tete">
+
+      <!-- Rubrique / catégorie -->
+      <a href="/blog/index.html" id="article-rubrique" class="article-rubrique" style="display:none"></a>
+
+      <!-- Titre principal -->
+      <h1 class="article-titre-principal" id="titre-article">
+        <!-- Chargé dynamiquement -->
+        <span class="squelette-texte squelette-long" style="height:3rem;display:block;"></span>
+      </h1>
+
+      <!-- Chapô / extrait -->
+      <p class="article-chapo" id="chapo-article" style="display:none"></p>
+
+      <!-- Métadonnées -->
+      <div class="article-byline">
+        <span>Par <span id="auteur-article">—</span></span>
+        <span aria-hidden="true">&mdash;</span>
+        <time id="date-article" datetime=""></time>
+        <span aria-hidden="true">&bull;</span>
+        <span id="temps-article"></span>
+      </div>
+
+    </header>
+
+    <!-- Image de couverture -->
+    <img
+      id="couverture-article"
+      class="article-image-couverture"
+      src=""
+      alt=""
+      loading="eager"
+      decoding="async"
+      hidden
+    >
+
+    <!-- Table des matières -->
+    <nav class="widget-toc" id="widget-toc" aria-label="Table des matières" hidden>
+      <div class="toc-titre">Sommaire</div>
+      <ol class="toc-liste" id="table-matieres" role="list"></ol>
+    </nav>
+
+    <!-- Corps de l'article -->
+    <article
+      class="article-corps prose"
+      id="corps-article"
+      role="article"
+      itemscope
+      itemtype="https://schema.org/Article"
+      aria-live="polite"
+    >
+      <!-- Squelette de chargement -->
+      <div class="squelette-texte squelette-long" style="height:14px;margin-bottom:var(--espace-3);"></div>
+      <div class="squelette-texte squelette-long" style="height:14px;margin-bottom:var(--espace-3);"></div>
+      <div class="squelette-texte squelette-moyen" style="height:14px;margin-bottom:var(--espace-8);"></div>
+      <div class="squelette-texte squelette-long" style="height:14px;margin-bottom:var(--espace-3);"></div>
+      <div class="squelette-texte squelette-long" style="height:14px;margin-bottom:var(--espace-3);"></div>
+      <div class="squelette-texte squelette-court" style="height:14px;"></div>
+    </article>
+
+    <!-- Tags -->
+    <div id="tags-article" class="article-tags" aria-label="Tags de l'article"></div>
+
+    <!-- Partage -->
+    <div class="article-share" role="region" aria-label="Partager l'article">
+      <span class="article-share__label">Partager :</span>
+      <div class="article-share__buttons">
+        <button
+          class="btn btn-contour btn-sm"
+          id="btn-copier-lien"
+          aria-label="Copier le lien de l'article"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Copier le lien
+        </button>
+        <a
+          id="btn-partager-twitter"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-contour btn-sm"
+          aria-label="Partager sur Twitter / X"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+          Twitter
+        </a>
+        <a
+          id="btn-partager-linkedin"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-contour btn-sm"
+          aria-label="Partager sur LinkedIn"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <!-- Articles connexes -->
+    <section class="section-connexes" id="section-connexes" aria-labelledby="titre-connexes" hidden>
+      <h2 class="section-connexes-titre" id="titre-connexes">À lire aussi</h2>
+      <div class="grille-connexes" id="articles-connexes" role="list" aria-label="Articles connexes">
+        <!-- Chargé dynamiquement -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Pied de page -->
+  <footer class="pied-de-page" role="contentinfo">
+    <div class="conteneur">
+      <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
+        <p class="pied-copyright">
+          &copy; <span id="annee-copyright">2024</span> Prénom Nom. Tous droits réservés.
+        </p>
+        <p class="pied-copyright">
+          <a href="/" style="color:inherit;">Portfolio Éditorial</a>
+          &mdash;
+          <a href="/blog/index.html" style="color:inherit;">Blog</a>
+          &mdash;
+          <a href="/sitemap.xml" style="color:inherit;">Sitemap</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bouton retour en haut -->
+  <button class="btn-haut-page" id="btn-haut-page" aria-label="Retourner en haut" hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <script type="module" src="/scripts/app.js"></script>
+  <script type="module">
+    import blog from '/scripts/blog/blog.js';
+
+    // Initialise la page article
+    await blog.initialiserPageArticle();
+
+    // Bouton copier le lien
+    document.getElementById('btn-copier-lien')?.addEventListener('click', () => {
+      navigator.clipboard.writeText(window.location.href)
+        .then(() => {
+          const btn = document.getElementById('btn-copier-lien');
+          const texteOriginal = btn.textContent;
+          btn.textContent = 'Lien copié !';
+          setTimeout(() => btn.textContent = texteOriginal, 2000);
+        })
+        .catch(() => {});
+    });
+
+    // Liens de partage dynamiques
+    const titre  = encodeURIComponent(document.title);
+    const urlEnc = encodeURIComponent(window.location.href);
+
+    const btnTwit = document.getElementById('btn-partager-twitter');
+    if (btnTwit) btnTwit.href = `https://twitter.com/intent/tweet?text=${titre}&url=${urlEnc}`;
+
+    const btnLI = document.getElementById('btn-partager-linkedin');
+    if (btnLI) btnLI.href = `https://www.linkedin.com/sharing/share-offsite/?url=${urlEnc}`;
+  </script>
+
+</body>
+</html>

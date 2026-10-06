@@ -1,0 +1,530 @@
+/**
+ * BOUTONS ET FORMULAIRES
+ * Portfolio Éditorial — Contrôles interactifs
+ *
+ * Style inspiré des imprimés et formulaires vintage.
+ * Chaque bouton est un artefact éditorial.
+ */
+
+/* ============================================================
+   BOUTONS — BASE
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-2);
+  padding: 0 var(--espace-6);
+  height: 44px;
+  font-family: var(--police-condensee);
+  font-size: var(--taille-sm);
+  font-weight: 600;
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normale);
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+  border-radius: var(--arrondi-sm);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--couleur-accent);
+  outline-offset: 3px;
+}
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+}
+
+/* ============================================================
+   VARIANTES DE BOUTON
+   ============================================================ */
+
+/* Primaire — Encre noire, décalage ombre */
+.btn-primaire {
+  background: var(--couleur-encre);
+  color: var(--couleur-fond);
+  border-color: var(--couleur-encre);
+  box-shadow: 3px 3px 0 var(--couleur-accent);
+}
+
+.btn-primaire:hover {
+  background: var(--couleur-encre-doux);
+  box-shadow: 5px 5px 0 var(--couleur-accent);
+  transform: translate(-2px, -2px);
+}
+
+/* Accent — Jaune éditorial */
+.btn-accent {
+  background: var(--couleur-accent);
+  color: var(--couleur-encre);
+  border-color: var(--couleur-accent-sombre);
+  box-shadow: 3px 3px 0 var(--couleur-encre);
+  font-weight: 700;
+}
+
+.btn-accent:hover {
+  background: var(--couleur-accent-vif);
+  box-shadow: 5px 5px 0 var(--couleur-encre);
+  transform: translate(-2px, -2px);
+}
+
+/* Contour — Bordure seulement */
+.btn-contour {
+  background: transparent;
+  color: var(--texte-primaire);
+  border: 2px solid var(--texte-primaire);
+}
+
+.btn-contour:hover {
+  background: var(--couleur-accent-tache);
+  border-color: var(--couleur-accent-sombre);
+  color: var(--couleur-accent-sombre);
+}
+
+/* Fantôme — Léger */
+.btn-fantome {
+  background: transparent;
+  color: var(--texte-secondaire);
+  border-color: var(--couleur-encre-fantome);
+}
+
+.btn-fantome:hover {
+  color: var(--texte-primaire);
+  border-color: var(--texte-primaire);
+}
+
+/* Danger */
+.btn-danger {
+  background: var(--couleur-rouge);
+  color: var(--couleur-fond);
+  border-color: var(--couleur-rouge);
+  box-shadow: 3px 3px 0 rgba(139, 26, 26, 0.4);
+}
+
+.btn-danger:hover {
+  background: #a02020;
+  box-shadow: 5px 5px 0 rgba(139, 26, 26, 0.5);
+  transform: translate(-2px, -2px);
+}
+
+/* ============================================================
+   TAILLES DE BOUTON
+   ============================================================ */
+
+.btn-xs {
+  height: 28px;
+  padding: 0 var(--espace-3);
+  font-size: var(--taille-xs);
+}
+
+.btn-sm {
+  height: 36px;
+  padding: 0 var(--espace-4);
+  font-size: var(--taille-xs);
+}
+
+.btn-lg {
+  height: 54px;
+  padding: 0 var(--espace-8);
+  font-size: var(--taille-base);
+}
+
+.btn-pleine-largeur {
+  width: 100%;
+}
+
+/* Bouton icône seule */
+.btn-icone {
+  padding: 0;
+  width: 44px;
+  aspect-ratio: 1;
+}
+
+.btn-icone.btn-sm {
+  width: 36px;
+}
+
+/* ============================================================
+   FORMULAIRES
+   ============================================================ */
+
+.groupe-champ {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-2);
+}
+
+.etiquette {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--texte-secondaire);
+  display: block;
+}
+
+.etiquette-obligatoire::after {
+  content: ' *';
+  color: var(--couleur-rouge);
+}
+
+.indication {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+}
+
+.erreur-champ {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--couleur-erreur);
+  display: flex;
+  align-items: center;
+  gap: var(--espace-1);
+}
+
+/* ============================================================
+   CHAMP DE SAISIE
+   ============================================================ */
+
+.champ {
+  width: 100%;
+  height: 44px;
+  padding: 0 var(--espace-4);
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-forte);
+  border-radius: 0; /* Style éditorial — pas de rayon */
+  font-family: var(--police-corps);
+  font-size: var(--taille-base);
+  color: var(--texte-primaire);
+  outline: none;
+  transition: border-color var(--transition-rapide), box-shadow var(--transition-rapide);
+  appearance: none;
+  border-radius: var(--arrondi-sm);
+}
+
+.champ::placeholder {
+  color: var(--texte-fantome);
+  font-style: italic;
+}
+
+.champ:hover {
+  border-color: var(--couleur-encre);
+}
+
+.champ:focus {
+  border-color: var(--couleur-accent-sombre);
+  box-shadow: 3px 3px 0 var(--couleur-accent-pale);
+}
+
+.champ-erreur {
+  border-color: var(--couleur-rouge);
+}
+
+.champ-erreur:focus {
+  box-shadow: 3px 3px 0 rgba(139, 26, 26, 0.15);
+}
+
+.champ-sm {
+  height: 36px;
+  padding: 0 var(--espace-3);
+  font-size: var(--taille-sm);
+}
+
+.champ-lg {
+  height: 54px;
+  font-size: var(--taille-lg);
+}
+
+/* Zone de texte */
+.zone-texte {
+  width: 100%;
+  min-height: 120px;
+  padding: var(--espace-4);
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-forte);
+  border-radius: 0;
+  font-family: var(--police-corps);
+  font-size: var(--taille-base);
+  color: var(--texte-primaire);
+  outline: none;
+  resize: vertical;
+  line-height: var(--ligne-lache);
+  transition: border-color var(--transition-rapide), box-shadow var(--transition-rapide);
+  border-radius: var(--arrondi-sm);
+}
+
+.zone-texte::placeholder {
+  color: var(--texte-fantome);
+  font-style: italic;
+}
+
+.zone-texte:focus {
+  border-color: var(--couleur-accent-sombre);
+  box-shadow: 3px 3px 0 var(--couleur-accent-pale);
+}
+
+/* Liste déroulante */
+.selecteur {
+  width: 100%;
+  height: 44px;
+  padding: 0 var(--espace-10) 0 var(--espace-4);
+  background: var(--couleur-fond-papier);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%233D3D3D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--espace-3) center;
+  border: var(--bordure-forte);
+  border-radius: var(--arrondi-sm);
+  font-family: var(--police-corps);
+  font-size: var(--taille-base);
+  color: var(--texte-primaire);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color var(--transition-rapide);
+}
+
+.selecteur:focus {
+  border-color: var(--couleur-accent-sombre);
+  box-shadow: 3px 3px 0 var(--couleur-accent-pale);
+}
+
+/* ============================================================
+   CASE À COCHER ET RADIO
+   ============================================================ */
+
+.option-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espace-3);
+  cursor: pointer;
+}
+
+.case-cochee,
+.bouton-radio {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-forte);
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 2px;
+  transition: all var(--transition-rapide);
+}
+
+.bouton-radio {
+  border-radius: 50%;
+}
+
+.case-cochee:checked {
+  background: var(--couleur-encre);
+  border-color: var(--couleur-encre);
+}
+
+.case-cochee:checked::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23F5F0E8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px;
+}
+
+.bouton-radio:checked {
+  border-color: var(--couleur-encre);
+  border-width: 5px;
+  background: var(--couleur-accent);
+}
+
+/* ============================================================
+   INTERRUPTEUR (TOGGLE)
+   ============================================================ */
+
+.interrupteur {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: var(--espace-3);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.interrupteur-entree {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.interrupteur-piste {
+  width: 48px;
+  height: 26px;
+  background: var(--couleur-encre-fantome);
+  border: 2px solid var(--couleur-encre-secondaire);
+  border-radius: 0; /* Style éditorial */
+  position: relative;
+  transition: all var(--transition-normale);
+}
+
+.interrupteur-curseur {
+  width: 18px;
+  height: 18px;
+  background: var(--couleur-fond);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform var(--transition-normale);
+  box-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+}
+
+.interrupteur-entree:checked + .interrupteur-piste {
+  background: var(--couleur-accent);
+  border-color: var(--couleur-accent-sombre);
+}
+
+.interrupteur-entree:checked + .interrupteur-piste .interrupteur-curseur {
+  transform: translateX(22px);
+  background: var(--couleur-encre);
+}
+
+/* ============================================================
+   CHAMP DE RECHERCHE
+   ============================================================ */
+
+.recherche-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.recherche-icone {
+  position: absolute;
+  left: var(--espace-3);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--texte-tertiaire);
+  pointer-events: none;
+}
+
+.champ-recherche {
+  width: 100%;
+  height: 44px;
+  padding: 0 var(--espace-4) 0 var(--espace-10);
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-forte);
+  border-radius: 0;
+  font-family: var(--police-corps);
+  font-size: var(--taille-sm);
+  color: var(--texte-primaire);
+  outline: none;
+  transition: all var(--transition-rapide);
+}
+
+.champ-recherche::placeholder {
+  color: var(--texte-fantome);
+  font-style: italic;
+}
+
+.champ-recherche:focus {
+  border-color: var(--couleur-accent-sombre);
+  box-shadow: 3px 3px 0 var(--couleur-accent-pale);
+}
+
+/* ============================================================
+   BADGE / ÉTIQUETTE ÉTAT
+   ============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-1);
+  padding: 2px var(--espace-2);
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+
+.badge-publié    { color: var(--couleur-succes); background: rgba(45, 106, 79, 0.08); }
+.badge-brouillon { color: var(--couleur-sepia); background: rgba(139, 115, 85, 0.08); }
+.badge-archivé   { color: var(--texte-tertiaire); background: transparent; }
+.badge-accent    { color: var(--couleur-accent-sombre); background: var(--couleur-accent-pale); border-color: var(--couleur-accent); }
+
+/* ============================================================
+   UPLOADER DE FICHIER
+   ============================================================ */
+
+.zone-upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-4);
+  min-height: 160px;
+  padding: var(--espace-8);
+  background: var(--couleur-fond-papier);
+  border: var(--bordure-tirets);
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-normale);
+}
+
+.zone-upload:hover,
+.zone-upload.glisser-dessus {
+  border-color: var(--couleur-accent-sombre);
+  background: var(--couleur-accent-tache);
+}
+
+.zone-upload input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.zone-upload-icone {
+  width: 40px;
+  height: 40px;
+  color: var(--texte-tertiaire);
+}
+
+.zone-upload-texte {
+  font-family: var(--police-mono);
+  font-size: var(--taille-sm);
+  color: var(--texte-secondaire);
+}
+
+.zone-upload-texte strong {
+  color: var(--couleur-accent-sombre);
+  text-decoration: underline;
+}

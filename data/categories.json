@@ -1,0 +1,5 @@
+[
+  {"id":"cat-001","nom":"Design","slug":"design","description":"Articles sur le design graphique, l'UX et la typographie","couleur":"#C8A840","nombre_articles":2,"ordre":1,"cree_le":"2024-01-01T00:00:00Z"},
+  {"id":"cat-002","nom":"Code","slug":"code","description":"Développement web, JavaScript, architectures et bonnes pratiques","couleur":"#1A2744","nombre_articles":3,"ordre":2,"cree_le":"2024-01-01T00:00:00Z"},
+  {"id":"cat-003","nom":"Culture","slug":"culture","description":"Réflexions sur la culture numérique, le design et la société","couleur":"#8B7355","nombre_articles":1,"ordre":3,"cree_le":"2024-01-01T00:00:00Z"}
+]

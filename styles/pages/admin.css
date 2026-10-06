@@ -1,0 +1,752 @@
+/**
+ * STYLES ADMINISTRATION
+ * Portfolio Éditorial — Interface d'administration
+ *
+ * Style éditorial brutalist pour l'interface d'admin :
+ * noir, jaune vintage, typographie Oswald/Courier.
+ */
+
+/* ============================================================
+   CORPS ADMIN
+   ============================================================ */
+
+.corps-admin {
+  background: var(--couleur-fond-alt);
+  min-height: 100vh;
+}
+
+/* ============================================================
+   GABARIT ADMIN — SIDEBAR + CONTENU
+   ============================================================ */
+
+.gabarit-admin {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   BARRE LATÉRALE
+   ============================================================ */
+
+.sidebar-admin {
+  width: var(--largeur-sidebar);
+  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--couleur-encre);
+  color: var(--couleur-fond);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: var(--z-fixe);
+  border-right: 3px solid var(--couleur-accent);
+}
+
+/* Logo sidebar */
+.sidebar-logo {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--espace-5) var(--espace-5);
+}
+
+.sidebar-logo-lien {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  text-decoration: none;
+  color: var(--couleur-fond);
+}
+
+.sidebar-logo-icone {
+  width: 36px;
+  height: 36px;
+  background: var(--couleur-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--couleur-encre);
+}
+
+.sidebar-logo-nom {
+  font-family: var(--police-display);
+  font-size: var(--taille-base);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--couleur-fond);
+}
+
+.sidebar-logo-sous {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: rgba(240, 235, 224, 0.45);
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+/* Navigation sidebar */
+.sidebar-nav {
+  flex: 1;
+  padding: var(--espace-4) var(--espace-3);
+  overflow-y: auto;
+}
+
+.sidebar-section-titre {
+  font-family: var(--police-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(240, 235, 224, 0.30);
+  padding: var(--espace-4) var(--espace-3) var(--espace-2);
+}
+
+.nav-admin-lien {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  padding: var(--espace-2) var(--espace-3);
+  font-family: var(--police-condensee);
+  font-size: var(--taille-sm);
+  font-weight: 500;
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  color: rgba(240, 235, 224, 0.55);
+  text-decoration: none;
+  position: relative;
+  transition: all var(--transition-rapide);
+  border-left: 3px solid transparent;
+}
+
+.nav-admin-lien:hover {
+  color: var(--couleur-fond);
+  background: rgba(255, 255, 255, 0.05);
+  border-left-color: rgba(200, 168, 64, 0.40);
+}
+
+.nav-admin-lien.actif {
+  color: var(--couleur-accent);
+  background: rgba(200, 168, 64, 0.08);
+  border-left-color: var(--couleur-accent);
+}
+
+.nav-admin-icone {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.nav-admin-badge {
+  margin-left: auto;
+  background: var(--couleur-accent);
+  color: var(--couleur-encre);
+  font-family: var(--police-mono);
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* Utilisateur en bas de sidebar */
+.sidebar-utilisateur {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--espace-4) var(--espace-3);
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+}
+
+.sidebar-utilisateur-avatar {
+  width: 34px;
+  height: 34px;
+  background: var(--couleur-accent);
+  color: var(--couleur-encre);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--police-display);
+  font-size: var(--taille-base);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.sidebar-utilisateur-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar-utilisateur-nom {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-sm);
+  font-weight: 600;
+  color: var(--couleur-fond);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-utilisateur-role {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: rgba(240, 235, 224, 0.40);
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+}
+
+.btn-deconnexion {
+  background: none;
+  border: none;
+  color: rgba(240, 235, 224, 0.35);
+  cursor: pointer;
+  padding: var(--espace-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-rapide);
+}
+
+.btn-deconnexion:hover {
+  color: var(--couleur-erreur);
+}
+
+/* ============================================================
+   CONTENU ADMIN — À DROITE DE LA SIDEBAR
+   ============================================================ */
+
+.contenu-admin {
+  flex: 1;
+  margin-left: var(--largeur-sidebar);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   TOPBAR ADMIN
+   ============================================================ */
+
+.topbar-admin {
+  height: var(--hauteur-nav);
+  background: var(--couleur-fond);
+  border-bottom: var(--bordure-tres-forte);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--espace-8);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-eleve);
+}
+
+.topbar-h1 {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-xl);
+  font-weight: 700;
+  letter-spacing: var(--espacement-serre);
+  text-transform: uppercase;
+  color: var(--texte-primaire);
+  margin: 0;
+}
+
+.topbar-sous-titre {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+  letter-spacing: var(--espacement-large);
+  margin: 0;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+}
+
+/* ============================================================
+   MAIN ADMIN
+   ============================================================ */
+
+.main-admin {
+  flex: 1;
+  padding: var(--espace-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-8);
+}
+
+/* ============================================================
+   GRILLE DE STATISTIQUES
+   ============================================================ */
+
+.grille-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--espace-5);
+}
+
+/* Widget statistique */
+.widget-stat {
+  background: var(--couleur-fond);
+  border: var(--bordure-forte);
+  padding: var(--espace-5) var(--espace-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.widget-stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-couleur, var(--couleur-accent));
+}
+
+.widget-stat-entete {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--espace-4);
+}
+
+.widget-stat-label {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--texte-tertiaire);
+}
+
+.widget-stat-icone {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-couleur-pale, var(--couleur-accent-pale));
+  color: var(--accent-couleur, var(--couleur-accent-sombre));
+}
+
+.widget-stat-valeur {
+  font-family: var(--police-display);
+  font-size: var(--taille-4xl);
+  font-weight: 900;
+  color: var(--texte-primaire);
+  line-height: 1;
+  letter-spacing: var(--espacement-serre);
+}
+
+.widget-stat-delta {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-tertiaire);
+  margin-top: var(--espace-2);
+  letter-spacing: var(--espacement-large);
+}
+
+.widget-stat-delta.positif { color: var(--couleur-succes); }
+.widget-stat-delta.negatif { color: var(--couleur-erreur); }
+
+/* Squelette chargement widget */
+.squelette-widget {
+  height: 120px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--couleur-fond) 25%,
+    var(--couleur-fond-alt) 50%,
+    var(--couleur-fond) 75%
+  );
+  background-size: 400% 100%;
+  animation: squelette-anim 1.5s ease-in-out infinite;
+}
+
+@keyframes squelette-anim {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ============================================================
+   GRILLE DASHBOARD
+   ============================================================ */
+
+.grille-dashboard {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--espace-5);
+  align-items: start;
+}
+
+.grille-dashboard-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ============================================================
+   PANNEAUX ADMIN
+   ============================================================ */
+
+.panneau-admin {
+  background: var(--couleur-fond);
+  border: var(--bordure-forte);
+}
+
+.panneau-en-tete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--espace-4) var(--espace-6);
+  border-bottom: var(--bordure-forte);
+  background: var(--couleur-fond-alt);
+}
+
+.panneau-titre {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-sm);
+  font-weight: 700;
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  color: var(--texte-primaire);
+  margin: 0;
+}
+
+.panneau-corps {
+  padding: var(--espace-5);
+}
+
+/* ============================================================
+   TABLEAU ARTICLES RÉCENTS
+   ============================================================ */
+
+.tableau-articles {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableau-articles th {
+  text-align: left;
+  padding: var(--espace-2) var(--espace-3);
+  font-family: var(--police-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--texte-tertiaire);
+  border-bottom: var(--bordure-forte);
+}
+
+.tableau-articles td {
+  padding: var(--espace-3);
+  font-family: var(--police-corps);
+  font-size: var(--taille-sm);
+  color: var(--texte-secondaire);
+  border-bottom: var(--bordure-fine);
+  vertical-align: middle;
+}
+
+.tableau-articles tr:last-child td {
+  border-bottom: none;
+}
+
+.tableau-articles tr:hover td {
+  background: var(--couleur-fond-alt);
+}
+
+.titre-article-admin {
+  font-family: var(--police-corps);
+  font-weight: 600;
+  color: var(--texte-primaire);
+  text-decoration: none;
+  display: block;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color var(--transition-rapide);
+}
+
+.titre-article-admin:hover {
+  color: var(--couleur-accent-sombre);
+}
+
+/* ============================================================
+   BADGE STATUT
+   ============================================================ */
+
+.badge-statut {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--police-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+
+.badge-statut::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.badge-statut-publie   { color: var(--couleur-succes); }
+.badge-statut-brouillon { color: var(--couleur-sepia); }
+.badge-statut-archive  { color: var(--texte-fantome); }
+
+/* ============================================================
+   ACTIONS DE LIGNE
+   ============================================================ */
+
+.actions-ligne {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-1);
+  opacity: 0;
+  transition: opacity var(--transition-rapide);
+}
+
+.tableau-articles tr:hover .actions-ligne {
+  opacity: 1;
+}
+
+.btn-action-ligne {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: var(--bordure-fine);
+  color: var(--texte-tertiaire);
+  cursor: pointer;
+  transition: all var(--transition-rapide);
+  text-decoration: none;
+}
+
+.btn-action-ligne:hover {
+  border-color: var(--texte-primaire);
+  color: var(--texte-primaire);
+  background: var(--couleur-fond-alt);
+}
+
+.btn-action-ligne.danger:hover {
+  border-color: var(--couleur-erreur);
+  color: var(--couleur-erreur);
+}
+
+/* ============================================================
+   INFORMATION SYSTÈME
+   ============================================================ */
+
+.info-systeme {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-4);
+}
+
+.info-ligne {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--espace-3) 0;
+  border-bottom: var(--bordure-fine);
+  font-size: var(--taille-sm);
+}
+
+.info-ligne:last-child {
+  border-bottom: none;
+}
+
+.info-cle {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  color: var(--texte-tertiaire);
+}
+
+.info-valeur {
+  font-family: var(--police-corps);
+  font-weight: 600;
+  color: var(--texte-primaire);
+  display: flex;
+  align-items: center;
+  gap: var(--espace-2);
+}
+
+.indicateur-mode {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.indicateur-mode.actif  { background: var(--couleur-succes); box-shadow: 0 0 6px var(--couleur-succes); }
+.indicateur-mode.inactif { background: var(--texte-fantome); }
+
+/* ============================================================
+   ACTIONS RAPIDES
+   ============================================================ */
+
+.actions-rapides-grille {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espace-3);
+}
+
+.action-rapide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-2);
+  padding: var(--espace-5);
+  background: var(--couleur-fond-alt);
+  border: var(--bordure-forte);
+  text-decoration: none;
+  text-align: center;
+  transition: all var(--transition-normale);
+  color: var(--texte-secondaire);
+}
+
+.action-rapide:hover {
+  border-color: var(--couleur-accent-sombre);
+  background: var(--couleur-accent-tache);
+  color: var(--texte-primaire);
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 var(--couleur-accent);
+}
+
+.action-rapide span {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   TOASTS / NOTIFICATIONS
+   ============================================================ */
+
+.zone-toasts {
+  position: fixed;
+  bottom: var(--espace-6);
+  right: var(--espace-6);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-3);
+  max-width: 380px;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espace-3);
+  padding: var(--espace-4) var(--espace-5);
+  background: var(--couleur-encre);
+  color: var(--couleur-fond);
+  border-left: 4px solid var(--couleur-accent);
+  box-shadow: var(--ombre-elevee);
+  animation: toast-entree 0.3s ease both;
+}
+
+.toast.succes { border-left-color: var(--couleur-succes); }
+.toast.erreur { border-left-color: var(--couleur-erreur); }
+.toast.info   { border-left-color: var(--couleur-accent); }
+
+@keyframes toast-entree {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+
+.toast-message {
+  font-family: var(--police-corps);
+  font-size: var(--taille-sm);
+  color: var(--couleur-fond);
+  flex: 1;
+}
+
+.toast-fermer {
+  background: none;
+  border: none;
+  color: rgba(240, 235, 224, 0.5);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.toast-fermer:hover {
+  color: var(--couleur-fond);
+}
+
+/* ============================================================
+   RESPONSIVE ADMIN
+   ============================================================ */
+
+@media (max-width: 1199px) {
+  .grille-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grille-dashboard-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 1023px) {
+  .sidebar-admin {
+    transform: translateX(-100%);
+    transition: transform var(--transition-lente);
+  }
+
+  .sidebar-admin.ouverte {
+    transform: translateX(0);
+  }
+
+  .contenu-admin {
+    margin-left: 0;
+  }
+
+  .grille-dashboard {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .grille-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .main-admin {
+    padding: var(--espace-5);
+  }
+
+  .grille-dashboard-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar-admin {
+    padding: 0 var(--espace-5);
+  }
+}
+
+@media (max-width: 479px) {
+  .grille-stats {
+    grid-template-columns: 1fr;
+  }
+}

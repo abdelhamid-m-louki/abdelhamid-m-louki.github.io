@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projets — Portfolio Éditorial</title>
+  <meta name="description" content="Portfolio de projets : applications web, API, design système, data visualisation. Réalisations sélectionnées de Prénom Nom.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.amlouki.me/projets.html">
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="Projets — Portfolio Éditorial">
+  <meta property="og:description" content="Portfolio de projets sélectionnés : applications web, API, design système.">
+  <meta property="og:url"         content="https://www.amlouki.me/projets.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap" media="print" onload="this.media='all'">
+
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/navigation.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+  <link rel="stylesheet" href="/styles/components/cartes.css">
+
+  <style>
+    .projets-header {
+      padding: calc(var(--hauteur-nav) + var(--espace-16)) 0 var(--espace-12);
+      border-bottom: var(--bordure-tres-forte);
+      background: var(--couleur-fond);
+    }
+
+    .projets-filtres {
+      display: flex;
+      align-items: center;
+      gap: var(--espace-3);
+      flex-wrap: wrap;
+      margin-top: var(--espace-8);
+      padding-top: var(--espace-6);
+      border-top: var(--bordure-fine);
+    }
+
+    .filtre-btn {
+      padding: var(--espace-2) var(--espace-4);
+      font-family: var(--police-condensee);
+      font-size: var(--taille-xs);
+      font-weight: 600;
+      letter-spacing: var(--espacement-large);
+      text-transform: uppercase;
+      color: var(--texte-tertiaire);
+      background: var(--couleur-fond-alt);
+      border: var(--bordure-forte);
+      cursor: pointer;
+      transition: all var(--transition-rapide);
+    }
+
+    .filtre-btn:hover { color: var(--texte-primaire); background: var(--couleur-accent-tache); border-color: var(--couleur-accent-sombre); }
+    .filtre-btn.actif { background: var(--couleur-encre); color: var(--couleur-fond); border-color: var(--couleur-encre); }
+
+    .projets-grille {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: var(--bordure-forte);
+      margin-top: var(--espace-12);
+    }
+
+    .projets-grille .carte-projet {
+      border: none;
+      border-right: var(--bordure-forte);
+      border-bottom: var(--bordure-forte);
+    }
+
+    .projets-grille .carte-projet:nth-child(3n) { border-right: none; }
+    .projets-grille .carte-projet:nth-last-child(-n+3):nth-child(3n+1),
+    .projets-grille .carte-projet:nth-last-child(-n+3):nth-child(3n+2),
+    .projets-grille .carte-projet:nth-last-child(-n+3):nth-child(3n) { border-bottom: none; }
+
+    .projet-vedette-full {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      border-right: none;
+    }
+
+    .projet-vedette-full .carte-projet-image {
+      aspect-ratio: unset;
+      height: 100%;
+      min-height: 360px;
+    }
+
+    .projet-vedette-full .carte-projet-corps {
+      padding: var(--espace-10);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .projet-vedette-full .carte-projet-titre { font-size: var(--taille-3xl); }
+
+    @media (max-width: 1023px) {
+      .projets-grille { grid-template-columns: repeat(2, 1fr); }
+      .projets-grille .carte-projet:nth-child(3n) { border-right: var(--bordure-forte); }
+      .projets-grille .carte-projet:nth-child(2n) { border-right: none; }
+      .projet-vedette-full { grid-template-columns: 1fr; }
+      .projet-vedette-full .carte-projet-image { min-height: 280px; }
+    }
+
+    @media (max-width: 767px) {
+      .projets-grille { grid-template-columns: 1fr; }
+      .projets-grille .carte-projet { border-right: none !important; }
+    }
+  </style>
+
+  <script>window.CONFIG = { SITE_NOM:'Portfolio Éditorial', SITE_URL:'http://www.amlouki.me', SUPABASE_URL:'https://qayrcorszsyiujzxfmxw.supabase.co', SUPABASE_ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFheXJjb3JzenN5aXVqenhmbXh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxOTk1MzcsImV4cCI6MjA5NDc3NTUzN30.4vwMex2ddoD3bCLPzdj60LoDZ5ba2igmBpVtOauQa7I' };</script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Projets — Portfolio Éditorial",
+    "description": "Portfolio de projets sélectionnés de Abdel-hamid Mahamat LOUKI",
+    "url": "https://www.amlouki.me/projets.html",
+    "creator": { "@type": "Person", "@id": "https://www.amlouki.me/#personne", "name": "Prénom Nom" }
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header class="en-tete" role="banner" id="en-tete-principal">
+    <div class="bandeau-superieur" aria-label="Informations éditoriales">
+      <div class="conteneur">
+        <div class="bandeau-interieur">
+          <span class="bandeau-date" id="date-bandeau"></span>
+          <span class="bandeau-edition">Édition numérique</span>
+          <div class="bandeau-actions"><a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Administration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></a></div>
+        </div>
+      </div>
+    </div>
+    <div class="conteneur">
+      <div class="en-tete-masthead">
+        <a href="/" class="logo-journal" aria-label="Portfolio Éditorial — Accueil">Portfolio Éditorial</a>
+        <span class="sous-titre-journal">Revue de création &amp; de code</span>
+        <button class="bouton-hamburger" id="btn-hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+      </div>
+    </div>
+    <nav class="nav-rubriques" aria-label="Navigation principale">
+      <div class="conteneur">
+        <div class="nav-rubriques-interieur" role="list">
+          <a href="/"                class="nav-lien" role="listitem">Accueil</a>
+          <a href="/a-propos.html"   class="nav-lien" role="listitem">À propos</a>
+          <a href="/projets.html"    class="nav-lien actif" role="listitem" aria-current="page">Projets</a>
+          <a href="/blog/index.html" class="nav-lien" role="listitem">Blog</a>
+          <a href="/contact.html"    class="nav-lien" role="listitem">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <div class="menu-mobile-en-tete"><span class="logo-journal" style="font-size:var(--taille-xl)">Portfolio Éditorial</span><button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <nav class="menu-mobile-nav"><a href="/" class="menu-mobile-lien">Accueil</a><a href="/a-propos.html" class="menu-mobile-lien">À propos</a><a href="/projets.html" class="menu-mobile-lien">Projets</a><a href="/blog/index.html" class="menu-mobile-lien">Blog</a><a href="/contact.html" class="menu-mobile-lien">Contact</a></nav>
+  </div>
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <main id="contenu-principal" role="main">
+
+    <!-- En-tête projets -->
+    <div class="projets-header">
+      <div class="conteneur">
+        <nav aria-label="Fil d'Ariane">
+          <ol style="display:flex;align-items:center;gap:var(--espace-2);list-style:none;margin:0 0 var(--espace-6);padding:0;font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-tertiaire);letter-spacing:var(--espacement-large);text-transform:uppercase;">
+            <li><a href="/" style="color:var(--texte-tertiaire);text-decoration:none;">Accueil</a></li>
+            <li style="opacity:0.5;">/</li>
+            <li aria-current="page" style="color:var(--texte-secondaire);">Projets</li>
+          </ol>
+        </nav>
+
+        <div style="display:grid;grid-template-columns:1fr auto;gap:var(--espace-8);align-items:flex-end;flex-wrap:wrap;">
+          <div>
+            <h1 class="titre-grand" style="margin-bottom:var(--espace-4);">
+              Projets <em>Sélectionnés</em>
+            </h1>
+            <p class="chapeau" style="max-width:52ch;">
+              Un ensemble de réalisations au croisement du code,
+              du design et de l'ingénierie produit.
+              <span id="compteur-projets" style="font-size:var(--taille-base);font-style:normal;color:var(--texte-tertiaire);margin-left:var(--espace-2);" aria-live="polite"></span>
+            </p>
+          </div>
+          <div>
+            <a href="/contact.html" class="btn btn-primaire">
+              Discutons d'un projet
+            </a>
+          </div>
+        </div>
+
+        <!-- Filtres par catégorie -->
+        <div class="projets-filtres" role="group" aria-label="Filtrer les projets par catégorie" id="filtres-categories">
+          <button class="filtre-btn actif" data-cat="" aria-pressed="true">Tous</button>
+          <!-- Catégories ajoutées dynamiquement -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Grille de projets -->
+    <div style="background:var(--couleur-fond-alt);">
+      <div class="conteneur" style="padding-top:var(--espace-8);padding-bottom:var(--espace-20);">
+        <div
+          id="grille-projets"
+          class="projets-grille"
+          role="list"
+          aria-label="Liste des projets"
+          aria-live="polite"
+        >
+          <!-- Squelettes de chargement -->
+          <div class="carte-projet squelette-carte" role="listitem" aria-label="Chargement" aria-busy="true">
+            <div class="squelette-image" style="aspect-ratio:16/10;"></div>
+            <div class="carte-projet-corps"><div class="squelette-texte squelette-court"></div><div class="squelette-texte squelette-long"></div></div>
+          </div>
+          <div class="carte-projet squelette-carte" role="listitem" aria-label="Chargement" aria-busy="true">
+            <div class="squelette-image" style="aspect-ratio:16/10;"></div>
+            <div class="carte-projet-corps"><div class="squelette-texte squelette-court"></div><div class="squelette-texte squelette-long"></div></div>
+          </div>
+          <div class="carte-projet squelette-carte" role="listitem" aria-label="Chargement" aria-busy="true">
+            <div class="squelette-image" style="aspect-ratio:16/10;"></div>
+            <div class="carte-projet-corps"><div class="squelette-texte squelette-court"></div><div class="squelette-texte squelette-long"></div></div>
+          </div>
+        </div>
+
+        <!-- Message vide -->
+        <div id="msg-vide" style="display:none;text-align:center;padding:var(--espace-20);font-family:var(--police-mono);font-size:var(--taille-sm);color:var(--texte-tertiaire);letter-spacing:var(--espacement-large);">
+          Aucun projet dans cette catégorie.
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA bas de page -->
+    <section class="section-contact" aria-labelledby="projets-cta-titre">
+      <div class="conteneur">
+        <div class="contact-contenu">
+          <span class="kicker" style="color:var(--couleur-accent);">Collaborons</span>
+          <h2 id="projets-cta-titre" class="titre-grand" style="color:var(--couleur-fond);margin-top:var(--espace-4);margin-bottom:var(--espace-6);">
+            Votre projet mérite<br><em>d'être bien fait.</em>
+          </h2>
+          <div style="display:flex;gap:var(--espace-4);flex-wrap:wrap;">
+            <a href="/contact.html" class="btn btn-accent btn-lg">Démarrer un projet</a>
+            <a href="/a-propos.html" class="btn btn-contour btn-lg" style="border-color:rgba(240,235,224,0.4);color:var(--couleur-fond);">En savoir plus</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pied-de-page" role="contentinfo">
+    <div class="conteneur">
+      <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
+        <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Prénom Nom. Tous droits réservés.</p>
+        <p class="pied-copyright"><a href="/" style="color:inherit;">Portfolio Éditorial</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn-haut-page" id="btn-haut-page" aria-label="Retourner en haut" hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+  </button>
+
+  <script type="module" src="/scripts/app.js"></script>
+  <script type="module">
+    import stockage, { COLLECTIONS } from '/scripts/storage/storage-manager.js';
+    import { echapper, Transformateurs } from '/scripts/app.js';
+    import seo from '/scripts/seo/seo.js';
+
+    let tousProjets = [];
+    let categorieActive = '';
+
+    seo.configurer({
+      titre: 'Projets sélectionnés',
+      description: 'Portfolio de projets : applications web, API, design système et data visualisation.',
+      type: 'website',
+      fil: [{ nom: 'Accueil', url: '/' }, { nom: 'Projets' }],
+    });
+
+    async function chargerProjets() {
+      try {
+        const { donnees, total } = await stockage.obtenirTous(COLLECTIONS.PROJETS, {
+          filtres: { statut: 'publié' },
+          tri: 'ordre',
+          ordre: 'asc',
+        });
+        tousProjets = donnees || [];
+
+        document.getElementById('compteur-projets').textContent =
+          `— ${total} projet${total > 1 ? 's' : ''}`;
+
+        // Construire les filtres de catégorie
+        const categories = [...new Set(tousProjets.map(p => p.categorie).filter(Boolean))];
+        const conteneurFiltres = document.getElementById('filtres-categories');
+        categories.forEach(cat => {
+          const btn = document.createElement('button');
+          btn.className = 'filtre-btn';
+          btn.dataset.cat = cat;
+          btn.textContent = cat;
+          btn.setAttribute('aria-pressed', 'false');
+          conteneurFiltres.appendChild(btn);
+        });
+
+        conteneurFiltres.addEventListener('click', e => {
+          const btn = e.target.closest('.filtre-btn');
+          if (!btn) return;
+          categorieActive = btn.dataset.cat;
+          conteneurFiltres.querySelectorAll('.filtre-btn').forEach(b => {
+            b.classList.toggle('actif', b === btn);
+            b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+          });
+          afficherProjets();
+        });
+
+        afficherProjets();
+      } catch (err) {
+        console.error('[Projets] Erreur :', err.message);
+        document.getElementById('grille-projets').innerHTML =
+          '<div style="grid-column:1/-1;padding:var(--espace-8);text-align:center;font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--couleur-erreur);">Impossible de charger les projets.</div>';
+      }
+    }
+
+    function afficherProjets() {
+      const grille  = document.getElementById('grille-projets');
+      const msgVide = document.getElementById('msg-vide');
+
+      const filtres = categorieActive
+        ? tousProjets.filter(p => p.categorie === categorieActive)
+        : tousProjets;
+
+      if (!filtres.length) {
+        grille.innerHTML = '';
+        msgVide.style.display = 'block';
+        return;
+      }
+      msgVide.style.display = 'none';
+
+      grille.innerHTML = filtres.map((projet, index) => {
+        const slug   = projet.slug || Transformateurs.slugifier(projet.titre);
+        const estVedette = projet.vedette && index === 0 && !categorieActive;
+        const numStr = String(index + 1).padStart(2, '0');
+
+        return `
+          <article class="carte-projet${estVedette ? ' projet-vedette-full' : ''}"
+                   role="listitem"
+                   itemscope itemtype="https://schema.org/CreativeWork"
+                   data-animer data-delai="${Math.min(index * 80, 400)}">
+            <a href="/projets/${echapper(slug)}.html"
+               class="carte-projet-lien-complet"
+               itemprop="url"
+               aria-label="${echapper(projet.titre)}">
+              <div class="carte-projet-image">
+                ${projet.image
+                  ? `<img src="${echapper(projet.image)}"
+                          alt="${echapper(projet.titre)}"
+                          loading="${index < 3 ? 'eager' : 'lazy'}"
+                          decoding="async"
+                          width="600" height="375"
+                          itemprop="image">`
+                  : `<div class="image-placeholder" aria-hidden="true">
+                       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                     </div>`
+                }
+                <div class="carte-projet-numero" aria-hidden="true">${numStr}</div>
+              </div>
+              <div class="carte-projet-corps">
+                <div class="carte-projet-categorie" itemprop="genre">${echapper(projet.categorie || 'Projet')}</div>
+                <h2 class="carte-projet-titre" itemprop="name">${echapper(projet.titre)}</h2>
+                <p class="carte-projet-description">${echapper(projet.description_courte || '')}</p>
+                <div class="carte-projet-pied">
+                  <div class="technos" aria-label="Technologies">
+                    ${(projet.technologies || []).slice(0, 4).map(t =>
+                      `<span class="techno-tag" itemprop="keywords">${echapper(t)}</span>`
+                    ).join('')}
+                  </div>
+                  <div style="display:flex;align-items:center;gap:var(--espace-3);">
+                    ${projet.url_demo ? `<a href="${echapper(projet.url_demo)}" target="_blank" rel="noopener noreferrer" class="btn btn-accent btn-xs" onclick="event.stopPropagation()" aria-label="Démo de ${echapper(projet.titre)}">Démo</a>` : ''}
+                    ${projet.url_code ? `<a href="${echapper(projet.url_code)}" target="_blank" rel="noopener noreferrer" class="btn btn-contour btn-xs" onclick="event.stopPropagation()" aria-label="Code de ${echapper(projet.titre)}">Code</a>` : ''}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </article>`;
+      }).join('');
+
+      // Réinitialise les animations
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const d = parseInt(e.target.dataset.delai || 0);
+            setTimeout(() => e.target.classList.add('visible'), d);
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      grille.querySelectorAll('[data-animer]').forEach(el => obs.observe(el));
+    }
+
+    document.addEventListener('DOMContentLoaded', chargerProjets);
+  </script>
+
+</body>
+</html>

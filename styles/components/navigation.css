@@ -1,0 +1,384 @@
+/**
+ * NAVIGATION ÉDITORIALE
+ * Portfolio — En-tête, menu, navigation
+ *
+ * Navigation inspirée de la une d'un journal :
+ * manchette, rubriques en filet, lisière inférieure.
+ */
+
+/* ============================================================
+   EN-TÊTE PRINCIPAL
+   ============================================================ */
+
+.en-tete {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixe);
+  background: var(--couleur-fond);
+  border-bottom: var(--bordure-tres-forte);
+  transition: background var(--transition-lente), box-shadow var(--transition-normale);
+}
+
+.en-tete-defilant {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  .en-tete-defilant {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.40);
+  }
+}
+
+/* Bandeau supérieur — date, infos éditoriales */
+.bandeau-superieur {
+  background: var(--couleur-encre);
+  color: var(--couleur-fond);
+  padding: var(--espace-2) 0;
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+}
+
+.bandeau-interieur {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bandeau-date {
+  color: rgba(255,255,255,0.7);
+}
+
+.bandeau-edition {
+  color: var(--couleur-accent);
+  font-weight: 700;
+}
+
+.bandeau-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-4);
+}
+
+/* ============================================================
+   MASTHEAD — LOGO TITRE DU JOURNAL
+   ============================================================ */
+
+.en-tete-masthead {
+  padding: var(--espace-5) 0 var(--espace-4);
+  text-align: center;
+  position: relative;
+  border-bottom: var(--bordure-fine);
+}
+
+.en-tete-masthead::before,
+.en-tete-masthead::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2px;
+  width: calc(50% - 240px);
+  background: var(--texte-primaire);
+}
+
+.en-tete-masthead::before { left: 0; }
+.en-tete-masthead::after  { right: 0; }
+
+.logo-journal {
+  font-family: var(--police-display);
+  font-size: clamp(var(--taille-3xl), 6vw, var(--taille-6xl));
+  font-weight: 900;
+  letter-spacing: var(--espacement-serre);
+  line-height: 1;
+  color: var(--texte-primaire);
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity var(--transition-rapide);
+}
+
+.logo-journal:hover {
+  opacity: 0.8;
+}
+
+.sous-titre-journal {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-xs);
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--texte-tertiaire);
+  margin-top: var(--espace-1);
+  display: block;
+}
+
+/* ============================================================
+   NAVIGATION RUBRIQUES
+   ============================================================ */
+
+.nav-rubriques {
+  border-bottom: var(--bordure-tres-forte);
+}
+
+.nav-rubriques-interieur {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  position: relative;
+}
+
+.nav-lien {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-2);
+  padding: var(--espace-3) var(--espace-5);
+  font-family: var(--police-condensee);
+  font-size: var(--taille-sm);
+  font-weight: 600;
+  letter-spacing: var(--espacement-large);
+  text-transform: uppercase;
+  color: var(--texte-secondaire);
+  text-decoration: none;
+  border-right: var(--bordure-fine);
+  position: relative;
+  transition: all var(--transition-rapide);
+  white-space: nowrap;
+}
+
+.nav-lien:first-child {
+  border-left: var(--bordure-fine);
+}
+
+.nav-lien::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--couleur-accent);
+  transform: scaleX(0);
+  transition: transform var(--transition-normale);
+  transform-origin: left;
+}
+
+.nav-lien:hover {
+  color: var(--texte-primaire);
+  background: var(--couleur-accent-tache);
+}
+
+.nav-lien:hover::after,
+.nav-lien.actif::after {
+  transform: scaleX(1);
+}
+
+.nav-lien.actif {
+  color: var(--texte-primaire);
+  font-weight: 700;
+}
+
+/* Icône dans la nav */
+.nav-icone {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
+}
+
+/* Bouton hamburger mobile */
+.bouton-hamburger {
+  display: none;
+  padding: var(--espace-2);
+  color: var(--texte-primaire);
+  background: none;
+  border: var(--bordure-forte);
+  cursor: pointer;
+  transition: all var(--transition-rapide);
+}
+
+.bouton-hamburger:hover {
+  background: var(--couleur-accent-tache);
+}
+
+/* ============================================================
+   MENU MOBILE
+   ============================================================ */
+
+.menu-mobile {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--couleur-fond);
+  z-index: var(--z-modal);
+  flex-direction: column;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform var(--transition-lente);
+}
+
+.menu-mobile.ouvert {
+  transform: translateX(0);
+}
+
+.menu-mobile-en-tete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--espace-5) var(--espace-6);
+  border-bottom: var(--bordure-tres-forte);
+}
+
+.menu-mobile-nav {
+  padding: var(--espace-6);
+  flex: 1;
+}
+
+.menu-mobile-lien {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--espace-4) 0;
+  border-bottom: var(--bordure-fine);
+  font-family: var(--police-display);
+  font-size: var(--taille-2xl);
+  font-weight: 700;
+  color: var(--texte-primaire);
+  text-decoration: none;
+  transition: color var(--transition-rapide);
+}
+
+.menu-mobile-lien:hover {
+  color: var(--couleur-accent-sombre);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .en-tete-masthead::before,
+  .en-tete-masthead::after {
+    width: calc(50% - 160px);
+  }
+}
+
+@media (max-width: 767px) {
+  .bandeau-superieur { display: none; }
+
+  .en-tete-masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: var(--espace-4) 0;
+  }
+
+  .en-tete-masthead::before,
+  .en-tete-masthead::after {
+    display: none;
+  }
+
+  .logo-journal {
+    font-size: var(--taille-2xl);
+  }
+
+  .nav-rubriques {
+    display: none;
+  }
+
+  .bouton-hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu-mobile {
+    display: flex;
+  }
+}
+
+/* ============================================================
+   PIED DE PAGE
+   ============================================================ */
+
+.pied-de-page {
+  background: var(--couleur-encre);
+  color: var(--couleur-fond);
+  border-top: var(--bordure-tres-forte);
+  padding: var(--espace-16) 0 var(--espace-8);
+  margin-top: var(--espace-32);
+}
+
+.pied-grille {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--espace-10);
+  margin-bottom: var(--espace-12);
+}
+
+.pied-section-titre {
+  font-family: var(--police-condensee);
+  font-size: var(--taille-xs);
+  font-weight: 700;
+  letter-spacing: var(--espacement-journal);
+  text-transform: uppercase;
+  color: var(--couleur-accent);
+  margin-bottom: var(--espace-4);
+  padding-bottom: var(--espace-2);
+  border-bottom: 1px solid rgba(200, 168, 64, 0.3);
+}
+
+.pied-lien {
+  display: block;
+  padding: var(--espace-2) 0;
+  font-family: var(--police-corps);
+  font-size: var(--taille-sm);
+  color: rgba(240, 235, 224, 0.65);
+  text-decoration: none;
+  transition: color var(--transition-rapide);
+  border-bottom: 1px solid transparent;
+}
+
+.pied-lien:hover {
+  color: var(--couleur-fond);
+  border-bottom-color: var(--couleur-accent);
+}
+
+.pied-bas {
+  padding-top: var(--espace-6);
+  border-top: 1px solid rgba(240, 235, 224, 0.10);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--espace-4);
+}
+
+.pied-copyright {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: rgba(240, 235, 224, 0.40);
+  letter-spacing: var(--espacement-large);
+}
+
+@media (max-width: 767px) {
+  .pied-grille {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espace-8);
+  }
+
+  .pied-bas {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pied-grille {
+    grid-template-columns: 1fr;
+  }
+}

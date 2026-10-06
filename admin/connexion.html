@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Connexion — Administration</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=EB+Garamond:wght@400;600&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap">
+
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/textures.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+
+  <style>
+    /* Styles spécifiques à la page de connexion */
+    body {
+      background: var(--couleur-encre);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: var(--espace-6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Texture de fond simulant du papier journal */
+    body::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent 0,
+        transparent 22px,
+        rgba(255, 255, 255, 0.02) 22px,
+        rgba(255, 255, 255, 0.02) 23px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Lettre décorative géante */
+    body::before {
+      content: 'A';
+      position: absolute;
+      top: -60px;
+      right: -40px;
+      font-family: var(--police-display);
+      font-size: 480px;
+      font-weight: 900;
+      line-height: 1;
+      color: rgba(200, 168, 64, 0.04);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .carte-connexion {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      background: var(--couleur-fond-papier);
+      border: 3px solid var(--couleur-accent);
+      box-shadow:
+        8px 8px 0 var(--couleur-accent),
+        16px 16px 0 rgba(200, 168, 64, 0.20);
+      padding: var(--espace-10) var(--espace-10);
+    }
+
+    .connexion-en-tete {
+      text-align: center;
+      margin-bottom: var(--espace-8);
+      padding-bottom: var(--espace-8);
+      border-bottom: var(--bordure-tres-forte);
+    }
+
+    .connexion-logo {
+      font-family: var(--police-display);
+      font-size: var(--taille-3xl);
+      font-weight: 900;
+      letter-spacing: var(--espacement-serre);
+      color: var(--texte-primaire);
+      display: block;
+      margin-bottom: var(--espace-2);
+    }
+
+    .connexion-sous-titre {
+      font-family: var(--police-mono);
+      font-size: var(--taille-xs);
+      letter-spacing: var(--espacement-journal);
+      text-transform: uppercase;
+      color: var(--texte-tertiaire);
+    }
+
+    .connexion-etiquette {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--espace-2);
+      background: var(--couleur-accent);
+      color: var(--couleur-encre);
+      font-family: var(--police-mono);
+      font-size: var(--taille-xs);
+      font-weight: 700;
+      letter-spacing: var(--espacement-journal);
+      text-transform: uppercase;
+      padding: 2px var(--espace-3);
+      margin-bottom: var(--espace-4);
+    }
+
+    .formulaire-connexion {
+      display: flex;
+      flex-direction: column;
+      gap: var(--espace-5);
+    }
+
+    .message-erreur {
+      display: none;
+      padding: var(--espace-4);
+      background: rgba(139, 26, 26, 0.06);
+      border: 1px solid var(--couleur-erreur);
+      border-left: 4px solid var(--couleur-erreur);
+      font-family: var(--police-mono);
+      font-size: var(--taille-xs);
+      color: var(--couleur-erreur);
+      letter-spacing: var(--espacement-large);
+    }
+
+    .message-erreur.visible {
+      display: block;
+    }
+
+    .connexion-pied {
+      text-align: center;
+      margin-top: var(--espace-6);
+      padding-top: var(--espace-6);
+      border-top: var(--bordure-fine);
+    }
+
+    .connexion-pied a {
+      font-family: var(--police-mono);
+      font-size: var(--taille-xs);
+      color: var(--texte-tertiaire);
+      text-decoration: none;
+      letter-spacing: var(--espacement-large);
+      text-transform: uppercase;
+      transition: color var(--transition-rapide);
+    }
+
+    .connexion-pied a:hover {
+      color: var(--couleur-accent-sombre);
+    }
+
+    /* Champ adapté au fond clair */
+    .champ, .zone-texte {
+      background: var(--couleur-fond);
+    }
+  </style>
+
+  <script>
+    window.CONFIG = {
+      SITE_NOM:          'Portfolio Éditorial',
+      SITE_URL:          'https://www.amlouki.me',
+      SUPABASE_URL:      'https://qayrcorszsyiujzxfmxw.supabase.co',
+      SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFheXJjb3JzenN5aXVqenhmbXh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxOTk1MzcsImV4cCI6MjA5NDc3NTUzN30.4vwMex2ddoD3bCLPzdj60LoDZ5ba2igmBpVtOauQa7I',
+    };
+  </script>
+</head>
+
+<body>
+
+  <main role="main" aria-labelledby="titre-connexion">
+
+    <div class="carte-connexion">
+
+      <!-- En-tête -->
+      <header class="connexion-en-tete">
+        <div class="connexion-etiquette" aria-hidden="true">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          Zone sécurisée
+        </div>
+        <a href="/" class="connexion-logo" aria-label="Portfolio Éditorial — Accueil">
+          Portfolio Éditorial
+        </a>
+        <p class="connexion-sous-titre">Interface d'administration</p>
+        <h1 id="titre-connexion" class="sr-seulement">Connexion à l'administration</h1>
+      </header>
+
+      <!-- Message d'erreur (masqué par défaut) -->
+      <div
+        class="message-erreur"
+        id="message-erreur"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <!-- Message injecté dynamiquement -->
+      </div>
+
+      <!-- Formulaire de connexion -->
+      <form
+        class="formulaire-connexion"
+        id="form-connexion"
+        novalidate
+        aria-label="Formulaire de connexion"
+      >
+
+        <!-- Email -->
+        <div class="groupe-champ">
+          <label for="champ-email" class="etiquette etiquette-obligatoire">
+            Adresse email
+          </label>
+          <div class="recherche-wrapper">
+            <svg class="recherche-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <input
+              type="email"
+              id="champ-email"
+              name="email"
+              class="champ"
+              style="padding-left: var(--espace-10);"
+              placeholder="admin@exemple.fr"
+              autocomplete="email"
+              required
+              aria-required="true"
+              aria-describedby="erreur-email"
+            >
+          </div>
+          <span id="erreur-email" class="erreur-champ" role="alert" aria-live="polite" hidden></span>
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="groupe-champ">
+          <label for="champ-mot-de-passe" class="etiquette etiquette-obligatoire">
+            Mot de passe
+          </label>
+          <div class="recherche-wrapper">
+            <svg class="recherche-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <input
+              type="password"
+              id="champ-mot-de-passe"
+              name="mot_de_passe"
+              class="champ"
+              style="padding-left: var(--espace-10); padding-right: var(--espace-10);"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+              aria-required="true"
+              minlength="6"
+              aria-describedby="erreur-mot-de-passe"
+            >
+            <!-- Bouton afficher/masquer le mot de passe -->
+            <button
+              type="button"
+              id="btn-afficher-mdp"
+              class="btn-afficher-mdp"
+              aria-label="Afficher le mot de passe"
+              aria-pressed="false"
+              style="
+                position: absolute;
+                right: var(--espace-3);
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: var(--texte-tertiaire);
+                padding: var(--espace-1);
+                display: flex;
+                align-items: center;
+                transition: color var(--transition-rapide);
+              "
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" id="icone-oeil">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+          <span id="erreur-mot-de-passe" class="erreur-champ" role="alert" aria-live="polite" hidden></span>
+        </div>
+
+        <!-- Se souvenir de moi -->
+        <div class="option-wrapper">
+          <input
+            type="checkbox"
+            id="se-souvenir"
+            name="se_souvenir"
+            class="case-cochee"
+          >
+          <label for="se-souvenir" style="font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-secondaire);letter-spacing:var(--espacement-large);cursor:pointer;">
+            Rester connecté sur cet appareil
+          </label>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <button
+          type="submit"
+          class="btn btn-primaire btn-pleine-largeur"
+          id="btn-connexion"
+          aria-label="Se connecter à l'administration"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/>
+            <line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          <span id="texte-btn-connexion">Se connecter</span>
+        </button>
+
+      </form>
+
+      <!-- Pied de page -->
+      <footer class="connexion-pied">
+        <a href="/admin/reinitialiser-mdp.html">Mot de passe oublié ?</a>
+        <span aria-hidden="true" style="margin: 0 var(--espace-3);color:var(--texte-fantome);">&mdash;</span>
+        <a href="/">Retour au site</a>
+      </footer>
+
+    </div>
+
+  </main>
+
+  <script type="module">
+    import auth from '/scripts/auth/auth.js';
+
+    // Redirige si déjà connecté
+    auth.redirigerSiConnecte('/admin/tableau-de-bord.html');
+
+    const form       = document.getElementById('form-connexion');
+    const btnConnexion = document.getElementById('btn-connexion');
+    const texteBtn   = document.getElementById('texte-btn-connexion');
+    const msgErreur  = document.getElementById('message-erreur');
+    const champEmail = document.getElementById('champ-email');
+    const champMdp   = document.getElementById('champ-mot-de-passe');
+    const btnAfficherMdp = document.getElementById('btn-afficher-mdp');
+
+    // --- Afficher/masquer le mot de passe ---
+    btnAfficherMdp.addEventListener('click', () => {
+      const affiche = champMdp.type === 'text';
+      champMdp.type = affiche ? 'password' : 'text';
+      btnAfficherMdp.setAttribute('aria-pressed', String(!affiche));
+      btnAfficherMdp.setAttribute('aria-label', affiche ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
+    });
+
+    // --- Validation en temps réel ---
+    champEmail.addEventListener('blur', () => validerEmail());
+    champMdp.addEventListener('blur', () => validerMdp());
+
+    function validerEmail() {
+      const erreur = document.getElementById('erreur-email');
+      if (!champEmail.value) {
+        afficherErreurChamp(erreur, champEmail, 'L\'adresse email est requise.');
+        return false;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(champEmail.value)) {
+        afficherErreurChamp(erreur, champEmail, 'Adresse email invalide.');
+        return false;
+      }
+      masquerErreurChamp(erreur, champEmail);
+      return true;
+    }
+
+    function validerMdp() {
+      const erreur = document.getElementById('erreur-mot-de-passe');
+      if (!champMdp.value) {
+        afficherErreurChamp(erreur, champMdp, 'Le mot de passe est requis.');
+        return false;
+      }
+      if (champMdp.value.length < 6) {
+        afficherErreurChamp(erreur, champMdp, 'Le mot de passe doit contenir au moins 6 caractères.');
+        return false;
+      }
+      masquerErreurChamp(erreur, champMdp);
+      return true;
+    }
+
+    function afficherErreurChamp(elemErreur, champ, message) {
+      elemErreur.textContent = message;
+      elemErreur.removeAttribute('hidden');
+      champ.classList.add('champ-erreur');
+      champ.setAttribute('aria-invalid', 'true');
+    }
+
+    function masquerErreurChamp(elemErreur, champ) {
+      elemErreur.setAttribute('hidden', '');
+      champ.classList.remove('champ-erreur');
+      champ.removeAttribute('aria-invalid');
+    }
+
+    // --- Soumission du formulaire ---
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Validation
+      const emailOk = validerEmail();
+      const mdpOk   = validerMdp();
+      if (!emailOk || !mdpOk) return;
+
+      // Désactive le bouton
+      btnConnexion.disabled = true;
+      texteBtn.textContent  = 'Connexion en cours…';
+      msgErreur.classList.remove('visible');
+
+      try {
+  await auth.seConnecter(champEmail.value, champMdp.value);
+  texteBtn.textContent = 'Connexion réussie…';
+  
+  // AJOUT DE LA REDIRECTION :
+  // Vérifie si l'utilisateur venait d'une page protégée spécifique
+  const retour = sessionStorage.getItem('auth_retour');
+  if (retour) {
+    sessionStorage.removeItem('auth_retour');
+    window.location.href = decodeURIComponent(retour);
+  } else {
+    // Sinon, redirection par défaut vers le tableau de bord
+    window.location.href = '/admin/tableau-de-bord.html';
+  }
+  
+} catch (erreur) {
+      msgErreur.textContent = erreur.message || 'Identifiants incorrects. Veuillez réessayer.';
+      msgErreur.classList.add('visible');
+      btnConnexion.disabled = false;
+      texteBtn.textContent  = 'Se connecter';
+      champMdp.value        = '';
+      champEmail.focus();
+    }
+    });
+  </script>
+
+</body>
+</html>
