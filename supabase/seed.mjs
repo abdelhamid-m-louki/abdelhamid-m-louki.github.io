@@ -5,8 +5,7 @@
  * - Appliquer d'abord supabase/schema.sql dans le SQL Editor Supabase.
  * - Crée le compte Admin (Supabase Auth) si absent.
  * - Insère le profil utilisateur admin.
- * - Peuple toutes les tables à partir des fichiers data/*.json
- *   (yml : le contenu existant du site).
+ * - Peuple toutes les tables à partir des fichiers supabase/seed-data/*.json.
  *
  * Minuit / sensibles : les secrets ne sont PAS dans le repo
  * (variables d'environnement ou fichier .env local non commité).
@@ -123,7 +122,7 @@ async function garantirProfil(admin) {
 }
 
 // ------------------------------------------------------------
-// 3. Contenu (data/*.json → tables)
+// 3. Contenu (supabase/seed-data/*.json → tables)
 // ------------------------------------------------------------
 const COLLECTIONS = [
   'articles', 'projets', 'competences', 'experiences', 'certifications',
@@ -133,7 +132,7 @@ const COLLECTIONS = [
 
 async function peuplerContenu() {
   for (const collection of COLLECTIONS) {
-    const fichier = path.join(racine, 'data', `${collection}.json`);
+    const fichier = path.join(__dirname, 'seed-data', `${collection}.json`);
     if (!fs.existsSync(fichier)) { console.log(`— ${collection} : fichier absent, ignoré`); continue; }
 
     let lignes;
@@ -162,7 +161,7 @@ async function peuplerContenu() {
 // 4. Table SEO (data/seo.json → lignes cle/valeur)
 // ------------------------------------------------------------
 async function peuplerSeo() {
-  const fichier = path.join(racine, 'data', 'seo.json');
+  const fichier = path.join(__dirname, 'seed-data', 'seo.json');
   if (!fs.existsSync(fichier)) return;
 
   let objet;

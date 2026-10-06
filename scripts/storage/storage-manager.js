@@ -6,9 +6,10 @@
  * Le frontend n'appelle jamais Supabase directement.
  *
  * Architecture :
- *   Page → storage-manager.js → [AdaptateurSupabase | AdaptateurJsonLocal]
+ *   Page → storage-manager.js → AdaptateurSupabase (backend unique)
  *
- * Bascule automatique vers JSON local si Supabase échoue.
+ * Supabase est le seul backend : toute erreur de connexion est
+ * remontée, aucune bascule locale n'existe.
  * Émet des événements DOM pour les notifications UI.
  *
  * @example
@@ -19,7 +20,6 @@
 'use strict';
 
 import { AdaptateurSupabase }   from './supabase.adapter.js';
-import { AdaptateurJsonLocal }  from './local-json.adapter.js';
 import { ErreurStockage, ErreurAutorisation } from './interfaces.js';
 
 /** Configuration lue depuis window.CONFIG (injecté dans le HTML) */
@@ -28,7 +28,6 @@ const CONFIG_GLOBALE = window.CONFIG || {};
 /** Mode de fonctionnement */
 const MODE = Object.freeze({
   SUPABASE: 'supabase',
-  LOCAL:    'local',
 });
 
 class GestionnaireStockage {
@@ -61,35 +60,27 @@ class GestionnaireStockage {
     const urlSupabase = CONFIG_GLOBALE.SUPABASE_URL;
     const cleSupabase = CONFIG_GLOBALE.SUPABASE_ANON_KEY;
 
-    // Tenter Supabase si configuré
-    if (urlSupabase && cleSupabase) {
-      try {
-        const adaptateur = new AdaptateurSupabase({
-          url: urlSupabase,
-          cle: cleSupabase,
-        });
-        await adaptateur.initialiser();
-        const connecte = await adaptateur.verifierConnexion();
-
-        if (connecte) {
-          this._adaptateur = adaptateur;
-          this._mode       = MODE.SUPABASE;
-          this._emettre('stockage:mode', { mode: MODE.SUPABASE });
-          console.info('[Stockage] Mode : Supabase PostgreSQL');
-          return;
-        }
-      } catch (err) {
-        console.warn('[Stockage] Supabase non disponible, bascule sur JSON local :', err.message);
-      }
+    if (!urlSupabase || !cleSupabase) {
+      throw new ErreurStockage(
+        'Supabase non configuré : renseignez SUPABASE_URL et SUPABASE_ANON_KEY dans config.js.',
+        'CONFIGURATION_MANQUANTE'
+      );
     }
 
-    // Fallback : adaptateur JSON local
-    const adaptateur = new AdaptateurJsonLocal();
+    const adaptateur = new AdaptateurSupabase({ url: urlSupabase, cle: cleSupabase });
     await adaptateur.initialiser();
+    const connecte = await adaptateur.verifierConnexion();
+    if (!connecte) {
+      throw new ErreurStockage(
+        'Connexion Supabase impossible : vérifiez la configuration.',
+        'CONNEXION_ECHEC'
+      );
+    }
+
     this._adaptateur = adaptateur;
-    this._mode       = MODE.LOCAL;
-    this._emettre('stockage:mode', { mode: MODE.LOCAL });
-    console.info('[Stockage] Mode : JSON local (localStorage)');
+    this._mode       = MODE.SUPABASE;
+    this._emettre('stockage:mode', { mode: MODE.SUPABASE });
+    console.info('[Stockage] Mode : Supabase PostgreSQL');
   }
 
   // ============================================================
@@ -253,11 +244,6 @@ class GestionnaireStockage {
    */
   async seConnecter(email, motDePasse) {
     await this._demarrer();
-    if (this._mode === MODE.LOCAL) {
-      throw new ErreurAutorisation(
-        'Connexion impossible : le stockage Supabase est requis.'
-      );
-    }
     return this._adaptateur.seConnecter(email, motDePasse);
   }
 
@@ -267,7 +253,6 @@ class GestionnaireStockage {
    */
   async obtenirUtilisateurAuth() {
     await this._demarrer();
-    if (this._mode !== MODE.SUPABASE) return null;
     return this._adaptateur.obtenirUtilisateurAuth();
   }
 
@@ -278,13 +263,8 @@ class GestionnaireStockage {
    */
   async demanderReinitialisation(email, redirection = '') {
     await this._demarrer();
-    if (this._mode !== MODE.SUPABASE) {
-      throw new ErreurAutorisation(
-        'Stockage Supabase requis pour la réinitialisation du mot de passe.'
-      );
-    }
     if (!this._adaptateur.demanderReinitialisation) {
-      throw new ErreurAutorisation('Réinitialisation indisponible dans ce mode.');
+      throw new ErreurAutorisation('Réinitialisation indisponible.');
     }
     return this._adaptateur.demanderReinitialisation(email, redirection);
   }
@@ -295,7 +275,7 @@ class GestionnaireStockage {
    */
   async obtenirJeton() {
     await this._demarrer();
-    if (this._mode !== MODE.SUPABASE || !this._adaptateur._obtenirJeton) return null;
+    if (!this._adaptateur._obtenirJeton) return null;
     return this._adaptateur._obtenirJeton();
   }
 
@@ -314,23 +294,16 @@ class GestionnaireStockage {
    */
   async mettreAJourMotDePasse(motDePasse) {
     await this._demarrer();
-    if (this._mode !== MODE.SUPABASE) {
-      throw new ErreurAutorisation(
-        'Stockage Supabase requis pour la réinitialisation.'
-      );
-    }
     return this._adaptateur.mettreAJourMotDePasse(motDePasse);
   }
 
   async seDeconnecter() {
     await this._demarrer();
-    if (this._mode !== MODE.SUPABASE) return;
     return this._adaptateur.seDeconnecter();
   }
 
   async obtenirSession() {
     await this._demarrer();
-    if (this._mode !== MODE.SUPABASE) return null;
     return this._adaptateur.obtenirSession();
   }
 
@@ -339,23 +312,18 @@ class GestionnaireStockage {
       console.warn('[Stockage] Impossible d\'écouter l\'auth avant initialisation.');
       return;
     }
-    if (this._mode === MODE.SUPABASE) {
-      this._adaptateur.ecouterAuthentification(rappel);
-    }
+    this._adaptateur.ecouterAuthentification(rappel);
   }
 
   // ============================================================
   // INFORMATIONS
   // ============================================================
 
-  /** @returns {string} Mode actuel ('supabase' | 'local') */
+  /** @returns {string} Mode actuel ('supabase') */
   get mode() { return this._mode; }
 
   /** @returns {boolean} Utilise Supabase */
   get estSupabase() { return this._mode === MODE.SUPABASE; }
-
-  /** @returns {boolean} Utilise le stockage local */
-  get estLocal() { return this._mode === MODE.LOCAL; }
 
   /** @returns {boolean} Gestionnaire prêt */
   get estPret() { return this._pret; }

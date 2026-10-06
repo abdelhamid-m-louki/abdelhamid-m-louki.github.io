@@ -41,7 +41,7 @@ Portfolio Éditorial est un CMS serverless inspiré de l'esthétique des journau
 
 - **Zéro framework** — HTML5, CSS3 et Vanilla JavaScript ES6+ exclusivement
 - **Serverless par nature** — aucun serveur applicatif requis
-- **Supabase en priorité** — avec fallback JSON automatique
+- **Supabase uniquement** — pas de fallback local, la base est obligatoire
 - **Français partout** — UI, code, commentaires, documentation
 - **SEO d'abord** — Lighthouse 100 comme objectif constant
 - **Accessibilité intégrée** — WCAG 2.1 AA minimum
@@ -55,8 +55,8 @@ Portfolio Éditorial est un CMS serverless inspiré de l'esthétique des journau
 | Base de données | Supabase PostgreSQL |
 | Stockage fichiers | Supabase Storage |
 | Authentification | Supabase Auth |
-| Déploiement | Tout hébergeur statique |
-| Fallback données | JSON + localStorage |
+| Déploiement | GitHub Pages (frontend) + Vercel (API) |
+| API backend | `/api/*` — data, ia, contact, vues |
 
 ---
 
@@ -74,8 +74,7 @@ index.html / blog/index.html / admin/*.html
 scripts/app.js (orchestrateur principal)
     │
     ├── scripts/storage/storage-manager.js  ← FAÇADE UNIQUE
-    │       ├── supabase.adapter.js          ← Mode production
-    │       └── local-json.adapter.js        ← Mode développement/fallback
+    │       └── supabase.adapter.js          ← Backend unique (Supabase)
     │
     ├── scripts/auth/auth.js                ← Authentification
     ├── scripts/seo/seo.js                  ← Métadonnées dynamiques
@@ -99,13 +98,12 @@ import { createClient } from '@supabase/supabase-js';
 // ← Ne jamais faire cela dans les pages ou composants
 ```
 
-### Mode de basculement automatique
+### Backend unique
 
-Au démarrage, `storage-manager.js` tente de se connecter à Supabase :
+Supabase est le seul backend du site. Au démarrage, `storage-manager.js` :
 
-1. Si `SUPABASE_URL` et `SUPABASE_ANON_KEY` sont définis → Mode Supabase
-2. Si la connexion Supabase échoue → Basculement automatique vers JSON local
-3. En développement local sans config → JSON local systématiquement
+1. Vérifie que `CONFIG.SUPABASE_URL` et `CONFIG.SUPABASE_ANON_KEY` sont définis (`config.js`) ;
+2. Tente la connexion ; toute erreur est **remontée** — aucune bascule locale n'existe.
 
 ---
 
@@ -118,6 +116,9 @@ portfolio-editorial/
 ├── a-propos.html                       # Page à propos
 ├── projets.html                        # Portfolio projets
 ├── contact.html                        # Formulaire de contact
+├── mentions-legales.html               # Mentions légales
+├── confidentialite.html                # Politique de confidentialité (RGPD)
+├── 404.html                            # Page 404
 ├── sitemap.xml                         # Plan du site SEO
 ├── robots.txt                          # Directives crawlers
 ├── manifest.json                       # PWA manifest
@@ -159,11 +160,11 @@ portfolio-editorial/
 │
 ├── scripts/
 │   ├── app.js                          # Orchestrateur principal
+│   ├── site-parametres.js              # Loader public des paramètres (data-contenu)
 │   ├── storage/
 │   │   ├── interfaces.js               # Contrats d'adaptateur + constantes
 │   │   ├── storage-manager.js          # Façade centrale (ENTRÉE UNIQUE)
-│   │   ├── supabase.adapter.js         # Implémentation Supabase
-│   │   └── local-json.adapter.js       # Implémentation JSON local
+│   │   └── supabase.adapter.js         # Implémentation Supabase (backend unique)
 │   ├── auth/
 │   │   └── auth.js                     # Authentification + sessions
 │   ├── seo/
@@ -177,27 +178,23 @@ portfolio-editorial/
 │   └── utils/
 │       └── upload.js                   # Compression et upload images
 │
-├── data/                               # Données JSON (fallback local)
-│   ├── articles.json
-│   ├── projets.json
-│   ├── competences.json
-│   ├── experiences.json
-│   ├── formations.json
-│   ├── certifications.json
-│   ├── categories.json
-│   ├── tags.json
-│   ├── medias.json
-│   ├── parametres.json
-│   ├── utilisateurs.json
-│   ├── seo.json
-│   └── analytiques.json
+├── supabase/                           # Backend Supabase
+│   ├── schema.sql                      # Schéma + RLS
+│   ├── seed.mjs                        # Seed (compte admin + contenu)
+│   ├── vider.mjs                       # Purge du contenu (conserve admin/config)
+│   ├── migrations/
+│   │   └── 0001-id-defaults-rls.sql    # Migration : id gen_random_uuid, RLS
+│   └── seed-data/                      # Fichiers JSON source du seed
+│       ├── parametres.json             # Config du site (clés)
+│       ├── seo.json                    # Métadonnées SEO
+│       └── autres tables (articles, projets, …)
 │
 └── assets/
     ├── images/
-    │   ├── portrait.png               # Portrait éditorial transparent
-    │   ├── blog/                      # Images des articles
-    │   └── projets/                   # Images des projets
-    ├── icons/                         # Icônes PWA
+    │   └── portrait.png               # Portrait éditorial transparent
+    ├── icons/                         # Icônes PWA (96/192/512)
+    ├── apple-touch-icon.png           # Icône iOS (180)
+    ├── og-accueil.jpg                 # Image Open Graph de l'accueil
     └── og-defaut.jpg                  # Image Open Graph par défaut
 ```
 
@@ -258,19 +255,24 @@ python3 -m http.server 8000
 # http://localhost:8000
 ```
 
-Le mode JSON local s'active automatiquement sans configuration Supabase.
+Supabase est obligatoire : renseignez les clés dans `config.js`, créez le
+compte admin et le contenu via `node supabase/seed.mjs`.
 
 ### Configuration
 
-Modifiez `window.CONFIG` dans chaque fichier HTML :
+Toute la configuration est centralisée dans `config.js` (`window.CONFIG`).
+`scripts/site-parametres.js`, chargé sur toutes les pages publiques, fusionne
+ensuite les valeurs de la table `parametres` (édition via
+`/admin/parametres.html`) et injecte le contenu dynamique via les attributs
+`data-contenu` (titre, bio, email, réseaux, disponibilité, localisation).
 
 ```javascript
 window.CONFIG = {
-  SITE_NOM:          'Votre Nom — Portfolio',
-  SITE_URL:          'https://www.votre-domaine.fr',
-  AUTEUR_NOM:        'Prénom Nom',
-  SUPABASE_URL:      'https://xxxxx.supabase.co',     // Optionnel
-  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6...' // Optionnel
+  SITE_NOM:          'AM. LOUKI',
+  SITE_URL:          'https://amlouki.me',
+  AUTEUR_NOM:        'Abdel-hamid M. LOUKI',
+  SUPABASE_URL:      'https://xxxxx.supabase.co',     // Requis
+  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6...' // Requis
 };
 ```
 
@@ -509,8 +511,7 @@ Page HTML
     ▼
 storage-manager.js    ← SEUL POINT D'ENTRÉE
     │
-    ├── [Supabase disponible] → supabase.adapter.js
-    └── [Fallback]            → local-json.adapter.js
+    └── supabase.adapter.js   (backend unique, obligatoire)
 ```
 
 ### API complète du gestionnaire
@@ -596,8 +597,7 @@ COLLECTIONS.UTILISATEURS    // 'utilisateurs'
 
 ### Ajouter un article
 
-1. Via l'admin (`/admin/articles.html?action=nouveau`)
-2. Ou directement dans `data/articles.json` pour le mode local
+1. Via l'admin (`/admin/articles.html`) — source unique du contenu (base Supabase).
 
 ---
 
@@ -606,11 +606,12 @@ COLLECTIONS.UTILISATEURS    // 'utilisateurs'
 ### Accès
 
 URL : `/admin/connexion.html`  
-Identifiants par défaut (mode local) :
-- Email : `admin@exemple.fr`
-- Mot de passe : `demo123`
+Authentification : Supabase Auth (comptes + table `utilisateurs`, RLS).
+Le compte administrateur est créé par `node supabase/seed.mjs`
+(variables `ADMIN_EMAIL` / `ADMIN_PASSWORD`).
 
-**IMPORTANT** : Changer ces identifiants avant le déploiement en production.
+**IMPORTANT** : aucune identité codée en dur — seuls les comptes Auth
+Supabase (rôle `admin` / `editeur`) sont acceptés.
 
 ### Pages d'administration
 
@@ -668,56 +669,14 @@ seo.configurer({
 
 ### Configuration
 
-L'IA passe par un proxy PHP `/api/ia.php` qui masque les clés API.
+L'IA passe par l'API Vercel `POST /api/ia` :
+- prompts système **côté serveur**, en liste blanche par action ;
+- authentification JWT requise (rôles éditeur / admin), exception : le
+  ping public `{"ping": true}` renvoie `{"ok": true}` ;
+- fournisseurs : Gemini (`GEMINI_KEY`) et/ou OpenAI (`OPENAI_KEY`).
 
-Créer le fichier `/api/ia.php` :
-
-```php
-<?php
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: https://www.exemple.fr');
-
-$GEMINI_KEY = 'votre_clé_gemini';
-$OPENAI_KEY = 'votre_clé_openai';
-
-$corps = json_decode(file_get_contents('php://input'), true);
-
-if (isset($corps['ping'])) {
-    echo json_encode(['ok' => true]);
-    exit;
-}
-
-$action      = $corps['action'] ?? '';
-$texte       = $corps['texte'] ?? '';
-$fournisseur = $corps['fournisseur'] ?? 'gemini';
-$promptSys   = $corps['promptSystem'] ?? '';
-
-// Appel Gemini
-if ($fournisseur === 'gemini') {
-    $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={$GEMINI_KEY}";
-    $payload = [
-        'contents' => [
-            ['role' => 'user', 'parts' => [
-                ['text' => $promptSys . "\n\n" . $texte]
-            ]]
-        ]
-    ];
-    $reponse = appelerAPI($url, $payload);
-    $resultat = $reponse['candidates'][0]['content']['parts'][0]['text'] ?? '';
-    echo json_encode(['resultat' => $resultat]);
-}
-
-function appelerAPI($url, $payload) {
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $reponse = curl_exec($ch);
-    curl_close($ch);
-    return json_decode($reponse, true);
-}
-```
+`scripts/ai/ia.js` envoie le jeton Supabase en en-tête
+`Authorization: Bearer …` via `stockage.obtenirJeton()`.
 
 ### Usage dans l'admin
 
@@ -789,11 +748,11 @@ Utilisateur → Formulaire connexion
     ▼
 auth.seConnecter(email, motDePasse)
     │
-    ├── Mode Supabase → supabase.auth.signInWithPassword()
-    └── Mode local    → Vérification dans data/utilisateurs.json
+    ▼
+supabase.auth.signInWithPassword()   (Supabase Auth uniquement)
     │
     ▼
-Session stockée (Supabase) ou localStorage
+Session stockée (Supabase Auth)
     │
     ▼
 Redirection vers /admin/tableau-de-bord.html
@@ -866,40 +825,23 @@ async function init() {
 
 ## 16. DÉPLOIEMENT
 
-### Option 1 : Netlify (recommandé)
+### Architecture de déploiement
 
-```bash
-# Depuis la racine du projet
-netlify deploy --prod --dir=.
-```
+Le site se déploie sur **deux cibles** :
 
-Variables d'environnement à configurer dans Netlify :
-- Les variables `SUPABASE_*` sont dans `window.CONFIG` dans le HTML.
+**Frontend — GitHub Pages** (`https://amlouki.me`, dépôt `abdelhamid-m-louki/abdelhamid-m-louki.github.io`)
+- Site 100 % statique publié depuis la branche `main` (racine du dépôt).
+- Aucune variable d'environnement : les clés publiques Supabase sont dans `config.js`.
 
-### Option 2 : Vercel
+**API — Vercel** (`https://abdelhamid-m-loukigithubio.vercel.app`)
+- Seul `/api/*` est déployé (`.vercelignore` exclut le reste du repo).
+- L'API est le « Backend For Frontend » : CRUD (`api/data/[collection].js`),
+  IA (`api/ia.js`), compteur de vues (`api/vues.js`), contact (`api/contact.js`).
 
-```bash
-vercel --prod
-```
-
-### Option 3 : GitHub Pages
-
-```yaml
-# .github/workflows/deploy.yml
-name: Deploy to GitHub Pages
-on:
-  push:
-    branches: [main]
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
-```
+Variables d'environnement côté Vercel :
+- `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+- `GEMINI_KEY`, `OPENAI_KEY`
+- `RESEND_API_KEY`, `CONTACT_EMAIL`, `CONTACT_FROM`, `ALLOWED_ORIGINS=https://amlouki.me`
 
 ### Option 4 : Hébergement classique (mutualisé)
 
@@ -969,13 +911,13 @@ export class AdaptateurAPIRest extends InterfaceStockage {
 
 ### Mise à jour des données
 
-**Mode Supabase :** Via l'interface d'administration (`/admin/`)  
-**Mode local :** Modifier directement les fichiers JSON dans `/data/`
+Tout passe par l'interface d'administration (`/admin/`) : la table `parametres`
+est éditée dans `/admin/parametres.html`, le contenu dans les pages CRUD.
 
 ### Sauvegarde
 
-En mode Supabase : export via le tableau de bord Supabase (Backups).  
-En mode local : versionner les fichiers `/data/*.json` avec Git.
+Export via le tableau de bord Supabase (Backups) ; les fichiers seed
+(`supabase/seed-data/*.json`) restent versionnés avec Git.
 
 ### Génération du sitemap
 
@@ -1011,7 +953,7 @@ const xml = seo.genererSitemap(pages);
 - [ ] Uploader le portrait PNG transparent
 - [ ] Générer les favicons et icônes PWA
 - [ ] Mettre à jour `sitemap.xml` avec les vrais URLs
-- [ ] Configurer le proxy PHP pour l'IA (si utilisé)
+- [ ] Configurer les variables d'env Vercel (`SUPABASE_*`, `GEMINI_KEY`, `OPENAI_KEY`, `RESEND_API_KEY`…)
 - [ ] Tester Lighthouse sur les pages principales
 - [ ] Vérifier les Open Graph avec le débogueur Meta
 - [ ] Soumettre le sitemap à Google Search Console

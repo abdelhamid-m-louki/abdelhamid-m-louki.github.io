@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
-Disallow: /data/
 Disallow: /scripts/storage/
 
 # Bloquer les crawlers d'IA trop agressifs
