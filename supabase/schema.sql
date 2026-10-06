@@ -268,55 +268,69 @@ create index if not exists idx_commentaires_article on public.commentaires (arti
 
 -- 5a. articles
 alter table public.articles enable row level security;
-create policy if not exists "articles - lecture publique"
+drop policy if exists "articles - lecture publique" on public.articles;
+create policy "articles - lecture publique"
   on public.articles for select to anon, authenticated
   using (statut = 'publié');
 
 -- 5b. projets
 alter table public.projets enable row level security;
-create policy if not exists "projets - lecture publique"
+drop policy if exists "projets - lecture publique" on public.projets;
+create policy "projets - lecture publique"
   on public.projets for select to anon, authenticated
   using (statut = 'publié');
 
 -- 5c. listes publiques du portfolio
 alter table public.competences enable row level security;
-create policy if not exists "competences - lecture publique" on public.competences for select to anon, authenticated using (true);
+drop policy if exists "competences - lecture publique" on public.competences;
+create policy "competences - lecture publique" on public.competences for select to anon, authenticated using (true);
 
 alter table public.experiences enable row level security;
-create policy if not exists "experiences - lecture publique" on public.experiences for select to anon, authenticated using (true);
+drop policy if exists "experiences - lecture publique" on public.experiences;
+create policy "experiences - lecture publique" on public.experiences for select to anon, authenticated using (true);
 
 alter table public.certifications enable row level security;
-create policy if not exists "certifications - lecture publique" on public.certifications for select to anon, authenticated using (true);
+drop policy if exists "certifications - lecture publique" on public.certifications;
+create policy "certifications - lecture publique" on public.certifications for select to anon, authenticated using (true);
 
 alter table public.formations enable row level security;
-create policy if not exists "formations - lecture publique" on public.formations for select to anon, authenticated using (true);
+drop policy if exists "formations - lecture publique" on public.formations;
+create policy "formations - lecture publique" on public.formations for select to anon, authenticated using (true);
 
 alter table public.categories enable row level security;
-create policy if not exists "categories - lecture publique" on public.categories for select to anon, authenticated using (true);
+drop policy if exists "categories - lecture publique" on public.categories;
+create policy "categories - lecture publique" on public.categories for select to anon, authenticated using (true);
 
 alter table public.tags enable row level security;
-create policy if not exists "tags - lecture publique" on public.tags for select to anon, authenticated using (true);
+drop policy if exists "tags - lecture publique" on public.tags;
+create policy "tags - lecture publique" on public.tags for select to anon, authenticated using (true);
 
 alter table public.medias enable row level security;
-create policy if not exists "medias - lecture publique" on public.medias for select to anon, authenticated using (true);
+drop policy if exists "medias - lecture publique" on public.medias;
+create policy "medias - lecture publique" on public.medias for select to anon, authenticated using (true);
 
 -- 5d. parametres / seo : config publique (aucun secret stocké)
 alter table public.parametres enable row level security;
-create policy if not exists "parametres - lecture publique" on public.parametres for select to anon, authenticated using (true);
+drop policy if exists "parametres - lecture publique" on public.parametres;
+create policy "parametres - lecture publique" on public.parametres for select to anon, authenticated using (true);
 
 alter table public.seo enable row level security;
-create policy if not exists "seo - lecture publique" on public.seo for select to anon, authenticated using (true);
+drop policy if exists "seo - lecture publique" on public.seo;
+create policy "seo - lecture publique" on public.seo for select to anon, authenticated using (true);
 
 -- 5e. utilisateurs : lecture réservée aux personnes connectées
 alter table public.utilisateurs enable row level security;
-create policy if not exists "utilisateurs - lecture connectes" on public.utilisateurs for select to authenticated using (true);
+drop policy if exists "utilisateurs - lecture connectes" on public.utilisateurs;
+create policy "utilisateurs - lecture connectes" on public.utilisateurs for select to authenticated using (true);
 
 -- 5f. tables réservées : lecture connectés uniquement
 alter table public.analytiques enable row level security;
-create policy if not exists "analytiques - lecture connectes" on public.analytiques for select to authenticated using (true);
+drop policy if exists "analytiques - lecture connectes" on public.analytiques;
+create policy "analytiques - lecture connectes" on public.analytiques for select to authenticated using (true);
 
 alter table public.commentaires enable row level security;
-create policy if not exists "commentaires - lecture connectes" on public.commentaires for select to authenticated using (true);
+drop policy if exists "commentaires - lecture connectes" on public.commentaires;
+create policy "commentaires - lecture connectes" on public.commentaires for select to authenticated using (true);
 
 -- RAPPEL : aucune politique d'écriture pour anon/authenticated.
 -- Toutes les écritures passent par l'API Vercel (service_role, contourne RLS).
@@ -334,7 +348,8 @@ on conflict (id) do update
       allowed_mime_types = excluded.allowed_mime_types;
 
 -- Lecture publique des objets du bucket images
-create policy if not exists "images - lecture publique"
+drop policy if exists "images - lecture publique" on storage.objects;
+create policy "images - lecture publique"
   on storage.objects for select to anon, authenticated
   using (bucket_id = 'images');
 
