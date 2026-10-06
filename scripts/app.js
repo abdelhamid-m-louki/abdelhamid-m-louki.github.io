@@ -458,7 +458,7 @@ function genererCarteProjet(projet, index) {
   const slug = projet.slug || Transformateurs.slugifier(projet.titre);
   return `
     <article class="carte-projet" role="listitem" data-animer data-delai="${index * 100}">
-      <a href="/projets/${slug}.html" aria-label="${echapper(projet.titre)}" class="carte-projet-lien-complet">
+      <div class="carte-projet-lien-complet">
         <div class="carte-projet-image">
           ${projet.image
             ? `<img src="${echapper(projet.image)}"
@@ -494,7 +494,7 @@ function genererCarteProjet(projet, index) {
             </span>
           </div>
         </div>
-      </a>
+      </div>
     </article>
   `;
 }
@@ -504,7 +504,7 @@ function genererCarteVedette(article) {
   const dateF = formaterDate(article.date_publication);
   return `
     <article class="carte-vedette" role="listitem" itemscope itemtype="https://schema.org/Article">
-      <a href="/blog/${slug}.html" class="carte-vedette-lien">
+      <a href="/blog/article.html?slug=${encodeURIComponent(slug)}" class="carte-vedette-lien">
         ${article.image_couverture
           ? `<div class="carte-vedette-image">
                <img src="${echapper(article.image_couverture)}"
@@ -543,7 +543,7 @@ function genererBrève(article) {
   const dateF = formaterDate(article.date_publication);
   return `
     <article class="breve" role="listitem" itemscope itemtype="https://schema.org/Article">
-      <a href="/blog/${slug}.html" class="breve-titre" itemprop="headline url">
+      <a href="/blog/article.html?slug=${encodeURIComponent(slug)}" class="breve-titre" itemprop="headline url">
         ${echapper(article.titre)}
       </a>
       <div class="breve-date">

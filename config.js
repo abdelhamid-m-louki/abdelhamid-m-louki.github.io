@@ -13,4 +13,7 @@ window.CONFIG = {
 
   /* Backend Vercel — seul /api/* y est déployé (frontend = GitHub Pages) */
   API_BASE:          'https://abdelhamid-m-loukigithubio.vercel.app',
+
+  /* Taille maximale d'un fichier compressé (upload) — doit rester ≤ la limite serveur (3 Mo) */
+  MAX_UPLOAD_MO: 3,
 };

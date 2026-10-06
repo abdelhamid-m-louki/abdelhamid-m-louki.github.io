@@ -148,13 +148,13 @@ function ouvrirFormulaire(id) {
 
 async function sauver() {
   if (!document.getElementById("exp-titre").value.trim() || !document.getElementById("exp-org").value.trim()) { toast('Intitulé du poste est obligatoire.', 'erreur'); return; }
-  const donnees = { titre: exp-titre.value.trim(),
-      organisation: exp-org.value.trim(),
-      description: exp-desc.value.trim(),
-      date_debut: exp-debut.value,
-      date_fin: exp-fin.value,
-      lieu: exp-lieu.value.trim(),
-      remote: exp-remote.checked };
+  const donnees = { titre: document.getElementById("exp-titre").value.trim(),
+      organisation: document.getElementById("exp-org").value.trim(),
+      description: document.getElementById("exp-desc").value.trim(),
+      date_debut: document.getElementById("exp-debut").value,
+      date_fin: document.getElementById("exp-fin").value,
+      lieu: document.getElementById("exp-lieu").value.trim(),
+      remote: document.getElementById("exp-remote").checked };
   try {
     if (etat.editId) await stockage.metAJour(COLL, etat.editId, donnees);
     else             await stockage.creer(COLL, donnees);

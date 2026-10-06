@@ -102,10 +102,9 @@ class MoteurBlog {
   }
 
   _obtenirSlugURL() {
-    // /blog/mon-article.html → mon-article
-    const chemin = window.location.pathname;
-    const match = chemin.match(/\/blog\/([^/]+?)(?:\.html)?$/);
-    return match ? match[1] : null;
+    // /blog/article.html?slug=mon-article
+    const params = new URLSearchParams(window.location.search);
+    return params.get('slug') || null;
   }
 
   // ============================================================
@@ -138,7 +137,7 @@ class MoteurBlog {
       if (this._recherche.length >= 2) {
         options.recherche       = this._recherche;
         options.champsRecherche = ['titre', 'extrait', 'contenu'];
-        delete options.filtres;
+        options.filtres         = { statut: 'publié' };
       }
 
       const { donnees, total, page } = await stockage.obtenirTous(
@@ -552,7 +551,7 @@ class MoteurBlog {
     seo.configurer({
       titre:            article.titre,
       description:      article.meta_description || article.extrait,
-      url:              `${window.location.origin}/blog/${article.slug}.html`,
+      url:              `${window.location.origin}/blog/article.html?slug=${article.slug}`,
       image:            article.image_couverture,
       type:             'article',
       datePublication:  article.date_publication,
@@ -582,7 +581,7 @@ class MoteurBlog {
     if (this._tag)       params.set('tag', this._tag);
     if (this._recherche) params.set('q', this._recherche);
 
-    const nouve lleURL = params.toString()
+    const nouvelleURL = params.toString()
       ? `${window.location.pathname}?${params}`
       : window.location.pathname;
 
@@ -594,9 +593,13 @@ class MoteurBlog {
   // ============================================================
 
   async _incrementerVues(id) {
+    if (!id) return;
     try {
-      await stockage.metAJour(COLLECTIONS.ARTICLES, id, {
-        vues: null, // Le backend incrémente
+      const base = (window.CONFIG && window.CONFIG.API_BASE) || '';
+      await fetch(`${base.replace(/\/+$/, '')}/api/vues?id=${encodeURIComponent(id)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:   JSON.stringify({ id }),
       });
     } catch (_) {
       // Silencieux — pas critique
@@ -649,7 +652,7 @@ class MoteurBlog {
              itemprop="articleSection">
             ${echapper(article.categorie)}
           </a>` : ''}
-          <a href="/blog/${slug}.html" class="carte-vedette-titre" itemprop="headline url">
+          <a href="/blog/article.html?slug=${encodeURIComponent(slug)}" class="carte-vedette-titre" itemprop="headline url">
             ${echapper(article.titre)}
           </a>
           ${article.extrait ? `

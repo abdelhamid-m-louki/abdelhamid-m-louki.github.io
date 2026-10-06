@@ -156,10 +156,11 @@
 <div class="zone-toasts" id="zone-toasts" aria-live="assertive" role="status"></div><script type="module">
 import stockage, { COLLECTIONS } from '/scripts/storage/storage-manager.js';
 import { protegerPage, toast, indicateurSauvegarde, initialiserUploadImage } from '/scripts/admin/utils-admin.js';
+import { ROLES } from '/scripts/auth/auth.js';
 import seo from '/scripts/seo/seo.js';
 
 async function init() {
-  const ok = await protegerPage(); if (!ok) return;
+  const ok = await protegerPage(ROLES.ADMIN); if (!ok) return;
   const indic = indicateurSauvegarde('indicateur-sauvegarde');
   
   // Upload OG image

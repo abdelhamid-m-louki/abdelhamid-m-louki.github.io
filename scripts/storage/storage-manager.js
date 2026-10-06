@@ -272,6 +272,43 @@ class GestionnaireStockage {
   }
 
   /**
+   * Demande un lien de réinitialisation de mot de passe (Supabase Auth)
+   * @param {string} email
+   * @param {string} [redirection] - URL de retour après clic sur le lien
+   */
+  async demanderReinitialisation(email, redirection = '') {
+    await this._demarrer();
+    if (this._mode !== MODE.SUPABASE) {
+      throw new ErreurAutorisation(
+        'Stockage Supabase requis pour la réinitialisation du mot de passe.'
+      );
+    }
+    if (!this._adaptateur.demanderReinitialisation) {
+      throw new ErreurAutorisation('Réinitialisation indisponible dans ce mode.');
+    }
+    return this._adaptateur.demanderReinitialisation(email, redirection);
+  }
+
+  /**
+   * Jeton d'accès Supabase courant (pour les appels API authentifiés)
+   * @returns {Promise<string|null>}
+   */
+  async obtenirJeton() {
+    await this._demarrer();
+    if (this._mode !== MODE.SUPABASE || !this._adaptateur._obtenirJeton) return null;
+    return this._adaptateur._obtenirJeton();
+  }
+
+  /**
+   * Force l'initialisation du gestionnaire
+   * @returns {Promise<boolean>}
+   */
+  async pret() {
+    await this._demarrer();
+    return true;
+  }
+
+  /**
    * Met à jour le mot de passe (après réinitialisation)
    * @param {string} motDePasse
    */

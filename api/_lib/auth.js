@@ -10,7 +10,7 @@ const ECRITURE_STANDARD = [ROLES.ADMIN, ROLES.EDITEUR];
 const ECRITURE_ADMIN = [ROLES.ADMIN];
 
 /** Collections réservées à l'admin seul */
-const COLLECTIONS_SENSIBLES = new Set(['utilisateurs', 'parametres']);
+const COLLECTIONS_SENSIBLES = new Set(['utilisateurs', 'parametres', 'seo']);
 
 export function rolesAutorises(collection) {
   return COLLECTIONS_SENSIBLES.has(collection) ? ECRITURE_ADMIN : ECRITURE_STANDARD;
@@ -85,5 +85,5 @@ export async function autentifier(req, collection) {
     return { ok: false, status: 403, erreur: 'Rôle insuffisant pour cette opération.' };
   }
 
-  return { ok: true, utilisateur, role: profil.role };
+  return { ok: true, utilisateur, role: profil.role, profil };
 }

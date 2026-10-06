@@ -26,7 +26,7 @@ $$;
 
 -- Articles de blog (lecture publique = statut 'publié')
 create table if not exists public.articles (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   titre             text,
   slug              text,
   extrait           text,
@@ -50,7 +50,7 @@ create table if not exists public.articles (
 
 -- Projets
 create table if not exists public.projets (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   titre             text,
   slug              text,
   description_courte text,
@@ -73,7 +73,7 @@ create table if not exists public.projets (
 
 -- Compétences
 create table if not exists public.competences (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   nom               text,
   categorie         text,
   niveau            integer        default 0,
@@ -86,7 +86,7 @@ create table if not exists public.competences (
 
 -- Expériences professionnelles
 create table if not exists public.experiences (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   titre             text,
   poste             text,
   entreprise        text,
@@ -105,7 +105,7 @@ create table if not exists public.experiences (
 
 -- Certifications
 create table if not exists public.certifications (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   titre             text,
   organisme         text,
   date_obtention    text,
@@ -118,7 +118,7 @@ create table if not exists public.certifications (
 
 -- Formations
 create table if not exists public.formations (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   titre             text,
   organisation      text,
   type              text,
@@ -136,7 +136,7 @@ create table if not exists public.formations (
 
 -- Catégories d'articles
 create table if not exists public.categories (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   nom               text,
   slug              text,
   description       text,
@@ -149,7 +149,7 @@ create table if not exists public.categories (
 
 -- Tags
 create table if not exists public.tags (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   nom               text,
   slug              text,
   nombre_articles   integer        default 0,
@@ -159,7 +159,7 @@ create table if not exists public.tags (
 
 -- Médiathèque
 create table if not exists public.medias (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   nom               text,
   type              text,
   taille            integer,
@@ -172,7 +172,7 @@ create table if not exists public.medias (
 
 -- Paramètres du site (cle → valeur)
 create table if not exists public.parametres (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   cle               text unique not null,
   valeur            text,
   type              text           default 'string',
@@ -183,7 +183,7 @@ create table if not exists public.parametres (
 
 -- SEO (cle → valeur, géré par admin/seo.html)
 create table if not exists public.seo (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   cle               text unique not null,
   valeur            text,
   type              text           default 'string',
@@ -194,7 +194,7 @@ create table if not exists public.seo (
 
 -- Utilisateurs (profil ; id = id du compte Supabase Auth)
 create table if not exists public.utilisateurs (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   email             text unique not null,
   nom               text,
   role              text           default 'editeur'
@@ -207,7 +207,7 @@ create table if not exists public.utilisateurs (
 
 -- Analytiques (événements — table réservée)
 create table if not exists public.analytiques (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   page              text,
   type              text,
   valeur            jsonb          default '{}'::jsonb,
@@ -218,7 +218,7 @@ create table if not exists public.analytiques (
 
 -- Commentaires (table réservée)
 create table if not exists public.commentaires (
-  id                text primary key,
+  id                text primary key default gen_random_uuid()::text,
   article_id        text,
   nom               text,
   email             text,
@@ -270,15 +270,26 @@ create index if not exists idx_commentaires_article on public.commentaires (arti
 alter table public.articles enable row level security;
 drop policy if exists "articles - lecture publique" on public.articles;
 create policy "articles - lecture publique"
-  on public.articles for select to anon, authenticated
+  on public.articles for select to anon
   using (statut = 'publié');
+
+-- L'admin (session connectée) voit aussi brouillons et archives
+drop policy if exists "articles - lecture connectes" on public.articles;
+create policy "articles - lecture connectes"
+  on public.articles for select to authenticated
+  using (true);
 
 -- 5b. projets
 alter table public.projets enable row level security;
 drop policy if exists "projets - lecture publique" on public.projets;
 create policy "projets - lecture publique"
-  on public.projets for select to anon, authenticated
+  on public.projets for select to anon
   using (statut = 'publié');
+
+drop policy if exists "projets - lecture connectes" on public.projets;
+create policy "projets - lecture connectes"
+  on public.projets for select to authenticated
+  using (true);
 
 -- 5c. listes publiques du portfolio
 alter table public.competences enable row level security;

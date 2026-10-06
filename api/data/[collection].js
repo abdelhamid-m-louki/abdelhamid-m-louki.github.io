@@ -1,6 +1,7 @@
 import { appliquerCors, gererPreflight } from '../_lib/cors.js';
 import { clientAdmin } from '../_lib/supabase.js';
 import { autentifier } from '../_lib/auth.js';
+import { randomUUID } from 'node:crypto';
 
 const COLLECTIONS = new Set([
   'articles',
@@ -67,7 +68,14 @@ export default async function handler(req, res) {
       }
 
       const aInserer = { ...nettoyer(corps), modifie_le: maintenant };
+      if (!aInserer.id) aInserer.id = randomUUID();
       if (!aInserer.cree_le) aInserer.cree_le = maintenant;
+
+      // Auteur renseigné côté serveur (source de vérité) pour les contenus édités
+      if (collection === 'articles' || collection === 'medias') {
+        aInserer.auteur_id  = auth.utilisateur.id;
+        aInserer.auteur_nom = auth.profil?.nom || auth.utilisateur.email || 'Auteur';
+      }
 
       const { data, error } = await sb.from(collection).insert(aInserer).select().single();
       if (error) return res.status(statutSupabase(error)).json({ erreur: error.message });

@@ -142,12 +142,12 @@ function ouvrirFormulaire(id) {
 
 async function sauver() {
   if (!document.getElementById("cert-titre").value.trim() || !document.getElementById("cert-org").value.trim()) { toast('Nom de la certification est obligatoire.', 'erreur'); return; }
-  const donnees = { titre: cert-titre.value.trim(),
-      organisme: cert-org.value.trim(),
-      date_obtention: cert-obtention.value,
-      date_expiration: cert-expiration.value,
-      url_credential: cert-url.value.trim(),
-      statut: cert-statut.value.trim() };
+  const donnees = { titre: document.getElementById("cert-titre").value.trim(),
+      organisme: document.getElementById("cert-org").value.trim(),
+      date_obtention: document.getElementById("cert-obtention").value,
+      date_expiration: document.getElementById("cert-expiration").value,
+      url_credential: document.getElementById("cert-url").value.trim(),
+      statut: document.getElementById("cert-statut").value.trim() };
   try {
     if (etat.editId) await stockage.metAJour(COLL, etat.editId, donnees);
     else             await stockage.creer(COLL, donnees);

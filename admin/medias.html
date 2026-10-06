@@ -170,7 +170,7 @@ async function chargerMedias() {
       grille.querySelectorAll('.media-item').forEach(el => {
         el.addEventListener('click', () => toggleSelection(el.dataset.id));
         el.querySelector('.btn-copier-url')?.addEventListener('click', e => { e.stopPropagation(); copierURL(el.dataset.url); });
-        el.querySelector('.btn-suppr-media')?.addEventListener('click', e => { e.stopPropagation(); supprimerMedia(el.dataset.id, el.dataset.nom); });
+        el.querySelector('.btn-suppr-media')?.addEventListener('click', e => { e.stopPropagation(); supprimerMedia(el.dataset.id, el.dataset.nom, el.dataset.chemin); });
         el.querySelector('.btn-detail-media')?.addEventListener('click', e => { e.stopPropagation(); afficherDetail(el.dataset.id); });
       });
     }
@@ -185,7 +185,7 @@ function carteMedia(m) {
   const estImage = m.type?.startsWith('image/') || m.url?.match(/\.(jpg|jpeg|png|webp|gif|svg)$/i);
   const taille = m.taille ? formaterTaille(m.taille) : '';
   return `
-    <div class="media-item" data-id="${echapper(m.id)}" data-url="${echapper(m.url||'')}" data-nom="${echapper(m.nom||'')}" role="listitem" tabindex="0" aria-label="${echapper(m.nom||'Fichier')}">
+    <div class="media-item" data-id="${echapper(m.id)}" data-url="${echapper(m.url||'')}" data-nom="${echapper(m.nom||'')}" data-chemin="${echapper(m.chemin||'')}" role="listitem" tabindex="0" aria-label="${echapper(m.nom||'Fichier')}">
       ${estImage
         ? `<img src="${echapper(m.url)}" alt="${echapper(m.nom||'Image')}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">`
         : `<div class="media-non-image"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span style="font-family:var(--police-mono);font-size:9px;text-transform:uppercase;">${echapper(m.nom?.split('.').pop()||'')}</span></div>`
@@ -217,12 +217,12 @@ function toggleSelection(id) {
   document.getElementById('btn-suppr-selection').style.display = etat.selection.size > 0 ? '' : 'none';
 }
 
-async function supprimerMedia(id, nom) {
+async function supprimerMedia(id, nom, chemin) {
   const ok = await confirmer({ titre:'Supprimer le fichier', message:`Supprimer « ${nom} » ? Cette action est irréversible.`, labelOk:'Supprimer', danger:true });
   if (!ok) return;
   try {
     await stockage.supprimer(COLLECTIONS.MEDIAS, id);
-    if (stockage.estSupabase) await stockage.supprimerFichier(nom);
+    if (stockage.estSupabase && chemin) await stockage.supprimerFichier(chemin);
     toast('Fichier supprimé.', 'succes');
     etat.selection.delete(id);
     await chargerMedias();
@@ -234,7 +234,12 @@ async function supprimerSelection() {
   const ok = await confirmer({ titre:'Supprimer la sélection', message:`Supprimer ${etat.selection.size} fichier(s) sélectionné(s) ?`, labelOk:'Supprimer tout', danger:true });
   if (!ok) return;
   try {
-    await Promise.all([...etat.selection].map(id => stockage.supprimer(COLLECTIONS.MEDIAS, id)));
+    for (const id of etat.selection) {
+      const media = etat.medias.find(m => m.id === id);
+      if (!media) continue;
+      await stockage.supprimer(COLLECTIONS.MEDIAS, id);
+      if (stockage.estSupabase && media.chemin) await stockage.supprimerFichier(media.chemin);
+    }
     etat.selection.clear();
     toast('Fichiers supprimés.', 'succes');
     await chargerMedias();
@@ -284,17 +289,14 @@ async function uploaderFichiers(fichiers) {
       const f = fichiers[i];
       texte.textContent = `Upload ${i + 1}/${fichiers.length} : ${f.name}`;
 
-      const { url, chemin, meta } = await upload.traiterEtUploader(f, {
+      const { url, chemin } = await upload.traiterEtUploader(f, {
         destination: 'medias',
         onProgression: pct => {
           fill.style.transform = `scaleX(${((i + pct/100) / fichiers.length)})`;
         },
       });
 
-      await stockage.creer(COLLECTIONS.MEDIAS, {
-        nom: f.name, type: f.type, taille: meta.tailleCompresse,
-        url, chemin, format: 'image/webp', cree_le: new Date().toISOString(),
-      });
+      // La fiche « medias » est créée par l'adaptateur lors de l'upload
     }
     toast(`${fichiers.length} fichier(s) uploadé(s).`, 'succes');
     await chargerMedias();

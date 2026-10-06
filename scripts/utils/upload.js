@@ -27,8 +27,8 @@ const TYPES_AUTORISES = Object.freeze([
   'image/svg+xml',
 ]);
 
-/** Taille maximale après compression (en octets) — 2 Mo */
-const TAILLE_MAX = 2 * 1024 * 1024;
+/** Taille maximale après compression (en octets) — lue depuis CONFIG, 3 Mo par défaut */
+const TAILLE_MAX = ((window.CONFIG && window.CONFIG.MAX_UPLOAD_MO) || 3) * 1024 * 1024;
 
 /** Dimensions maximales par défaut */
 const DIMENSIONS = Object.freeze({
@@ -97,13 +97,6 @@ export class GestionnaireUpload {
 
     // 6. Upload
     options.onProgression?.(70);
-    const resultat = await stockage.uploaderFichier(blob, chemin, {
-      bucket: options.bucket,
-    });
-
-    options.onProgression?.(95);
-
-    // 7. Métadonnées
     const meta = {
       nomOriginal:  fichier.name,
       typeOriginal: fichier.type,
@@ -115,10 +108,16 @@ export class GestionnaireUpload {
       format:      'image/webp',
       cree_le:     new Date().toISOString(),
     };
+    const resultat = await stockage.uploaderFichier(blob, chemin, {
+      bucket: options.bucket,
+      meta,
+    });
+
+    options.onProgression?.(95);
 
     options.onProgression?.(100);
 
-    return { url: resultat.url, chemin, meta };
+    return { url: resultat.url, chemin, meta, fiche: resultat.fiche || null };
   }
 
   // ============================================================

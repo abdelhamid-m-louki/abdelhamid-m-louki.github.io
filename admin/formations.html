@@ -160,15 +160,15 @@ function ouvrirFormulaire(id) {
 
 async function sauver() {
   if (!document.getElementById("form-titre").value.trim() || !document.getElementById("form-org").value.trim()) { toast('Titre de la formation est obligatoire.', 'erreur'); return; }
-  const donnees = { titre: form-titre.value.trim(),
-      organisation: form-org.value.trim(),
-      specialite: form-spec.value.trim(),
-      diplome: form-diplome.value.trim(),
-      mention: form-mention.value.trim(),
-      date_debut: form-debut.value,
-      date_fin: form-fin.value,
-      lieu: form-lieu.value.trim(),
-      description: form-desc.value.trim() };
+  const donnees = { titre: document.getElementById("form-titre").value.trim(),
+      organisation: document.getElementById("form-org").value.trim(),
+      specialite: document.getElementById("form-spec").value.trim(),
+      diplome: document.getElementById("form-diplome").value.trim(),
+      mention: document.getElementById("form-mention").value.trim(),
+      date_debut: document.getElementById("form-debut").value,
+      date_fin: document.getElementById("form-fin").value,
+      lieu: document.getElementById("form-lieu").value.trim(),
+      description: document.getElementById("form-desc").value.trim() };
   try {
     if (etat.editId) await stockage.metAJour(COLL, etat.editId, donnees);
     else             await stockage.creer(COLL, donnees);

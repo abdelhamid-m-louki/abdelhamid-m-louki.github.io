@@ -23,6 +23,8 @@
 
 'use strict';
 
+import stockage from '../storage/storage-manager.js';
+
 /** Point d'entrée du proxy Vercel — masque les clés API */
 const PROXY_URL = `${(window.CONFIG && window.CONFIG.API_BASE) || ''}/api/ia`;
 
@@ -45,82 +47,6 @@ export const ACTIONS = Object.freeze({
   GENERER_EXTRAIT:  'generer_extrait',
   CORRIGER:         'corriger',
   SIMPLIFIER:       'simplifier',
-});
-
-/** Prompts système par action */
-const PROMPTS_SYSTEME = Object.freeze({
-  [ACTIONS.REECRIRE]: `Tu es un rédacteur éditorial expert francophone.
-Réécris le texte fourni en conservant le sens original mais en améliorant :
-- La clarté et la fluidité
-- Le style éditorial et la voix narrative
-- La précision du vocabulaire
-- La structure des phrases
-Réponds UNIQUEMENT avec le texte réécrit, sans commentaire.`,
-
-  [ACTIONS.RESUMER]: `Tu es un éditeur de presse francophone expert.
-Rédige un résumé concis (2-3 phrases maximum) du texte fourni.
-Style : direct, informatif, accrocheur comme un chapô de journal.
-Réponds UNIQUEMENT avec le résumé, sans introduction ni commentaire.`,
-
-  [ACTIONS.AMELIORER]: `Tu es un correcteur de style éditorial francophone.
-Améliore le texte fourni en :
-- Supprimant les répétitions et les tournures maladroites
-- Enrichissant le vocabulaire
-- Améliorant la ponctuation et le rythme
-- Respectant les règles typographiques françaises (guillemets, espaces, etc.)
-Réponds UNIQUEMENT avec le texte amélioré.`,
-
-  [ACTIONS.HUMANISER]: `Tu es un auteur humain francophone.
-Réécris ce texte pour qu'il semble naturellement écrit par un humain :
-- Varie les constructions de phrases
-- Utilise des expressions idiomatiques françaises
-- Ajoute des nuances et des opinions personnelles subtiles
-- Évite les formulations trop formelles ou mécaniques
-Réponds UNIQUEMENT avec le texte humanisé.`,
-
-  [ACTIONS.GENERER_TITRES]: `Tu es un rédacteur en chef de presse française.
-Génère 5 titres alternatifs accrocheurs pour le contenu fourni.
-Format de réponse : JSON uniquement, tableau de chaînes.
-Exemple : ["Titre 1", "Titre 2", "Titre 3", "Titre 4", "Titre 5"]
-Réponds UNIQUEMENT avec le JSON, sans texte additionnel.`,
-
-  [ACTIONS.GENERER_META]: `Tu es un expert SEO francophone.
-Génère les métadonnées SEO optimisées pour le contenu fourni.
-Format de réponse : JSON uniquement avec les clés :
-- titre (max 60 caractères, accrocheur et SEO)
-- description (max 160 caractères, incitative et descriptive)
-- motsClés (tableau de 5-8 mots-clés pertinents)
-Réponds UNIQUEMENT avec le JSON valide.`,
-
-  [ACTIONS.GENERER_TAGS]: `Tu es un indexeur éditorial francophone.
-Génère une liste de tags pertinents pour le contenu fourni.
-Format de réponse : JSON uniquement, tableau de chaînes en minuscules.
-Maximum 10 tags. Exemple : ["tag-un", "tag-deux", "tag-trois"]
-Réponds UNIQUEMENT avec le JSON.`,
-
-  [ACTIONS.GENERER_EXTRAIT]: `Tu es un éditeur de presse francophone.
-Génère un extrait accrocheur de 160-200 mots pour le contenu fourni.
-L'extrait doit :
-- Accrocher le lecteur dès la première phrase
-- Présenter l'essentiel sans tout révéler
-- Inviter à lire la suite
-Réponds UNIQUEMENT avec l'extrait, sans commentaire.`,
-
-  [ACTIONS.CORRIGER]: `Tu es un correcteur typographique francophone expert.
-Corrige le texte fourni en respectant :
-- L'orthographe française
-- La grammaire et la conjugaison
-- Les règles typographiques françaises (guillemets « », espaces insécables, etc.)
-- La ponctuation
-Réponds UNIQUEMENT avec le texte corrigé, sans commentaire.`,
-
-  [ACTIONS.SIMPLIFIER]: `Tu es un spécialiste de la communication claire francophone.
-Simplifie le texte fourni pour le rendre accessible :
-- Remplace le jargon technique par des mots simples
-- Raccourcis les phrases longues
-- Utilise un vocabulaire courant
-- Conserve l'information essentielle
-Réponds UNIQUEMENT avec le texte simplifié.`,
 });
 
 class AssistantIA {
@@ -311,16 +237,17 @@ class AssistantIA {
       action,
       texte:        texte.trim(),
       fournisseur:  this._fournisseur,
-      promptSystem: PROMPTS_SYSTEME[action],
       options,
     };
 
     try {
+      const jeton = await stockage.obtenirJeton();
       const reponse = await fetch(PROXY_URL, {
         method:  'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-Requested-With': 'XMLHttpRequest',
+          ...(jeton ? { Authorization: `Bearer ${jeton}` } : {}),
         },
         body:   JSON.stringify(corps),
         signal: this._controleur.signal,

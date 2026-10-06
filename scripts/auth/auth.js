@@ -16,7 +16,7 @@
 'use strict';
 
 import stockage from '../storage/storage-manager.js';
-import { ErreurValidation } from '../storage/interfaces.js';
+import { ErreurValidation, ErreurAutorisation } from '../storage/interfaces.js';
 
 /** Rôles autorisés */
 const ROLES = Object.freeze({
@@ -248,13 +248,12 @@ class GestionnaireAuthentification {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       throw new Error('Adresse email invalide.');
     }
-    // En mode Supabase, utilise la fonctionnalité native
-    if (stockage.estSupabase) {
-      await stockage._adaptateur._client.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/admin/nouveau-mot-de-passe.html`,
-      });
-    }
-    // En mode local, message simulé
+    // Initialise le stockage avant toute vérification de mode
+    await stockage.pret();
+    await stockage.demanderReinitialisation(
+      email,
+      `${window.location.origin}/admin/nouveau-mot-de-passe.html`
+    );
   }
 
   // ============================================================
@@ -262,7 +261,9 @@ class GestionnaireAuthentification {
   // ============================================================
 
   /**
-   * Établit une session à partir des données reçues
+   * Établit une session à partir des données reçues.
+   * Fail-closed : sans profil utilisateur en base (ou compte désactivé),
+   * la session est refusée — aucun accès par défaut à un rôle élevé.
    * @param {Object} session 
    */
   async _etablirSession(session) {
@@ -272,29 +273,42 @@ class GestionnaireAuthentification {
 
     // Extrait l'utilisateur selon le format (Supabase vs local)
     const utilisateurBrut = session.user || session.utilisateur;
-    if (!utilisateurBrut) return;
+    if (!utilisateurBrut) {
+      this._reinitialiserEtat();
+      return;
+    }
 
-    // Récupère le profil complet depuis la BDD
+    // Le profil en base fait foi : rôle, nom et état du compte
+    let profil = null;
     try {
-      const profil = await stockage.obtenirParChamp(
+      profil = await stockage.obtenirParChamp(
         'utilisateurs',
         'id',
         utilisateurBrut.id
       );
-      this._utilisateur = profil || {
-        id:    utilisateurBrut.id,
-        email: utilisateurBrut.email,
-        role:  utilisateurBrut.role || ROLES.EDITEUR,
-        nom:   utilisateurBrut.nom || utilisateurBrut.email,
-      };
     } catch (_) {
-      this._utilisateur = {
-        id:    utilisateurBrut.id,
-        email: utilisateurBrut.email,
-        role:  utilisateurBrut.role || ROLES.EDITEUR,
-        nom:   utilisateurBrut.nom || utilisateurBrut.email,
-      };
+      profil = null;
     }
+
+    if (!profil) {
+      this._reinitialiserEtat();
+      throw new ErreurAutorisation(
+        'Profil introuvable. Votre accès est refusé — contactez l\'administrateur.'
+      );
+    }
+    if (profil.actif === false) {
+      this._reinitialiserEtat();
+      throw new ErreurAutorisation(
+        'Compte désactivé. Votre accès est refusé — contactez l\'administrateur.'
+      );
+    }
+
+    this._utilisateur = {
+      id:    profil.id || utilisateurBrut.id,
+      email: profil.email || utilisateurBrut.email,
+      role:  profil.role || ROLES.LECTEUR, // défaut minimaliste, jamais éditeur/admin
+      nom:   profil.nom || profil.email || utilisateurBrut.email,
+    };
 
     this._planifierVerificationExpiration(session);
     this._emettre(EVENEMENTS.CONNECTE, { utilisateur: this._utilisateur });

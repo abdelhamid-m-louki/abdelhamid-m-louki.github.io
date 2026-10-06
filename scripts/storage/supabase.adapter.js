@@ -95,7 +95,11 @@ export class AdaptateurSupabase extends InterfaceStockage {
     if (options.filtres) {
       for (const [champ, valeur] of Object.entries(options.filtres)) {
         if (valeur === null || valeur === undefined) continue;
-        if (Array.isArray(valeur)) {
+        if (champ === 'tags_contient') {
+          requete = requete.contains('tags', [valeur]);
+        } else if (champ === 'type_prefixe') {
+          requete = requete.ilike('type', `${valeur}%`);
+        } else if (Array.isArray(valeur)) {
           requete = requete.in(champ, valeur);
         } else {
           requete = requete.eq(champ, valeur);
@@ -403,7 +407,28 @@ export class AdaptateurSupabase extends InterfaceStockage {
     if (!corps?.donnees?.url) {
       throw new ErreurStockage('Réponse API d\'upload invalide.', 'API_INVALIDE');
     }
-    return { url: corps.donnees.url, chemin: corps.donnees.chemin || chemin };
+
+    // Crée la fiche « medias » (source de vérité unique de la médiathèque).
+    // Chaque fichier uploade, d'où qu'il vienne, est ainsi listé.
+    let fiche = null;
+    const meta = options.meta || {};
+    if (meta?.nomOriginal) {
+      try {
+        fiche = await this.creer('medias', {
+          nom:     meta.nomOriginal,
+          type:    meta.typeOriginal || fichier?.type || 'image/webp',
+          taille:  meta.tailleCompresse || fichier?.size || 0,
+          url:     corps.donnees.url,
+          chemin:  corps.donnees.chemin || chemin,
+          format:  meta.format || 'image/webp',
+        });
+      } catch (err) {
+        console.warn('[AdaptateurSupabase] Fiche médias non enregistrée :', err.message);
+        fiche = null;
+      }
+    }
+
+    return { url: corps.donnees.url, chemin: corps.donnees.chemin || chemin, fiche };
   }
 
   async supprimerFichier(chemin, bucket = BUCKETS.IMAGES) {
@@ -501,6 +526,19 @@ export class AdaptateurSupabase extends InterfaceStockage {
   async mettreAJourMotDePasse(motDePasse) {
     await this._assurerinitialise();
     const { error } = await this._client.auth.updateUser({ password: motDePasse });
+    if (error) this._lancerErreur(error);
+  }
+
+  /**
+   * Demande un email de réinitialisation de mot de passe
+   * @param {string} email
+   * @param {string} [redirection] - URL de retour après clic sur le lien
+   */
+  async demanderReinitialisation(email, redirection = '') {
+    await this._assurerinitialise();
+    const { error } = await this._client.auth.resetPasswordForEmail(email, {
+      redirectTo: redirection || undefined,
+    });
     if (error) this._lancerErreur(error);
   }
 
