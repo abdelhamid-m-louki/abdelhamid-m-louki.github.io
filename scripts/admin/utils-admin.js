@@ -333,7 +333,7 @@ export function initialiserUploadImage(options = {}) {
     zoneId       = 'zone-upload',
     barreId      = 'barre-upload',
     supprimerId  = 'btn-supprimer-image',
-    destination  = 'medias',
+    destination  = 'images',
     onURL        = null,
   } = options;
 

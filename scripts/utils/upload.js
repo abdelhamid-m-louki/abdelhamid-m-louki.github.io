@@ -93,7 +93,7 @@ export class GestionnaireUpload {
 
     // 5. Génération du nom de fichier
     const nomFichier = this._genererNom(fichier.name, options.destination);
-    const chemin     = `${options.destination || 'medias'}/${nomFichier}`;
+    const chemin     = `${options.destination || 'images'}/${nomFichier}`;
 
     // 6. Upload
     options.onProgression?.(70);

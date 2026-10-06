@@ -20,7 +20,7 @@
 
 import { AdaptateurSupabase }   from './supabase.adapter.js';
 import { AdaptateurJsonLocal }  from './local-json.adapter.js';
-import { ErreurStockage, COLLECTIONS } from './interfaces.js';
+import { ErreurStockage, ErreurAutorisation } from './interfaces.js';
 
 /** Configuration lue depuis window.CONFIG (injecté dans le HTML) */
 const CONFIG_GLOBALE = window.CONFIG || {};
@@ -254,28 +254,22 @@ class GestionnaireStockage {
   async seConnecter(email, motDePasse) {
     await this._demarrer();
     if (this._mode === MODE.LOCAL) {
-      // Authentification simulée en mode local
-      return this._authentificationLocale(email, motDePasse);
+      throw new ErreurAutorisation(
+        'Connexion impossible : le stockage Supabase est requis.'
+      );
     }
     return this._adaptateur.seConnecter(email, motDePasse);
   }
 
   async seDeconnecter() {
     await this._demarrer();
-    if (this._mode === MODE.LOCAL) {
-      localStorage.removeItem('portfolio_session_locale');
-      this._emettre('auth:deconnecte', {});
-      return;
-    }
+    if (this._mode !== MODE.SUPABASE) return;
     return this._adaptateur.seDeconnecter();
   }
 
   async obtenirSession() {
     await this._demarrer();
-    if (this._mode === MODE.LOCAL) {
-      const session = localStorage.getItem('portfolio_session_locale');
-      return session ? JSON.parse(session) : null;
-    }
+    if (this._mode !== MODE.SUPABASE) return null;
     return this._adaptateur.obtenirSession();
   }
 
@@ -337,40 +331,6 @@ class GestionnaireStockage {
    */
   _emettre(nom, detail) {
     document.dispatchEvent(new CustomEvent(nom, { detail, bubbles: true }));
-  }
-
-  /**
-   * Authentification simulée en mode local (développement)
-   * @param {string} email 
-   * @param {string} motDePasse 
-   * @returns {Object} Session simulée
-   */
-  async _authentificationLocale(email, motDePasse) {
-    // Récupère les utilisateurs depuis le stockage local
-    const { donnees: utilisateurs } = await this.obtenirTous(COLLECTIONS.UTILISATEURS);
-    const utilisateur = utilisateurs.find(u =>
-      u.email === email && u.mot_de_passe_hash === motDePasse
-    );
-
-    if (!utilisateur) {
-      const { ErreurAutorisation } = await import('./interfaces.js');
-      throw new ErreurAutorisation('Identifiants incorrects.');
-    }
-
-    const session = {
-      utilisateur: {
-        id:    utilisateur.id,
-        email: utilisateur.email,
-        role:  utilisateur.role,
-        nom:   utilisateur.nom,
-      },
-      expire_le:  new Date(Date.now() + 8 * 3600 * 1000).toISOString(),
-      token:      'local-' + Date.now(),
-    };
-
-    localStorage.setItem('portfolio_session_locale', JSON.stringify(session));
-    this._emettre('auth:connecte', { session });
-    return { session, user: session.utilisateur };
   }
 }
 

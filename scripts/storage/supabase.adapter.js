@@ -21,7 +21,7 @@ import {
 
 /** Buckets de stockage Supabase */
 const BUCKETS = Object.freeze({
-  MEDIAS:    'medias',
+  IMAGES:    'images',
   AVATARS:   'avatars',
   DOCUMENTS: 'documents',
 });
@@ -175,51 +175,48 @@ export class AdaptateurSupabase extends InterfaceStockage {
   async creer(collection, donnees) {
     await this._assurerinitialise();
 
-    const { data, error } = await this._client
-      .from(collection)
-      .insert([{
-        ...donnees,
-        cree_le:    donnees.cree_le    || new Date().toISOString(),
-        modifie_le: new Date().toISOString(),
-      }])
-      .select()
-      .single();
+    const corps = await this._appelApi(`data/${collection}`, {
+      method: 'POST',
+      body:   JSON.stringify(donnees),
+      contexte404: { collection, id: '' },
+    });
 
-    if (error) this._lancerErreur(error);
-    return data;
+    if (!corps?.donnees) {
+      throw new ErreurStockage('Réponse API de création invalide.', 'API_INVALIDE');
+    }
+    return corps.donnees;
   }
 
   async metAJour(collection, id, donnees) {
     await this._assurerinitialise();
 
-    const { data, error } = await this._client
-      .from(collection)
-      .update({
-        ...donnees,
-        modifie_le: new Date().toISOString(),
-      })
-      .eq('id', id)
-      .select()
-      .single();
+    const corps = await this._appelApi(
+      `data/${collection}?id=${encodeURIComponent(id)}`,
+      {
+        method: 'PUT',
+        body:   JSON.stringify(donnees),
+        contexte404: { collection, id },
+      }
+    );
 
-    if (error) {
-      if (error.code === 'PGRST116') throw new ErreurNonTrouve(collection, id);
-      this._lancerErreur(error);
+    if (!corps?.donnees) {
+      throw new ErreurStockage('Réponse API de mise à jour invalide.', 'API_INVALIDE');
     }
-
-    return data;
+    return corps.donnees;
   }
 
   async supprimer(collection, id) {
     await this._assurerinitialise();
 
-    const { error } = await this._client
-      .from(collection)
-      .delete()
-      .eq('id', id);
+    const corps = await this._appelApi(
+      `data/${collection}?id=${encodeURIComponent(id)}`,
+      {
+        method: 'DELETE',
+        contexte404: { collection, id },
+      }
+    );
 
-    if (error) this._lancerErreur(error);
-    return true;
+    return corps?.supprime === true;
   }
 
   // ============================================================
@@ -314,40 +311,113 @@ export class AdaptateurSupabase extends InterfaceStockage {
   }
 
   // ============================================================
-  // GESTION DES FICHIERS — SUPABASE STORAGE
+  // HELPERS — APPELS API VERCEL (écritures)
+  // ============================================================
+
+  /** Base de l'API Vercel (window.CONFIG.API_BASE, relatif en dev) */
+  _baseApi(chemin) {
+    const base = (window.CONFIG && window.CONFIG.API_BASE) || '';
+    return `${base.replace(/\/+$/, '')}/api/${chemin.replace(/^\/+/, '')}`;
+  }
+
+  /** Jeton d'accès de la session Supabase courante */
+  async _obtenirJeton() {
+    await this._assurerinitialise();
+    const { data } = await this._client.auth.getSession();
+    return data?.session?.access_token || null;
+  }
+
+  /**
+   * Appelle l'API Vercel en ajoutant le jeton Supabase.
+   * Les erreurs HTTP sont traduites en erreurs de stockage typées.
+   */
+  async _appelApi(chemin, options = {}) {
+    const jeton = await this._obtenirJeton();
+
+    const reponse = await fetch(this._baseApi(chemin), {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(jeton ? { Authorization: `Bearer ${jeton}` } : {}),
+        ...(options.headers || {}),
+      },
+    });
+
+    let corps = null;
+    try {
+      corps = await reponse.json();
+    } catch (_) {
+      corps = null;
+    }
+
+    if (!reponse.ok) {
+      const message = corps?.erreur || `Erreur API (${reponse.status}).`;
+      if (reponse.status === 401 || reponse.status === 403) {
+        throw new ErreurAutorisation(message);
+      }
+      if (reponse.status === 404) {
+        const ctx = options.contexte404 || {};
+        throw new ErreurNonTrouve(ctx.collection || chemin, ctx.id || '');
+      }
+      throw new ErreurStockage(message, `API_${reponse.status}`);
+    }
+
+    return corps || {};
+  }
+
+  /** Convertit un Blob en chaîne base64 */
+  _blobEnBase64(blob) {
+    return new Promise((resoudre, rejeter) => {
+      const lecteur = new FileReader();
+      lecteur.onload = () => {
+        const valeur = String(lecteur.result || '');
+        resoudre(valeur.includes(',') ? valeur.split(',')[1] : valeur);
+      };
+      lecteur.onerror = () =>
+        rejeter(new ErreurStockage('Lecture du fichier impossible.', 'LECTURE_ECHEC'));
+      lecteur.readAsDataURL(blob);
+    });
+  }
+
+  // ============================================================
+  // GESTION DES FICHIERS — SUPABASE STORAGE (via API Vercel)
   // ============================================================
 
   async uploaderFichier(fichier, chemin, options = {}) {
     await this._assurerinitialise();
 
-    const bucket = options.bucket || BUCKETS.MEDIAS;
+    const bucket   = options.bucket || BUCKETS.IMAGES;
+    const base64   = await this._blobEnBase64(fichier);
 
-    const { data, error } = await this._client.storage
-      .from(bucket)
-      .upload(chemin, fichier, {
-        cacheControl: '3600',
-        upsert:       options.ecraser || false,
-        contentType:  fichier.type,
-      });
+    const corps = await this._appelApi('upload', {
+      method: 'POST',
+      body: JSON.stringify({
+        chemin,
+        bucket,
+        contentType: fichier?.type || 'image/webp',
+        data:        base64,
+        ecraser:     options.ecraser === true,
+      }),
+    });
 
-    if (error) this._lancerErreur(error);
-
-    const url = this.obtenirUrlFichier(chemin, bucket);
-    return { url, chemin: data.path };
+    if (!corps?.donnees?.url) {
+      throw new ErreurStockage('Réponse API d\'upload invalide.', 'API_INVALIDE');
+    }
+    return { url: corps.donnees.url, chemin: corps.donnees.chemin || chemin };
   }
 
-  async supprimerFichier(chemin, bucket = BUCKETS.MEDIAS) {
+  async supprimerFichier(chemin, bucket = BUCKETS.IMAGES) {
     await this._assurerinitialise();
 
-    const { error } = await this._client.storage
-      .from(bucket)
-      .remove([chemin]);
+    const corps = await this._appelApi(
+      `upload?chemin=${encodeURIComponent(chemin)}&bucket=${encodeURIComponent(bucket)}`,
+      { method: 'DELETE' }
+    );
 
-    if (error) this._lancerErreur(error);
-    return true;
+    return corps?.supprime === true;
   }
 
-  obtenirUrlFichier(chemin, bucket = BUCKETS.MEDIAS) {
+  obtenirUrlFichier(chemin, bucket = BUCKETS.IMAGES) {
     const { data } = this._client.storage
       .from(bucket)
       .getPublicUrl(chemin);

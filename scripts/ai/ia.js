@@ -9,7 +9,7 @@
  *
  * Toutes les sorties sont en français.
  * Les clés API ne transitent JAMAIS par le navigateur.
- * Proxy PHP obligatoire : /api/ia.php
+ * Proxy Vercel obligatoire : api/ia.js
  *
  * Fonctionnalités :
  * - Réécriture de texte
@@ -23,8 +23,8 @@
 
 'use strict';
 
-/** Point d'entrée du proxy PHP — masque les clés API */
-const PROXY_URL = '/api/ia.php';
+/** Point d'entrée du proxy Vercel — masque les clés API */
+const PROXY_URL = `${(window.CONFIG && window.CONFIG.API_BASE) || ''}/api/ia`;
 
 /** Fournisseurs disponibles */
 export const FOURNISSEURS = Object.freeze({
@@ -383,4 +383,3 @@ class AssistantIA {
 // Singleton exporté
 const ia = new AssistantIA();
 export default ia;
-export { ACTIONS, FOURNISSEURS };
