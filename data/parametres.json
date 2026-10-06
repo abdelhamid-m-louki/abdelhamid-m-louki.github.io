@@ -10,7 +10,7 @@
   {
     "id": "param-002",
     "cle": "site_url",
-    "valeur": "https://www.amlouki.me",
+    "valeur": "https://amlouki.me",
     "type": "string",
     "description": "URL principale du site",
     "modifie_le": "2024-01-01T00:00:00Z"

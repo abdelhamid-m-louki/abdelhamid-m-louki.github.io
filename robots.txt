@@ -15,7 +15,7 @@ User-agent: anthropic-ai
 Disallow: /
 
 # Sitemap
-Sitemap: https://www.exemple.fr/sitemap.xml
+Sitemap: https://amlouki.me/sitemap.xml
 
 # Délai de crawl recommandé
 Crawl-delay: 2
