@@ -4,7 +4,6 @@
     "email": "admin@exemple.fr",
     "nom": "Administrateur",
     "role": "admin",
-    "mot_de_passe_hash": "demo123",
     "avatar": null,
     "actif": true,
     "cree_le": "2024-01-01T00:00:00Z",

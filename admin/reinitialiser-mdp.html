@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Réinitialiser le mot de passe — Administration</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=EB+Garamond:wght@400;600&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap">
+
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+
+  <style>
+    body {
+      background: var(--couleur-encre);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: var(--espace-6);
+    }
+    .carte-connexion {
+      width: 100%;
+      max-width: 420px;
+      background: var(--couleur-fond-papier);
+      border: 3px solid var(--couleur-accent);
+      box-shadow: 8px 8px 0 var(--couleur-accent);
+      padding: var(--espace-10);
+    }
+    .connexion-en-tete { text-align: center; margin-bottom: var(--espace-8); padding-bottom: var(--espace-8); border-bottom: var(--bordure-tres-forte); }
+    .connexion-logo { font-family: var(--police-display); font-size: var(--taille-3xl); font-weight: 900; letter-spacing: var(--espacement-serre); color: var(--texte-primaire); display: block; margin-bottom: var(--espace-2); text-decoration: none; }
+    .connexion-sous-titre { font-family: var(--police-mono); font-size: var(--taille-xs); letter-spacing: var(--espacement-journal); text-transform: uppercase; color: var(--texte-tertiaire); }
+    .formulaire-connexion { display: flex; flex-direction: column; gap: var(--espace-5); }
+    .message-erreur { display: none; padding: var(--espace-4); background: rgba(139, 26, 26, 0.06); border: 1px solid var(--couleur-erreur); border-left: 4px solid var(--couleur-erreur); font-family: var(--police-mono); font-size: var(--taille-xs); color: var(--couleur-erreur); letter-spacing: var(--espacement-large); }
+    .message-erreur.visible { display: block; }
+    .message-succes { display: none; padding: var(--espace-4); background: rgba(28, 92, 60, 0.06); border: 1px solid var(--couleur-succes); border-left: 4px solid var(--couleur-succes); font-family: var(--police-mono); font-size: var(--taille-xs); color: var(--couleur-succes); letter-spacing: var(--espacement-large); }
+    .message-succes.visible { display: block; }
+    .champ, .zone-texte { background: var(--couleur-fond); }
+    .connexion-pied { text-align: center; margin-top: var(--espace-6); padding-top: var(--espace-6); border-top: var(--bordure-fine); }
+    .connexion-pied a { font-family: var(--police-mono); font-size: var(--taille-xs); color: var(--texte-tertiaire); text-decoration: none; letter-spacing: var(--espacement-large); text-transform: uppercase; }
+    .connexion-pied a:hover { color: var(--couleur-accent-sombre); }
+  </style>
+
+  <script src="/config.js"></script>
+</head>
+<body>
+
+  <main role="main" aria-labelledby="titre-reset">
+    <div class="carte-connexion">
+      <header class="connexion-en-tete">
+        <a href="/" class="connexion-logo" aria-label="Portfolio Éditorial — Accueil">Portfolio Éditorial</a>
+        <p class="connexion-sous-titre">Réinitialiser le mot de passe</p>
+        <h1 id="titre-reset" class="sr-seulement">Réinitialisation du mot de passe</h1>
+      </header>
+
+      <div class="message-erreur" id="message-erreur" role="alert" aria-live="assertive"></div>
+      <div class="message-succes" id="message-succes" role="status"></div>
+
+      <form class="formulaire-connexion" id="form-reset" novalidate aria-label="Formulaire de réinitialisation">
+        <div class="groupe-champ">
+          <label for="champ-email" class="etiquette etiquette-obligatoire">Adresse email</label>
+          <input type="email" id="champ-email" class="champ" placeholder="admin@exemple.fr" autocomplete="email" required>
+        </div>
+        <button type="submit" class="btn btn-primaire" id="btn-envoyer">Envoyer le lien</button>
+      </form>
+
+      <footer class="connexion-pied">
+        <a href="/admin/connexion.html">Retour à la connexion</a>
+      </footer>
+    </div>
+  </main>
+
+  <script type="module">
+    import auth from '/scripts/auth/auth.js';
+
+    const form     = document.getElementById('form-reset');
+    const email    = document.getElementById('champ-email');
+    const btn      = document.getElementById('btn-envoyer');
+    const erreur   = document.getElementById('message-erreur');
+    const succes   = document.getElementById('message-succes');
+
+    function afficherErreur(message) {
+      erreur.textContent = message;
+      erreur.classList.add('visible');
+      succes.classList.remove('visible');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      erreur.classList.remove('visible');
+      succes.classList.remove('visible');
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        afficherErreur('Adresse email invalide.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Envoi…';
+      try {
+        await auth.reinitialiserMotDePasse(email.value.trim());
+        succes.textContent = 'Si un compte existe pour cette adresse, un lien de réinitialisation vient d\'être envoyé.';
+        succes.classList.add('visible');
+        email.value = '';
+      } catch (err) {
+        afficherErreur(err.message || 'Une erreur est survenue.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Envoyer le lien';
+      }
+    });
+  </script>
+</body>
+</html>

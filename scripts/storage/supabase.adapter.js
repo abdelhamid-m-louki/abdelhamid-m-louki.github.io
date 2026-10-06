@@ -483,6 +483,27 @@ export class AdaptateurSupabase extends InterfaceStockage {
     });
   }
 
+  /**
+   * Récupère l'utilisateur Auth courant (utilisé par le flux
+   * de réinitialisation de mot de passe, jeton dans l'URL)
+   * @returns {Promise<Object|null>}
+   */
+  async obtenirUtilisateurAuth() {
+    await this._assurerinitialise();
+    const { data: { user } } = await this._client.auth.getUser();
+    return user;
+  }
+
+  /**
+   * Met à jour le mot de passe de l'utilisateur connecté
+   * @param {string} motDePasse
+   */
+  async mettreAJourMotDePasse(motDePasse) {
+    await this._assurerinitialise();
+    const { error } = await this._client.auth.updateUser({ password: motDePasse });
+    if (error) this._lancerErreur(error);
+  }
+
   // ============================================================
   // VÉRIFICATION
   // ============================================================

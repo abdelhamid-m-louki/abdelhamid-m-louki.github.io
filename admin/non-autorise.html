@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Accès restreint — Administration</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=EB+Garamond:wght@400;600&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap">
+
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+
+  <style>
+    body {
+      background: var(--couleur-encre);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: var(--espace-6);
+    }
+    .carte {
+      width: 100%;
+      max-width: 460px;
+      background: var(--couleur-fond-papier);
+      border: 3px solid var(--couleur-accent);
+      box-shadow: 8px 8px 0 var(--couleur-accent);
+      padding: var(--espace-10);
+      text-align: center;
+    }
+    .code {
+      font-family: var(--police-display);
+      font-size: var(--taille-3xl);
+      font-weight: 900;
+      letter-spacing: var(--espacement-serre);
+      color: var(--couleur-erreur);
+    }
+    .etiquette {
+      display: inline-flex;
+      background: var(--couleur-accent);
+      color: var(--couleur-encre);
+      font-family: var(--police-mono);
+      font-size: var(--taille-xs);
+      font-weight: 700;
+      letter-spacing: var(--espacement-journal);
+      text-transform: uppercase;
+      padding: 2px var(--espace-3);
+      margin-bottom: var(--espace-4);
+    }
+    h1 {
+      font-family: var(--police-corps);
+      font-size: var(--taille-xl);
+      color: var(--texte-primaire);
+      margin-bottom: var(--espace-3);
+    }
+    p {
+      font-family: var(--police-mono);
+      font-size: var(--taille-sm);
+      color: var(--texte-secondaire);
+      line-height: 1.7;
+      margin-bottom: var(--espace-8);
+    }
+    .liens {
+      display: flex;
+      justify-content: center;
+      gap: var(--espace-4);
+    }
+    .lien {
+      font-family: var(--police-mono);
+      font-size: var(--taille-xs);
+      letter-spacing: var(--espacement-journal);
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--couleur-encre);
+      background: var(--couleur-texte-primaire);
+      border: 1px solid var(--couleur-texte-primaire);
+      padding: var(--espace-2) var(--espace-4);
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .lien:hover {
+      background: transparent;
+      color: var(--couleur-texte-primaire);
+    }
+  </style>
+</head>
+<body>
+  <div class="carte">
+    <span class="etiquette">Administration</span>
+    <div class="code">403</div>
+    <h1>Accès restreint</h1>
+    <p>Votre compte ne dispose pas du rôle requis pour accéder à cette section.<br>
+       Contactez l'administrateur du site pour une élévation de privilèges.</p>
+    <div class="liens">
+      <a class="lien" href="/admin/tableau-de-bord.html">Tableau de bord</a>
+      <a class="lien" href="/admin/connexion.html">Se déconnecter</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Nouveau mot de passe — Administration</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=EB+Garamond:wght@400;600&family=Oswald:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap">
+
+  <link rel="stylesheet" href="/styles/tokens/variables.css">
+  <link rel="stylesheet" href="/styles/tokens/reset.css">
+  <link rel="stylesheet" href="/styles/tokens/typographie.css">
+  <link rel="stylesheet" href="/styles/layouts/disposition.css">
+  <link rel="stylesheet" href="/styles/components/formulaires.css">
+
+  <style>
+    body {
+      background: var(--couleur-encre);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: var(--espace-6);
+    }
+    .carte-connexion {
+      width: 100%;
+      max-width: 420px;
+      background: var(--couleur-fond-papier);
+      border: 3px solid var(--couleur-accent);
+      box-shadow: 8px 8px 0 var(--couleur-accent);
+      padding: var(--espace-10);
+    }
+    .connexion-en-tete { text-align: center; margin-bottom: var(--espace-8); padding-bottom: var(--espace-8); border-bottom: var(--bordure-tres-forte); }
+    .connexion-logo { font-family: var(--police-display); font-size: var(--taille-3xl); font-weight: 900; letter-spacing: var(--espacement-serre); color: var(--texte-primaire); display: block; margin-bottom: var(--espace-2); text-decoration: none; }
+    .connexion-sous-titre { font-family: var(--police-mono); font-size: var(--taille-xs); letter-spacing: var(--espacement-journal); text-transform: uppercase; color: var(--texte-tertiaire); }
+    .formulaire-connexion { display: flex; flex-direction: column; gap: var(--espace-5); }
+    .message-erreur { display: none; padding: var(--espace-4); background: rgba(139, 26, 26, 0.06); border: 1px solid var(--couleur-erreur); border-left: 4px solid var(--couleur-erreur); font-family: var(--police-mono); font-size: var(--taille-xs); color: var(--couleur-erreur); letter-spacing: var(--espacement-large); }
+    .message-erreur.visible { display: block; }
+    .champ, .zone-texte { background: var(--couleur-fond); }
+    .connexion-pied { text-align: center; margin-top: var(--espace-6); padding-top: var(--espace-6); border-top: var(--bordure-fine); }
+    .connexion-pied a { font-family: var(--police-mono); font-size: var(--taille-xs); color: var(--texte-tertiaire); text-decoration: none; letter-spacing: var(--espacement-large); text-transform: uppercase; }
+    .connexion-pied a:hover { color: var(--couleur-accent-sombre); }
+  </style>
+
+  <script src="/config.js"></script>
+</head>
+<body>
+
+  <main role="main" aria-labelledby="titre-nouveau">
+    <div class="carte-connexion">
+      <header class="connexion-en-tete">
+        <a href="/" class="connexion-logo" aria-label="Portfolio Éditorial — Accueil">Portfolio Éditorial</a>
+        <p class="connexion-sous-titre">Nouveau mot de passe</p>
+        <h1 id="titre-nouveau" class="sr-seulement">Définition du nouveau mot de passe</h1>
+      </header>
+
+      <div class="message-erreur" id="message-erreur" role="alert" aria-live="assertive"></div>
+      <div class="message-erreur" id="message-lien" role="alert"></div>
+
+      <form class="formulaire-connexion" id="form-nouveau" novalidate aria-label="Formulaire du nouveau mot de passe">
+        <div class="groupe-champ">
+          <label for="champ-mdp" class="etiquette etiquette-obligatoire">Nouveau mot de passe</label>
+          <input type="password" id="champ-mdp" class="champ" placeholder="••••••••" minlength="6" autocomplete="new-password" required>
+        </div>
+        <div class="groupe-champ">
+          <label for="champ-confirmation" class="etiquette etiquette-obligatoire">Confirmer le mot de passe</label>
+          <input type="password" id="champ-confirmation" class="champ" placeholder="••••••••" minlength="6" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="btn btn-primaire" id="btn-valider">Mettre à jour</button>
+      </form>
+
+      <footer class="connexion-pied">
+        <a href="/admin/connexion.html">Retour à la connexion</a>
+      </footer>
+    </div>
+  </main>
+
+  <script type="module">
+    import stockage from '/scripts/storage/storage-manager.js';
+
+    const form   = document.getElementById('form-nouveau');
+    const mdp    = document.getElementById('champ-mdp');
+    const conf   = document.getElementById('champ-confirmation');
+    const btn    = document.getElementById('btn-valider');
+    const erreur = document.getElementById('message-erreur');
+    const lien   = document.getElementById('message-lien');
+
+    function afficherErreur(message, element = erreur) {
+      element.textContent = message;
+      element.classList.add('visible');
+    }
+
+    (async () => {
+      try {
+        const user = await stockage.obtenirUtilisateurAuth();
+        if (!user) {
+          afficherErreur('Lien invalide ou expiré. Demandez un nouveau lien de réinitialisation.', lien);
+          form.hidden = true;
+          btn.hidden = true;
+        }
+      } catch (_) {
+        afficherErreur('Lien invalide ou expiré. Demandez un nouveau lien de réinitialisation.', lien);
+        form.hidden = true;
+        btn.hidden = true;
+      }
+    })();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      erreur.classList.remove('visible');
+
+      if (mdp.value.length < 6) {
+        afficherErreur('Le mot de passe doit contenir au moins 6 caractères.');
+        return;
+      }
+      if (mdp.value !== conf.value) {
+        afficherErreur('Les deux mots de passe ne correspondent pas.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Enregistrement…';
+      try {
+        await stockage.mettreAJourMotDePasse(mdp.value);
+        window.location.href = '/admin/connexion.html?reinitialise=1';
+      } catch (err) {
+        afficherErreur(err.message || 'Une erreur est survenue.');
+        btn.disabled = false;
+        btn.textContent = 'Mettre à jour';
+      }
+    });
+  </script>
+</body>
+</html>

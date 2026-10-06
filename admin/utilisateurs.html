@@ -65,10 +65,7 @@
           <option value="lecteur">Lecteur</option>
         </select>
       </div>
-      <div class="groupe-champ" id="groupe-mdp">
-        <label for="user-mdp" class="etiquette">Mot de passe <span style="color:var(--texte-tertiaire);font-weight:400;">(laisser vide pour ne pas changer)</span></label>
-        <input type="password" id="user-mdp" class="champ" placeholder="••••••••" minlength="8" autocomplete="new-password">
-      </div>
+      <p class="indication" style="margin:0;font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-tertiaire);line-height:1.5;">Le mot de passe n'est pas stocké ici : le compte est créé dans Supabase Auth (Dashboard → Authentication → Users) avec l'email ci-dessus, puis ce profil (nom, rôle) est enregistré dans la base.</p>
       <div class="ligne-interrupteur">
         <span class="ligne-interrupteur-label">Compte actif</span>
         <label class="interrupteur"><input type="checkbox" class="interrupteur-entree" id="user-actif" checked><div class="interrupteur-piste"><div class="interrupteur-curseur"></div></div></label>
@@ -135,7 +132,6 @@ function ouvrirFormulaire(id) {
   document.getElementById('user-nom').value    = u?.nom || '';
   document.getElementById('user-email').value  = u?.email || '';
   document.getElementById('user-role').value   = u?.role || 'editeur';
-  document.getElementById('user-mdp').value    = '';
   document.getElementById('user-actif').checked = u?.actif !== false;
   document.getElementById('modale-label').textContent = id ? "Modifier l'utilisateur" : "Nouvel utilisateur";
   document.getElementById('modale-form').classList.add('ouverte');
@@ -152,10 +148,7 @@ async function sauver() {
     role:  document.getElementById('user-role').value,
     actif: document.getElementById('user-actif').checked,
   };
-  
-  const mdp = document.getElementById('user-mdp').value;
-  if (mdp) donnees.mot_de_passe_hash = mdp; // En production: hacher côté serveur
-  
+
   try {
     if (etat.editId) await stockage.metAJour(COLLECTIONS.UTILISATEURS, etat.editId, donnees);
     else             await stockage.creer(COLLECTIONS.UTILISATEURS, donnees);

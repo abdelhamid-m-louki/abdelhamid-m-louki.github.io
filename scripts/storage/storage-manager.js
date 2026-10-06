@@ -261,6 +261,30 @@ class GestionnaireStockage {
     return this._adaptateur.seConnecter(email, motDePasse);
   }
 
+  /**
+   * Récupère l'utilisateur Auth courant (flux de réinitialisation)
+   * @returns {Promise<Object|null>}
+   */
+  async obtenirUtilisateurAuth() {
+    await this._demarrer();
+    if (this._mode !== MODE.SUPABASE) return null;
+    return this._adaptateur.obtenirUtilisateurAuth();
+  }
+
+  /**
+   * Met à jour le mot de passe (après réinitialisation)
+   * @param {string} motDePasse
+   */
+  async mettreAJourMotDePasse(motDePasse) {
+    await this._demarrer();
+    if (this._mode !== MODE.SUPABASE) {
+      throw new ErreurAutorisation(
+        'Stockage Supabase requis pour la réinitialisation.'
+      );
+    }
+    return this._adaptateur.mettreAJourMotDePasse(motDePasse);
+  }
+
   async seDeconnecter() {
     await this._demarrer();
     if (this._mode !== MODE.SUPABASE) return;

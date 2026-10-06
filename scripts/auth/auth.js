@@ -16,12 +16,20 @@
 'use strict';
 
 import stockage from '../storage/storage-manager.js';
+import { ErreurValidation } from '../storage/interfaces.js';
 
 /** Rôles autorisés */
- const ROLES = Object.freeze({
+const ROLES = Object.freeze({
   ADMIN:    'admin',
   EDITEUR:  'editeur',
   LECTEUR:  'lecteur',
+});
+
+/** Hiérarchie des rôles pour les comparaisons de niveau */
+const NIVEAU_ROLE = Object.freeze({
+  lecteur: 1,
+  editeur: 2,
+  admin:   3,
 });
 
 /** Événements émis */
@@ -137,24 +145,28 @@ class GestionnaireAuthentification {
 
   /**
    * Vérifie si l'utilisateur possède un rôle minimum
-   * @param {string} roleMinimum 
+   * (hiérarchie : lecteur < editeur < admin)
+   * @param {string} roleMinimum
    * @returns {boolean}
    */
-  /**
-   * Vérifie si l'utilisateur possède un rôle minimum
-   */
   aLeRole(roleMinimum) {
-    return true; // TOUJOURS AUTORISÉ
+    if (!this.estConnecte) return false;
+    const niveauActuel = NIVEAU_ROLE[this._utilisateur?.role];
+    const niveauRequis = NIVEAU_ROLE[roleMinimum];
+    if (typeof niveauActuel !== 'number' || typeof niveauRequis !== 'number') {
+      return false;
+    }
+    return niveauActuel >= niveauRequis;
   }
 
   /** @returns {boolean} Utilisateur est administrateur */
   get estAdmin() {
-    return true; // TOUJOURS AUTORISÉ
+    return this.aLeRole(ROLES.ADMIN);
   }
 
   /** @returns {boolean} Utilisateur est éditeur ou plus */
   get estEditeur() {
-    return true; // TOUJOURS AUTORISÉ
+    return this.aLeRole(ROLES.EDITEUR);
   }
 
   // ============================================================
@@ -178,12 +190,12 @@ class GestionnaireAuthentification {
       window.location.href = redirection;
       return false;
     }
-    /*
+
     if (roleRequis && !this.aLeRole(roleRequis)) {
       window.location.href = '/admin/non-autorise.html';
       return false;
     }
-    */
+
     return true;
   }
 
@@ -340,7 +352,6 @@ class GestionnaireAuthentification {
       erreurs.motDePasse = 'Le mot de passe doit contenir au moins 6 caractères.';
     }
     if (Object.keys(erreurs).length > 0) {
-      const { ErreurValidation } = require('../storage/interfaces.js');
       throw new ErreurValidation('Identifiants invalides.', erreurs);
     }
   }
