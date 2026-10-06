@@ -1,9 +1,9 @@
 {
   "site_nom": "Portfolio Éditorial",
   "site_url": "https://amlouki.me",
-  "description_defaut": "Portfolio et blog éditorial professionnel. Design, code et culture numérique.",
+  "description_defaut": "Portfolio et blog éditorial d'Abdel-hamid M. LOUKI — design, code et culture numérique.",
   "image_og_defaut": "/assets/og-defaut.jpg",
-  "twitter_handle": "@exemple",
+  "twitter_handle": "",
   "langue": "fr",
   "locale": "fr_FR",
   "indexation": true,

@@ -1,10 +1,1 @@
-[
-  {"id":"tag-001","nom":"JavaScript","slug":"javascript","nombre_articles":3,"cree_le":"2024-01-01T00:00:00Z"},
-  {"id":"tag-002","nom":"CSS","slug":"css","nombre_articles":2,"cree_le":"2024-01-01T00:00:00Z"},
-  {"id":"tag-003","nom":"Design","slug":"design","nombre_articles":3,"cree_le":"2024-01-01T00:00:00Z"},
-  {"id":"tag-004","nom":"Supabase","slug":"supabase","nombre_articles":2,"cree_le":"2024-01-01T00:00:00Z"},
-  {"id":"tag-005","nom":"Typographie","slug":"typographie","nombre_articles":1,"cree_le":"2024-01-01T00:00:00Z"},
-  {"id":"tag-006","nom":"SEO","slug":"seo","nombre_articles":1,"cree_le":"2024-01-01T00:00:00Z"},
-  {"id":"tag-007","nom":"Culture","slug":"culture","nombre_articles":2,"cree_le":"2024-01-01T00:00:00Z"},
-  {"id":"tag-008","nom":"Open Source","slug":"open-source","nombre_articles":1,"cree_le":"2024-01-01T00:00:00Z"}
-]
+[]

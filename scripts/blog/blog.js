@@ -533,7 +533,7 @@ class MoteurBlog {
       : 'Blog — Toutes les publications';
 
     const description = this._categorie
-      ? `Articles et réflexions sur ${this._categorie}. Blog éditorial de Prénom Nom.`
+      ? `Articles et réflexions sur ${this._categorie}. Blog éditorial de Abdel-hamid M. LOUKI.`
       : 'Toutes mes publications : design, code et culture numérique. Blog éditorial indépendant.';
 
     seo.configurer({
