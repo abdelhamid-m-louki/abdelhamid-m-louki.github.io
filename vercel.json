@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/ia.js": { "maxDuration": 30 },
+    "api/contact.js": { "maxDuration": 30 },
+    "api/upload.js": { "maxDuration": 30 },
+    "api/data/[collection].js": { "maxDuration": 15 }
+  },
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  }
+}
