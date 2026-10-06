@@ -141,6 +141,37 @@
         </div>
 
         <div class="bloc-editeur">
+          <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Cards du portrait (accueil)</span></div>
+          <div class="bloc-editeur-corps">
+            <p class="indication">Trois petites vignettes autour de la photo. Laissez le titre vide pour masquer une card.</p>
+            <div class="groupe-champ">
+              <label for="param-carte-1-titre" class="etiquette">Card 1 — Titre</label>
+              <input type="text" id="param-carte-1-titre" class="champ" placeholder="Sécurité & gestion de risques">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-carte-1-sous" class="etiquette">Card 1 — Sous-titre</label>
+              <input type="text" id="param-carte-1-sous" class="champ" placeholder="AD, GPO, Firewall">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-carte-2-titre" class="etiquette">Card 2 — Titre</label>
+              <input type="text" id="param-carte-2-titre" class="champ" placeholder="Veille continue">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-carte-2-sous" class="etiquette">Card 2 — Sous-titre</label>
+              <input type="text" id="param-carte-2-sous" class="champ" placeholder="sécurité & développement">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-carte-3-titre" class="etiquette">Card 3 — Titre</label>
+              <input type="text" id="param-carte-3-titre" class="champ" placeholder="En stage">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-carte-3-sous" class="etiquette">Card 3 — Sous-titre</label>
+              <input type="text" id="param-carte-3-sous" class="champ" placeholder="Chez Computime Sarl">
+            </div>
+          </div>
+        </div>
+
+        <div class="bloc-editeur">
           <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Système de stockage</span></div>
           <div class="bloc-editeur-corps">
             <div id="info-mode-stockage" style="font-family:var(--police-mono);font-size:var(--taille-xs);color:var(--texte-tertiaire);">Détection en cours…</div>
@@ -202,6 +233,12 @@ const CHAMPS = [
   { id:'param-slogan',        cle:'site_slogan',          type:'string' },
   { id:'param-annee-valeur',  cle:'annee_etudes',         type:'string' },
   { id:'param-annee-libelle', cle:'annee_etudes_libelle', type:'string' },
+  { id:'param-carte-1-titre', cle:'carte_1_titre',        type:'string' },
+  { id:'param-carte-1-sous',  cle:'carte_1_sous',         type:'string' },
+  { id:'param-carte-2-titre', cle:'carte_2_titre',        type:'string' },
+  { id:'param-carte-2-sous',  cle:'carte_2_sous',         type:'string' },
+  { id:'param-carte-3-titre', cle:'carte_3_titre',        type:'string' },
+  { id:'param-carte-3-sous',  cle:'carte_3_sous',         type:'string' },
   { id:'param-ia-fournisseur',cle:'ia_fournisseur',       type:'string' },
 ];
 

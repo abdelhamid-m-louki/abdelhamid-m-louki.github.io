@@ -31,6 +31,12 @@
     auteur_localisation: 'LOCALISATION',
     annee_etudes:        'AUTEUR_ANNEE',
     annee_etudes_libelle:'AUTEUR_ANNEE_LIBELLE',
+    carte_1_titre:       'CARTE_1_TITRE',
+    carte_1_sous:        'CARTE_1_SOUS',
+    carte_2_titre:       'CARTE_2_TITRE',
+    carte_2_sous:        'CARTE_2_SOUS',
+    carte_3_titre:       'CARTE_3_TITRE',
+    carte_3_sous:        'CARTE_3_SOUS',
     github_url:          'GITHUB_URL',
     linkedin_url:        'LINKEDIN_URL',
     twitter_handle:      'TWITTER_HANDLE',
@@ -82,6 +88,17 @@
     injecterDom();
   }
 
+  /** Remplit le texte d'une card du portrait (masque la card si vide) */
+  function remplirCarte(zone, texte) {
+    var carte = zone.closest('.etiquette-flottante');
+    if (texte) {
+      zone.textContent = texte;
+      if (carte) carte.style.display = '';
+    } else if (carte) {
+      carte.style.display = 'none';
+    }
+  }
+
   /** Met à jour les zones d'identité du DOM marquées data-contenu="…" */
   function injecterDom() {
     var zones = document.querySelectorAll('[data-contenu]');
@@ -115,6 +132,24 @@
           break;
         case 'annee-libelle':
           if (CONFIG.AUTEUR_ANNEE_LIBELLE) zone.textContent = CONFIG.AUTEUR_ANNEE_LIBELLE;
+          break;
+        case 'carte-1-titre':
+          remplirCarte(zone, CONFIG.CARTE_1_TITRE);
+          break;
+        case 'carte-1-sous':
+          if (CONFIG.CARTE_1_SOUS) zone.textContent = CONFIG.CARTE_1_SOUS;
+          break;
+        case 'carte-2-titre':
+          remplirCarte(zone, CONFIG.CARTE_2_TITRE);
+          break;
+        case 'carte-2-sous':
+          if (CONFIG.CARTE_2_SOUS) zone.textContent = CONFIG.CARTE_2_SOUS;
+          break;
+        case 'carte-3-titre':
+          remplirCarte(zone, CONFIG.CARTE_3_TITRE);
+          break;
+        case 'carte-3-sous':
+          if (CONFIG.CARTE_3_SOUS) zone.textContent = CONFIG.CARTE_3_SOUS;
           break;
         case 'auteur-bio':
           if (CONFIG.AUTEUR_BIO) zone.textContent = CONFIG.AUTEUR_BIO;

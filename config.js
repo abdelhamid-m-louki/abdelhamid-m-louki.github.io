@@ -24,6 +24,14 @@ window.CONFIG = {
   AUTEUR_ANNEE:           '',
   AUTEUR_ANNEE_LIBELLE:   '',
 
+  /* Cards du portrait (paramétrables depuis l'admin) */
+  CARTE_1_TITRE:          'Sécurité & gestion de risques',
+  CARTE_1_SOUS:           'AD, GPO, Firewall',
+  CARTE_2_TITRE:          'Veille continue',
+  CARTE_2_SOUS:           'sécurité & développement',
+  CARTE_3_TITRE:          'En stage',
+  CARTE_3_SOUS:           'Chez Computime Sarl',
+
   /* Réseaux sociaux (paramétrables depuis l'admin) */
   GITHUB_URL:        'https://github.com/dirdaymi',
   LINKEDIN_URL:      'https://linkedin.com/in/amlouki',
