@@ -90,7 +90,7 @@
           <div class="bloc-editeur-corps">
             <div class="groupe-champ">
               <label for="param-nom-site" class="etiquette">Nom du site</label>
-              <input type="text" id="param-nom-site" class="champ" placeholder="Portfolio Éditorial">
+              <input type="text" id="param-nom-site" class="champ" placeholder="AM. LOUKI">
             </div>
             <div class="groupe-champ">
               <label for="param-url-site" class="etiquette">URL du site</label>
@@ -120,8 +120,23 @@
             </div>
             <div class="groupe-champ">
               <label for="param-slogan" class="etiquette">Sous-titre / Slogan</label>
-              <input type="text" id="param-slogan" class="champ" placeholder="Revue de création et de code">
+              <input type="text" id="param-slogan" class="champ" placeholder="Ex. Le journal de la cybersécurité">
             </div>
+          </div>
+        </div>
+
+        <div class="bloc-editeur">
+          <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Métrique « Année d'études »</span></div>
+          <div class="bloc-editeur-corps">
+            <div class="groupe-champ">
+              <label for="param-annee-valeur" class="etiquette">Valeur (ex. 4e)</label>
+              <input type="text" id="param-annee-valeur" class="champ" placeholder="4e">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-annee-libelle" class="etiquette">Libellé (ex. Année d'ingénierie)</label>
+              <input type="text" id="param-annee-libelle" class="champ" placeholder="Année d'ingénierie">
+            </div>
+            <p class="indication">Affichée sur la page d'accueil ; laissez vide pour masquer la métrique.</p>
           </div>
         </div>
 
@@ -185,6 +200,8 @@ const CHAMPS = [
   { id:'param-disponible',    cle:'disponible',           type:'boolean' },
   { id:'param-edition',       cle:'numero_edition',       type:'string' },
   { id:'param-slogan',        cle:'site_slogan',          type:'string' },
+  { id:'param-annee-valeur',  cle:'annee_etudes',         type:'string' },
+  { id:'param-annee-libelle', cle:'annee_etudes_libelle', type:'string' },
   { id:'param-ia-fournisseur',cle:'ia_fournisseur',       type:'string' },
 ];
 

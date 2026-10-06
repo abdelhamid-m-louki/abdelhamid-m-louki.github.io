@@ -29,6 +29,8 @@
     auteur_bio:          'AUTEUR_BIO',
     email_contact:       'AUTEUR_EMAIL',
     auteur_localisation: 'LOCALISATION',
+    annee_etudes:        'AUTEUR_ANNEE',
+    annee_etudes_libelle:'AUTEUR_ANNEE_LIBELLE',
     github_url:          'GITHUB_URL',
     linkedin_url:        'LINKEDIN_URL',
     twitter_handle:      'TWITTER_HANDLE',
@@ -93,6 +95,26 @@
           break;
         case 'auteur-titre':
           if (CONFIG.AUTEUR_TITRE) zone.textContent = CONFIG.AUTEUR_TITRE;
+          break;
+        case 'slogan':
+          zone.style.display = CONFIG.SITE_SLOGAN ? '' : 'none';
+          if (CONFIG.SITE_SLOGAN) zone.textContent = CONFIG.SITE_SLOGAN;
+          break;
+        case 'annee-valeur':
+          var item = zone.closest('.metrique-item');
+          var sep = item && item.previousElementSibling;
+          var sepSeparateur = sep && sep.classList.contains('metrique-separateur');
+          if (CONFIG.AUTEUR_ANNEE) {
+            zone.textContent = CONFIG.AUTEUR_ANNEE;
+            if (item) item.style.display = '';
+            if (sepSeparateur) sep.style.display = '';
+          } else {
+            if (item) item.style.display = 'none';
+            if (sepSeparateur) sep.style.display = 'none';
+          }
+          break;
+        case 'annee-libelle':
+          if (CONFIG.AUTEUR_ANNEE_LIBELLE) zone.textContent = CONFIG.AUTEUR_ANNEE_LIBELLE;
           break;
         case 'auteur-bio':
           if (CONFIG.AUTEUR_BIO) zone.textContent = CONFIG.AUTEUR_BIO;

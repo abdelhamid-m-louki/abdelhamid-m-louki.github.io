@@ -31,38 +31,6 @@
   }
 }
 
-/* Bandeau supérieur — date, infos éditoriales */
-.bandeau-superieur {
-  background: var(--couleur-encre);
-  color: var(--couleur-fond);
-  padding: var(--espace-2) 0;
-  font-family: var(--police-mono);
-  font-size: var(--taille-xs);
-  letter-spacing: var(--espacement-large);
-  text-transform: uppercase;
-}
-
-.bandeau-interieur {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.bandeau-date {
-  color: rgba(255,255,255,0.7);
-}
-
-.bandeau-edition {
-  color: var(--couleur-accent);
-  font-weight: 700;
-}
-
-.bandeau-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--espace-4);
-}
-
 /* ============================================================
    MASTHEAD — LOGO TITRE DU JOURNAL
    ============================================================ */
@@ -112,6 +80,29 @@
   color: var(--texte-tertiaire);
   margin-top: var(--espace-1);
   display: block;
+}
+
+/* Accès discret à l'administration, ancré en haut à droite du masthead */
+.lien-admin-discret {
+  position: absolute;
+  top: var(--espace-4);
+  right: var(--espace-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--texte-tertiaire);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: color var(--transition-rapide), border-color var(--transition-rapide), background var(--transition-rapide);
+}
+
+.lien-admin-discret:hover {
+  color: var(--couleur-accent-sombre);
+  border-color: var(--couleur-accent);
+  background: var(--couleur-accent-tache);
 }
 
 /* ============================================================
@@ -267,7 +258,7 @@
 }
 
 @media (max-width: 767px) {
-  .bandeau-superieur { display: none; }
+  .lien-admin-discret { display: none; }
 
   .en-tete-masthead {
     display: flex;

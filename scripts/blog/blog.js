@@ -412,7 +412,7 @@ class MoteurBlog {
     }
 
     // Titre de la page (DOM)
-    document.title = `${article.titre} — Portfolio Éditorial`;
+    document.title = `${article.titre} — AM. LOUKI`;
   }
 
   // ============================================================
@@ -717,7 +717,7 @@ class MoteurBlog {
   }
 
   _afficherErreur404() {
-    document.title = 'Article non trouvé — Portfolio Éditorial';
+    document.title = 'Article non trouvé — AM. LOUKI';
     const principal = document.getElementById('contenu-principal');
     if (principal) {
       principal.innerHTML = `

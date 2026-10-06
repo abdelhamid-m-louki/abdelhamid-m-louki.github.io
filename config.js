@@ -19,6 +19,11 @@ window.CONFIG = {
   AUTEUR_PHOTO:      '/assets/images/portrait.png',
   LOCALISATION:      'Paris, France',
 
+  /* Sous-titre du masthead + métrique « Année d'études » (paramétrables) */
+  SITE_SLOGAN:            '',
+  AUTEUR_ANNEE:           '',
+  AUTEUR_ANNEE_LIBELLE:   '',
+
   /* Réseaux sociaux (paramétrables depuis l'admin) */
   GITHUB_URL:        'https://github.com/dirdaymi',
   LINKEDIN_URL:      'https://linkedin.com/in/amlouki',

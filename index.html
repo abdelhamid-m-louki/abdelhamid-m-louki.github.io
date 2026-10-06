@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- SEO Primaire -->
-  <title>Abdel-hamid M. LOUKI — Portfolio Éditorial & Blog</title>
+  <title>Abdel-hamid M. LOUKI — Portfolio & Blog</title>
   <meta name="description" content="Portfolio éditorial de Abdel-hamid M. LOUKI — Développeur, designer et auteur. Projets, réflexions et publications au croisement du code, du design et de la culture.">
   <meta name="author" content="Abdel-hamid M. LOUKI">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -20,7 +20,7 @@
   <meta property="og:site_name"   content="AM. LOUKI">
   <meta property="og:locale"      content="fr_FR">
   <meta property="og:url"         content="https://amlouki.me/">
-  <meta property="og:title"       content="Abdel-hamid M. LOUKI — Portfolio Éditorial & Blog">
+  <meta property="og:title"       content="Abdel-hamid M. LOUKI — Portfolio & Blog">
   <meta property="og:description" content="Portfolio éditorial de Abdel-hamid M. LOUKI — Étudiant en ingénierie de la sécurité informatique, développeur et auteur.">
   <meta property="og:image"       content="https://amlouki.me/assets/og-accueil.jpg">
   <meta property="og:image:width"  content="1200">
@@ -29,7 +29,7 @@
 
   <!-- Twitter Cards -->
   <meta name="twitter:card"    content="summary_large_image">
-  <meta name="twitter:title"   content="Abdel-hamid M. LOUKI — Portfolio Éditorial">
+  <meta name="twitter:title"   content="Abdel-hamid M. LOUKI — Portfolio">
   <meta name="twitter:description" content="Portfolio éditorial de Abdel-hamid M. LOUKI.">
   <meta name="twitter:image"   content="https://amlouki.me/assets/og-accueil.jpg">
 
@@ -115,35 +115,19 @@
 
   <header class="en-tete" role="banner" id="en-tete-principal">
 
-    <!-- Bandeau supérieur — informations éditoriales -->
-    <div class="bandeau-superieur" aria-label="Informations éditoriales">
-      <div class="conteneur">
-        <div class="bandeau-interieur">
-          <time class="bandeau-date" id="date-bandeau" datetime="">
-            Samedi, 17 mai 2026
-          </time>
-          <span class="bandeau-edition">Édition No. 001</span>
-          <div class="bandeau-actions">
-            <a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Accès administration">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Masthead — Logo journal -->
     <div class="conteneur">
       <div class="en-tete-masthead">
+        <a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Accès administration">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </a>
         <a href="/" class="logo-journal" aria-label="AM. LOUKI — Accueil">
           AM. LOUKI
         </a>
-        <span class="sous-titre-journal">
-          Conception et Management des SI &amp; Reseaux IT &mdash; Elève ingénieur en 4e année à l'Université Mundiapolis de Casa
-        </span>
+        <span class="sous-titre-journal" data-contenu="slogan"></span>
         <!-- Bouton hamburger mobile -->
         <button class="bouton-hamburger" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="menu-mobile" id="btn-hamburger">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
@@ -272,8 +256,8 @@
               </div>
               <div class="metrique-separateur" aria-hidden="true"></div>
               <div class="metrique-item" role="listitem">
-                <div class="metrique-nombre">4e</div>
-                <div class="metrique-label">Année d'ingénierie</div>
+                <div class="metrique-nombre" data-contenu="annee-valeur" aria-label="Année d'études"></div>
+                <div class="metrique-label" data-contenu="annee-libelle"></div>
               </div>
             </div>
 
@@ -589,7 +573,7 @@
         <!-- Colonne principale — Description -->
         <div class="pied-colonne-principale">
           <div class="logo-journal" style="font-size: var(--taille-2xl); color: var(--couleur-fond); margin-bottom: var(--espace-4);">
-            Portfolio Éditorial
+            AM. LOUKI
           </div>
           <p style="font-family: var(--police-corps); font-size: var(--taille-sm); color: rgba(240,235,224,0.55); line-height: var(--ligne-lache); max-width: 30ch;">
             Revue personnelle de sécurité informatique, de développement et de culture numérique.

@@ -22,7 +22,7 @@
 const CFG = window.CONFIG || {};
 
 const SITE = Object.freeze({
-  nom:         CFG.SITE_NOM          || 'Portfolio Éditorial',
+  nom:         CFG.SITE_NOM          || 'AM. LOUKI',
   url:         CFG.SITE_URL          || window.location.origin,
   description: CFG.SITE_DESCRIPTION  || 'Portfolio et blog éditorial professionnel',
   auteur:      CFG.AUTEUR_NOM        || 'Auteur',
