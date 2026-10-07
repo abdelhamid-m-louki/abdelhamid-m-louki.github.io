@@ -16,6 +16,7 @@ window.CONFIG = {
   AUTEUR_EMAIL:      'am.louki@outlook.fr',
   AUTEUR_TITRE:      'Étudiant en ingénierie de la sécurité informatique',
   AUTEUR_BIO:        "Étudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique.",
+  A_PROPOS_DESCRIPTION: "Étudiant en ingénierie de la sécurité informatique, je conçois et développe des interfaces web performantes, en portant une attention particulière à la sécurité, à la clarté technique et à l'expérience utilisateur.\n\nJe m'intéresse à la cybersécurité au sens large — administration de systèmes et de réseaux, gestion des identités et des accès, protection des données — et à la manière dont le code bien écrit participe à la robustesse d'un produit numérique.\n\nJ'écris sur la sécurité informatique, le développement web et la culture numérique, avec le souci d'une écriture claire, informée et structurée.",
   AUTEUR_PHOTO:      '/assets/images/portrait.png',
   LOCALISATION:      'Paris, France',
 

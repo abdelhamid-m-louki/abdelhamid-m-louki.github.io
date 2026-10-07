@@ -52,6 +52,10 @@
               <textarea id="param-bio" class="zone-texte" rows="4" placeholder="Présentez-vous en quelques phrases…"></textarea>
             </div>
             <div class="groupe-champ">
+              <label for="param-a-propos-description" class="etiquette">Biographie longue (page À propos)</label>
+              <textarea id="param-a-propos-description" class="zone-texte" rows="7" placeholder="Décrivez votre parcours, vos centres d'intérêt… Un paragraphe par ligne."></textarea>
+            </div>
+            <div class="groupe-champ">
               <label for="param-localisation" class="etiquette">Localisation</label>
               <input type="text" id="param-localisation" class="champ" placeholder="Paris, France">
             </div>
@@ -219,6 +223,7 @@ const CHAMPS = [
   { id:'param-titre-pro',     cle:'auteur_titre',         type:'string' },
   { id:'param-email-contact', cle:'email_contact',        type:'string' },
   { id:'param-bio',           cle:'auteur_bio',           type:'text' },
+  { id:'param-a-propos-description', cle:'a_propos_description', type:'text' },
   { id:'param-localisation',  cle:'auteur_localisation',  type:'string' },
   { id:'param-github',        cle:'github_url',           type:'string' },
   { id:'param-linkedin',      cle:'linkedin_url',         type:'string' },

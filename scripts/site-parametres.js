@@ -27,6 +27,7 @@
     auteur_nom:          'AUTEUR_NOM',
     auteur_titre:        'AUTEUR_TITRE',
     auteur_bio:          'AUTEUR_BIO',
+    a_propos_description:'A_PROPOS_DESCRIPTION',
     email_contact:       'AUTEUR_EMAIL',
     auteur_localisation: 'LOCALISATION',
     annee_etudes:        'AUTEUR_ANNEE',
@@ -153,6 +154,21 @@
           break;
         case 'auteur-bio':
           if (CONFIG.AUTEUR_BIO) zone.textContent = CONFIG.AUTEUR_BIO;
+          break;
+        case 'a-propos-description':
+          if (CONFIG.A_PROPOS_DESCRIPTION) {
+            var paragraphes = String(CONFIG.A_PROPOS_DESCRIPTION).split('\n')
+              .map(function (ligne) { return ligne.trim(); })
+              .filter(function (ligne) { return ligne !== ''; });
+            if (paragraphes.length) {
+              zone.textContent = '';
+              paragraphes.forEach(function (ligne) {
+                var par = document.createElement('p');
+                par.textContent = ligne;
+                zone.appendChild(par);
+              });
+            }
+          }
           break;
         case 'localisation':
           if (CONFIG.LOCALISATION) zone.textContent = CONFIG.LOCALISATION;
