@@ -5,28 +5,16 @@
 # des chemins sous /api/ (ex. /api/data/ doit rester déployé).
 # ============================================================
 
-# Pages et fichiers de la racine
-/404.html
-/a-propos.html
-/contact.html
-/index.html
-/projets.html
-/manifest.json
-/robots.txt
-/sitemap.xml
-/CNAME
-/config.js
+# Déploiement Vercel complet :
+# - le frontend statique (HTML, CSS, JS, assets) est déployé ;
+# - seules les ressources inutiles au runtime sont exclues.
 
-# Dossiers frontend (racine uniquement)
-/admin/
-/assets/
-/blog/
+# Ressources non servies / lourdes
 /docs/
-/scripts/
-/styles/
 /supabase/
+/node_modules/
 
-# Fichiers d'environnement / divers
+# Fichiers sensibles / méta dépôt
 /.env
 /.env.example
 /.gitignore
