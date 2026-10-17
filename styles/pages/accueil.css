@@ -11,8 +11,8 @@
    ============================================================ */
 
 .section-hero {
-  padding-top: var(--espace-8);
-  padding-bottom: var(--espace-12);
+  padding-top: var(--espace-4);
+  padding-bottom: var(--espace-8);
   position: relative;
   overflow: hidden;
   border-bottom: var(--bordure-tres-forte);
@@ -50,8 +50,8 @@
 .hero-grille {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 400px;
-  gap: var(--espace-10);
-  align-items: center;
+  gap: var(--espace-8);
+  align-items: start;
   position: relative;
   z-index: 1;
 }
@@ -70,20 +70,20 @@
 .etiquettes-hero {
   display: flex;
   gap: var(--espace-3);
-  margin-bottom: var(--espace-5);
+  margin-bottom: var(--espace-4);
   flex-wrap: wrap;
 }
 
 /* Kicker */
 .hero-contenu .kicker {
   font-size: var(--taille-sm);
-  margin-bottom: var(--espace-4);
+  margin-bottom: var(--espace-3);
 }
 
 /* Manchette principale */
 .hero-contenu .manchette {
   margin: 0;
-  margin-bottom: var(--espace-4);
+  margin-bottom: var(--espace-3);
   position: relative;
   font-size: clamp(var(--taille-3xl), 4.5vw, 3.25rem);
   line-height: 1.04;
@@ -108,14 +108,14 @@
 
 /* Chapô */
 .hero-chapo {
-  margin-bottom: var(--espace-4);
+  margin-bottom: var(--espace-3);
   max-width: 52ch;
   color: var(--texte-secondaire);
 }
 
 /* Filet de séparation */
 .hero-filet {
-  margin-bottom: var(--espace-4);
+  margin-bottom: var(--espace-3);
 }
 
 /* ============================================================
@@ -126,7 +126,7 @@
   display: flex;
   align-items: center;
   gap: 0;
-  margin-bottom: var(--espace-5);
+  margin-bottom: var(--espace-3);
   border: var(--bordure-fine);
   padding: var(--espace-3) var(--espace-5);
   background: var(--couleur-fond-papier);
@@ -179,7 +179,7 @@
   align-items: center;
   gap: var(--espace-4);
   flex-wrap: wrap;
-  margin-bottom: var(--espace-5);
+  margin-bottom: var(--espace-3);
 }
 
 .hero-sociaux {
@@ -214,9 +214,9 @@
 
 .hero-portrait-zone {
   position: relative;
-  min-height: 470px;
+  min-height: 340px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 }
 
@@ -579,6 +579,19 @@
   margin-bottom: var(--espace-5);
 }
 
+/* Liste des compétences — grille éditoriale (2 colonnes sur desktop) */
+#liste-competences {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--espace-4);
+}
+
+/* Carte compétence — taille homogène dans la grille */
+#liste-competences .carte-competence {
+  display: flex;
+  flex-direction: column;
+}
+
 /* ============================================================
    SECTION EXPÉRIENCE
    ============================================================ */
@@ -780,6 +793,10 @@
     gap: var(--espace-8);
   }
 
+  #liste-competences {
+    grid-template-columns: 1fr;
+  }
+
   .grille-blog-accueil {
     grid-template-columns: 1fr;
   }
@@ -796,8 +813,8 @@
 
 @media (max-width: 767px) {
   .section-hero {
-    padding-top: var(--espace-8);
-    padding-bottom: var(--espace-12);
+    padding-top: var(--espace-3);
+    padding-bottom: var(--espace-8);
   }
 
   .hero-contenu .manchette {
