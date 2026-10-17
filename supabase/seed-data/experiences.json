@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": "exp-computime-2026",
+    "titre": "Stagiaire — Sécurité des systèmes d'information",
+    "organisation": "Computime Sarl",
+    "type": "emploi",
+    "description": "Veille sécurité, administration des pare-feu et gestion des identités (AD, GPO) en environnement d'entreprise.",
+    "date_debut": "2026-01-15",
+    "date_fin": null,
+    "lieu": "",
+    "remote": false,
+    "ordre": 1
+  },
+  {
+    "id": "exp-inforgerance-2024",
+    "titre": "Technicien support & sécurité (alternance)",
+    "organisation": "Infogérance Systèmes",
+    "type": "emploi",
+    "description": "Déploiement de postes sécurisés, administration des postes et serveurs, sensibilisation des utilisateurs.",
+    "date_debut": "2024-09-01",
+    "date_fin": "2025-08-31",
+    "lieu": "",
+    "remote": false,
+    "ordre": 2
+  }
+]

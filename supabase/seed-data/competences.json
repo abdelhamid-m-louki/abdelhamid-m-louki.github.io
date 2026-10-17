@@ -1,1 +1,8 @@
-[]
+[
+  { "id": "comp-01", "nom": "Sécurité des systèmes & réseaux", "categorie": "Sécurité", "niveau": 85, "vedette": true, "ordre": 1 },
+  { "id": "comp-02", "nom": "Développement web (HTML, CSS, JS)", "categorie": "Développement", "niveau": 80, "vedette": true, "ordre": 2 },
+  { "id": "comp-03", "nom": "Cybersécurité & veille", "categorie": "Sécurité", "niveau": 78, "vedette": true, "ordre": 3 },
+  { "id": "comp-04", "nom": "Administration AD / GPO / Firewall", "categorie": "Systèmes", "niveau": 75, "vedette": true, "ordre": 4 },
+  { "id": "comp-05", "nom": "Rédaction technique & documentation", "categorie": "Communication", "niveau": 88, "vedette": true, "ordre": 5 },
+  { "id": "comp-06", "nom": "Git & CI/CD", "categorie": "Développement", "niveau": 70, "vedette": true, "ordre": 6 }
+]

@@ -54,5 +54,21 @@
     "type": "text",
     "description": "Biographie longue (page À propos)",
     "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-011",
+    "cle": "auteur_titre",
+    "valeur": "Étudiant en ingénierie de la sécurité informatique",
+    "type": "string",
+    "description": "Titre professionnel",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-012",
+    "cle": "auteur_specialite",
+    "valeur": "Sécurité & Développement web",
+    "type": "string",
+    "description": "Spécialité",
+    "modifie_le": "2024-01-01T00:00:00Z"
   }
 ]

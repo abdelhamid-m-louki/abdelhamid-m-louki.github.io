@@ -26,6 +26,7 @@
     description_defaut:  'SITE_DESCRIPTION',
     auteur_nom:          'AUTEUR_NOM',
     auteur_titre:        'AUTEUR_TITRE',
+    auteur_specialite:   'AUTEUR_SPECIALITE',
     auteur_bio:          'AUTEUR_BIO',
     a_propos_description:'A_PROPOS_DESCRIPTION',
     email_contact:       'AUTEUR_EMAIL',
@@ -113,6 +114,15 @@
           break;
         case 'auteur-titre':
           if (CONFIG.AUTEUR_TITRE) zone.textContent = CONFIG.AUTEUR_TITRE;
+          break;
+        case 'specialite':
+          if (CONFIG.AUTEUR_SPECIALITE) zone.textContent = CONFIG.AUTEUR_SPECIALITE;
+          break;
+        case 'site-description':
+          // Balises <meta> (description, og:description, twitter:description)
+          if (zone.tagName === 'META' && CONFIG.SITE_DESCRIPTION) {
+            zone.setAttribute('content', CONFIG.SITE_DESCRIPTION);
+          }
           break;
         case 'slogan':
           zone.style.display = CONFIG.SITE_SLOGAN ? '' : 'none';
@@ -203,6 +213,37 @@
           zone.style.display = CONFIG.DISPONIBLE === false ? 'none' : '';
           break;
       }
+    });
+
+    synchroniserJsonLd();
+  }
+
+  /**
+   * Aligne le « jobTitle » des données structurées JSON-LD sur le titre
+   * professionnel paramétré (index.html, a-propos.html…), sans dupliquer
+   * le script : on réécrit le texte du script existant.
+   */
+  function synchroniserJsonLd() {
+    if (!CONFIG.AUTEUR_TITRE) return;
+
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(function (script) {
+      var brut = script.textContent;
+      if (!brut || brut.indexOf('"jobTitle"') === -1) return;
+      try {
+        var objet = JSON.parse(brut);
+        var modifie = false;
+        var parcourir = function (noeud) {
+          if (!noeud || typeof noeud !== 'object') return;
+          if (Array.isArray(noeud)) { noeud.forEach(parcourir); return; }
+          if (Object.prototype.hasOwnProperty.call(noeud, 'jobTitle')) {
+            noeud.jobTitle = CONFIG.AUTEUR_TITRE;
+            modifie = true;
+          }
+          Object.keys(noeud).forEach(function (cle) { parcourir(noeud[cle]); });
+        };
+        parcourir(objet);
+        if (modifie) script.textContent = JSON.stringify(objet);
+      } catch (_) { /* JSON-LD non exploitable : laissé tel quel */ }
     });
   }
 

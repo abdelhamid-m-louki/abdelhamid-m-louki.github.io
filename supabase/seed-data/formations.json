@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "form-securite-info",
+    "titre": "Ingénieur en sécurité informatique",
+    "organisation": "École d'ingénierie — Paris",
+    "specialite": "Cybersécurité",
+    "description": "Cybersécurité, administration systèmes et réseaux, gestion des identités et des accès, protection des données.",
+    "date_debut": "2023-09-01",
+    "date_fin": null,
+    "lieu": "Paris, France",
+    "ordre": 1
+  }
+]

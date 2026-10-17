@@ -270,63 +270,6 @@ function initialiserCompteurs() {
 // CHARGEMENT DES DONNÉES
 // ============================================================
 
-// ------------------------------------------------------------------
-// DONNÉES DE RECHANGE (éditorial)
-// Affichées quand Supabase est indisponible ou que les collections
-// sont vides, afin que le visiteur ne se retrouve jamais devant des
-// sections vides. Remplaçables à tout moment par l'admin / Supabase.
-// ------------------------------------------------------------------
-
-const EXPERIENCES_PAR_DEFAUT = [
-  {
-    titre: 'Stagiaire — Sécurité des systèmes d\'information',
-    entreprise: 'Computime Sarl',
-    date_debut: '2026-01-15',
-    date_fin: null,
-    description: 'Veille sécurité, administration des pare-feu et gestion des identités (AD, GPO) en environnement d’entreprise.',
-  },
-  {
-    titre: 'Technicien support & sécurité (alternance)',
-    entreprise: 'Infogérance Systèmes',
-    date_debut: '2024-09-01',
-    date_fin: '2025-08-31',
-    description: 'Déploiement de postes sécurisés, administration des postes et serveurs, sensibilisation des utilisateurs.',
-  },
-];
-
-const FORMATIONS_PAR_DEFAUT = [
-  {
-    titre: 'Ingénieur en sécurité informatique',
-    organisation: 'École d\'ingénierie — Paris',
-    date_debut: '2023-09-01',
-    date_fin: null,
-    description: 'Cybersécurité, administration systèmes et réseaux, gestion des identités et des accès, protection des données.',
-  },
-];
-
-const COMPETENCES_PAR_DEFAUT = [
-  { nom: 'Sécurité des systèmes & réseaux', niveau: 85 },
-  { nom: 'Développement web (HTML, CSS, JS)', niveau: 80 },
-  { nom: 'Cybersécurité & veille', niveau: 78 },
-  { nom: 'Administration AD / GPO / Firewall', niveau: 75 },
-  { nom: 'Rédaction technique & documentation', niveau: 88 },
-  { nom: 'Git & CI/CD', niveau: 70 },
-];
-
-/**
- * Récupère une collection depuis Supabase, avec repli sur des données
- * de défaut si la collecte est vide ou si le backend est indisponible.
- */
-async function obtenirOuDefaut(collection, options, defaut) {
-  try {
-    const { donnees } = await stockage.obtenirTous(collection, options);
-    if (donnees?.length) return donnees;
-  } catch (_) {
-    // Supabase non configuré ou hors ligne : on utilise le repli.
-  }
-  return defaut;
-}
-
 async function chargerDonnees() {
   // Chargement en parallèle pour optimiser le TTFB
   const promesses = [];
@@ -466,11 +409,13 @@ async function chargerCompetences() {
   if (!conteneur) return;
 
   try {
-    const donnees = await obtenirOuDefaut(
-      COLLECTIONS.COMPETENCES,
-      { filtres: { vedette: true }, limite: 6, tri: 'ordre' },
-      COMPETENCES_PAR_DEFAUT
-    );
+    const { donnees } = await stockage.obtenirTous(COLLECTIONS.COMPETENCES, {
+      filtres: { vedette: true },
+      limite:  6,
+      tri:     'ordre',
+    });
+
+    if (!donnees?.length) return;
 
     conteneur.innerHTML = donnees.map(comp => `
       <div class="carte-competence" role="listitem" data-animer data-delai="100">
@@ -514,24 +459,26 @@ async function chargerExperiences() {
   if (!friseExp) return;
 
   try {
-    const experiences = await obtenirOuDefaut(
-      COLLECTIONS.EXPERIENCES,
-      { filtres: { type: 'emploi' }, tri: 'date_debut', ordre: 'desc', limite: 4 },
-      EXPERIENCES_PAR_DEFAUT
-    );
-    const formations = await obtenirOuDefaut(
-      COLLECTIONS.FORMATIONS,
-      { tri: 'date_debut', ordre: 'desc', limite: 3 },
-      FORMATIONS_PAR_DEFAUT
-    );
+    const [{ donnees: experiences }, { donnees: formations }] = await Promise.all([
+      stockage.obtenirTous(COLLECTIONS.EXPERIENCES, {
+        tri: 'date_debut',
+        ordre: 'desc',
+        limite: 4,
+      }),
+      stockage.obtenirTous(COLLECTIONS.FORMATIONS, {
+        tri: 'date_debut',
+        ordre: 'desc',
+        limite: 3,
+      }),
+    ]);
 
-    if (friseExp && experiences.length) {
+    if (friseExp && experiences?.length) {
       friseExp.innerHTML = experiences.map(exp =>
         genererElementFrise(exp)
       ).join('');
     }
 
-    if (friseForm && formations.length) {
+    if (friseForm && formations?.length) {
       friseForm.innerHTML = formations.map(form =>
         genererElementFrise(form)
       ).join('');
