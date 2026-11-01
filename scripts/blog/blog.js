@@ -19,8 +19,20 @@ import seo from '../seo/seo.js';
 import { echapper, formaterDate, Transformateurs } from '../app.js';
 
 /** Configuration de pagination */
+function articlesParPage() {
+  const n = Number(window.CONFIG && window.CONFIG.ARTICLES_PAR_PAGE);
+  return Number.isFinite(n) && n > 0 ? n : 9;
+}
+
+function nomSite() {
+  return (window.CONFIG && window.CONFIG.SITE_NOM) || '';
+}
+
+function nomAuteur() {
+  return (window.CONFIG && window.CONFIG.AUTEUR_NOM) || '';
+}
+
 const CONFIG_PAGINATION = Object.freeze({
-  ARTICLES_PAR_PAGE: 9,
   DEBOUNCE_RECHERCHE: 350, // ms
 });
 
@@ -50,6 +62,7 @@ class MoteurBlog {
     ]);
 
     this._configurerSEOListing();
+    this._configurerSEOApresConfig(() => this._configurerSEOListing());
     this._initialiserObservateurs();
   }
 
@@ -76,6 +89,7 @@ class MoteurBlog {
 
       this._rendrePageArticle(article);
       this._configurerSEOArticle(article);
+      this._configurerSEOApresConfig(() => this._configurerSEOArticle(article));
       this._configurerProgressionLecture();
       this._configurerTableMatieres();
       await this._chargerArticlesConnexes(article);
@@ -123,7 +137,7 @@ class MoteurBlog {
     try {
       const options = {
         filtres: { statut: 'publié' },
-        parPage: CONFIG_PAGINATION.ARTICLES_PAR_PAGE,
+        parPage: articlesParPage(),
         page:    this._page,
         tri:     'date_publication',
         ordre:   'desc',
@@ -271,7 +285,7 @@ class MoteurBlog {
     const conteneur = document.getElementById('pagination-blog');
     if (!conteneur) return;
 
-    const totalPages = Math.ceil(this._total / CONFIG_PAGINATION.ARTICLES_PAR_PAGE);
+    const totalPages = Math.ceil(this._total / articlesParPage());
 
     if (totalPages <= 1) {
       conteneur.innerHTML = '';
@@ -412,7 +426,7 @@ class MoteurBlog {
     }
 
     // Titre de la page (DOM)
-    document.title = `${article.titre} — AM. LOUKI`;
+    document.title = nomSite() ? `${article.titre} — ${nomSite()}` : article.titre;
   }
 
   // ============================================================
@@ -526,14 +540,19 @@ class MoteurBlog {
   // SEO DYNAMIQUE
   // ============================================================
 
+  _configurerSEOApresConfig(rappel) {
+    if (window.__CONFIG_PRET__) { rappel(); return; }
+    document.addEventListener('config:pret', rappel, { once: true });
+  }
+
   _configurerSEOListing() {
     const titre = this._categorie
       ? `Blog — ${this._categorie}`
       : 'Blog — Toutes les publications';
 
     const description = this._categorie
-      ? `Articles et réflexions sur ${this._categorie}. Blog éditorial de Abdel-hamid M. LOUKI.`
-      : 'Toutes mes publications : design, code et culture numérique. Blog éditorial indépendant.';
+      ? `Articles et réflexions sur ${this._categorie}.${nomAuteur() ? ' Blog éditorial de ' + nomAuteur() + '.' : ''}`
+      : (window.CONFIG && (window.CONFIG.SITE_META_DESCRIPTION || window.CONFIG.SITE_DESCRIPTION)) || '';
 
     seo.configurer({
       titre,
@@ -717,7 +736,7 @@ class MoteurBlog {
   }
 
   _afficherErreur404() {
-    document.title = 'Article non trouvé — AM. LOUKI';
+    document.title = nomSite() ? `Article non trouvé — ${nomSite()}` : 'Article non trouvé';
     const principal = document.getElementById('contenu-principal');
     if (principal) {
       principal.innerHTML = `

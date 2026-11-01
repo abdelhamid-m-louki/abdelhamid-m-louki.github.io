@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr" dir="ltr" data-titre="Projets" data-url="/projets.html">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projets — AM. LOUKI</title>
-  <meta name="description" content="Portfolio de projets : applications web, API, design système, data visualisation. Réalisations sélectionnées de Abdel-hamid M. LOUKI.">
+  <title>Projets</title>
+  <meta name="description" content="" data-contenu="site-meta-description">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://amlouki.me/projets.html">
   <meta property="og:type"        content="website">
-  <meta property="og:title"       content="Projets — AM. LOUKI">
-  <meta property="og:description" content="Portfolio de projets sélectionnés : applications web, API, design système.">
-  <meta property="og:url"         content="https://amlouki.me/projets.html">
+  <meta property="og:image"       content="/assets/og-defaut.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -127,10 +124,10 @@
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Projets — AM. LOUKI",
-    "description": "Portfolio de projets sélectionnés de Abdel-hamid Mahamat LOUKI",
-    "url": "https://amlouki.me/projets.html",
-    "creator": { "@type": "Person", "@id": "https://amlouki.me/#personne", "name": "Abdel-hamid M. LOUKI" }
+    "name": "Projets",
+    "description": "",
+    "url": "",
+    "creator": { "@type": "Person", "@id": "#personne", "name": "" }
   }
   </script>
 </head>
@@ -142,7 +139,7 @@
     <div class="conteneur">
       <div class="en-tete-masthead">
         <a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Administration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></a>
-        <a href="/" class="logo-journal" aria-label="AM. LOUKI — Accueil">AM. LOUKI</a>
+        <a href="/" class="logo-journal" aria-label="Accueil"><span data-contenu="site-nom">Portfolio</span></a>
         <span class="sous-titre-journal" data-contenu="slogan"></span>
         <button class="bouton-hamburger" id="btn-hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
       </div>
@@ -160,7 +157,7 @@
     </nav>
   </header>
   <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" hidden>
-    <div class="menu-mobile-en-tete"><span class="logo-journal" style="font-size:var(--taille-xl)">AM. LOUKI</span><button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <div class="menu-mobile-en-tete"><span class="logo-journal" style="font-size:var(--taille-xl)" data-contenu="site-nom">Portfolio</span><button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
     <nav class="menu-mobile-nav"><a href="/" class="menu-mobile-lien">Accueil</a><a href="/a-propos.html" class="menu-mobile-lien">À propos</a><a href="/projets.html" class="menu-mobile-lien">Projets</a><a href="/blog/index.html" class="menu-mobile-lien">Blog</a><a href="/contact.html" class="menu-mobile-lien">Contact</a></nav>
   </div>
   <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
@@ -257,7 +254,7 @@
   <footer class="pied-de-page" role="contentinfo">
     <div class="conteneur">
       <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
-        <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Abdel-hamid M. LOUKI. Tous droits réservés.</p>
+        <p class="pied-copyright">&copy; <span data-contenu="annee-copyright">2024</span> <span data-contenu="auteur-nom"></span>. Tous droits réservés.</p>
         <p class="pied-copyright">
           <a href="/mentions-legales.html" style="color:inherit;">Mentions légales</a> &middot;
           <a href="/confidentialite.html"  style="color:inherit;">Confidentialité</a> &middot;
@@ -283,7 +280,7 @@
 
     seo.configurer({
       titre: 'Projets sélectionnés',
-      description: 'Portfolio de projets : applications web, API, design système et data visualisation.',
+      description: (window.CONFIG && (window.CONFIG.SITE_META_DESCRIPTION || window.CONFIG.SITE_DESCRIPTION)) || '',
       type: 'website',
       fil: [{ nom: 'Accueil', url: '/' }, { nom: 'Projets' }],
     });

@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr" dir="ltr" data-titre="À propos" data-url="/a-propos.html">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>À propos — AM. LOUKI</title>
-  <meta name="description" content="Étudiant en ingénierie de la sécurité informatique, développeur et auteur. Parcours, compétences et approche de la sécurité et du web." data-contenu="site-description">
+  <title>À propos</title>
+  <meta name="description" content="" data-contenu="site-meta-description">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://amlouki.me/a-propos.html">
 
   <meta property="og:type"        content="profile">
-  <meta property="og:title"       content="À propos — AM. LOUKI">
-  <meta property="og:description" content="Étudiant en ingénierie de la sécurité informatique, développeur et auteur. Parcours, compétences et approche de la sécurité et du web." data-contenu="site-description">
-  <meta property="og:url"         content="https://amlouki.me/a-propos.html">
+  <meta property="og:image"       content="/assets/og-defaut.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,14 +36,14 @@
   {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
-    "name": "À propos — AM. LOUKI",
-    "url": "https://amlouki.me/a-propos.html",
+    "name": "À propos",
+    "url": "",
     "mainEntity": {
       "@type": "Person",
-      "@id": "https://amlouki.me/#personne",
-      "name": "Abdel-hamid M. LOUKI",
-      "jobTitle": "Étudiant en ingénierie de la sécurité informatique",
-      "url": "https://amlouki.me/"
+      "@id": "#personne",
+      "name": "",
+      "jobTitle": "",
+      "url": ""
     }
   }
   </script>
@@ -59,7 +56,7 @@
     <div class="conteneur">
       <div class="en-tete-masthead">
         <a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Administration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></a>
-        <a href="/" class="logo-journal" aria-label="AM. LOUKI — Accueil">AM. LOUKI</a>
+        <a href="/" class="logo-journal" aria-label="Accueil"><span data-contenu="site-nom">Portfolio</span></a>
         <span class="sous-titre-journal" data-contenu="slogan"></span>
         <button class="bouton-hamburger" id="btn-hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
       </div>
@@ -77,7 +74,7 @@
     </nav>
   </header>
   <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" hidden>
-    <div class="menu-mobile-en-tete"><span class="logo-journal" style="font-size:var(--taille-xl)">AM. LOUKI</span><button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <div class="menu-mobile-en-tete"><span class="logo-journal" style="font-size:var(--taille-xl)" data-contenu="site-nom">Portfolio</span><button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
     <nav class="menu-mobile-nav"><a href="/" class="menu-mobile-lien">Accueil</a><a href="/a-propos.html" class="menu-mobile-lien">À propos</a><a href="/projets.html" class="menu-mobile-lien">Projets</a><a href="/blog/index.html" class="menu-mobile-lien">Blog</a><a href="/contact.html" class="menu-mobile-lien">Contact</a></nav>
   </div>
   <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
@@ -91,13 +88,10 @@
           <div>
             <span class="kicker">À propos</span>
             <h1 class="titre-grand" style="margin-bottom:var(--espace-6);">
-              Abdel-hamid M. LOUKI,<br>
-              <em data-contenu="auteur-titre">Étudiant en ingénierie de la sécurité informatique</em>
+              <span data-contenu="auteur-nom">Nom</span>,<br>
+              <em data-contenu="auteur-titre"></em>
             </h1>
-            <p class="chapeau" style="margin-bottom:var(--espace-8);" data-contenu="auteur-bio">
-              Étudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité,
-              le développement web et l'écriture technique.
-            </p>
+            <p class="chapeau" style="margin-bottom:var(--espace-8);" data-contenu="auteur-bio"></p>
             <div style="display:flex;gap:var(--espace-4);flex-wrap:wrap;">
               <a href="/contact.html" class="btn btn-primaire">Me contacter</a>
               <a href="#parcours" class="btn btn-contour">Voir mon parcours</a>
@@ -107,7 +101,8 @@
             <div class="feuille-papier feuille-inclinee" style="padding:var(--espace-4);background:var(--couleur-fond-papier);">
               <img
                 src="/assets/images/portrait.png"
-                alt="Portrait de Abdel-hamid M. LOUKI"
+                alt=""
+                data-contenu="auteur-photo"
                 width="280"
                 height="360"
                 loading="eager"
@@ -115,7 +110,7 @@
               >
             </div>
             <div class="etiquette-volante etiquette-jaune etiquette-inclinee-2" style="position:absolute;bottom:var(--espace-4);right:calc(-1 * var(--espace-6));" data-contenu="disponible">
-              Disponible en freelance
+              <span data-contenu="disponibilite-libelle"></span>
             </div>
           </div>
         </div>
@@ -132,40 +127,21 @@
             <div style="display:flex;flex-direction:column;gap:var(--espace-4);">
               <div style="padding:var(--espace-4);background:var(--couleur-fond-alt);border-left:3px solid var(--couleur-accent);">
                 <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-2);">Localisation</div>
-                <div style="font-family:var(--police-corps);color:var(--texte-primaire);" data-contenu="localisation">Paris, France</div>
+                <div style="font-family:var(--police-corps);color:var(--texte-primaire);" data-contenu="localisation"></div>
               </div>
               <div style="padding:var(--espace-4);background:var(--couleur-fond-alt);border-left:3px solid var(--couleur-accent);">
                 <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-2);">Statut</div>
-                <div style="font-family:var(--police-corps);color:var(--texte-primaire);">Étudiant ingénieur</div>
+                <div style="font-family:var(--police-corps);color:var(--texte-primaire);" data-contenu="auteur-statut"></div>
               </div>
               <div style="padding:var(--espace-4);background:var(--couleur-fond-alt);border-left:3px solid var(--couleur-accent);">
                 <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-2);">Spécialité</div>
-                <div style="font-family:var(--police-corps);color:var(--texte-primaire);" data-contenu="specialite">Sécurité &amp; Développement web</div>
+                <div style="font-family:var(--police-corps);color:var(--texte-primaire);" data-contenu="specialite"></div>
               </div>
             </div>
           </div>
           <div class="prose">
-            <div data-contenu="a-propos-description">
-              <p>
-                Étudiant en ingénierie de la sécurité informatique, je conçois et développe
-                des interfaces web performantes, en portant une attention particulière
-                à la sécurité, à la clarté technique et à l'expérience utilisateur.
-              </p>
-              <p>
-                Je m'intéresse à la cybersécurité au sens large — administration de
-                systèmes et de réseaux, gestion des identités et des accès, protection
-                des données — et à la manière dont le code bien écrit participe à la
-                robustesse d'un produit numérique.
-              </p>
-              <p>
-                J'écris sur la sécurité informatique, le développement web et la culture
-                numérique, avec le souci d'une écriture claire, informée et structurée.
-              </p>
-            </div>
-            <blockquote>
-              La sécurité n'est pas un état, c'est un processus. Comme le code,
-              elle s'entretient et se documente.
-            </blockquote>
+            <div data-contenu="a-propos-description"></div>
+            <blockquote data-contenu="citation"></blockquote>
           </div>
         </div>
       </div>
@@ -221,7 +197,7 @@
             Un projet ? <em>Parlons-en.</em>
           </h2>
           <div style="display:flex;gap:var(--espace-4);justify-content:center;flex-wrap:wrap;">
-            <a href="mailto:am.louki@outlook.fr" class="btn btn-accent btn-lg" data-contenu="email">
+            <a href="mailto:" class="btn btn-accent btn-lg" data-contenu="email">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               Écrire un email
             </a>
@@ -238,7 +214,7 @@
   <footer class="pied-de-page" role="contentinfo">
     <div class="conteneur">
       <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
-        <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Abdel-hamid M. LOUKI. Tous droits réservés.</p>
+        <p class="pied-copyright">&copy; <span data-contenu="annee-copyright">2024</span> <span data-contenu="auteur-nom"></span>. Tous droits réservés.</p>
         <p class="pied-copyright">
           <a href="/mentions-legales.html" style="color:inherit;">Mentions légales</a> &middot;
           <a href="/confidentialite.html"  style="color:inherit;">Confidentialité</a> &middot;
@@ -258,9 +234,9 @@
     import seo from '/scripts/seo/seo.js';
     seo.configurer({
       titre: 'À propos',
-      description: (window.CONFIG && window.CONFIG.SITE_DESCRIPTION) || 'Étudiant en ingénierie de la sécurité informatique, développeur web et auteur.',
-      url: 'https://amlouki.me/a-propos.html',
-      image: 'https://amlouki.me/assets/og-defaut.jpg',
+      description: (window.CONFIG && (window.CONFIG.SITE_META_DESCRIPTION || window.CONFIG.SITE_DESCRIPTION)) || '',
+      url: (window.CONFIG && window.CONFIG.SITE_URL ? window.CONFIG.SITE_URL.replace(/\/+$/, '') : '') + '/a-propos.html',
+      image: (window.CONFIG && window.CONFIG.SEO_IMAGE_DEFAUT) || '/assets/og-defaut.jpg',
       type: 'profile',
     });
   </script>

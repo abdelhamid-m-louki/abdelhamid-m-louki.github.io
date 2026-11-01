@@ -1,8 +1,6 @@
-/** CORS — autorise GitHub Pages (amlouki.me) à appeler l'API Vercel */
+/** CORS — origines autorisées à appeler l'API (configurées via ALLOWED_ORIGINS) */
 
 const ORIGINES_DEFAUT = [
-  'https://amlouki.me',
-  'https://www.amlouki.me',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
 ];

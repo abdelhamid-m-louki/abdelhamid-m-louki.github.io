@@ -33,11 +33,11 @@
           <div class="bloc-editeur-corps">
             <div class="groupe-champ">
               <label for="seo-nom" class="etiquette etiquette-obligatoire">Nom du site</label>
-              <input type="text" id="seo-nom" class="champ" placeholder="AM. LOUKI">
+              <input type="text" id="seo-nom" class="champ" placeholder="Nom du site">
             </div>
             <div class="groupe-champ">
               <label for="seo-url" class="etiquette etiquette-obligatoire">URL principale</label>
-              <input type="url" id="seo-url" class="champ" placeholder="https://amlouki.me">
+              <input type="url" id="seo-url" class="champ" placeholder="https://votre-domaine.fr">
             </div>
             <div class="groupe-champ">
               <label for="seo-desc" class="etiquette">Description générale <span id="cpt-seo-desc" style="color:var(--texte-tertiaire);font-weight:400;">(0/160)</span></label>
@@ -45,7 +45,7 @@
             </div>
             <div class="groupe-champ">
               <label for="seo-auteur" class="etiquette">Nom de l'auteur</label>
-              <input type="text" id="seo-auteur" class="champ" placeholder="Abdel-hamid M. LOUKI">
+              <input type="text" id="seo-auteur" class="champ" placeholder="Nom complet de l'auteur">
             </div>
           </div>
         </div>
@@ -238,7 +238,7 @@ async function init() {
         stockage.obtenirTous('articles', { filtres:{ statut:'publié' } }),
         stockage.obtenirTous('projets',  { filtres:{ statut:'publié' } }),
       ]);
-      const baseURL = document.getElementById('seo-url').value || 'https://amlouki.me';
+      const baseURL = document.getElementById('seo-url').value || window.location.origin;
       const pages = [
         { url:`${baseURL}/`,                  priorite:1.0, frequence:'weekly' },
         { url:`${baseURL}/a-propos.html`,     priorite:0.8, frequence:'monthly' },

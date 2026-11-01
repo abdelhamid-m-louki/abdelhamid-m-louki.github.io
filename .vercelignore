@@ -1,6 +1,6 @@
 # ============================================================
 # .vercelignore — Vercel ne déploie QUE l'API (/api/*)
-# Le frontend statique est servi par GitHub Pages (amlouki.me).
+# Le frontend statique est servi par GitHub Pages (votre-domaine.fr).
 # NB : motifs ancrés à la racine avec "/" pour ne pas exclure
 # des chemins sous /api/ (ex. /api/data/ doit rester déployé).
 # ============================================================

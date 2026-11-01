@@ -176,8 +176,9 @@ function initialiserDateBandeau() {
 // ============================================================
 
 function mettreAJourAnnee() {
-  const elem = document.getElementById('annee-copyright');
-  if (elem) elem.textContent = new Date().getFullYear();
+  const elems = document.querySelectorAll('#annee-copyright, [data-contenu="annee-copyright"]');
+  const annee = new Date().getFullYear();
+  elems.forEach((elem) => { elem.textContent = annee; });
 }
 
 // ============================================================

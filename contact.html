@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr" dir="ltr" data-titre="Contact" data-url="/contact.html">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — AM. LOUKI</title>
-  <meta name="description" content="Contactez Abdel-hamid M. LOUKI pour vos projets freelance, collaborations éditoriales ou échanges professionnels.">
+  <title>Contact</title>
+  <meta name="description" content="" data-contenu="site-meta-description">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://amlouki.me/contact.html">
   <meta property="og:type"        content="website">
-  <meta property="og:title"       content="Contact — AM. LOUKI">
-  <meta property="og:description" content="Prenons contact pour discuter de votre projet.">
-  <meta property="og:url"         content="https://amlouki.me/contact.html">
+  <meta property="og:image"       content="/assets/og-defaut.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,15 +35,15 @@
   {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Contact — AM. LOUKI",
-    "url": "https://amlouki.me/contact.html",
-    "description": "Formulaire de contact pour projets freelance et collaborations",
+    "name": "Contact",
+    "url": "",
+    "description": "",
     "mainEntity": {
       "@type": "Person",
-      "@id": "https://amlouki.me/#personne",
-      "name": "Abdel-hamid M. LOUKI",
-      "email": "am.louki@outlook.fr",
-      "url": "https://amlouki.me/"
+      "@id": "#personne",
+      "name": "",
+      "email": "",
+      "url": ""
     }
   }
   </script>
@@ -59,7 +56,7 @@
     <div class="conteneur">
       <div class="en-tete-masthead">
         <a href="/admin/connexion.html" class="lien-admin-discret" aria-label="Administration"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></a>
-        <a href="/" class="logo-journal" aria-label="AM. LOUKI — Accueil">AM. LOUKI</a>
+        <a href="/" class="logo-journal" aria-label="Accueil"><span data-contenu="site-nom">Portfolio</span></a>
         <span class="sous-titre-journal" data-contenu="slogan"></span>
         <button class="bouton-hamburger" id="btn-hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
       </div>
@@ -77,7 +74,7 @@
     </nav>
   </header>
   <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" hidden>
-    <div class="menu-mobile-en-tete"><span class="logo-journal" style="font-size:var(--taille-xl)">AM. LOUKI</span><button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+    <div class="menu-mobile-en-tete"><span class="logo-journal" style="font-size:var(--taille-xl)" data-contenu="site-nom">Portfolio</span><button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
     <nav class="menu-mobile-nav"><a href="/" class="menu-mobile-lien">Accueil</a><a href="/a-propos.html" class="menu-mobile-lien">À propos</a><a href="/projets.html" class="menu-mobile-lien">Projets</a><a href="/blog/index.html" class="menu-mobile-lien">Blog</a><a href="/contact.html" class="menu-mobile-lien">Contact</a></nav>
   </div>
   <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
@@ -121,7 +118,7 @@
               style="display:none;padding:var(--espace-6);background:rgba(45,106,79,0.08);border:1px solid var(--couleur-succes);border-left:4px solid var(--couleur-succes);margin-bottom:var(--espace-6);"
             >
               <p style="font-family:var(--police-display);font-size:var(--taille-xl);font-weight:700;color:var(--couleur-succes);margin-bottom:var(--espace-2);">Message envoyé !</p>
-              <p style="font-family:var(--police-corps);color:var(--texte-secondaire);">Merci pour votre message. Je vous répondrai dans les meilleurs délais, généralement sous 24 à 48 heures.</p>
+              <p style="font-family:var(--police-corps);color:var(--texte-secondaire);">Merci pour votre message. <span data-contenu="delai-reponse"></span></p>
             </div>
 
             <!-- Message d'erreur -->
@@ -266,33 +263,33 @@
               <h2 style="font-family:var(--police-condensee);font-size:var(--taille-xs);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--texte-tertiaire);margin-bottom:var(--espace-5);padding-bottom:var(--espace-3);border-bottom:var(--bordure-forte);">Contact direct</h2>
 
               <div style="display:flex;flex-direction:column;gap:var(--espace-5);">
-                <a href="mailto:am.louki@outlook.fr" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;transition:color var(--transition-rapide);" class="lien-contact-direct" data-contenu="email">
+                <a href="mailto:" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;transition:color var(--transition-rapide);" class="lien-contact-direct" data-contenu="email">
                   <div style="width:40px;height:40px;background:var(--couleur-encre);color:var(--couleur-fond);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                   </div>
                   <div>
                     <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-large);text-transform:uppercase;color:var(--texte-tertiaire);">Email</div>
-                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);">am.louki@outlook.fr</div>
+                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);" data-contenu="email-texte"></div>
                   </div>
                 </a>
 
-                <a href="https://linkedin.com/in/amlouki" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;" data-contenu="linkedin">
+                <a href="#" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;" data-contenu="linkedin">
                   <div style="width:40px;height:40px;background:var(--couleur-encre);color:var(--couleur-fond);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                   </div>
                   <div>
                     <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-large);text-transform:uppercase;color:var(--texte-tertiaire);">LinkedIn</div>
-                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);">in/amlouki</div>
+                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);" data-contenu="linkedin-label"></div>
                   </div>
                 </a>
 
-                <a href="https://github.com/dirdaymi" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;" data-contenu="github">
+                <a href="#" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:var(--espace-3);color:var(--texte-primaire);text-decoration:none;" data-contenu="github">
                   <div style="width:40px;height:40px;background:var(--couleur-encre);color:var(--couleur-fond);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                   </div>
                   <div>
                     <div style="font-family:var(--police-mono);font-size:var(--taille-xs);letter-spacing:var(--espacement-large);text-transform:uppercase;color:var(--texte-tertiaire);">GitHub</div>
-                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);">dirdaymi</div>
+                    <div style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-primaire);" data-contenu="github-label"></div>
                   </div>
                 </a>
               </div>
@@ -302,21 +299,15 @@
             <div class="feuille-papier" style="padding:var(--espace-6);border-left:4px solid var(--couleur-succes);" data-contenu="disponible">
               <div style="display:flex;align-items:center;gap:var(--espace-3);margin-bottom:var(--espace-3);">
                 <div style="width:10px;height:10px;border-radius:50%;background:var(--couleur-succes);box-shadow:0 0 8px rgba(45,106,79,0.6);flex-shrink:0;"></div>
-                <span style="font-family:var(--police-condensee);font-size:var(--taille-xs);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--couleur-succes);">Disponible en freelance</span>
+                <span style="font-family:var(--police-condensee);font-size:var(--taille-xs);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--couleur-succes);" data-contenu="disponibilite-libelle"></span>
               </div>
-              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin:0;line-height:var(--ligne-lache);">
-                Je suis ouvert aux missions freelance à partir de 3 jours par semaine,
-                en présentiel (Paris) ou à distance.
-              </p>
+              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin:0;line-height:var(--ligne-lache);" data-contenu="disponibilite-texte"></p>
             </div>
 
             <!-- Délai de réponse -->
             <div style="padding:var(--espace-5);background:var(--couleur-accent-tache);border:var(--bordure-accent);">
               <div style="font-family:var(--police-condensee);font-size:var(--taille-xs);font-weight:700;letter-spacing:var(--espacement-journal);text-transform:uppercase;color:var(--couleur-accent-sombre);margin-bottom:var(--espace-2);">Délai de réponse</div>
-              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin:0;">
-                Je réponds à tous les messages sous <strong>24 à 48 heures</strong>,
-                du lundi au vendredi.
-              </p>
+              <p style="font-family:var(--police-corps);font-size:var(--taille-sm);color:var(--texte-secondaire);margin:0;" data-contenu="delai-reponse"></p>
             </div>
 
           </div>
@@ -329,7 +320,7 @@
   <footer class="pied-de-page" role="contentinfo">
     <div class="conteneur">
       <div class="pied-bas" style="margin-top:0;padding-top:0;border-top:none;">
-        <p class="pied-copyright">&copy; <span id="annee-copyright">2024</span> Abdel-hamid M. LOUKI. Tous droits réservés.</p>
+        <p class="pied-copyright">&copy; <span data-contenu="annee-copyright">2024</span> <span data-contenu="auteur-nom"></span>. Tous droits réservés.</p>
         <p class="pied-copyright">
           <a href="/mentions-legales.html" style="color:inherit;">Mentions légales</a> &middot;
           <a href="/confidentialite.html"  style="color:inherit;">Confidentialité</a> &middot;
@@ -352,7 +343,7 @@
 
     seo.configurer({
       titre: 'Contact',
-      description: 'Contactez Abdel-hamid M. LOUKI pour vos projets freelance, collaborations éditoriales ou échanges professionnels.',
+      description: (window.CONFIG && (window.CONFIG.SITE_META_DESCRIPTION || window.CONFIG.SITE_DESCRIPTION)) || '',
       type: 'website',
       fil: [{ nom: 'Accueil', url: '/' }, { nom: 'Contact' }],
     });
@@ -448,12 +439,13 @@
         throw new Error((corps && corps.erreur) || 'Service de contact indisponible.');
       } catch (err) {
         // Repli : ouvrir le client email avec le message pré-rempli
-        const email = (window.CONFIG && window.CONFIG.AUTEUR_EMAIL) || 'am.louki@outlook.fr';
-        const sujet = encodeURIComponent(`[amlouki.me] ${donnees.objet || 'Message'} — ${donnees.nom}`);
+        const email = (window.CONFIG && window.CONFIG.AUTEUR_EMAIL) || '';
+        const nomSite = (window.CONFIG && window.CONFIG.SITE_NOM) || 'Site';
+        const sujet = encodeURIComponent(`[${nomSite}] ${donnees.objet || 'Message'} — ${donnees.nom}`);
         const corps = encodeURIComponent(
           `${donnees.message}\n\n---\n${donnees.nom} (${donnees.email})`
         );
-        window.location.href = `mailto:${email}?subject=${sujet}&body=${corps}`;
+        if (email) window.location.href = `mailto:${email}?subject=${sujet}&body=${corps}`;
         btnEnvoyer.disabled = false;
         texteBtn.textContent = 'Envoyer le message';
         msgErreur.textContent =

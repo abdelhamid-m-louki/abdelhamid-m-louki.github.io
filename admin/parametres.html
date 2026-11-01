@@ -41,15 +41,27 @@
             </div>
             <div class="groupe-champ">
               <label for="param-titre-pro" class="etiquette">Titre professionnel</label>
-              <input type="text" id="param-titre-pro" class="champ" placeholder="Étudiant en ingénierie de la sécurité informatique">
+              <input type="text" id="param-titre-pro" class="champ" placeholder="Votre titre professionnel">
             </div>
             <div class="groupe-champ">
               <label for="param-specialite" class="etiquette">Spécialité</label>
-              <input type="text" id="param-specialite" class="champ" placeholder="Sécurité & Développement web">
+              <input type="text" id="param-specialite" class="champ" placeholder="Votre spécialité">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-statut" class="etiquette">Statut affiché</label>
+              <input type="text" id="param-statut" class="champ" placeholder="Étudiant ingénieur">
             </div>
             <div class="groupe-champ">
               <label for="param-email-contact" class="etiquette">Email de contact public</label>
-              <input type="email" id="param-email-contact" class="champ" placeholder="am.louki@outlook.fr">
+              <input type="email" id="param-email-contact" class="champ" placeholder="vous@exemple.fr">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-photo" class="etiquette">URL de la photo / portrait</label>
+              <input type="text" id="param-photo" class="champ" placeholder="/assets/images/portrait.png">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-photo-alt" class="etiquette">Texte alternatif de la photo</label>
+              <input type="text" id="param-photo-alt" class="champ" placeholder="Portrait de …">
             </div>
             <div class="groupe-champ">
               <label for="param-bio" class="etiquette">Biographie courte</label>
@@ -61,7 +73,7 @@
             </div>
             <div class="groupe-champ">
               <label for="param-localisation" class="etiquette">Localisation</label>
-              <input type="text" id="param-localisation" class="champ" placeholder="Paris, France">
+              <input type="text" id="param-localisation" class="champ" placeholder="Ville, Pays">
             </div>
           </div>
         </div>
@@ -70,12 +82,20 @@
           <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Réseaux et liens</span></div>
           <div class="bloc-editeur-corps">
             <div class="groupe-champ">
-              <label for="param-github" class="etiquette">GitHub</label>
+              <label for="param-github" class="etiquette">GitHub (URL)</label>
               <input type="url" id="param-github" class="champ" placeholder="https://github.com/votre-profil">
             </div>
             <div class="groupe-champ">
-              <label for="param-linkedin" class="etiquette">LinkedIn</label>
+              <label for="param-github-label" class="etiquette">GitHub (libellé affiché)</label>
+              <input type="text" id="param-github-label" class="champ" placeholder="votre-pseudo">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-linkedin" class="etiquette">LinkedIn (URL)</label>
               <input type="url" id="param-linkedin" class="champ" placeholder="https://linkedin.com/in/votre-profil">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-linkedin-label" class="etiquette">LinkedIn (libellé affiché)</label>
+              <input type="text" id="param-linkedin-label" class="champ" placeholder="in/votre-profil">
             </div>
             <div class="groupe-champ">
               <label for="param-twitter" class="etiquette">Twitter / X</label>
@@ -98,11 +118,11 @@
           <div class="bloc-editeur-corps">
             <div class="groupe-champ">
               <label for="param-nom-site" class="etiquette">Nom du site</label>
-              <input type="text" id="param-nom-site" class="champ" placeholder="AM. LOUKI">
+              <input type="text" id="param-nom-site" class="champ" placeholder="Nom du site">
             </div>
             <div class="groupe-champ">
               <label for="param-url-site" class="etiquette">URL du site</label>
-              <input type="url" id="param-url-site" class="champ" placeholder="https://amlouki.me">
+              <input type="url" id="param-url-site" class="champ" placeholder="https://votre-domaine.fr">
             </div>
             <div class="groupe-champ">
               <label for="param-articles-page" class="etiquette">Articles par page (blog)</label>
@@ -112,23 +132,67 @@
               <span class="ligne-interrupteur-label">Mode maintenance</span>
               <label class="interrupteur"><input type="checkbox" class="interrupteur-entree" id="param-maintenance"><div class="interrupteur-piste"><div class="interrupteur-curseur"></div></div></label>
             </div>
-            <div class="ligne-interrupteur">
-              <span class="ligne-interrupteur-label">Disponible en freelance</span>
-              <label class="interrupteur"><input type="checkbox" class="interrupteur-entree" id="param-disponible" checked><div class="interrupteur-piste"><div class="interrupteur-curseur"></div></div></label>
+          </div>
+        </div>
+
+        <div class="bloc-editeur">
+          <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Apparence éditoriale</span></div>
+          <div class="bloc-editeur-corps">
+            <div class="groupe-champ">
+              <label for="param-edition" class="etiquette">Édition affichée (accueil)</label>
+              <input type="text" id="param-edition" class="champ" placeholder="Édition 2026">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-numero" class="etiquette">Numéro d'édition</label>
+              <input type="text" id="param-numero" class="champ" placeholder="N° 001">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-slogan" class="etiquette">Sous-titre / Slogan</label>
+              <input type="text" id="param-slogan" class="champ" placeholder="Ex. Le journal de la cybersécurité">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-footer-description" class="etiquette">Description du pied de page</label>
+              <textarea id="param-footer-description" class="zone-texte" rows="3" placeholder="Revue personnelle…"></textarea>
+            </div>
+            <div class="groupe-champ">
+              <label for="param-citation" class="etiquette">Citation (page À propos)</label>
+              <textarea id="param-citation" class="zone-texte" rows="3" placeholder="Votre citation…"></textarea>
             </div>
           </div>
         </div>
 
         <div class="bloc-editeur">
-          <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Apparence</span></div>
+          <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Disponibilité</span></div>
           <div class="bloc-editeur-corps">
-            <div class="groupe-champ">
-              <label for="param-edition" class="etiquette">Numéro d'édition</label>
-              <input type="text" id="param-edition" class="champ" placeholder="No. 001">
+            <div class="ligne-interrupteur">
+              <span class="ligne-interrupteur-label">Disponible en freelance</span>
+              <label class="interrupteur"><input type="checkbox" class="interrupteur-entree" id="param-disponible" checked><div class="interrupteur-piste"><div class="interrupteur-curseur"></div></div></label>
             </div>
             <div class="groupe-champ">
-              <label for="param-slogan" class="etiquette">Sous-titre / Slogan</label>
-              <input type="text" id="param-slogan" class="champ" placeholder="Ex. Le journal de la cybersécurité">
+              <label for="param-disponibilite-libelle" class="etiquette">Libellé de disponibilité</label>
+              <input type="text" id="param-disponibilite-libelle" class="champ" placeholder="Disponible en freelance">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-disponibilite-texte" class="etiquette">Texte de disponibilité</label>
+              <textarea id="param-disponibilite-texte" class="zone-texte" rows="3" placeholder="Décrivez vos disponibilités…"></textarea>
+            </div>
+            <div class="groupe-champ">
+              <label for="param-delai-reponse" class="etiquette">Délai de réponse</label>
+              <textarea id="param-delai-reponse" class="zone-texte" rows="2" placeholder="Délai de réponse aux messages…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="bloc-editeur">
+          <div class="bloc-editeur-en-tete"><span class="bloc-editeur-titre">Mentions légales</span></div>
+          <div class="bloc-editeur-corps">
+            <div class="groupe-champ">
+              <label for="param-legal-description" class="etiquette">Qualité de l'éditeur</label>
+              <input type="text" id="param-legal-description" class="champ" placeholder="Votre activité">
+            </div>
+            <div class="groupe-champ">
+              <label for="param-legal-date" class="etiquette">Dernière mise à jour</label>
+              <input type="text" id="param-legal-date" class="champ" placeholder="Date de mise à jour">
             </div>
           </div>
         </div>
@@ -154,27 +218,27 @@
             <p class="indication">Trois petites vignettes autour de la photo. Laissez le titre vide pour masquer une card.</p>
             <div class="groupe-champ">
               <label for="param-carte-1-titre" class="etiquette">Card 1 — Titre</label>
-              <input type="text" id="param-carte-1-titre" class="champ" placeholder="Sécurité & gestion de risques">
+              <input type="text" id="param-carte-1-titre" class="champ" placeholder="Titre de la card 1">
             </div>
             <div class="groupe-champ">
               <label for="param-carte-1-sous" class="etiquette">Card 1 — Sous-titre</label>
-              <input type="text" id="param-carte-1-sous" class="champ" placeholder="AD, GPO, Firewall">
+              <input type="text" id="param-carte-1-sous" class="champ" placeholder="Sous-titre">
             </div>
             <div class="groupe-champ">
               <label for="param-carte-2-titre" class="etiquette">Card 2 — Titre</label>
-              <input type="text" id="param-carte-2-titre" class="champ" placeholder="Veille continue">
+              <input type="text" id="param-carte-2-titre" class="champ" placeholder="Titre de la card 2">
             </div>
             <div class="groupe-champ">
               <label for="param-carte-2-sous" class="etiquette">Card 2 — Sous-titre</label>
-              <input type="text" id="param-carte-2-sous" class="champ" placeholder="sécurité & développement">
+              <input type="text" id="param-carte-2-sous" class="champ" placeholder="Sous-titre">
             </div>
             <div class="groupe-champ">
               <label for="param-carte-3-titre" class="etiquette">Card 3 — Titre</label>
-              <input type="text" id="param-carte-3-titre" class="champ" placeholder="En stage">
+              <input type="text" id="param-carte-3-titre" class="champ" placeholder="Titre de la card 3">
             </div>
             <div class="groupe-champ">
               <label for="param-carte-3-sous" class="etiquette">Card 3 — Sous-titre</label>
-              <input type="text" id="param-carte-3-sous" class="champ" placeholder="Chez Computime Sarl">
+              <input type="text" id="param-carte-3-sous" class="champ" placeholder="Sous-titre">
             </div>
           </div>
         </div>
@@ -226,12 +290,17 @@ const CHAMPS = [
   { id:'param-nom',           cle:'auteur_nom_famille',   type:'string' },
   { id:'param-titre-pro',     cle:'auteur_titre',         type:'string' },
   { id:'param-specialite',    cle:'auteur_specialite',    type:'string' },
+  { id:'param-statut',        cle:'auteur_statut',        type:'string' },
   { id:'param-email-contact', cle:'email_contact',        type:'string' },
+  { id:'param-photo',         cle:'auteur_photo',         type:'string' },
+  { id:'param-photo-alt',     cle:'auteur_photo_alt',     type:'string' },
   { id:'param-bio',           cle:'auteur_bio',           type:'text' },
   { id:'param-a-propos-description', cle:'a_propos_description', type:'text' },
   { id:'param-localisation',  cle:'auteur_localisation',  type:'string' },
   { id:'param-github',        cle:'github_url',           type:'string' },
+  { id:'param-github-label',  cle:'github_label',         type:'string' },
   { id:'param-linkedin',      cle:'linkedin_url',         type:'string' },
+  { id:'param-linkedin-label',cle:'linkedin_label',       type:'string' },
   { id:'param-twitter',       cle:'twitter_handle',       type:'string' },
   { id:'param-cv',            cle:'cv_url',               type:'string' },
   { id:'param-nom-site',      cle:'site_nom',             type:'string' },
@@ -239,8 +308,16 @@ const CHAMPS = [
   { id:'param-articles-page', cle:'articles_par_page',    type:'number' },
   { id:'param-maintenance',   cle:'maintenance',          type:'boolean' },
   { id:'param-disponible',    cle:'disponible',           type:'boolean' },
-  { id:'param-edition',       cle:'numero_edition',       type:'string' },
+  { id:'param-disponibilite-libelle', cle:'disponibilite_libelle', type:'string' },
+  { id:'param-disponibilite-texte',   cle:'disponibilite_texte',   type:'text' },
+  { id:'param-delai-reponse', cle:'delai_reponse',        type:'text' },
+  { id:'param-edition',       cle:'site_edition',         type:'string' },
+  { id:'param-numero',        cle:'numero_edition',       type:'string' },
   { id:'param-slogan',        cle:'site_slogan',          type:'string' },
+  { id:'param-footer-description', cle:'site_footer_description', type:'text' },
+  { id:'param-citation',      cle:'site_citation',        type:'text' },
+  { id:'param-legal-description', cle:'legal_editeur_description', type:'string' },
+  { id:'param-legal-date',    cle:'legal_date_maj',       type:'string' },
   { id:'param-annee-valeur',  cle:'annee_etudes',         type:'string' },
   { id:'param-annee-libelle', cle:'annee_etudes_libelle', type:'string' },
   { id:'param-carte-1-titre', cle:'carte_1_titre',        type:'string' },

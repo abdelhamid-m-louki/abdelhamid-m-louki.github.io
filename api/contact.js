@@ -15,7 +15,8 @@ export default async function handler(req, res) {
   const corps = req.body || {};
   const nom = String(corps.nom || '').trim();
   const email = String(corps.email || '').trim();
-  const sujet = String(corps.sujet || corps.objet || '').trim() || 'Message depuis amlouki.me';
+  const nomSite = process.env.SITE_NAME || 'le site';
+  const sujet = String(corps.sujet || corps.objet || '').trim() || `Message depuis ${nomSite}`;
   const message = String(corps.message || '').trim();
 
   // Honeypot : champ rempli = bot → faux succès silencieux
@@ -52,10 +53,10 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${cle}`,
       },
       body: JSON.stringify({
-        from: process.env.CONTACT_FROM || 'amlouki.me <onboarding@resend.dev>',
+        from: process.env.CONTACT_FROM || `${nomSite} <onboarding@resend.dev>`,
         to: [destinataire],
         reply_to: email,
-        subject: `[amlouki.me] ${sujet} — ${nom}`,
+        subject: `[${nomSite}] ${sujet} — ${nom}`,
         text: [`Nom : ${nom}`, `Email : ${email}`, `Sujet : ${sujet}`, '', message].join('\n'),
       }),
       signal: AbortSignal.timeout(15000),

@@ -1,37 +1,24 @@
-<!DOCTYPE html>
-<html lang="fr" dir="ltr">
+﻿<!DOCTYPE html>
+<html lang="fr" dir="ltr" data-titre="{auteur} — Portfolio & Blog" data-url="/" data-image="/assets/og-accueil.jpg">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <!-- SEO Primaire -->
-  <title>Abdel-hamid M. LOUKI — Portfolio & Blog</title>
-  <meta name="description" content="Portfolio éditorial de Abdel-hamid M. LOUKI — Étudiant en ingénierie de la sécurité informatique, développeur et auteur. Projets, réflexions et publications." data-contenu="site-description">
-  <meta name="author" content="Abdel-hamid M. LOUKI">
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <!-- SEO Primaire — injecté depuis la base (scripts/site-parametres.js) -->
+  <title>Portfolio &amp; Blog</title>
+  <meta name="description" content="" data-contenu="site-meta-description">
   <meta name="generator" content="Portfolio Éditorial CMS">
   <meta name="theme-color" content="#0A0A0A">
-  <meta name="keywords" content="portfolio, développeur, designer, blog, éditorial, projets, créatif">
-  <link rel="canonical" href="https://amlouki.me/">
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website">
-  <meta property="og:site_name"   content="AM. LOUKI">
-  <meta property="og:locale"      content="fr_FR">
-  <meta property="og:url"         content="https://amlouki.me/">
-  <meta property="og:title"       content="Abdel-hamid M. LOUKI — Portfolio & Blog">
-  <meta property="og:description" content="Portfolio éditorial de Abdel-hamid M. LOUKI — Étudiant en ingénierie de la sécurité informatique, développeur et auteur." data-contenu="site-description">
-  <meta property="og:image"       content="https://amlouki.me/assets/og-accueil.jpg">
+  <meta property="og:image"       content="/assets/og-accueil.jpg">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt"   content="AM. LOUKI — Page d'accueil">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card"    content="summary_large_image">
-  <meta name="twitter:title"   content="Abdel-hamid M. LOUKI — Portfolio">
-  <meta name="twitter:description" content="Portfolio éditorial de Abdel-hamid M. LOUKI." data-contenu="site-description">
-  <meta name="twitter:image"   content="https://amlouki.me/assets/og-accueil.jpg">
 
   <!-- Icônes et manifeste -->
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -60,47 +47,7 @@
   <link rel="stylesheet" href="/styles/components/cartes.css">
   <link rel="stylesheet" href="/styles/pages/accueil.css">
 
-  <!-- JSON-LD — WebSite + Person -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://amlouki.me/#website",
-        "name": "AM. LOUKI",
-        "url": "https://amlouki.me/",
-        "description": "AM. LOUKI - Portfolio éditorial et blog de sécurité informatique",
-        "inLanguage": "fr",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://amlouki.me/blog/?q={search_term_string}"
-          },
-          "query-input": "required name=search_term_string"
-        }
-      },
-      {
-        "@type": "Person",
-        "@id": "https://amlouki.me/#personne",
-        "name": "Abdel-hamid M. LOUKI",
-        "url": "https://amlouki.me/",
-        "description": "Etudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique. Sur ce blog, je partage mes projets, mes réflexions et mes découvertes dans le domaine de la sécurité informatique.",
-        "jobTitle": "Étudiant en ingénierie de la sécurité informatique",
-        "sameAs": [
-          "https://github.com/dirdaymi",
-          "https://linkedin.com/in/amlouki"
-        ],
-        "image": {
-          "@type": "ImageObject",
-          "url": "https://amlouki.me/assets/images/portrait.png"
-        },
-        "knowsLanguage": ["fr", "en"]
-      }
-    ]
-  }
-  </script>
+  <!-- JSON-LD — injecté dynamiquement (WebSite + Person) -->
 
   <!-- Configuration globale (non-secrète) -->
   <script src="/config.js"></script>
@@ -124,8 +71,8 @@
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
         </a>
-        <a href="/" class="logo-journal" aria-label="AM. LOUKI — Accueil">
-          AM. LOUKI
+        <a href="/" class="logo-journal" aria-label="Accueil">
+          <span data-contenu="site-nom">Portfolio</span>
         </a>
         <span class="sous-titre-journal" data-contenu="slogan"></span>
         <!-- Bouton hamburger mobile -->
@@ -171,7 +118,7 @@
   <!-- Menu mobile -->
   <div class="menu-mobile" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu de navigation mobile" hidden>
     <div class="menu-mobile-en-tete">
-      <span class="logo-journal" style="font-size: var(--taille-2xl)">AM. LOUKI</span>
+      <span class="logo-journal" style="font-size: var(--taille-2xl)" data-contenu="site-nom">Portfolio</span>
       <button class="btn btn-contour btn-icone" id="btn-fermer-menu" aria-label="Fermer le menu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
           <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
@@ -222,23 +169,21 @@
 
             <!-- Étiquette volante — genre éditorial -->
             <div class="etiquettes-hero" aria-hidden="true">
-              <span class="etiquette-volante etiquette-jaune etiquette-inclinee-2">N° 001</span>
-              <span class="etiquette-volante etiquette-inclinee-moins-1" style="margin-left: var(--espace-4);">Édition 2026</span>
+              <span class="etiquette-volante etiquette-jaune etiquette-inclinee-2" data-contenu="site-numero">N° 001</span>
+              <span class="etiquette-volante etiquette-inclinee-moins-1" style="margin-left: var(--espace-4);" data-contenu="site-edition">Édition 2026</span>
             </div>
 
             <!-- Kicker -->
-            <span class="kicker" id="sous-titre-hero" data-contenu="auteur-titre">Étudiant en ingénierie de la sécurité informatique</span>
+            <span class="kicker" id="sous-titre-hero" data-contenu="auteur-titre"></span>
 
             <!-- Manchette principale -->
             <h1 class="manchette" id="titre-hero">
-              Abdel-hamid<br>
-              <em>Mahamat LOUKI</em>
+              <span data-contenu="auteur-prenom">Prénom</span><br>
+              <em data-contenu="auteur-nom-famille">Nom</em>
             </h1>
 
             <!-- Chapô -->
-            <p class="chapeau hero-chapo" data-contenu="auteur-bio">
-              Étudiant en ingénierie de la sécurité informatique, passionné par la cybersécurité, le développement web et l'écriture technique.
-            </p>
+            <p class="chapeau hero-chapo" data-contenu="auteur-bio"></p>
 
             <!-- Filet de séparation -->
             <div class="filet-epais hero-filet" aria-hidden="true"></div>
@@ -274,13 +219,13 @@
 
             <!-- Liens sociaux -->
             <div class="hero-sociaux" aria-label="Réseaux sociaux">
-              <a href="https://github.com/dirdaymi" class="lien-social" aria-label="GitHub" rel="noopener noreferrer" target="_blank" data-contenu="github">
+              <a href="#" class="lien-social" aria-label="GitHub" rel="noopener noreferrer" target="_blank" data-contenu="github">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
               </a>
-              <a href="https://linkedin.com/in/amlouki" class="lien-social" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank" data-contenu="linkedin">
+              <a href="#" class="lien-social" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank" data-contenu="linkedin">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
-              <a href="mailto:am.louki@outlook.fr" class="lien-social" aria-label="Envoyer un email" data-contenu="email">
+              <a href="mailto:" class="lien-social" aria-label="Envoyer un email" data-contenu="email">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               </a>
             </div>
@@ -299,7 +244,8 @@
               <div class="portrait-image-wrapper halftone-conteneur">
                 <img
                   src="/assets/images/portrait.png"
-                  alt="Portrait éditorial de Abdel-hamid M. LOUKI, assis avec un ordinateur portable"
+                  alt=""
+                  data-contenu="auteur-photo"
                   class="portrait-image portrait-editorial"
                   width="460"
                   height="580"
@@ -540,12 +486,9 @@
               Un projet en tête ?<br>
               <em>Parlons-en.</em>
             </h2>
-            <p class="chapeau" style="margin-top: var(--espace-6); max-width: 54ch;">
-              Je suis disponible pour des missions freelance, des collaborations 
-              éditoriales et des projets ambitieux qui méritent d'être bien faits.
-            </p>
+            <p class="chapeau" style="margin-top: var(--espace-6); max-width: 54ch;" data-contenu="disponibilite-texte"></p>
             <div class="contact-actions" style="margin-top: var(--espace-8);">
-              <a href="mailto:am.louki@outlook.fr" class="btn btn-primaire btn-lg" aria-label="Envoyer un email">
+              <a href="mailto:" class="btn btn-primaire btn-lg" aria-label="Envoyer un email" data-contenu="email">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                 Écrire un email
               </a>
@@ -572,20 +515,18 @@
 
         <!-- Colonne principale — Description -->
         <div class="pied-colonne-principale">
-          <div class="logo-journal" style="font-size: var(--taille-2xl); color: var(--couleur-fond); margin-bottom: var(--espace-4);">
-            AM. LOUKI
-          </div>
+          <div class="logo-journal" style="font-size: var(--taille-2xl); color: var(--couleur-fond); margin-bottom: var(--espace-4);" data-contenu="site-nom">Portfolio</div>
           <p style="font-family: var(--police-corps); font-size: var(--taille-sm); color: rgba(240,235,224,0.55); line-height: var(--ligne-lache); max-width: 30ch;">
-            Revue personnelle de sécurité informatique, de développement et de culture numérique.
+            <span data-contenu="footer-description"></span>
           </p>
           <div class="pied-sociaux" style="margin-top: var(--espace-6);">
-            <a href="https://github.com/dirdaymi" class="lien-social pied-social" aria-label="GitHub" rel="noopener noreferrer" target="_blank" data-contenu="github">
+            <a href="#" class="lien-social pied-social" aria-label="GitHub" rel="noopener noreferrer" target="_blank" data-contenu="github">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
             </a>
-            <a href="https://linkedin.com/in/amlouki" class="lien-social pied-social" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank" data-contenu="linkedin">
+            <a href="#" class="lien-social pied-social" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank" data-contenu="linkedin">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
             </a>
-            <a href="mailto:am.louki@outlook.fr" class="lien-social pied-social" aria-label="Envoyer un email" data-contenu="email">
+            <a href="mailto:" class="lien-social pied-social" aria-label="Envoyer un email" data-contenu="email">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             </a>
           </div>
@@ -630,7 +571,7 @@
       <!-- Ligne de copyright -->
       <div class="pied-bas">
         <p class="pied-copyright">
-          &copy; <span id="annee-copyright">2024</span> Abdel-hamid M. LOUKI.
+          &copy; <span data-contenu="annee-copyright">2024</span> <span data-contenu="auteur-nom"></span>.
           Tous droits réservés.
         </p>
       </div>

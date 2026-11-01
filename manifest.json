@@ -1,7 +1,7 @@
 {
-  "name": "AM. LOUKI",
-  "short_name": "AM. LOUKI",
-  "description": "Portfolio et blog éditorial — Security engineering student",
+  "name": "Portfolio",
+  "short_name": "Portfolio",
+  "description": "Portfolio et blog éditorial",
   "lang": "fr",
   "start_url": "/",
   "display": "standalone",

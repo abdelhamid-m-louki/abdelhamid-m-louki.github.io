@@ -20,7 +20,23 @@
     "cle": "auteur_nom",
     "valeur": "Abdel-hamid M. LOUKI",
     "type": "string",
-    "description": "Abdel-hamid Mahamat LOUKI",
+    "description": "Nom complet affiché",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-003a",
+    "cle": "auteur_prenom",
+    "valeur": "Abdel-hamid",
+    "type": "string",
+    "description": "Prénom",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-003b",
+    "cle": "auteur_nom_famille",
+    "valeur": "Mahamat LOUKI",
+    "type": "string",
+    "description": "Nom de famille",
     "modifie_le": "2024-01-01T00:00:00Z"
   },
   {
@@ -48,6 +64,38 @@
     "modifie_le": "2024-01-01T00:00:00Z"
   },
   {
+    "id": "param-007",
+    "cle": "email_contact",
+    "valeur": "am.louki@outlook.fr",
+    "type": "string",
+    "description": "Email public de contact",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-008",
+    "cle": "auteur_localisation",
+    "valeur": "Paris, France",
+    "type": "string",
+    "description": "Localisation affichée",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-009",
+    "cle": "auteur_photo",
+    "valeur": "/assets/images/portrait.png",
+    "type": "string",
+    "description": "URL du portrait",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-009a",
+    "cle": "auteur_photo_alt",
+    "valeur": "Portrait éditorial de Abdel-hamid M. LOUKI, assis avec un ordinateur portable",
+    "type": "string",
+    "description": "Texte alternatif du portrait",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
     "id": "param-010",
     "cle": "a_propos_description",
     "valeur": "Étudiant en ingénierie de la sécurité informatique, je conçois et développe des interfaces web performantes, en portant une attention particulière à la sécurité, à la clarté technique et à l'expérience utilisateur.\n\nJe m'intéresse à la cybersécurité au sens large — administration de systèmes et de réseaux, gestion des identités et des accès, protection des données — et à la manière dont le code bien écrit participe à la robustesse d'un produit numérique.\n\nJ'écris sur la sécurité informatique, le développement web et la culture numérique, avec le souci d'une écriture claire, informée et structurée.",
@@ -69,6 +117,238 @@
     "valeur": "Sécurité & Développement web",
     "type": "string",
     "description": "Spécialité",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-013",
+    "cle": "auteur_statut",
+    "valeur": "Étudiant ingénieur",
+    "type": "string",
+    "description": "Statut affiché sur la page À propos",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-014",
+    "cle": "site_description",
+    "valeur": "Portfolio éditorial et blog de sécurité informatique",
+    "type": "string",
+    "description": "Description courte du site",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-015",
+    "cle": "site_meta_description",
+    "valeur": "Portfolio éditorial de Abdel-hamid M. LOUKI — étudiant en ingénierie de la sécurité informatique, développeur et auteur. Projets, réflexions et publications.",
+    "type": "text",
+    "description": "Description meta par défaut",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-016",
+    "cle": "site_edition",
+    "valeur": "Édition 2026",
+    "type": "string",
+    "description": "Mention d'édition affichée sur l'accueil",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-017",
+    "cle": "numero_edition",
+    "valeur": "N° 001",
+    "type": "string",
+    "description": "Numéro d'édition affiché sur l'accueil",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-018",
+    "cle": "site_footer_description",
+    "valeur": "Revue personnelle de sécurité informatique, de développement et de culture numérique.",
+    "type": "text",
+    "description": "Description affichée dans le pied de page",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-019",
+    "cle": "site_citation",
+    "valeur": "La sécurité n'est pas un état, c'est un processus. Comme le code, elle s'entretient et se documente.",
+    "type": "text",
+    "description": "Citation de la page À propos",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-020",
+    "cle": "disponible",
+    "valeur": "true",
+    "type": "boolean",
+    "description": "Disponible en freelance",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-021",
+    "cle": "disponibilite_libelle",
+    "valeur": "Disponible en freelance",
+    "type": "string",
+    "description": "Libellé de disponibilité",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-022",
+    "cle": "disponibilite_texte",
+    "valeur": "Je suis ouvert aux missions freelance à partir de 3 jours par semaine, en présentiel (Paris) ou à distance.",
+    "type": "text",
+    "description": "Texte de disponibilité",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-023",
+    "cle": "delai_reponse",
+    "valeur": "Je réponds à tous les messages sous 24 à 48 heures, du lundi au vendredi.",
+    "type": "text",
+    "description": "Délai de réponse affiché sur la page Contact",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-024",
+    "cle": "github_url",
+    "valeur": "https://github.com/dirdaymi",
+    "type": "string",
+    "description": "URL GitHub",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-025",
+    "cle": "github_label",
+    "valeur": "dirdaymi",
+    "type": "string",
+    "description": "Libellé GitHub affiché",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-026",
+    "cle": "linkedin_url",
+    "valeur": "https://linkedin.com/in/amlouki",
+    "type": "string",
+    "description": "URL LinkedIn",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-027",
+    "cle": "linkedin_label",
+    "valeur": "in/amlouki",
+    "type": "string",
+    "description": "Libellé LinkedIn affiché",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-028",
+    "cle": "twitter_handle",
+    "valeur": "",
+    "type": "string",
+    "description": "Pseudo Twitter / X (sans @)",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-029",
+    "cle": "cv_url",
+    "valeur": "",
+    "type": "string",
+    "description": "URL du CV (PDF)",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-030",
+    "cle": "site_slogan",
+    "valeur": "",
+    "type": "string",
+    "description": "Sous-titre du masthead",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-031",
+    "cle": "annee_etudes",
+    "valeur": "",
+    "type": "string",
+    "description": "Valeur de la métrique Année d'études",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-032",
+    "cle": "annee_etudes_libelle",
+    "valeur": "",
+    "type": "string",
+    "description": "Libellé de la métrique Année d'études",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-033",
+    "cle": "carte_1_titre",
+    "valeur": "Sécurité & gestion de risques",
+    "type": "string",
+    "description": "Card portrait 1 — titre",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-034",
+    "cle": "carte_1_sous",
+    "valeur": "AD, GPO, Firewall",
+    "type": "string",
+    "description": "Card portrait 1 — sous-titre",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-035",
+    "cle": "carte_2_titre",
+    "valeur": "Veille continue",
+    "type": "string",
+    "description": "Card portrait 2 — titre",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-036",
+    "cle": "carte_2_sous",
+    "valeur": "sécurité & développement",
+    "type": "string",
+    "description": "Card portrait 2 — sous-titre",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-037",
+    "cle": "carte_3_titre",
+    "valeur": "En stage",
+    "type": "string",
+    "description": "Card portrait 3 — titre",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-038",
+    "cle": "carte_3_sous",
+    "valeur": "Chez Computime Sarl",
+    "type": "string",
+    "description": "Card portrait 3 — sous-titre",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-039",
+    "cle": "legal_editeur_description",
+    "valeur": "étudiant en ingénierie de la sécurité informatique",
+    "type": "string",
+    "description": "Qualité de l'éditeur (mentions légales)",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-040",
+    "cle": "legal_date_maj",
+    "valeur": "6 octobre 2026",
+    "type": "string",
+    "description": "Date de dernière mise à jour des pages légales",
+    "modifie_le": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "param-041",
+    "cle": "ia_fournisseur",
+    "valeur": "gemini",
+    "type": "string",
+    "description": "Fournisseur IA par défaut",
     "modifie_le": "2024-01-01T00:00:00Z"
   }
 ]

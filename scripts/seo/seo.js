@@ -21,16 +21,20 @@
 /** Configuration SEO globale (lue depuis window.CONFIG) */
 const CFG = window.CONFIG || {};
 
-const SITE = Object.freeze({
-  nom:         CFG.SITE_NOM          || 'AM. LOUKI',
-  url:         CFG.SITE_URL          || window.location.origin,
-  description: CFG.SITE_DESCRIPTION  || 'Portfolio et blog éditorial professionnel',
-  auteur:      CFG.AUTEUR_NOM        || 'Auteur',
-  langue:      'fr',
-  twitter:     CFG.TWITTER_HANDLE    || '',
-  locale:      'fr_FR',
-  type:        'website',
-});
+/**
+ * Vue dynamique sur window.CONFIG : les valeurs peuvent être remplacées à
+ * chaud par site-parametres.js après lecture de Supabase.
+ */
+const SITE = {
+  get nom()         { return CFG.SITE_NOM         || ''; },
+  get url()         { return CFG.SITE_URL         || window.location.origin; },
+  get description() { return CFG.SITE_META_DESCRIPTION || CFG.SITE_DESCRIPTION || ''; },
+  get auteur()      { return CFG.AUTEUR_NOM       || ''; },
+  get langue()      { return CFG.SITE_LANGUE      || 'fr'; },
+  get twitter()     { return CFG.TWITTER_HANDLE   || ''; },
+  get locale()      { return CFG.SITE_LOCALE      || 'fr_FR'; },
+  get type()        { return 'website'; },
+};
 
 class MoteurSEO {
   constructor() {

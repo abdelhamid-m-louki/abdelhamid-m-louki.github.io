@@ -1,12 +1,16 @@
 {
   "site_nom": "AM. LOUKI",
   "site_url": "https://amlouki.me",
-  "description_defaut": "Portfolio et blog éditorial d'Abdel-hamid M. LOUKI — design, code et culture numérique.",
+  "auteur_nom": "Abdel-hamid M. LOUKI",
+  "description_defaut": "Portfolio éditorial de Abdel-hamid M. LOUKI — étudiant en ingénierie de la sécurité informatique, développeur et auteur. Projets, réflexions et publications.",
   "image_og_defaut": "/assets/og-defaut.jpg",
   "twitter_handle": "",
+  "linkedin_url": "https://linkedin.com/in/amlouki",
+  "github_url": "https://github.com/dirdaymi",
   "langue": "fr",
   "locale": "fr_FR",
   "indexation": true,
+  "sitemap_auto": true,
   "sitemap_url": "https://amlouki.me/sitemap.xml",
   "google_analytics_id": "",
   "google_search_console": ""
